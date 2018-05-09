@@ -1,7 +1,7 @@
 # Top level test script for Stan.jl
 using Compat, CmdStan, Test
 
-println("Running tests for Stan-j0.6-v2.0.3:")
+println("Running tests for CmdStan-j0.7-v1.0.0:")
 
 code_tests = ["test_env.jl",              
               "test_utilities.jl",
@@ -25,7 +25,7 @@ execution_tests = [
 
 if CMDSTAN_HOME != ""
   println("CMDSTAN_HOME set. Try to run tests.")
-  @testset "Stan.jl" begin
+  @testset "CmdStan.jl" begin
     for my_test in code_tests
         println("\n\n\n  * $(my_test) *")
         include(my_test)

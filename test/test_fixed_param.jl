@@ -1,4 +1,4 @@
-using CmndStan
+using CmdStan
 
 ProjDir = dirname(@__FILE__);
 cd(ProjDir) do

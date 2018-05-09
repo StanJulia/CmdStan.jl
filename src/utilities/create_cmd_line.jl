@@ -74,7 +74,7 @@ function cmdline(m)
           if name == :metric || isa(getfield(m, name), DataType)
             cmd = `$cmd $(name)=$(split(lowercase(string(typeof(getfield(m, name)))), '.')[end])`
           else
-            if name == :algorithm && typeof(getfield(m, name)) == Stan.Fixed_param
+            if name == :algorithm && typeof(getfield(m, name)) == CmdStan.Fixed_param
               cmd = `$cmd $(name)=fixed_param`
             else
               cmd = `$cmd $(name)=$(getfield(m, name))`
