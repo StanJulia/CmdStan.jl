@@ -1,4 +1,4 @@
-######### Stan batch program example  ###########
+######### CmdStan batch program example  ###########
 
 using Compat, CmdStan, Test
 

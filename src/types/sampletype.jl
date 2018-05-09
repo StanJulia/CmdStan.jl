@@ -42,7 +42,7 @@ Nuts(;max_depth=10)
 ?Engine                        : Engine for Hamiltonian Monte Carlo
 ```
 """
-type Nuts <: Engine
+mutable struct Nuts <: Engine
   max_depth::Int64
 end
 Nuts(;max_depth::Number=10) = Nuts(max_depth)
@@ -68,7 +68,7 @@ Static(;int_time=2 * pi)
 ?Engine                        : Engine for Hamiltonian Monte Carlo
 ```
 """
-type Static <: Engine
+mutable struct Static <: Engine
   int_time::Float64
 end
 Static(;int_time::Number=2 * pi) = Static(int_time)
@@ -87,11 +87,11 @@ Geometry of base manifold
 ```
 """ 
 @compat abstract type Metric end
-type unit_e <: Metric
+mutable struct unit_e <: Metric
 end
-type dense_e <: Metric
+mutable struct dense_e <: Metric
 end
-type diag_e <: Metric
+mutable struct diag_e <: Metric
 end
 
 
@@ -127,7 +127,7 @@ Hmc(;
 ?Metric                        : Base manifold geometries
 ```
 """
-type Hmc <: SamplingAlgorithm
+mutable struct Hmc <: SamplingAlgorithm
   engine::Engine
   metric::Metric
   stepsize::Float64
@@ -158,7 +158,7 @@ Fixed_param()
 ?Metric                        : Base manifold geometries
 ```
 """
-type Fixed_param <: SamplingAlgorithm end
+mutable struct Fixed_param <: SamplingAlgorithm end
   
 """
 
@@ -196,7 +196,7 @@ Adapt(;
 ?Sample                        : Sampling settings
 ```
 """
-type Adapt
+mutable struct Adapt
   engaged::Bool
   gamma::Float64
   delta::Float64
@@ -247,7 +247,7 @@ Sample(;
 ?SamplingAlgorithm
 ```
 """
-type Sample <: Method
+mutable struct Sample <: Method
   num_samples::Int64
   num_warmup::Int64
   save_warmup::Bool

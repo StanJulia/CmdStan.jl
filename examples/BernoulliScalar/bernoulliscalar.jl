@@ -1,4 +1,4 @@
-######### Stan program example  ###########
+######### CmdStan program example  ###########
 
 using Compat, CmdStan, Test
 

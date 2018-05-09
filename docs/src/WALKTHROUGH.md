@@ -4,9 +4,9 @@
 
 In this walk-through, it is assumed that 'ProjDir' holds a path to where transient files will be created (in a subdirectory /tmp of ProjDir).
 
-Make Stan.jl and Mamba diagnostics and graphics available:
+Make CmdStan.jl available:
 ```
-using Mamba, Stan
+using CmdStan
 ```
 
 Next define the variable 'bernoullistanmodel' to hold the Stan model definition:
@@ -57,45 +57,11 @@ The first time (or when updates to the model have been made) stan() will compile
 
 On Windows, the CmdStanDir argument appears needed (this is still being investigated). On OSX/Unix CmdStanDir is obtained from either ~/.juliarc.jl or an environment variable (see the Requirements section).
 
-By default stan() will run 4 chains, optionally display a combined summary and returns a Mamba Chains object for a sampler. Some other Stan methods, e.g. optimize, return a dictionary.
+By default stan() will run 4 chainsand  optionally display a combined summarySome other CmdStan methods, e.g. optimize, return a dictionary.
 
-The following diagnostics and Gadfly based plot functions (all from Mamba.jl) are available:
-```
-println("Brooks, Gelman and Rubin Convergence Diagnostic")
-try
-  gelmandiag(sim, mpsrf=true, transform=true) |> display
-catch e
-  #println(e)
-  gelmandiag(sim, mpsrf=false, transform=true) |> display
-end
-println()
+## Running a CmdStan script, some details
 
-println("Geweke Convergence Diagnostic")
-gewekediag(sim) |> display
-println()
-
-println("Highest Posterior Density Intervals")
-hpd(sim) |> display
-println()
-
-println("Cross-Correlations")
-cor(sim) |> display
-println()
-
-println("Lag-Autocorrelations")
-autocor(sim) |> display
-println()
-```
-To plot the simulation results:
-```
-p = plot(sim, [:trace, :mean, :density, :autocor], legend=true);
-draw(p, ncol=4, filename="summaryplot", fmt=:svg)
-draw(p, ncol=4, filename="summaryplot", fmt=:pdf)
-```
-
-## Running a Stan script, some details
-
-Stan.jl really only consists of 2 functions, Stanmodel() and stan().
+CmdStan.jl really only consists of 2 functions, Stanmodel() and stan().
 
 ### [`Stanmodel`](@ref)
 

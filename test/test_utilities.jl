@@ -1,4 +1,4 @@
-using Stan
+using CmdStan
 
 cmd1 = `echo`
 cmd2 = `2`
@@ -16,9 +16,9 @@ for i in 1:5
 end
 
 println()
-r = Stan.par(cs)
+r = CmdStan.par(cs)
 run(r)
 
 println()
-r = Stan.par(`echo hello`, 6)
+r = CmdStan.par(`echo hello`, 6)
 run(r)

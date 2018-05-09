@@ -1,4 +1,4 @@
-using Stan
+using CmdStan
 wd = dirname(@__FILE__)
 
 if !isdefined(Main, :update_R_file)

@@ -1,4 +1,4 @@
-using Stan
+using CmdStan
 
 N1 = 10
 data1 = Dict(

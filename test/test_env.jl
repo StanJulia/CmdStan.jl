@@ -1,10 +1,10 @@
-using Stan
+using CmdStan
 
 ## testing accessors to CMDSTAN_HOME
-let oldpath = Stan.CMDSTAN_HOME
-    newpath = Stan.CMDSTAN_HOME * "##test##"
+let oldpath = CmdStan.CMDSTAN_HOME
+    newpath = CmdStan.CMDSTAN_HOME * "##test##"
     set_cmdstan_home!(newpath)
-    @test Stan.CMDSTAN_HOME == newpath
+    @test CmdStan.CMDSTAN_HOME == newpath
     set_cmdstan_home!(oldpath)
-    @test Stan.CMDSTAN_HOME == oldpath
+    @test CmdStan.CMDSTAN_HOME == oldpath
 end

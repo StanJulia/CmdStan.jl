@@ -43,7 +43,7 @@ update_R_file{T<:Any}(file, dct)
 ```
 
 """
-function update_R_file{T<:Any}(file::String, dct::Dict{String, T})
+function update_R_file(file::String, dct::Dict{String, T}) where T <: Any
 	isfile(file) && rm(file)
 	strmout = open(file, "w")
 	

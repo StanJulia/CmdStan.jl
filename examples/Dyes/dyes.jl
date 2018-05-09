@@ -1,6 +1,6 @@
-######### Stan batch program example  ###########
+######### CmdStan batch program example  ###########
 
-using Stan, Compat, Test
+using CmdStan, Compat, Test
 
 ProjDir = dirname(@__FILE__)
 cd(ProjDir) do

@@ -94,7 +94,7 @@ function stan(
   cd(CmdStanDir)
   local tmpmodelname::String
   tmpmodelname = Pkg.dir(model.tmpdir, model.name)
-  if @static is_windows() ? true : false
+  if @static Sys.iswindows() ? true : false
     tmpmodelname = replace(tmpmodelname*".exe", "\\", "/")
   end
   try

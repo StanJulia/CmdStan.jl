@@ -12,16 +12,16 @@ import Base: show, showcompact
 *  Variational::Method        : Variational Bayes
 ```
 """ 
-@compat abstract type Method end
+abstract type Method end
 
 const DataDict = Dict{String, Any}
 
-type Random
+mutable struct Random
   seed::Int64
 end
 Random(;seed::Number=-1) = Random(seed)
 
-type Output
+mutable struct Output
   file::String
   diagnostic_file::String
   refresh::Int64
@@ -29,7 +29,7 @@ end
 Output(;file::String="", diagnostic_file::String="", refresh::Number=100) =
   Output(file, diagnostic_file, refresh)
 
-type Stanmodel
+mutable struct Stanmodel
   name::String
   nchains::Int
   num_warmup::Int
@@ -165,7 +165,7 @@ function Stanmodel(
       return
     end
 
-    if typeof(res) == VersionNumber
+    if mutable structof(res) == VersionNumber
       eval(quote
         using Mamba
         using Gadfly
@@ -232,7 +232,7 @@ update_model_file(
 ?Stan.Stanmodel                 : Create a StanModel
 ```
 """
-function update_model_file(file::String, str::String)
+function update_model_file(file::AbstractString, str::AbstractString)
   str2 = ""
   if isfile(file)
     str2 = open(readstring, file, "r")

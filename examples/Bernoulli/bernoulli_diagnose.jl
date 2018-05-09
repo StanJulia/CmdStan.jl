@@ -1,4 +1,4 @@
-######## Stan diagnose example  ###########
+######## CmdStan diagnose example  ###########
 
 using Compat, CmdStan, Test
 
@@ -27,7 +27,7 @@ cd(ProjDir) do
   ]
 
   global stanmode, rc, diags
-  stanmodel = Stanmodel(Diagnose(Stan.Gradient(epsilon=1e-6)), name="bernoulli",
+  stanmodel = Stanmodel(Diagnose(CmdStan.Gradient(epsilon=1e-6)), name="bernoulli",
     model=bernoulli, useMamba=false);
 
   rc, diags = stan(stanmodel, bernoullidata, ProjDir, CmdStanDir=CMDSTAN_HOME);

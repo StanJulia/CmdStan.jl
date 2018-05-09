@@ -1,18 +1,20 @@
-# A Julia interface to CmdStan
+# A Julia interface to cmdstan
 
-## Stan.jl
+## CmdStan.jl
 
 [Stan](https://github.com/stan-dev/stan) is a system for statistical modeling, data analysis, and prediction. It is extensively used in social, biological, and physical sciences, engineering, and business. The Stan program language and interfaces are documented [here](http://mc-stan.org/documentation/).
 
-[CmdStan](http://mc-stan.org/interfaces/cmdstan.html) is the shell/command line interface to run Stan language programs. 
+[cmdctan](http://mc-stan.org/interfaces/cmdstan.html) is the shell/command line interface to run Stan language programs. 
 
-[Stan.jl](https://github.com/goedman/Stan.jl) wraps CmdStan and captures the samples for further processing.
+[CmdStan.jl](https://github.com/StanJulia/CmdStan.jl) wraps cmdstan and captures the samples for further processing.
 
 ## A few other MCMC options in Julia
 
 [Mamba.jl](http://mambajl.readthedocs.io/en/latest/) and [Klara.jl](http://klarajl.readthedocs.io/en/latest/) are other Julia packages to run MCMC models (in pure Julia!).
 
-[Jags.jl](https://github.com/goedman/Jags.jl) is another option, but like CmdStan/Stan.jl, Jags runs as an external program.
+Note: Add Turing.jl and  DynamicHMC.jl
+
+[Jags.jl](https://github.com/goedman/Jags.jl) is another option, but like StanJulia/CmdStan.jl, Jags runs as an external program.
 
 ## References
 
