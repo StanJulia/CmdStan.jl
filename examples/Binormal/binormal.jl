@@ -5,7 +5,7 @@ using Compat, CmdStan, Test
 ProjDir = dirname(@__FILE__)
 cd(ProjDir) do
 
-  const binorm = "
+  binorm = "
   transformed data {
       matrix[2,2] Sigma;
       vector[2] mu;
@@ -34,6 +34,6 @@ cd(ProjDir) do
   if rc == 0
     println()
     println("Test round(mean(y[1]), 0) ≈ 0.0")
-    @test round(mean(sim[:,8,:]), 0) ≈ 0.0
+    @test round(mean(sim[:,8,:]), digits=0) ≈ 0.0
   end
 end # cd

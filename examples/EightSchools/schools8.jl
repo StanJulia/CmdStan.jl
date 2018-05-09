@@ -5,7 +5,7 @@ using Compat, CmdStan, Test
 ProjDir = dirname(@__FILE__)
 cd(ProjDir) do
 
-  const eightschools ="
+  eightschools ="
   data {
     int<lower=0> J; // number of schools 
     real y[J]; // estimated treatment effects
@@ -27,7 +27,7 @@ cd(ProjDir) do
   }
   "
 
-  const schools8data = [
+  schools8data = [
     Dict("J" => 8,
       "y" => [28,  8, -3,  7, -1,  1, 18, 12],
       "sigma" => [15, 10, 16, 11,  9, 11, 10, 18],
@@ -41,7 +41,7 @@ cd(ProjDir) do
 
   if rc == 0
     println()
-    println("Test round(mean(mu), 0) ≈ 8.0")
-    @test round(mean(sim[:,8,:]), 0) ≈ 8.0
+    println("Test round(mean(mu), digits=0) ≈ 8.0")
+    @test round(mean(sim[:,8,:]), digits=0) ≈ 8.0
   end
 end # cd

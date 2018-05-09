@@ -5,7 +5,7 @@ using CmdStan, Compat, Test
 ProjDir = dirname(@__FILE__)
 cd(ProjDir) do
 
-  const dyes ="
+  dyes ="
   data {
     int BATCHES; 
     int SAMPLES; 
@@ -46,7 +46,7 @@ cd(ProjDir) do
   }
   "
 
-  const dyesdata = [
+  dyesdata = [
     Dict("BATCHES" => 6,
       "SAMPLES" => 5,
       "y" => reshape([
@@ -66,7 +66,7 @@ cd(ProjDir) do
 
   if rc == 0
     println()
-    println("Test round(mean(theta)/100.0, 0) ≈ 15.0")
-    @test round(mean(sim[:,10,:])/100.0, 0) ≈ 15.0
+    println("Test round(mean(theta)/100.0, digits=0) ≈ 15.0")
+    @test round(mean(sim[:,10,:])/100.0, digits=0) ≈ 15.0
   end
 end # cd
