@@ -25,7 +25,8 @@ function rewrite_file(model, chain, chainno::Int, fname)
   pstring = joinpath("/Users/rob/Projects/Stan/cmdstan", "bin", "stansummary")
   cmd = `$(pstring) $(fname)`
   println(cmd)
-  #print(open(readstring, cmd, "r"))
+  resfile = open(cmd, "r")
+  print(read(resfile, String))
 end
 
 rewrite_file(stanmodel1, sim1, 1, "simple_samples_1.csv")

@@ -63,7 +63,7 @@ function cmdline(m)
       cmd = `$cmd $(split(lowercase(string(typeof(m))), '.')[end])`
     end
     #println(cmd)
-    for name in fieldnames(m)
+    for name in fieldnames(typeof(m))
       #println("$(name) = $(getfield(m, name)) ($(typeof(getfield(m, name))))")
       if  isa(getfield(m, name), String) || isa(getfield(m, name), Tuple)
         cmd = `$cmd $(name)=$(getfield(m, name))`

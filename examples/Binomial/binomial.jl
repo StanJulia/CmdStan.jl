@@ -7,7 +7,7 @@ using Compat, CmdStan, Test
 ProjDir = dirname(@__FILE__)
 cd(ProjDir) do
 
-  const binomialstanmodel = "
+  binomialstanmodel = "
   // Inferring a Rate
   data {
     int<lower=1> n;
@@ -37,7 +37,7 @@ cd(ProjDir) do
   global stanmodel, rc, sim
   stanmodel = Stanmodel(name="binomial", model=binomialstanmodel, useMamba=false)
 
-  const binomialdata = [
+  binomialdata = [
     Dict("n" => 10, "k" => 5)
   ]
 
@@ -46,7 +46,7 @@ cd(ProjDir) do
 
   if rc == 0
     println()
-    println("Test round(mean(theta[1]), 1) ≈ 0.5")
-    @test round(mean(sim[:,8,:]), 1) ≈ 0.5
+    println("Test round(mean(theta[1]), digits=1) ≈ 0.5")
+    @test round(mean(sim[:,8,:]), digits=1) ≈ 0.5
   end
 end # cd

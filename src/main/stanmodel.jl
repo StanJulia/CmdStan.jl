@@ -235,7 +235,8 @@ update_model_file(
 function update_model_file(file::AbstractString, str::AbstractString)
   str2 = ""
   if isfile(file)
-    str2 = open(readstring, file, "r")
+    resfile = open(file, "r")
+    str2 = read(resfile, String)
     str != str2 && rm(file)
   end
   if str != str2

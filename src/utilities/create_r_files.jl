@@ -62,14 +62,14 @@ function update_R_file(file::String, dct::Dict{String, T}) where T <: Any
 			str = str*"structure(c("
 			write(strmout, str)
 			str = ""
-			writecsv(strmout, val');
+  		    writedlm(strmout, val', ',')
 			str = str*"), .Dim=c($(length(val))))\n"
 		elseif length(val)>1 && length(size(val))>1
 			# Array
 			str = str*"structure(c("
 			write(strmout, str)
 			str = ""
-			writecsv(strmout, val[:]');
+  		    writedlm(strmout, val[:]', ',')
 			dimstr = "c"*string(size(val))
 			str = str*"), .Dim=$(dimstr))\n"
 		end
