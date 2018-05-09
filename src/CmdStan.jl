@@ -1,4 +1,4 @@
-module Stan
+module CmdStan
 
 using Compat, Documenter
 

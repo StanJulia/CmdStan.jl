@@ -14,46 +14,46 @@ set_cmdstan_home!
 
 ```@docs
 Stanmodel
-Stan.update_model_file
+CmdStan.update_model_file
 ```
 
 ## stan()
 
 ```@docs
 stan
-Stan.stan_summary(filecmd::Cmd; CmdStanDir=CMDSTAN_HOME)
-Stan.stan_summary(file::String; CmdStanDir=CMDSTAN_HOME)
+CmdStan.stan_summary(filecmd::Cmd; CmdStanDir=CMDSTAN_HOME)
+CmdStan.stan_summary(file::String; CmdStanDir=CMDSTAN_HOME)
 ```
 
 ## Types
 ```@docs
-Stan.Method
-Stan.Sample
-Stan.Adapt
-Stan.SamplingAlgorithm
-Stan.Hmc
-Stan.Metric
-Stan.Engine
-Stan.Nuts
-Stan.Static
-Stan.Diagnostics
-Stan.Gradient
-Stan.Diagnose
-Stan.OptimizeAlgorithm
-Stan.Optimize
-Stan.Lbfgs
-Stan.Bfgs
-Stan.Newton
-Stan.Variational
+CmdStan.Method
+CmdStan.Sample
+CmdStan.Adapt
+CmdStan.SamplingAlgorithm
+CmdStan.Hmc
+CmdStan.Metric
+CmdStan.Engine
+CmdStan.Nuts
+CmdStan.Static
+CmdStan.Diagnostics
+CmdStan.Gradient
+CmdStan.Diagnose
+CmdStan.OptimizeAlgorithm
+CmdStan.Optimize
+CmdStan.Lbfgs
+CmdStan.Bfgs
+CmdStan.Newton
+CmdStan.Variational
 ```
 
 ## Utilities
 ```@docs
-Stan.cmdline
-Stan.check_dct_type
-Stan.update_R_file
-Stan.par
-Stan.read_stanfit(model::Stanmodel)
+CmdStan.cmdline
+CmdStan.check_dct_type
+CmdStan.update_R_file
+CmdStan.par
+CmdStan.read_stanfit(model::Stanmodel)
 ```
 
 ## Index

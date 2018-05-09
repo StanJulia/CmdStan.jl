@@ -1,6 +1,6 @@
 ######### Stan batch program example  ###########
 
-using Stan, Compat, Base.Test
+using Stan, Compat, Test
 
 ProjDir = dirname(@__FILE__)
 cd(ProjDir) do

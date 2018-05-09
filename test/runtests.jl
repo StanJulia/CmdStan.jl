@@ -1,5 +1,5 @@
 # Top level test script for Stan.jl
-using Stan, Test
+using Compat, CmdStan, Test
 
 println("Running tests for Stan-j0.6-v2.0.3:")
 

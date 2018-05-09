@@ -1,18 +1,18 @@
-using Documenter, Stan
+using Documenter, CmdStan
 makedocs(
     format = :html,
-    sitename = "Stan",
+    sitename = "CmdStan",
     pages = Any[
         "Introduction" => "INTRO.md",
         "Installation" => "INSTALLATION.md",
         "Walkthrough" => "WALKTHROUGH.md",
         "Versions" => "VERSIONS.md",
-        "Stan.jl documentation" => "index.md",
+        "CmdStan.jl documentation" => "index.md",
     ]
 )
 
 deploydocs(
-    repo = "github.com/goedman/Stan.jl.git",
+    repo = "github.com/StanJulia/CmdStan.jl.git",
     target = "build",
     julia = "0.6",
     osname = "linux",

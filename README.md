@@ -7,19 +7,18 @@
 [![codecov.io](http://codecov.io/github/StanJulia/CmdStan.jl/coverage.svg?branch=master)](http://codecov.io/github/StanJulia/CmdStan.jl?branch=master)
 
 Documentation:
-[![](https://img.shields.io/badge/docs-latest-blue.svg)](https://goedman.github.io/Stan.jl/latest)
+[![](https://img.shields.io/badge/docs-latest-blue.svg)](https://StanJulia.github.io/CmdStan.jl/latest)
 
 ## Purpose
 
-A package to use Stan (as an external program) from Julia v1.x and up. 
+A package to use cmdstan (as an external program) from Julia v1.x and up. 
 
-Documentation can be found [here](http://goedman.github.io/Stan.jl/latest/INTRO.html)
+Documentation can be found [here](http://StanJulia.github.io/Stan.jl/latest/INTRO.html)
 
-CmdStan needs to be installed separatedly. Please see [CmdStan installation](http://goedman.github.io/Stan.jl/latest/INSTALLATION.html). 
+Cmdstan needs to be installed separatedly. Please see [CmdStan installation](http://StanJulia.github.io/Stan.jl/latest/INSTALLATION.html). 
 
 For more info on Stan, please go to <http://mc-stan.org>.
 
-For more info on Mamba, please go to <http://mambajl.readthedocs.org/en/latest/>.
+##
 
-For more info on Gadfly, please go to <https://github.com/GiovineItalia/Gadfly.jl>
-
+Part of the StanJulia Github organization set of packages
