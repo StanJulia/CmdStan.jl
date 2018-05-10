@@ -1,6 +1,6 @@
 # CmdStan
 
-[![Build Status](https://travis-ci.org/goedman/CmdStan.jl.svg?branch=master)](https://travis-ci.org/StanJulia/CmdStan.jl)
+[![Build Status](https://travis-ci.org/StanJulia/CmdStan.jl.svg?branch=master)](https://travis-ci.org/StanJulia/CmdStan.jl)
 
 [![Coverage Status](https://coveralls.io/repos/StanJulia/CmdStan.jl/badge.svg?branch=master&service=github)](https://coveralls.io/github/StanJulia/CmdStan.jl?branch=master)
 
