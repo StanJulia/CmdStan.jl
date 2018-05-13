@@ -1,7 +1,7 @@
-site_name:        CmdStan.jl
+site_name:        StanJulia/CmdStan.jl
 repo_url:         https://github.com/StanJulia/CmdStan.jl
 site_description: Package to run cmdstan from Julia
-site_author:      stanjulia
+site_author:      StanJulia
 
 theme: readthedocs
 
