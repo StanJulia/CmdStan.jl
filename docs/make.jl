@@ -1,7 +1,7 @@
 using Documenter, CmdStan
 makedocs(
     format = :html,
-    sitename = "CmdStan",
+    sitename = "StanJulia/CmdStan",
     pages = Any[
         "Introduction" => "INTRO.md",
         "Installation" => "INSTALLATION.md",
@@ -12,7 +12,7 @@ makedocs(
 )
 
 deploydocs(
-    repo = "github.com/StanJulia/CmdStan.jl",
+    repo = "https://github.com/StanJulia/CmdStan.jl",
     target = "build",
     julia = "nightly",
     osname = "linux",

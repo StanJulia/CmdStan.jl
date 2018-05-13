@@ -4,7 +4,7 @@
 
 [Stan](https://github.com/stan-dev/stan) is a system for statistical modeling, data analysis, and prediction. It is extensively used in social, biological, and physical sciences, engineering, and business. The Stan program language and interfaces are documented [here](http://mc-stan.org/documentation/).
 
-[cmdctan](http://mc-stan.org/interfaces/cmdstan.html) is the shell/command line interface to run Stan language programs. 
+[cmdstan](http://mc-stan.org/interfaces/cmdstan.html) is the shell/command line interface to run Stan language programs. 
 
 [CmdStan.jl](https://github.com/StanJulia/CmdStan.jl) wraps cmdstan and captures the samples for further processing.
 
