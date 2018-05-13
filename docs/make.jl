@@ -12,7 +12,7 @@ makedocs(
 )
 
 deploydocs(
-    repo = "https://github.com/StanJulia/CmdStan.jl",
+    repo = "github.com/StanJulia/CmdStan.jl",
     target = "build",
     julia = "nightly",
     osname = "linux",
