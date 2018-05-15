@@ -178,7 +178,7 @@ cd(ProjDir) do
   ]
 
   global stanmodel, rc, sim
-  stanmodel = Stanmodel(name="kid", model=kid, useMamba=false);
+  stanmodel = Stanmodel(name="kid", model=kid);
   rc, sim = stan(stanmodel, kiddata, ProjDir, CmdStanDir=CMDSTAN_HOME)
 
   if rc == 0

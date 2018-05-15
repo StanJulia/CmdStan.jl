@@ -27,8 +27,7 @@ cd(ProjDir) do
   ]
 
   global stanmode, rc, diags
-  stanmodel = Stanmodel(Diagnose(CmdStan.Gradient(epsilon=1e-6)), name="bernoulli",
-    model=bernoulli, useMamba=false);
+  stanmodel = Stanmodel(Diagnose(CmdStan.Gradient(epsilon=1e-6)), name="bernoulli", model=bernoulli);
 
   rc, diags = stan(stanmodel, bernoullidata, ProjDir, CmdStanDir=CMDSTAN_HOME);
 

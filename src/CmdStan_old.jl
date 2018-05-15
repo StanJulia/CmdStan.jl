@@ -28,41 +28,29 @@ set_cmdstan_home!(path) = global CMDSTAN_HOME=path
 
 include("main/stanmodel.jl")
 include("main/stancode.jl")
-
 include("utilities/parallel.jl")
 include("utilities/create_cmd_line.jl")
 include("utilities/create_r_files.jl")
-include("utilities/read_samples_or_diagnostics.jl")
-include("utilities/read_variational.jl")
-include("utilities/read_diagnose_or_optimize.jl")
-include("utilities/update_model_file.jl")
-
+include("utilities/read_stan_files.jl")
 include("types/sampletype.jl")
 include("types/optimizetype.jl")
 include("types/diagnosetype.jl")
 include("types/variationaltype.jl")
 
 export
-
 # from this file
 set_cmdstan_home!,
 CMDSTAN_HOME,
-
 # From stanmodel.jl
 Stanmodel,
-
 # From stancode.jl
 stan,
-
 # From sampletype.jl
 Sample,
-
 # From optimizetype.jl
 Optimize,
-
 # From diagnosetype.jl
 Diagnose,
-
 # From variationaltype.jl
 Variational
 

@@ -35,7 +35,7 @@ rc, sim = stan(
 * `init=Nothing`                     : Initial parameter value dictionary
 * `summary=true`                  : Use CmdStan's stansummary to display results
 * `diagnostics=false`             : Generate diagnostics file
-* `CmdStanDir=CMDSTAN_HOME`       : Location of CmdStan directory
+* `CmdStanDir=CMDSTAN_HOME`       : Location of cmdstan directory
 ```
 
 ### Return values
@@ -126,6 +126,7 @@ function stan(
       end
     end
   end
+  
   if init != Nothing && check_dct_type(init)
     if length(init) == model.nchains
       for i in 1:model.nchains
@@ -145,6 +146,7 @@ function stan(
       end
     end
   end
+  
   for i in 1:model.nchains
     model.id = i
     model.data_file ="$(model.name)_$(i).data.R"
@@ -170,6 +172,7 @@ function stan(
     end
     model.command[i] = cmdline(model)
   end
+  
   try
     run(pipeline(par(model.command), stdout="$(model.name)_run.log"))
   catch e
@@ -183,28 +186,35 @@ function stan(
   local samplefiles = String[]
   local ftype
   
-  if isa(model.method, Sample)
+  if isa(model.method, Sample) || isa(model.method, Diagnostics)
     ftype = diagnostics ? "diagnostics" : "samples"
+    
     for i in 1:model.nchains
       push!(samplefiles, "$(model.name)_$(ftype)_$(i).csv")
     end
-    if isa(model.method, Sample) && summary
+    
+    if summary
       stan_summary(par(samplefiles), CmdStanDir=CmdStanDir)
     end
-    res = read_stanfit_samples(model, diagnostics)
+    
+    res = read_samples_or_diagnostics(model, diagnostics)
+    
+  elseif isa(model.method, Optimize) || isa(model.method, Diagnose)
+    res = read_diagnose_or_optimize(model)
+
   elseif isa(model.method, Variational)
     ftype = "variational"
+    
     for i in 1:model.nchains
       push!(samplefiles, "$(model.name)_$(ftype)_$(i).csv")
     end
-    if isa(model.method, Variational) && summary
+    
+    if summary
       stan_summary(par(samplefiles), CmdStanDir=CmdStanDir)
     end
-    res = read_stanfit_variational_samples(model)
-  elseif isa(model.method, Optimize)
-    res = read_stanfit(model)
-  elseif isa(model.method, Diagnose)
-    res = read_stanfit(model)
+    
+    res = read_variational(model)
+    
   else
     println("\nAn unknown method is specified in the call to stan().")
     cd(old)
@@ -219,7 +229,7 @@ end
 
 # Method stan_summary
 
-Display CmdStan summary 
+Display cmdstan summary 
 
 ### Method
 ```julia
@@ -235,7 +245,7 @@ stan_summary(
 
 ### Optional arguments
 ```julia
-* CmdStanDir=CMDSTAN_HOME       : CmdStan directory for stansummary program
+* CmdStanDir=CMDSTAN_HOME       : cmdstan directory for stansummary program
 ```
 
 ### Related help
@@ -258,7 +268,7 @@ end
 
 # Method stan_summary
 
-Display CmdStan summary 
+Display cmdstan summary 
 
 ### Method
 ```julia
@@ -274,7 +284,7 @@ stan_summary(
 
 ### Optional arguments
 ```julia
-* CmdStanDir=CMDSTAN_HOME       : CmdStan directory for stansummary program
+* CmdStanDir=CMDSTAN_HOME       : cmdstan directory for stansummary program
 ```
 
 ### Related help

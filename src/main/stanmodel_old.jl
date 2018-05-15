@@ -48,6 +48,8 @@ mutable struct Stanmodel
   init_file::String
   output::Output
   tmpdir::String
+  useMamba::Bool
+  mambaThinning::Int
 end
 
 """
@@ -70,7 +72,9 @@ Stanmodel(
   random=Random(),
   init=DataDict[],
   output=Output(),
-  pdir::String=pwd()
+  pdir::String=pwd(),
+  useMamba=true,
+  mambaThinning=1
 )
 
 ```
@@ -93,6 +97,8 @@ Stanmodel(
 * `output::Output`             : File output options
 * `pdir::String`               : Working directory
 * `monitors::String[] `        : Filter for variables used in Mamba post-processing
+* `useMamba::Bool`             : Use Mamba Chains for diagnostics and graphics
+* `mambaThinning::Int`         : Additional thinning factor in Mamba Chains
 ```
 
 ### Example
@@ -136,9 +142,36 @@ function Stanmodel(
   random=Random(),
   init=DataDict[],
   output=Output(),
-  pdir::String=pwd())
+  pdir::String=pwd(),
+  useMamba=true,
+  mambaThinning=1)
     
   cd(pdir)
+  
+  if useMamba
+    res = ""
+    try
+    	res = Pkg.installed("Mamba")
+    catch
+      println("Package Mamba.jl not installed, please run Pkg.add(\"Mamba\")")
+      return
+    end
+
+    res = ""
+    try
+    	res = Pkg.installed("Gadfly")
+    catch
+      println("Package Gadfly.jl not installed, please run Pkg.add(\"Gadfly\")")
+      return
+    end
+
+    if mutable structof(res) == VersionNumber
+      eval(quote
+        using Mamba
+        using Gadfly
+      end)
+    end
+  end
   
   tmpdir = Pkg.dir(pdir, "tmp")
   if !isdir(tmpdir)
@@ -171,7 +204,47 @@ function Stanmodel(
     num_warmup, num_samples, thin,
     id, model, model_file, monitors,
     data, data_file, cmdarray, method, random,
-    init, init_file, output, tmpdir);
+    init, init_file, output, tmpdir,
+    useMamba, mambaThinning);
+end
+
+"""
+
+# Method update_model_file
+
+Update Stan language model file if necessary 
+
+### Method
+```julia
+update_model_file(
+  file::String, 
+  str::String
+)
+```
+### Required arguments
+```julia
+* `file::String`                : File holding existing Stan model
+* `str::String`                 : Stan model string
+```
+
+### Related help
+```julia
+?Stan.Stanmodel                 : Create a StanModel
+```
+"""
+function update_model_file(file::AbstractString, str::AbstractString)
+  str2 = ""
+  if isfile(file)
+    resfile = open(file, "r")
+    str2 = read(resfile, String)
+    str != str2 && rm(file)
+  end
+  if str != str2
+    println("\nFile $(file) will be updated.\n")
+    strmout = open(file, "w")
+    write(strmout, str)
+    close(strmout)
+  end
 end
 
 function model_show(io::IO, m::Stanmodel, compact::Bool)
@@ -180,6 +253,8 @@ function model_show(io::IO, m::Stanmodel, compact::Bool)
   println("  num_samples =             $(m.num_samples)")
   println("  num_warmup =                   $(m.num_warmup)")
   println("  thin =                    $(m.thin)")
+  println("  useMamba =                $(m.useMamba)")
+  println("  mambaThinning =           $(m.mambaThinning)")
   println("  monitors =                $(m.monitors)")
   println("  model_file =              \"$(m.model_file)\"")
   println("  data_file =               \"$(m.data_file)\"")
@@ -199,3 +274,4 @@ function model_show(io::IO, m::Stanmodel, compact::Bool)
 end
 
 show(io::IO, m::Stanmodel) = model_show(io, m, false)
+showcompact(io::IO, m::Stanmodel) = model_show(io, m, true)

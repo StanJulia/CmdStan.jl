@@ -27,8 +27,7 @@ cd(ProjDir) do
   ]
 
   global stanmodel, rc, optim
-  stanmodel = Stanmodel(Optimize(), name="bernoulli",
-    model=bernoulli, useMamba=false);
+  stanmodel = Stanmodel(Optimize(), name="bernoulli", model=bernoulli);
 
   rc, optim = stan(stanmodel, bernoullidata, ProjDir, CmdStanDir=CMDSTAN_HOME);
 

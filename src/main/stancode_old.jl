@@ -35,7 +35,7 @@ rc, sim = stan(
 * `init=Nothing`                     : Initial parameter value dictionary
 * `summary=true`                  : Use CmdStan's stansummary to display results
 * `diagnostics=false`             : Generate diagnostics file
-* `CmdStanDir=CMDSTAN_HOME`       : Location of CmdStan directory
+* `CmdStanDir=CMDSTAN_HOME`       : Location of cmdstan directory
 ```
 
 ### Return values
@@ -219,7 +219,7 @@ end
 
 # Method stan_summary
 
-Display CmdStan summary 
+Display cmdstan summary 
 
 ### Method
 ```julia
@@ -235,7 +235,7 @@ stan_summary(
 
 ### Optional arguments
 ```julia
-* CmdStanDir=CMDSTAN_HOME       : CmdStan directory for stansummary program
+* CmdStanDir=CMDSTAN_HOME       : cmdstan directory for stansummary program
 ```
 
 ### Related help
@@ -254,11 +254,12 @@ function stan_summary(file::String; CmdStanDir=CMDSTAN_HOME)
   end
 end
 
+#=
 """
 
 # Method stan_summary
 
-Display CmdStan summary 
+Display cmdstan summary 
 
 ### Method
 ```julia
@@ -274,7 +275,7 @@ stan_summary(
 
 ### Optional arguments
 ```julia
-* CmdStanDir=CMDSTAN_HOME       : CmdStan directory for stansummary program
+* CmdStanDir=CMDSTAN_HOME       : cmdstan directory for stansummary program
 ```
 
 ### Related help
@@ -300,4 +301,4 @@ function stan_summary(filecmd::Cmd; CmdStanDir=CMDSTAN_HOME)
     println()
   end
 end
-
+=#

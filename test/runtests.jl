@@ -7,7 +7,7 @@ code_tests = ["test_env.jl",
               "test_utilities.jl",
               "test_cmdtype.jl"]
 
-# Run execution_tests only if CmdStan is installed and CMDSTAN_HOME is set correctly.
+# Run execution_tests only if cmdstan is installed and CMDSTAN_HOME is set correctly.
 execution_tests = [
   "test_bernoulli.jl",
   "test_bernoulli_optimize.jl",

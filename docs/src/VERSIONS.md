@@ -10,11 +10,11 @@ New functionality will be introduced in minor level updates. This includes addin
 
 Changes that require updates to some examples bump the major level.
 
-Updates for new releases of Julia and CmdStan bump the appropriate level.
+Updates for new releases of Julia and cmdstan bump the appropriate level.
 
 ## Testing
 
-Version 1.0 of the package has been tested on Mac OSX 10.13, Julia 0.7- and CmdStan 2.18.
+Version 1.0 of the package has been tested on Mac OSX 10.13, Julia 0.7- and cmdstan 2.18.
 
 ## Version 1.0.0
 

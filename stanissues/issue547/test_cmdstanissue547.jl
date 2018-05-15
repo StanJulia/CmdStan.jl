@@ -1,4 +1,4 @@
-# This is a test for CmdStan issue #547 (thanks to chris fisher & bob)
+# This is a test for cmdstan issue #547 (thanks to chris fisher & bob)
 
 using Mamba, Stan
 

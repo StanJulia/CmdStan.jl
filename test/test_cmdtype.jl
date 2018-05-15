@@ -25,8 +25,7 @@ data = [
   Dict("N" => 10, "y" => [0, 0, 0, 1, 0, 0, 0, 1, 0, 1])
 ]
 
-m = Stanmodel(Optimize(), name="bernoulli", model=bernoulli, 
-  data=data, useMamba=false);
+m = Stanmodel(Optimize(), name="bernoulli", model=bernoulli, data=data);
 m.command[1] = CmdStan.cmdline(m)
 
 println()
