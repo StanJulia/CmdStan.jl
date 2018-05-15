@@ -29,13 +29,23 @@ set_cmdstan_home!(path) = global CMDSTAN_HOME=path
 include("main/stanmodel.jl")
 include("main/stancode.jl")
 
-include("utilities/parallel.jl")
-include("utilities/create_cmd_line.jl")
+# preprocessing
+
+include("utilities/update_model_file.jl")
 include("utilities/create_r_files.jl")
+include("utilities/create_cmd_line.jl")
+
+# run cmdstan
+
+include("utilities/parallel.jl")
+
+# used in postprocessing
+
 include("utilities/read_samples_or_diagnostics.jl")
 include("utilities/read_variational.jl")
 include("utilities/read_diagnose_or_optimize.jl")
-include("utilities/update_model_file.jl")
+
+# type definitions
 
 include("types/sampletype.jl")
 include("types/optimizetype.jl")

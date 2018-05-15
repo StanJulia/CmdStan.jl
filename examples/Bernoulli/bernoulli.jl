@@ -3,7 +3,7 @@
 using Compat, CmdStan, Test
 
 ProjDir = dirname(@__FILE__)
-cd(ProjDir) #do
+cd(ProjDir) do
 
   bernoullimodel = "
   data { 
@@ -37,4 +37,5 @@ cd(ProjDir) #do
     println("Test round(mean(theta), digits=1) ≈ 0.3")
     @test round(mean(sim[:,8,:]), digits=1) ≈ 0.3
   end
-  #end # cd
+
+end # cd
