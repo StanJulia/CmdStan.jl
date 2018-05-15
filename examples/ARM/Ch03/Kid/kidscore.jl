@@ -5,7 +5,7 @@ using Compat, CmdStan, Test
 ProjDir = dirname(@__FILE__)
 cd(ProjDir) do
 
-  const kid = "
+  kid = "
   data {
     int<lower=0> N;
     vector[N] kid_score;
@@ -21,7 +21,7 @@ cd(ProjDir) do
   }
   "
 
-  const kiddata = [
+  kiddata = [
     Dict("N" => 434,
     "kid_score" => [65, 98, 85, 83, 115, 98, 69, 106, 102, 95, 91, 58, 84, 78, 102,
     110, 102, 99, 105, 101, 102, 115, 100, 87, 99, 96, 72, 78, 77, 98, 69, 130, 109,
@@ -182,7 +182,7 @@ cd(ProjDir) do
   rc, sim = stan(stanmodel, kiddata, ProjDir, CmdStanDir=CMDSTAN_HOME)
 
   if rc == 0
-    println("Test: 25.0 < round(mean(beta[1]), 0) == $(mean(sim[:,8,:])) < 27.0")
-    @test 24.0 < round(mean(sim[:,8,:]), 0) < 27.0
+    println("Test: 24.0 < round(mean(sim[:,8,:]), digits=0) < 27.0")
+    @test 24.0 < round(mean(sim[:,8,:]), digits=0) < 27.0
   end
 end # cd
