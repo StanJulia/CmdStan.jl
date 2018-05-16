@@ -29,13 +29,11 @@ cd(ProjDir) do
   global stanmodel, rc, sim
   stanmodel = Stanmodel(num_samples=1200, thin=2, name="bernoulli",  model=bernoullimodel);
 
-  rc, sim = stan(stanmodel, observeddata, ProjDir, diagnostics=false,
+  rc, sim, cnames = stan(stanmodel, observeddata, ProjDir, diagnostics=false,
     CmdStanDir=CMDSTAN_HOME);
 
   if rc == 0
-    println()
-    println("Test round(mean(theta), digits=1) ≈ 0.3")
-    @test round(mean(sim[:,8,:]), digits=1) ≈ 0.3
+    @test round.(mean(sim[:, 8, :]), digits=1) ≈ 0.3
   end
 
 end # cd

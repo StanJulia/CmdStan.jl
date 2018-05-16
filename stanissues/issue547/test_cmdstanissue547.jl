@@ -15,7 +15,7 @@ cd(ProjDir) do
 
   global stanmodel, rc, sim
   stanmodel = Stanmodel(Sample(save_warmup=true, thin=1), name="simple", model=simplecode);
-  rc, sim = stan(stanmodel, [Dict("y" => 0.)], CmdStanDir=CMDSTAN_HOME);
+  rc, sim, cnames = stan(stanmodel, [Dict("y" => 0.)], CmdStanDir=CMDSTAN_HOME);
   rc == 0 && describe(sim)
   
 end

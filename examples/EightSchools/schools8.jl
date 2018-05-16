@@ -37,7 +37,7 @@ cd(ProjDir) do
 
   global stanmodel, rc, sim
   stanmodel = Stanmodel(name="schools8", model=eightschools);
-  rc, sim = stan(stanmodel, schools8data, ProjDir, CmdStanDir=CMDSTAN_HOME)
+  rc, sim, cnames = stan(stanmodel, schools8data, ProjDir, CmdStanDir=CMDSTAN_HOME)
 
   if rc == 0
     println()

@@ -29,7 +29,7 @@ cd(ProjDir) do
   global stanmodel, rc, sim
   stanmodel = Stanmodel(CmdStan.Variational(), name="bernoulli",  model=bernoulli)
 
-  rc, sim = stan(stanmodel, bernoullidata, ProjDir, CmdStanDir=CMDSTAN_HOME)
+  rc, sim, cnames = stan(stanmodel, bernoullidata, ProjDir, CmdStanDir=CMDSTAN_HOME)
 
   if rc == 0
     println()

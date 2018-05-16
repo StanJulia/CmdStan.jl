@@ -8,7 +8,7 @@ Execute a Stan model.
 
 ### Method
 ```julia
-rc, sim = stan(
+rc, sim, cnames = stan(
   model::Stanmodel, 
   data=Nothing, 
   ProjDir=pwd();
@@ -185,6 +185,7 @@ function stan(
   
   local samplefiles = String[]
   local ftype
+  local cnames = String[]
   
   if isa(model.method, Sample) || isa(model.method, Diagnostics)
     ftype = diagnostics ? "diagnostics" : "samples"
@@ -197,7 +198,7 @@ function stan(
       stan_summary(par(samplefiles), CmdStanDir=CmdStanDir)
     end
     
-    res = read_samples_or_diagnostics(model, diagnostics)
+    (res, cnames) = read_samples_or_diagnostics(model, diagnostics)
     
   elseif isa(model.method, Optimize) || isa(model.method, Diagnose)
     res = read_diagnose_or_optimize(model)
@@ -222,7 +223,9 @@ function stan(
   end
   
   cd(old)
-  (rc, res)
+
+  (rc, res, cnames)
+  
 end
 
 """

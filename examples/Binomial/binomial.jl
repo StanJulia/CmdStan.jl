@@ -41,7 +41,7 @@ cd(ProjDir) do
     Dict("n" => 10, "k" => 5)
   ]
 
-  rc, sim = stan(stanmodel, binomialdata, ProjDir, diagnostics=false,
+  rc, sim, cnames = stan(stanmodel, binomialdata, ProjDir, diagnostics=false,
               CmdStanDir=CMDSTAN_HOME)
 
   if rc == 0

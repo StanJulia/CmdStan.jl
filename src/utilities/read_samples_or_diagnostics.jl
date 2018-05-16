@@ -62,6 +62,13 @@ function read_samples_or_diagnostics(m::Stanmodel, diagnostics=false, warmup_sam
     end   # read in next file
   end   # read in file for each chain
   
-  a3d
+  cnames = convert.(String, idx)
+  if !m.create_dataframe
+    return (a3d, cnames)
+  else
+    csymbols = Symbol.(cnames)
+    df = [DataFrame(a3d[:,:,i], csymbols) for i in 1:m.nchains]
+    return (df, cnames)
+  end
   
 end   # end of read_samples

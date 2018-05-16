@@ -10,6 +10,7 @@ code_tests = ["test_env.jl",
 # Run execution_tests only if cmdstan is installed and CMDSTAN_HOME is set correctly.
 execution_tests = [
   "test_bernoulli.jl",
+  "test_bernoulli_dataframe.jl",
   "test_bernoulli_optimize.jl",
   "test_bernoulli_diagnose.jl",
   "test_bernoulli_variational.jl",
@@ -19,6 +20,7 @@ execution_tests = [
   "test_binormal.jl",
   "test_schools8.jl",
   "test_dyes.jl",
+  "test_dyes_dataframe.jl",
   "test_kidscore.jl",
   "test_fixed_param.jl"
 ]

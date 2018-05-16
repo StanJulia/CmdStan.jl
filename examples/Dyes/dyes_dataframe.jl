@@ -61,12 +61,11 @@ cd(ProjDir) do
   ]
 
   global stanmodel, rc, sim
-  stanmodel = Stanmodel(name="dyes", model=dyes);
+  stanmodel = Stanmodel(name="dyes", model=dyes, create_dataframe=true);
   @time rc, sim, cnames = stan(stanmodel, dyesdata, ProjDir, CmdStanDir=CMDSTAN_HOME)
 
   if rc == 0
     println()
-    println("Test round(mean(theta)/100.0, digits=0) ≈ 15.0")
-    @test round(mean(sim[:,10,:])/100.0, digits=0) ≈ 15.0
+    @test round.(mean([mean(sim[i][:theta])/100.0 for i in 1:stanmodel.nchains]), digits=0) ≈ 15.0
   end
 end # cd

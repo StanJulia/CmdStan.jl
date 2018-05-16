@@ -19,31 +19,22 @@ cd(ProjDir) do
   }
   "
 
-  bernoullidata = Dict{String, Any}[
+  observeddata = [
     Dict("N" => 10, "y" => [0, 1, 0, 1, 0, 0, 0, 0, 0, 1]),
     Dict("N" => 10, "y" => [0, 1, 0, 0, 0, 0, 1, 0, 0, 1]),
     Dict("N" => 10, "y" => [0, 0, 0, 0, 0, 0, 1, 0, 1, 1]),
     Dict("N" => 10, "y" => [0, 0, 0, 1, 0, 0, 0, 1, 0, 1])
   ]
 
-  inittheta = Dict{String, Any}[
-    Dict("theta" => 0.31),
-    Dict("theta" => 0.32),
-    Dict("theta" => 0.33),
-    Dict("theta" => 0.34),
-  ]
+  global stanmodel, rc, sim
+  stanmodel = Stanmodel(num_samples=1200, thin=2, name="bernoulli",  model=bernoullimodel,
+    create_dataframe=true);
 
-  global stanmodel
-  stanmodel = Stanmodel(name="bernoulli", model=bernoullimodel, num_warmup=1);
+  rc, sim, cnames = stan(stanmodel, observeddata, ProjDir, diagnostics=false,
+    CmdStanDir=CMDSTAN_HOME);
 
-  global rc, sim
-  rc, sim, cnames = stan(stanmodel, bernoullidata, ProjDir, 
-    init=inittheta, CmdStanDir=CMDSTAN_HOME)
-  
   if rc == 0
-    println()
-    println("Test 0.2 <= mean(theta[1]) <= 0.5)")
-    @test 0.2 <= round(mean(sim[:,8,:]), digits=1) <= 0.5
+    @test round.(mean([mean(sim[i][:theta]) for i in 1:stanmodel.nchains]), digits=1) ≈ 0.3
   end
 
 end # cd

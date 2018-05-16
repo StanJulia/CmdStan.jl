@@ -28,7 +28,7 @@ cd(ProjDir) do
   global stanmodel, rc, sim
   stanmodel = Stanmodel(name="binormal", model=binorm, Sample(save_warmup=true));
 
-  rc, sim = stan(stanmodel, CmdStanDir=CMDSTAN_HOME)
+  rc, sim, cnames = stan(stanmodel, CmdStanDir=CMDSTAN_HOME)
 
   if rc == 0
     println()

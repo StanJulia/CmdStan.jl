@@ -179,7 +179,7 @@ cd(ProjDir) do
 
   global stanmodel, rc, sim
   stanmodel = Stanmodel(name="kid", model=kid);
-  rc, sim = stan(stanmodel, kiddata, ProjDir, CmdStanDir=CMDSTAN_HOME)
+  rc, sim, cnames = stan(stanmodel, kiddata, ProjDir, CmdStanDir=CMDSTAN_HOME)
 
   if rc == 0
     println("Test: 24.0 < round(mean(sim[:,8,:]), digits=0) < 27.0")

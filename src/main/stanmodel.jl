@@ -48,6 +48,7 @@ mutable struct Stanmodel
   init_file::String
   output::Output
   tmpdir::String
+  create_dataframe::Bool
 end
 
 """
@@ -70,7 +71,8 @@ Stanmodel(
   random=Random(),
   init=DataDict[],
   output=Output(),
-  pdir::String=pwd()
+  pdir::String=pwd(),
+  create_dataframe=false
 )
 
 ```
@@ -93,6 +95,7 @@ Stanmodel(
 * `output::Output`             : File output options
 * `pdir::String`               : Working directory
 * `monitors::String[] `        : Filter for variables used in Mamba post-processing
+* `create_dataframe`        : If true a DataFrame is returned instead of an array
 ```
 
 ### Example
@@ -136,7 +139,8 @@ function Stanmodel(
   random=Random(),
   init=DataDict[],
   output=Output(),
-  pdir::String=pwd())
+  pdir::String=pwd(),
+  create_dataframe=false)
     
   cd(pdir)
   
@@ -171,7 +175,7 @@ function Stanmodel(
     num_warmup, num_samples, thin,
     id, model, model_file, monitors,
     data, data_file, cmdarray, method, random,
-    init, init_file, output, tmpdir);
+    init, init_file, output, tmpdir, create_dataframe);
 end
 
 function model_show(io::IO, m::Stanmodel, compact::Bool)
@@ -183,6 +187,7 @@ function model_show(io::IO, m::Stanmodel, compact::Bool)
   println("  monitors =                $(m.monitors)")
   println("  model_file =              \"$(m.model_file)\"")
   println("  data_file =               \"$(m.data_file)\"")
+  println("  create_dataframe = \"$(m.create_dataframe)\"")
   println("  output =                  Output()")
   println("    file =                    \"$(m.output.file)\"")
   println("    diagnostics_file =        \"$(m.output.diagnostic_file)\"")
