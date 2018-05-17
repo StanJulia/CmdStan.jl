@@ -60,7 +60,13 @@ cd(ProjDir) do
     )
   ]
 
-  global stanmodel, rc, sim
+  global stanmodel, rc, sim, cnames
+  
+  #=
+  monitor = ["tau_between", "tau_within", "theta", "mu.1", "mu.2"]
+  stanmodel = Stanmodel(name="dyes", model=dyes, create_dataframe=true, monitors=monitor);
+  =#
+  
   stanmodel = Stanmodel(name="dyes", model=dyes, create_dataframe=true);
   @time rc, sim, cnames = stan(stanmodel, dyesdata, ProjDir, CmdStanDir=CMDSTAN_HOME)
 
