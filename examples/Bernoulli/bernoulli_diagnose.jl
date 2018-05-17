@@ -29,15 +29,12 @@ cd(ProjDir) do
   global stanmode, rc, diags
   stanmodel = Stanmodel(Diagnose(CmdStan.Gradient(epsilon=1e-6)), name="bernoulli", model=bernoulli);
 
-  rc, diags = stan(stanmodel, bernoullidata, ProjDir, CmdStanDir=CMDSTAN_HOME);
+  rc, diags, cnames = stan(stanmodel, bernoullidata, ProjDir, CmdStanDir=CMDSTAN_HOME);
 
   if rc == 0
-    diags[1]["diagnose"] |> display
     println()
-
-    println()
-    tmp = diags[1]["diagnose"][:error][1]
-    println("Test round(diags[1][diagnose][:error], 6) ≈ 0.0")
-    @test round(tmp, digits=6) ≈ 0.0
+    tmp = diags[1][1]["diagnose"][:error][1]
+    println("Test round.(diags[1][1][\"diagnose\"][:error], digits=6) ≈ 0.0")
+    @test round.(tmp, digits=6) ≈ 0.0
   end
 end # cd

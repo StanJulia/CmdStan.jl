@@ -38,7 +38,7 @@ function read_samples_or_diagnostics(m::Stanmodel, diagnostics=false, warmup_sam
       if length(m.monitors) == 0
         indvec = 1:length(index)
       else
-        indvec = findin(index, m.monitors)
+        indvec = findall((in)(m.monitors), index)
       end
       
       if i == 1
@@ -62,7 +62,7 @@ function read_samples_or_diagnostics(m::Stanmodel, diagnostics=false, warmup_sam
     end   # read in next file
   end   # read in file for each chain
   
-  cnames = convert.(String, idx)
+  cnames = convert.(String, idx[indvec])
   if !m.create_dataframe
     return (a3d, cnames)
   else

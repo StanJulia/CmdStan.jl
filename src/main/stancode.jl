@@ -214,7 +214,7 @@ function stan(
       stan_summary(par(samplefiles), CmdStanDir=CmdStanDir)
     end
     
-    res = read_variational(model)
+    res, cnames = read_variational(model)
     
   else
     println("\nAn unknown method is specified in the call to stan().")

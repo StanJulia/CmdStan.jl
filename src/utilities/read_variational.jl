@@ -1,6 +1,7 @@
 function read_variational(m::Stanmodel)
 
   local a3d, monitors, index, idx, indvec, ftype
+  
   ftype = "variational"
   
   for i in 1:m.nchains
@@ -13,7 +14,7 @@ function read_variational(m::Stanmodel)
       if length(m.monitors) == 0
         indvec = 1:length(index)
       else
-        indvec = findin(index, m.monitors)
+        indvec = findall((in)(m.monitors), index)
       end
       if i == 1
         a3d = fill(0.0, m.method.output_samples, length(indvec), m.nchains)
@@ -26,7 +27,7 @@ function read_variational(m::Stanmodel)
           close(instream)
           break
         else
-          flds = parse.(Float64, split(strip(line), ","))
+          flds = parse.(Float64, (split(strip(line), ",")))
           flds = reshape(flds[indvec], 1, length(indvec))
           a3d[j,:,i] = flds
         end
@@ -34,7 +35,9 @@ function read_variational(m::Stanmodel)
     end
   end
   
-  a3d
+  cnames = convert.(String, idx[indvec])
+  
+  (a3d, cnames)
   
 end
 

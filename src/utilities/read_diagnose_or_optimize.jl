@@ -29,6 +29,7 @@ function read_diagnose_or_optimize(model::Stanmodel)
   ## Collect the results of a chain in an array ##
   
   chainarray = Dict[]
+  cnames = String[]
   
   ## Each chain dictionary can contain up to 5 types of results ##
   
@@ -66,7 +67,10 @@ function read_diagnose_or_optimize(model::Stanmodel)
           line = Unicode.normalize(readline(instream), newline2lf=true)
           idx = split(strip(line), ",")
           index = [idx[k] for k in 1:length(idx)]
+          cnames = convert.(String, idx)
+  
           #res_type == "optimize" && println(index)
+          
           j = 0
           skipchars(isspace, instream, linecomment='#')
           while true
@@ -113,6 +117,8 @@ function read_diagnose_or_optimize(model::Stanmodel)
       rtdict = Dict()
     end
   end
-  chainarray
+  
+  (chainarray, cnames)
+  
 end
 

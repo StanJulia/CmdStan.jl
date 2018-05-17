@@ -38,7 +38,7 @@ cd(ProjDir) do
 
   global rc, sim
   rc, sim, cnames = stan(stanmodel, bernoullidata, ProjDir, 
-    init=inittheta, CmdStanDir=CMDSTAN_HOME)
+    init=inittheta, CmdStanDir=CMDSTAN_HOME, summary=false)
   
   if rc == 0
     println()

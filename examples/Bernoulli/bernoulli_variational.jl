@@ -26,7 +26,7 @@ cd(ProjDir) do
     Dict("N" => 10, "y" => [0, 0, 0, 1, 0, 0, 0, 1, 0, 1])
   ]
 
-  global stanmodel, rc, sim
+  global stanmodel, rc, sim, cnames
   stanmodel = Stanmodel(CmdStan.Variational(), name="bernoulli",  model=bernoulli)
 
   rc, sim, cnames = stan(stanmodel, bernoullidata, ProjDir, CmdStanDir=CMDSTAN_HOME)
