@@ -1,4 +1,4 @@
-function read_samples_or_diagnostics(m::Stanmodel, diagnostics=false, warmup_samples=false)
+function read_samples(m::Stanmodel, diagnostics=false, warmup_samples=false)
 
   local a3d, monitors, index, idx, indvec, ftype, noofsamples
 
@@ -8,14 +8,22 @@ function read_samples_or_diagnostics(m::Stanmodel, diagnostics=false, warmup_sam
   #   i:  variable name (either from monitors or read from .csv file produiced by cmdstan)
   #   c:  chain number (from m.chains)
 
-  ftype = diagnostics ? "diagnostics" : "samples"
+  if isa(m.method, Sample)
+    ftype = diagnostics ? "diagnostics" : "samples"
+    
+    # The sample index s runs from 1:noofsamples
   
-  # The sample index s runs from 1:noofsamples
-  
-  if m.method.save_warmup
-    noofsamples = floor(Int, (m.method.num_samples+m.method.num_warmup)/m.method.thin)
+    if m.method.save_warmup
+      noofsamples = floor(Int, (m.method.num_samples+m.method.num_warmup)/m.method.thin)
+    else
+      noofsamples = floor(Int, m.method.num_samples/m.method.thin)
+    end
   else
-    noofsamples = floor(Int, m.method.num_samples/m.method.thin)
+    ftype = lowercase(string(typeof(m.method)))
+    
+    # The noofsamples is obtained from method.output_samples
+  
+    noofsamples = m.method.output_samples
   end
   
   # Read .csv files created by each chain

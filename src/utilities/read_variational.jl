@@ -2,7 +2,7 @@ function read_variational(m::Stanmodel)
 
   local a3d, monitors, index, idx, indvec, ftype
   
-  ftype = "variational"
+  ftype = lowercase(string(typeof(m.method)))
   
   for i in 1:m.nchains
     if isfile("$(m.name)_$(ftype)_$(i).csv")

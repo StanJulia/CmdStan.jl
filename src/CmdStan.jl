@@ -41,8 +41,8 @@ include("utilities/parallel.jl")
 
 # used in postprocessing
 
-include("utilities/read_samples_or_diagnostics.jl")
-include("utilities/read_variational.jl")
+include("utilities/read_samples.jl")
+#include("utilities/read_variational.jl")
 include("utilities/read_diagnose.jl")
 include("utilities/read_optimize.jl")
 

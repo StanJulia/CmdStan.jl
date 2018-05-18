@@ -26,10 +26,14 @@ function read_diagnose(model::Stanmodel)
   
   for i in 1:model.nchains
     if isfile("$(model.name)_$(res_type)_$(i).csv")
+      
       ## A result type file for chain i is present ##
-      ## Result type diagnose needs special treatment ##
+      
       instream = open("$(model.name)_$(res_type)_$(i).csv")
       if i == 1
+        
+        # Extract cmdstan version
+        
         str = read(instream, String)
         sstr = split(str)
         tdict[:stan_major_version] = [parse(Int, sstr[4])]
@@ -38,6 +42,7 @@ function read_diagnose(model::Stanmodel)
       end
       
       # Position sstr at the beginning of last comment line
+      
       sstr_lp = sstr[79]
       sstr_lp = parse(Float64, split(sstr_lp, '=')[2])
       
@@ -49,6 +54,9 @@ function read_diagnose(model::Stanmodel)
         append!(tdict[:finite_dif], parse(Float64, sstr[93]))
         append!(tdict[:error], parse(Float64, sstr[94]))
       else
+        
+        # First time around, create value array
+        
         tdict[:lp] = [sstr_lp]
         tdict[:var_id] = [parse(Int, sstr[90])]
         tdict[:value] = [parse(Float64, sstr[91])]
@@ -59,9 +67,6 @@ function read_diagnose(model::Stanmodel)
     end
   end
       
-  ## End of processing result type file ##
-  ## If any keys were found, merge it in the rtdict ##
-        
   (tdict, cnames)
   
 end

@@ -187,8 +187,12 @@ function stan(
   local ftype
   local cnames = String[]
   
-  if isa(model.method, Sample) || isa(model.method, Diagnostics)
-    ftype = diagnostics ? "diagnostics" : "samples"
+  if typeof(model.method) in [Sample, Variational]
+    if isa(model.method, Sample)
+      ftype = diagnostics ? "diagnostics" : "samples"
+    else
+      ftype = lowercase(string(typeof(model.method)))
+    end
     
     for i in 1:model.nchains
       push!(samplefiles, "$(model.name)_$(ftype)_$(i).csv")
@@ -198,20 +202,7 @@ function stan(
       stan_summary(par(samplefiles), CmdStanDir=CmdStanDir)
     end
     
-    (res, cnames) = read_samples_or_diagnostics(model, diagnostics)
-    
-  elseif isa(model.method, Variational)
-    ftype = "variational"
-    
-    for i in 1:model.nchains
-      push!(samplefiles, "$(model.name)_$(ftype)_$(i).csv")
-    end
-    
-    if summary
-      stan_summary(par(samplefiles), CmdStanDir=CmdStanDir)
-    end
-    
-    res, cnames = read_variational(model)
+    (res, cnames) = read_samples(model, diagnostics)
     
   elseif isa(model.method, Optimize)
     res, cnames = read_optimize(model)
