@@ -200,9 +200,6 @@ function stan(
     
     (res, cnames) = read_samples_or_diagnostics(model, diagnostics)
     
-  elseif isa(model.method, Optimize) || isa(model.method, Diagnose)
-    res = read_diagnose_or_optimize(model)
-
   elseif isa(model.method, Variational)
     ftype = "variational"
     
@@ -216,6 +213,12 @@ function stan(
     
     res, cnames = read_variational(model)
     
+  elseif isa(model.method, Optimize)
+    res, cnames = read_optimize(model)
+
+  elseif isa(model.method, Diagnose)
+    res, cnames = read_diagnose(model)
+
   else
     println("\nAn unknown method is specified in the call to stan().")
     cd(old)

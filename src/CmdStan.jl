@@ -43,7 +43,8 @@ include("utilities/parallel.jl")
 
 include("utilities/read_samples_or_diagnostics.jl")
 include("utilities/read_variational.jl")
-include("utilities/read_diagnose_or_optimize.jl")
+include("utilities/read_diagnose.jl")
+include("utilities/read_optimize.jl")
 
 # type definitions
 

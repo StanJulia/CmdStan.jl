@@ -1,4 +1,4 @@
-######### CmdStan program example  ###########
+######### CmdStan optimize program example  ###########
 
 using Compat, CmdStan, Test
 
@@ -33,7 +33,9 @@ cd(ProjDir) do
 
   if rc == 0
     println()
-    println("Test round.(optim[1][1][\"optimize\"][\"theta\"][1], 1) ≈ 0.3")
-    @test round.(optim[1][1]["optimize"]["theta"][1], digits=1) ≈ 0.3
+    display(optim)
+    println()
+    println("Test round.(mean(optim[1][\"theta\"]), digits=1) ≈ 0.3")
+    @test round.(mean(optim["theta"]), digits=1) ≈ 0.3
   end
 end # cd

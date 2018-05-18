@@ -26,15 +26,17 @@ cd(ProjDir) do
     Dict("N" => 10, "y" => [0, 0, 0, 1, 0, 0, 0, 1, 0, 1])
   ]
 
-  global stanmode, rc, diags
+  global stanmode, rc, diags, cnames
   stanmodel = Stanmodel(Diagnose(CmdStan.Gradient(epsilon=1e-6)), name="bernoulli", model=bernoulli);
 
   rc, diags, cnames = stan(stanmodel, bernoullidata, ProjDir, CmdStanDir=CMDSTAN_HOME);
 
   if rc == 0
     println()
-    tmp = diags[1][1]["diagnose"][:error][1]
-    println("Test round.(diags[1][1][\"diagnose\"][:error], digits=6) ≈ 0.0")
+    display(diags)
+    println()
+    tmp = diags[:error][1]
+    println("Test round.(diags[:error], digits=6) ≈ 0.0")
     @test round.(tmp, digits=6) ≈ 0.0
   end
 end # cd
