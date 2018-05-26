@@ -10,7 +10,7 @@ julia:
   
 matrix:
   allow_failures:
-    - julia: osx
+    - os: osx
 
 notifications:
   email: false

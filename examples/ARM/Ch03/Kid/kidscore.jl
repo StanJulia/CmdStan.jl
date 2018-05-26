@@ -182,7 +182,7 @@ cd(ProjDir) do
   rc, sim, cnames = stan(stanmodel, kiddata, ProjDir, CmdStanDir=CMDSTAN_HOME)
 
   if rc == 0
-    println("Test: 24.0 < round(mean(sim[:,8,:]), digits=0) < 27.0")
-    @test 24.0 < round(mean(sim[:,8,:]), digits=0) < 27.0
+    println("Test: 24.0 < round.(mean(sim[:,8,:]), digits=0) < 27.0")
+    @test 24.0 < round.(mean(sim[:,8,:]), digits=0) < 27.0
   end
 end # cd
