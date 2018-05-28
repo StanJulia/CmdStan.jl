@@ -5,7 +5,7 @@ And as Scott mentioned, Pkg(3) is very different, I like it though. Both StanJul
 
 I'm left with several questions/observations, mainly workflow related:
 
-1. It seems Pkg(3) expects Julia to run in the 'correct' directory? E.g. after `generate HelloWorld` I found the project in the current working directory. The Pkg REPL also relies on that I think.
+1. It seems Pkg(3) expects Julia to run in the 'correct' directory? E.g. after `generate HelloWorld` ( as in the Pkg docs ) I found the project in the current working directory. The Pkg REPL also relies on that I think.
 
 1. I like this idea of having several Julia processes running, each bound to a project. Is that the idea? Pretty quickly I found myself constantly working in the Pkg REPL for a particular project.
  
@@ -17,8 +17,12 @@ I'm left with several questions/observations, mainly workflow related:
 
 1. When in the Pkg REPL (or using Pkg.add(...)), will `add package_name` always select the most suitable registered version available? To override that, use an URL?
 
+1. After working ( `develop ...` ) on a package in e.g. .julia/dev, the package is now ready for a new release. The Pkg documentation states: "When the PR has been merged we can go over to track the master branch and when a new release ...", does that means `free package_name` by default will switch to master and on a future `up package_name` to the new release?
+
 1. The updates Scott suggested for .travis.yml (and appveyor.yml?) seem to do the trick. This seems to simplify .travis.yml, e.g.: "  - julia -e 'using Pkg; Pkg.test("CmdStan"; coverage=true)'  "
 
 1. Will there be a Curated registry in the future? 
+
+1. Is REQUIRE still needed?
 
 
