@@ -21,9 +21,9 @@ I'm left with several questions/observations, mainly workflow related:
 
 1. After working ( `develop ...` ) on a package in e.g. .julia/dev, the package is now ready for a new release. The Pkg documentation states: "When the PR has been merged we can go over to track the master branch and when a new release ...", does that mean `free package_name` by default will switch to master and on a future `up package_name` to the new release? 
 
-1. In my case `review free PtFEM` returned an error (see below). I've also seen error messages related to package and project name being the same. This is clearly the area I struggle with most.  I guess the Pkg docs refer to existing packages added to a project. In my case both CmdStan.jl and PtFEM.jl are the targets of the development work.
+1. In my case `review free PtFEM` returned an error (see below). I've also seen error messages related to package and project name being the same. This is clearly the area I struggle with most.  I guess the Pkg docs refer to existing packages added to a project. In my case both CmdStan.jl and PtFEM.jl are the targets of the development work. I kind of expected this to work for PtFEM (as it is already registered), but CmdStan.jl needs to be first registered I guess.
 
-1. Still need to study switching between branches. In fact I'm hoping that after Julia 1.0 is released I can go back to just having a released version and a master branch.
+1. Still need to study switching between branches. In fact I'm hoping that after Julia 1.0 is released I can go back to just having a released version and a master branch. In my case, using Github Desktop to select the right branches, e.g. in .julia/v0.6 and .julia/v0.7, was error prone.
 
 1. Also I'm not sure what the extra directory layer in .julia/packages/`packagename`/`xxxx`/ is for, I guess it is for version management using Manifest.toml?
 
