@@ -1,13 +1,15 @@
 Encouraged by this thread ( [Switching to Pkg3](https://discourse.julialang.org/t/problems-after-switch-to-pkg3/11144) )
 I also ventured into Pkg(3) land for a redo of Stan.jl for Julia 0.7/1.0 ( [StanJulia](https://github.com/StanJulia) ) and similarly for a previously registered project PtFEM.jl ( [PtFEM](https://github.com/PtFEM) ). Both Github organizations (StanJulia and PtFEM) currently hold several related work-in-progress packages.
 
-And as Scott mentioned, Pkg(3) is very different, I like it though. Both StanJulia/CmdStan.jl and PtFEM/PtFEM.jl are maybe 80% there. 
+And as Scott mentioned, working in/with Pkg(3) is very different, I like it though. Both StanJulia/CmdStan.jl and PtFEM/PtFEM.jl are maybe 80% there. 
 
 I'm left with several questions/observations, mainly workflow related:
 
 1. It seems Pkg(3) expects Julia to run in the 'correct' directory? E.g. after `generate HelloWorld` ( as in the Pkg docs ) I found the project in the current working directory. The Pkg REPL also relies on that I think.
 
 1. I like this idea of having several Julia processes running, each bound to a project. Is that the idea? Pretty quickly I found myself constantly working in the Pkg REPL for a particular project.
+
+1. Not sure if this is indeed correct, but in Pkg REPL simply typing `test` runs all tests. I did not restart Julia! If this is correct, that is super!!!!
  
 1. (After saving the v0.6 subdirectory in .julia,) I tried if I could delete all of .julia.. That did work ok, dev, packages, registries, etc are recreated when needed.
 
