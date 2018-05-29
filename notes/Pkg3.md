@@ -15,17 +15,17 @@ I'm left with several questions/observations, mainly workflow related:
 
 1. The version of a package that Julia selects with e.g. `using PtFEM` is solely determined by what is in Project.toml and Manifest.toml?
 
-1. When in the Pkg REPL (or using Pkg.add(...)), will `add package_name` always select the most suitable registered version available? To override that, use an URL?
+1. When in the Pkg REPL (or using Pkg.add(...)), will `add package_name` always select the most suitable registered version available? To override that, use an URL or local directory?
 
 1. After working ( `develop ...` ) on a package in e.g. .julia/dev, the package is now ready for a new release. The Pkg documentation states: "When the PR has been merged we can go over to track the master branch and when a new release ...", does that mean `free package_name` by default will switch to master and on a future `up package_name` to the new release? 
 
-1. In my case `review PtFEM` return an error (see below). I've also seen error messages related to package and project name being the same. This is clearly the area I struggle with most.
+1. In my case `review free PtFEM` returned an error (see below). I've also seen error messages related to package and project name being the same. This is clearly the area I struggle with most.  I guess the Pkg docs refer to existing packages added to a project. In my case both CmdStan.jl and PtFEM.jl are the targets of the development work.
 
 1. Still need to study switching between branches. In fact I'm hoping that after Julia 1.0 is released I can go back to just having a released version and a master branch.
 
 1. Also I'm not sure what the extra directory layer in .julia/packages/`packagename`/`xxxx`/ is for, I guess it is for version management using Manifest.toml?
 
-1. Over the last couple of years I have learned the hard way that it is better to layer package dependencies as much as possible. I haven't studied that part of Pkg(3) yet. For now I plan to create base packages, e.g. CmdStan.jl and then layer creating DataFrames in a seoarate package (StanDataFrames). Similarly for StanMamba, StanPlotsRecipes, StanFeather etc., all part of the StanJulia organization.
+1. Over the last couple of years I have learned the hard way that it is better to layer package dependencies as much as possible. I haven't studied that part of Pkg(3) yet. For now I plan to create base packages, e.g. CmdStan.jl and then layer creating DataFrames in a seoarate package (StanDataFrames). Similarly for StanMamba, StanPlotsRecipes, StanFeather etc., all part of the StanJulia organization. But I’ll certainly keep an eye on the discussion about [classes of packages in Github organizations]( https://discourse.julialang.org/t/the-4-kinds-of-metapackages-api-higher-level-packages/10947/3 )
 
 1. The updates Scott suggested for .travis.yml (and appveyor.yml) seem to do the trick. This seems to simplify .travis.yml, e.g.: "  - julia -e 'using Pkg; Pkg.add("..."); Pkg.test("CmdStan"; coverage=true)'  ". Although I'm not sure why e.g. the Pkg.add("Compat") is required in .travis.yml and appveyor.yml.
 
