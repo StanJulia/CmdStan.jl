@@ -33,3 +33,18 @@ Thanks to Robert Feldt and the brew folks, in addition to the user following the
 	 Homebrew.add("homebrew/science/cmdstan")
 	 ```
 	 will install CmdStan in ~/.julia/v0.x/Homebrew/deps/usr/Cellar/cmdstan/x.x.x.
+	 
+	 
+## Linux options
+
+For those who are using a Linux based operating system. These are the cmdstan installation instructions using Linuxbrew.
+Please Note that you must have Linuxbrew installed on your machine prior to going through these steps.
+
+	Executing in a terminal:
+	'''
+	brew tap brewsci/science
+	brew install cmdstan
+	'''
+	should install the latest available cmdstan in /home/usrname/.linuxbrew/Cellar/cmdstan/x.x.x:
+	
+Afterward you would then use the set_cmdstan_home!() in the REPL to designate where your local installation of cmdstan lives.
