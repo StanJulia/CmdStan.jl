@@ -1,5 +1,5 @@
 Encouraged by this thread ( [Switching to Pkg3](https://discourse.julialang.org/t/problems-after-switch-to-pkg3/11144) )
-I also ventured into Pkg(3) land for a redo of Stan.jl for Julia 0.7/1.0 ( [StanJulia](https://github.com/StanJulia) ) and similarly for a previously registered project PtFEM.jl ( [PtFEM](https://github.com/PtFEM) ). Both Github organizations currently hold several related work-in-progress packages.
+I also ventured into Pkg(3) land for a redo of Stan.jl for Julia 0.7/1.0 ( [StanJulia](https://github.com/StanJulia) ) and similarly for a previously registered project PtFEM.jl ( [PtFEM](https://github.com/PtFEM) ). Both Github organizations (StanJulia and PtFEM) currently hold several related work-in-progress packages.
 
 And as Scott mentioned, Pkg(3) is very different, I like it though. Both StanJulia/CmdStan.jl and PtFEM/PtFEM.jl are maybe 80% there. 
 
@@ -17,12 +17,44 @@ I'm left with several questions/observations, mainly workflow related:
 
 1. When in the Pkg REPL (or using Pkg.add(...)), will `add package_name` always select the most suitable registered version available? To override that, use an URL?
 
-1. After working ( `develop ...` ) on a package in e.g. .julia/dev, the package is now ready for a new release. The Pkg documentation states: "When the PR has been merged we can go over to track the master branch and when a new release ...", does that means `free package_name` by default will switch to master and on a future `up package_name` to the new release?
+1. After working ( `develop ...` ) on a package in e.g. .julia/dev, the package is now ready for a new release. The Pkg documentation states: "When the PR has been merged we can go over to track the master branch and when a new release ...", does that means `free package_name` by default will switch to master and on a future `up package_name` to the new release? In my case `review PtFEM` return an error (see below). I've also seen error messages related to package and project name being the same. This is clearly the area I struggle with most.
 
-1. The updates Scott suggested for .travis.yml (and appveyor.yml?) seem to do the trick. This seems to simplify .travis.yml, e.g.: "  - julia -e 'using Pkg; Pkg.test("CmdStan"; coverage=true)'  "
+1. Still need to study switching between branches.
+
+1. Also I'm not sure what the extra directory layer in .julia/packages/`packagename`/`xxxx`/ is for, I guess it is for version management using Manifest.toml?
+
+1. Over the last couple of years I have learned the hard way that it is better to layer package dependencies as much as possible. I haven't studied that part of Pkg(3) yet. For now I plan to create base packages, e.g. CmdStan.jl and then layer creating DataFrames in a seoarate package (StanDataFrames). Similarly for StanMamba, StanPlotsRecipes, StanFeather etc., all part of the StanJulia organization.
+
+1. The updates Scott suggested for .travis.yml (and appveyor.yml) seem to do the trick. This seems to simplify .travis.yml, e.g.: "  - julia -e 'using Pkg; Pkg.add("..."); Pkg.test("CmdStan"; coverage=true)'  ". Although I'm not sure why e.g. the Pkg.add("Compat") is required in .travis.yml and appveyor.yml.
 
 1. Will there be a Curated registry in the future? 
 
-1. Is REQUIRE still needed?
+1. Is the REQUIRE file still needed?
+
+Just wanted to capture these notes, but maybe they are helpful for others (as Scott's thread was to me). Feedback is of course always welcome.
+
+Rob
 
 
+------------------------
+
+
+(PtFEM) pkg> preview free PtFEM
+───── Preview mode ─────
+ERROR: MethodError: no method matching get(::Nothing, ::String, ::Bool)
+Closest candidates are:
+  get(::Base.EnvDict, ::AbstractString, ::Any) at env.jl:77
+  get(::REPL.Terminals.TTYTerminal, ::Any, ::Any) at /Users/rob/Projects/Julia/julia/usr/share/julia/stdlib/v0.7/REPL/src/Terminals.jl:174
+  get(::IdDict{K,V}, ::Any, ::Any) where {K, V} at abstractdict.jl:624
+  ...
+Stacktrace:
+ [1] #free#30(::Base.Iterators.Pairs{Union{},Union{},Tuple{},NamedTuple{(),Tuple{}}}, ::Function, ::Pkg.Types.Context, ::Array{Pkg.Types.PackageSpec,1}) at /Users/rob/Projects/Julia/julia/usr/share/julia/stdlib/v0.7/Pkg/src/API.jl:187
+ [2] free at /Users/rob/Projects/Julia/julia/usr/share/julia/stdlib/v0.7/Pkg/src/API.jl:172 [inlined]
+ [3] do_free!(::Pkg.Types.Context, ::Array{Union{Pkg.Types.VersionRange, String, Pkg.REPLMode.Command, Pkg.REPLMode.Option, Pkg.REPLMode.Rev},1}) at /Users/rob/Projects/Julia/julia/usr/share/julia/stdlib/v0.7/Pkg/src/REPLMode.jl:664
+ [4] #invokelatest#1 at ./essentials.jl:667 [inlined]
+ [5] invokelatest at ./essentials.jl:666 [inlined]
+ [6] do_cmd!(::Array{Union{Pkg.Types.VersionRange, String, Pkg.REPLMode.Command, Pkg.REPLMode.Option, Pkg.REPLMode.Rev},1}, ::REPL.LineEditREPL) at /Users/rob/Projects/Julia/julia/usr/share/julia/stdlib/v0.7/Pkg/src/REPLMode.jl:273
+ [7] #do_cmd#8(::Bool, ::Function, ::REPL.LineEditREPL, ::String) at /Users/rob/Projects/Julia/julia/usr/share/julia/stdlib/v0.7/Pkg/src/REPLMode.jl:233
+ [8] do_cmd at /Users/rob/Projects/Julia/julia/usr/share/julia/stdlib/v0.7/Pkg/src/REPLMode.jl:230 [inlined]
+ [9] (::getfield(Pkg.REPLMode, Symbol("##27#30")){REPL.LineEditREPL,REPL.LineEdit.Prompt})(::REPL.LineEdit.MIState, ::Base.GenericIOBuffer{Array{UInt8,1}}, ::Bool) at /Users/rob/Projects/Julia/julia/usr/share/julia/stdlib/v0.7/Pkg/src/REPLMode.jl:948
+ [10] top-level scope
