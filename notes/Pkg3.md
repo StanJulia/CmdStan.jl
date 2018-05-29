@@ -17,9 +17,11 @@ I'm left with several questions/observations, mainly workflow related:
 
 1. When in the Pkg REPL (or using Pkg.add(...)), will `add package_name` always select the most suitable registered version available? To override that, use an URL?
 
-1. After working ( `develop ...` ) on a package in e.g. .julia/dev, the package is now ready for a new release. The Pkg documentation states: "When the PR has been merged we can go over to track the master branch and when a new release ...", does that means `free package_name` by default will switch to master and on a future `up package_name` to the new release? In my case `review PtFEM` return an error (see below). I've also seen error messages related to package and project name being the same. This is clearly the area I struggle with most.
+1. After working ( `develop ...` ) on a package in e.g. .julia/dev, the package is now ready for a new release. The Pkg documentation states: "When the PR has been merged we can go over to track the master branch and when a new release ...", does that mean `free package_name` by default will switch to master and on a future `up package_name` to the new release? 
 
-1. Still need to study switching between branches.
+1. In my case `review PtFEM` return an error (see below). I've also seen error messages related to package and project name being the same. This is clearly the area I struggle with most.
+
+1. Still need to study switching between branches. In fact I'm hoping that after Julia 1.0 is released I can go back to just having a released version and a master branch.
 
 1. Also I'm not sure what the extra directory layer in .julia/packages/`packagename`/`xxxx`/ is for, I guess it is for version management using Manifest.toml?
 
@@ -31,7 +33,7 @@ I'm left with several questions/observations, mainly workflow related:
 
 1. Is the REQUIRE file still needed?
 
-Just wanted to capture these notes, but maybe they are helpful for others (as Scott's thread was to me). Feedback is of course always welcome.
+Just wanted to capture these [notes](https://github.com/StanJulia/CmdStan.jl/blob/master/notes/Pkg3.md) for my own use, but maybe they are helpful for others (as Scott's thread was to me). Feedback is of course always welcome.
 
 Rob
 
