@@ -1,16 +1,37 @@
-Encouraged by this thread ( [Switching to Pkg3](https://discourse.julialang.org/t/problems-after-switch-to-pkg3/11144) )
-I also ventured into Pkg(3) land for a redo of Stan.jl for Julia 0.7/1.0 ( [StanJulia](https://github.com/StanJulia) ) and similarly for a previously registered project PtFEM.jl ( [PtFEM](https://github.com/PtFEM) ). Both Github organizations (StanJulia and PtFEM) currently hold several related work-in-progress packages.
+## Notes on Pkg(3)
 
-And as Scott mentioned, working in/with Pkg(3) is very different, I like it though. Both StanJulia/CmdStan.jl and PtFEM/PtFEM.jl are maybe 80% there. 
+### Quick review of workflow for a new package
 
-I'm left with several questions/observations, mainly workflow related:
+1. Move to a working directory where you would like the project subdirectory to be generated,  e.g. ~/.julia/dev (the default location for the `develop` command in Pkg REPL, see later).
 
-1. It seems Pkg(3) expects Julia to run in the 'correct' directory? E.g. after `generate HelloWorld` ( as in the Pkg docs ) I found the project in the current working directory. The Pkg REPL also relies on that I think.
+1. Press ']'.
+
+1. You're now in Pkg REPL and it will show the current project, `(0.7) pkg>` most likely (unless you moved to a package directory).
+
+1. Type `generate PkgName`, e.g. `generate HelloWorld` as in the Pkg documentation.
+
+1. Exit the Pkg REPL (press <del> on an empty Pkg REPL line) and moveove to the package directory, e.g. `cd("HelloWorld")`
+  
+1. Type ']' again. The Pkg REPL prompt should lokk like `(HelloWorld) pkg>`.
+
+1. Add this point I typically add all packages I am planning to use, e.g. `add Compat`.
+
+### Quick review of workflow for a previously registered package
+
+1. 
+
+### Quick review of workflow for an existing, not-registered package
+
+1. 
+
+### Some details
+
+1. Pkg(3) expects Julia to run in the 'correct' directory. E.g. after `generate HelloWorld` ( as in the Pkg docs ) the project in the current working directory. The Pkg REPL relies on that as well.
 
 1. I like this idea of having several Julia processes running, each bound to a project. Is that the idea? Pretty quickly I found myself constantly working in the Pkg REPL for a particular project.
 
 1. Not sure if this is indeed correct, but in Pkg REPL simply typing `test` runs all tests. I did not restart Julia! If this is correct, that is super!!!!
- 
+
 1. (After saving the v0.6 subdirectory in .julia,) I tried if I could delete all of .julia.. That did work ok, dev, packages, registries, etc are recreated when needed.
 
 1. All previously registered packages are in .julia/packages. These are not (never?) git repositories?
@@ -27,7 +48,7 @@ I'm left with several questions/observations, mainly workflow related:
 
 1. Also I'm not sure what the extra directory layer in .julia/packages/`packagename`/`xxxx`/ is for, I guess it is for version management using Manifest.toml?
 
-1. Over the last couple of years I have learned the hard way that it is better to layer package dependencies as much as possible. I haven't studied that part of Pkg(3) yet. For now I plan to create base packages, e.g. CmdStan.jl and then layer creating DataFrames in a seoarate package (StanDataFrames). Similarly for StanMamba, StanPlotsRecipes, StanFeather etc., all part of the StanJulia organization. But I’ll certainly keep an eye on the discussion about [classes of packages in Github organizations]( https://discourse.julialang.org/t/the-4-kinds-of-metapackages-api-higher-level-packages/10947/3 )
+1. Over the last couple of years I have learned the hard way that it is better to layer package dependencies as much as possible. I haven't studied that part of Pkg(3) yet. For now I plan to create base packages, e.g. CmdStan.jl and then layer creating DataFrames in a separate package (StanDataFrames). Similarly for StanMamba, StanPlotsRecipes, StanFeather etc., all part of the StanJulia organization. But I’ll certainly keep an eye on the discussion about [classes of packages in Github organizations]( https://discourse.julialang.org/t/the-4-kinds-of-metapackages-api-higher-level-packages/10947/3 )
 
 1. The updates Scott suggested for .travis.yml (and appveyor.yml) seem to do the trick. This seems to simplify .travis.yml, e.g.: "  - julia -e 'using Pkg; Pkg.add("..."); Pkg.test("CmdStan"; coverage=true)'  ". Although I'm not sure why e.g. the Pkg.add("Compat") is required in .travis.yml and appveyor.yml.
 
@@ -35,30 +56,6 @@ I'm left with several questions/observations, mainly workflow related:
 
 1. Is the REQUIRE file still needed?
 
-Just wanted to capture these [notes](https://github.com/StanJulia/CmdStan.jl/blob/master/notes/Pkg3.md) for my own use, but maybe they are helpful for others (as Scott's thread was to me). Feedback is of course always welcome.
+### Outstanding questions
 
-Rob
-
-
-------------------------
-
-
-(PtFEM) pkg> preview free PtFEM
-───── Preview mode ─────
-ERROR: MethodError: no method matching get(::Nothing, ::String, ::Bool)
-Closest candidates are:
-  get(::Base.EnvDict, ::AbstractString, ::Any) at env.jl:77
-  get(::REPL.Terminals.TTYTerminal, ::Any, ::Any) at /Users/rob/Projects/Julia/julia/usr/share/julia/stdlib/v0.7/REPL/src/Terminals.jl:174
-  get(::IdDict{K,V}, ::Any, ::Any) where {K, V} at abstractdict.jl:624
-  ...
-Stacktrace:
- [1] #free#30(::Base.Iterators.Pairs{Union{},Union{},Tuple{},NamedTuple{(),Tuple{}}}, ::Function, ::Pkg.Types.Context, ::Array{Pkg.Types.PackageSpec,1}) at /Users/rob/Projects/Julia/julia/usr/share/julia/stdlib/v0.7/Pkg/src/API.jl:187
- [2] free at /Users/rob/Projects/Julia/julia/usr/share/julia/stdlib/v0.7/Pkg/src/API.jl:172 [inlined]
- [3] do_free!(::Pkg.Types.Context, ::Array{Union{Pkg.Types.VersionRange, String, Pkg.REPLMode.Command, Pkg.REPLMode.Option, Pkg.REPLMode.Rev},1}) at /Users/rob/Projects/Julia/julia/usr/share/julia/stdlib/v0.7/Pkg/src/REPLMode.jl:664
- [4] #invokelatest#1 at ./essentials.jl:667 [inlined]
- [5] invokelatest at ./essentials.jl:666 [inlined]
- [6] do_cmd!(::Array{Union{Pkg.Types.VersionRange, String, Pkg.REPLMode.Command, Pkg.REPLMode.Option, Pkg.REPLMode.Rev},1}, ::REPL.LineEditREPL) at /Users/rob/Projects/Julia/julia/usr/share/julia/stdlib/v0.7/Pkg/src/REPLMode.jl:273
- [7] #do_cmd#8(::Bool, ::Function, ::REPL.LineEditREPL, ::String) at /Users/rob/Projects/Julia/julia/usr/share/julia/stdlib/v0.7/Pkg/src/REPLMode.jl:233
- [8] do_cmd at /Users/rob/Projects/Julia/julia/usr/share/julia/stdlib/v0.7/Pkg/src/REPLMode.jl:230 [inlined]
- [9] (::getfield(Pkg.REPLMode, Symbol("##27#30")){REPL.LineEditREPL,REPL.LineEdit.Prompt})(::REPL.LineEdit.MIState, ::Base.GenericIOBuffer{Array{UInt8,1}}, ::Bool) at /Users/rob/Projects/Julia/julia/usr/share/julia/stdlib/v0.7/Pkg/src/REPLMode.jl:948
- [10] top-level scope
+1. 
