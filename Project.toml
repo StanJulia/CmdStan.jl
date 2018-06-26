@@ -1,6 +1,6 @@
-authors = ["Rob J Goedman <goedman@mac.com>"]
 name = "CmdStan"
 uuid = "b06cc8f0-5f5d-11e8-13db-4b9f44fd0782"
+authors = ["Rob J Goedman <goedman@mac.com>"]
 version = "1.0.0"
 
 [deps]

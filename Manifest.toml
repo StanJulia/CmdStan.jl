@@ -8,16 +8,16 @@ uuid = "9e28174c-4ba2-5203-b857-d8d62c4213ee"
 version = "0.8.8"
 
 [[BinaryProvider]]
-deps = ["Compat", "Libdl", "SHA"]
-git-tree-sha1 = "9b40439f35dd21b87a559fccb2833377fc56517d"
+deps = ["Compat", "SHA"]
+git-tree-sha1 = "88f5e40c04b5aac568656d6464576974eb9afce4"
 uuid = "b99e7846-7c00-51b0-8f62-c81ae34c0232"
-version = "0.3.0"
+version = "0.3.2"
 
 [[CategoricalArrays]]
-deps = ["Compat", "JSON", "Missings", "Printf", "Reexport"]
-git-tree-sha1 = "8ff661f67c4dd799626bfd4fdf6241923c792af5"
+deps = ["Compat", "Future", "JSON", "Missings", "Printf", "Reexport"]
+git-tree-sha1 = "6a78981b00a954d850d923cae8500801647d843e"
 uuid = "324d7699-5711-5eae-9e2f-1d82baa6b597"
-version = "0.3.9"
+version = "0.3.10"
 
 [[CodecZlib]]
 deps = ["BinaryProvider", "Compat", "Test", "TranscodingStreams"]
@@ -26,10 +26,10 @@ uuid = "944b1d66-785c-5afd-91f1-9de20f533193"
 version = "0.4.3"
 
 [[Compat]]
-deps = ["Base64", "Dates", "DelimitedFiles", "Distributed", "InteractiveUtils", "IterativeEigensolvers", "LibGit2", "Libdl", "LinearAlgebra", "Markdown", "Mmap", "Pkg", "Printf", "REPL", "Random", "Serialization", "SharedArrays", "Sockets", "SparseArrays", "SuiteSparse", "Test", "UUIDs", "Unicode"]
-git-tree-sha1 = "2d63205c29efd9211fb2e10788c20587b4a5af5f"
+deps = ["Base64", "Dates", "DelimitedFiles", "Distributed", "InteractiveUtils", "LibGit2", "Libdl", "LinearAlgebra", "Markdown", "Mmap", "Pkg", "Printf", "REPL", "Random", "Serialization", "SharedArrays", "Sockets", "SparseArrays", "Test", "UUIDs", "Unicode"]
+git-tree-sha1 = "f3e87ca1e2df8e1e4f82ea504fddf0b9b0894f61"
 uuid = "34da2185-b29b-5c13-b0c7-acf172513d20"
-version = "0.65.1"
+version = "0.69.0"
 
 [[DataFrames]]
 deps = ["CategoricalArrays", "CodecZlib", "Compat", "DataStreams", "Missings", "Reexport", "SortingAlgorithms", "StatsBase", "TranscodingStreams", "WeakRefStrings"]
@@ -38,10 +38,10 @@ uuid = "a93c6f00-e57d-5684-b7b6-d8193f3e46c0"
 version = "0.11.6"
 
 [[DataStreams]]
-deps = ["Dates", "Missings", "NamedTuples", "Test", "WeakRefStrings"]
-git-tree-sha1 = "bc4d99c5203fb3082927440ff24e2b8e6a1dc394"
+deps = ["Compat", "Missings", "NamedTuples", "WeakRefStrings"]
+git-tree-sha1 = "62d1a39a3e9634eceb7413151b48cbc95521a059"
 uuid = "9a8bc11e-79be-5b39-94d7-1ccc349a1a85"
-version = "0.3.4"
+version = "0.3.6"
 
 [[DataStructures]]
 deps = ["Compat", "REPL"]
@@ -82,6 +82,9 @@ git-tree-sha1 = "c570805a0f2dd6f952ab55febe73e3318b5d2ed2"
 uuid = "53afe959-3a16-52fa-a8da-cf864710bae9"
 version = "0.3.2"
 
+[[Future]]
+uuid = "9fa8497b-333b-5362-9e8d-4d0656e87820"
+
 [[Homebrew]]
 deps = ["BinDeps", "Compat", "JSON", "Libdl", "Unicode"]
 git-tree-sha1 = "3e6d20b90cab32759f38639e2f085b4e5aa17f21"
@@ -90,9 +93,6 @@ version = "0.6.3"
 
 [[InteractiveUtils]]
 uuid = "b77e0a4c-d291-57a0-90e8-8db25a27a240"
-
-[[IterativeEigensolvers]]
-uuid = "de555fa4-b82f-55e7-8b71-53f60bbc027d"
 
 [[JSON]]
 deps = ["Compat", "Nullables", "Sockets", "Unicode"]
@@ -117,9 +117,9 @@ uuid = "d6f4376e-aef5-505a-96c1-9c027394607a"
 
 [[Missings]]
 deps = ["Compat"]
-git-tree-sha1 = "4b7feda2672b8163c95738533671afb4493b6d03"
+git-tree-sha1 = "866fb034899be6055dcb6cb1a70fbda379bb0b55"
 uuid = "e1d29d7a-bbdc-5cf2-9ac0-f12de2c33e28"
-version = "0.2.9"
+version = "0.2.10"
 
 [[Mmap]]
 uuid = "a63ad114-7e13-5084-954f-fe012c677804"
@@ -174,13 +174,10 @@ version = "0.2.1"
 uuid = "2f01184e-e22b-5df5-ae63-d93ebab69eaf"
 
 [[StatsBase]]
-deps = ["Compat", "DataStructures", "Missings", "Printf", "SortingAlgorithms"]
-git-tree-sha1 = "3d200af9d48d2ca589ea01defd4de926689b2b1e"
+deps = ["Compat", "DataStructures", "LinearAlgebra", "Missings", "Printf", "Random", "SortingAlgorithms", "SparseArrays", "Test"]
+git-tree-sha1 = "53ae4232e9f1d7ffda8c38f80437136baed595bd"
 uuid = "2913bbd2-ae8a-5f71-8c99-4fb6c76f3a91"
-version = "0.22.0"
-
-[[SuiteSparse]]
-uuid = "4607b0f0-06f3-5cda-b6b1-a6196a1729e9"
+version = "0.23.0"
 
 [[Test]]
 uuid = "8dfed614-e22c-5e08-85e1-65c5234f0b40"
@@ -205,6 +202,6 @@ uuid = "4ec0a83e-493e-50e2-b9ac-8f72acf5a8f5"
 
 [[WeakRefStrings]]
 deps = ["Compat", "Missings"]
-git-tree-sha1 = "9eef6958ac378bf44da8e4232c731677946a7dcb"
+git-tree-sha1 = "bb0464e62baf3a0767340fbb51fed584159ad9b7"
 uuid = "ea10d353-3f73-51f8-a26c-33c1cb351aa5"
-version = "0.4.6"
+version = "0.4.7"
