@@ -71,12 +71,7 @@ function read_samples(m::Stanmodel, diagnostics=false, warmup_samples=false)
   end   # read in file for each chain
   
   cnames = convert.(String, idx[indvec])
-  if !m.create_dataframe
-    return (a3d, cnames)
-  else
-    csymbols = Symbol.(cnames)
-    df = [DataFrame(a3d[:,:,i], csymbols) for i in 1:m.nchains]
-    return (df, cnames)
-  end
+  
+  (a3d, cnames)
   
 end   # end of read_samples

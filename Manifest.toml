@@ -124,11 +124,6 @@ version = "0.2.10"
 [[Mmap]]
 uuid = "a63ad114-7e13-5084-954f-fe012c677804"
 
-[[NamedTuples]]
-git-tree-sha1 = "6374851ad4b15f2a20ac20637d38c550531fa684"
-uuid = "73a701b4-84e1-5df0-88ff-1968ee2ee8dc"
-version = "4.0.2"
-
 [[Nullables]]
 deps = ["Compat"]
 git-tree-sha1 = "23258f849603ad4fed3ce7dbcb8c0658920fa5ef"
@@ -147,11 +142,6 @@ uuid = "3fa0cd96-eef1-5676-8a61-b3b8758bbffb"
 [[Random]]
 uuid = "9a3f8284-a2c9-5f02-9a11-845980a1fd5c"
 
-[[Reexport]]
-git-tree-sha1 = "caba582b2e9ef39b9cfff911aa13c5ca1b9a9896"
-uuid = "189a3867-3050-52da-a836-e630ba90ab69"
-version = "0.1.0"
-
 [[SHA]]
 uuid = "ea8e919c-243c-51af-8825-aaa63cd721ce"
 
@@ -164,12 +154,6 @@ uuid = "1a1011a3-84de-559e-8e89-a11a2f7dc383"
 [[Sockets]]
 uuid = "6462fe0b-24de-5631-8697-dd941f90decc"
 
-[[SortingAlgorithms]]
-deps = ["Compat", "DataStructures"]
-git-tree-sha1 = "748c3ad6f150b685f1582906d1f9dba8834dd6db"
-uuid = "a2af1166-a08f-5f64-846c-94a0d3cef48c"
-version = "0.2.1"
-
 [[SparseArrays]]
 uuid = "2f01184e-e22b-5df5-ae63-d93ebab69eaf"
 
@@ -181,12 +165,6 @@ version = "0.23.0"
 
 [[Test]]
 uuid = "8dfed614-e22c-5e08-85e1-65c5234f0b40"
-
-[[TranscodingStreams]]
-deps = ["Compat", "Random", "Test"]
-git-tree-sha1 = "497524e8b703e67caf20cc086d20235852041fe4"
-uuid = "3bb67fe8-82b1-5028-8e26-92a6c54297fa"
-version = "0.5.2"
 
 [[URIParser]]
 deps = ["Compat", "Unicode"]

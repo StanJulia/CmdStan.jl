@@ -9,7 +9,7 @@
 * Newton::OptimizeAlgorithm  : Euclidean manifold with unit metric
 ```
 """ 
-@compat abstract type OptimizeAlgorithm end
+abstract type OptimizeAlgorithm end
 
 """
 

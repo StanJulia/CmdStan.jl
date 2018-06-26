@@ -1,15 +1,15 @@
-abstract Metrics
-type Unit_e <: Metrics
+abstract type Metrics end
+mutable struct Unit_e <: Metrics
 end
-type Diag_e <: Metrics
+mutable struct Diag_e <: Metrics
 end
 
-abstract SamplingAlgorithm
-type Hmc <: SamplingAlgorithm
+abstract type SamplingAlgorithm end
+mutable struct Hmc <: SamplingAlgorithm
   # ...
   metric::Metrics
 end
-type Fixed_param <: SamplingAlgorithm
+mutable struct Fixed_param <: SamplingAlgorithm
 end
 
 Hmc() = Hmc(Diag_e())

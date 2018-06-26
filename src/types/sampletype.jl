@@ -10,7 +10,7 @@ Engine for Hamiltonian Monte Carlo
 * Static     : Static integration time
 ```
 """ 
-@compat abstract type Engine end
+abstract type Engine end
 
 """
 
@@ -19,7 +19,7 @@ Engine for Hamiltonian Monte Carlo
 Currently limited to Hmc().
 
 """ 
-@compat abstract type SamplingAlgorithm end
+abstract type SamplingAlgorithm end
 
 """
 
@@ -86,7 +86,7 @@ Geometry of base manifold
 * diag_e::Metric      : Euclidean manifold with diag netric
 ```
 """ 
-@compat abstract type Metric end
+abstract type Metric end
 mutable struct unit_e <: Metric
 end
 mutable struct dense_e <: Metric

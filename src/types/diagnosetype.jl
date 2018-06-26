@@ -5,7 +5,7 @@
 Currently limited to Gradient().
 
 """ 
-@compat abstract type Diagnostics end
+abstract type Diagnostics end
 
 """
 
