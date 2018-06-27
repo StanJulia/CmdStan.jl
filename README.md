@@ -17,3 +17,5 @@ For more info on Stan, please go to <http://mc-stan.org>.
 Note 1: CmdStan.jl is part of the Github StanJulia organization set of packages. It's the primary interface to Stan's cmdstan executable. Most other envisaged packages are for post-sampling steps. The intention is to deprecate Stan.jl.
 
 Note 2: This is a pre-release, additional work is needed on documentation and at least on the next couple of packages in the StanJulia organization, i.e. StanDataFrames.jl and StanMamba.jl.
+
+Note 3: Last test on beta41
