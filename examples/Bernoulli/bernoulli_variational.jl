@@ -1,6 +1,6 @@
 ######### CmndStan program example  ###########
 
-using Compat, CmdStan, Test
+using Compat, CmdStan, Test, Statistics
 
 ProjDir = dirname(@__FILE__)
 cd(ProjDir) do

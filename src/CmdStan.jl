@@ -1,6 +1,6 @@
 module CmdStan
 
-using Compat, Pkg, Documenter, DelimitedFiles, Unicode
+using Compat, Pkg, Documenter, DelimitedFiles, Unicode, Statistics
 
 """
 The directory which contains the cmdstan executables such as `bin/stanc` and 
