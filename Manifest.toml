@@ -24,9 +24,9 @@ uuid = "8ba89e20-285c-5b6f-9357-94700520ee1b"
 
 [[DocStringExtensions]]
 deps = ["Compat"]
-git-tree-sha1 = "0e9a957a5c1cc5d06e54aab3b8b9c4c495253269"
+git-tree-sha1 = "0d767d338c201b1b2064e2186a0b63ac1e55dbb1"
 uuid = "ffbed154-4ef7-542d-bbb7-c09d3a79fcae"
-version = "0.4.4"
+version = "0.4.5"
 
 [[Documenter]]
 deps = ["Compat", "DocStringExtensions", "Logging", "REPL"]
@@ -44,10 +44,10 @@ version = "0.6.3"
 uuid = "b77e0a4c-d291-57a0-90e8-8db25a27a240"
 
 [[JSON]]
-deps = ["Compat", "Nullables", "Sockets", "Unicode"]
-git-tree-sha1 = "e2f6776e8bfd310b2ade13fba1faf99d8967d58f"
+deps = ["Dates", "Distributed", "Mmap", "Sockets", "Test", "Unicode"]
+git-tree-sha1 = "723a515212612b2175095fa5fa55da0bb4c377e5"
 uuid = "682c06a0-de6a-54ab-a142-c8b1cf79cde6"
-version = "0.17.2"
+version = "0.18.0"
 
 [[LibGit2]]
 uuid = "76f85450-5226-5b5a-8eaa-529ad045b433"
@@ -72,12 +72,6 @@ version = "0.2.10"
 
 [[Mmap]]
 uuid = "a63ad114-7e13-5084-954f-fe012c677804"
-
-[[Nullables]]
-deps = ["Compat"]
-git-tree-sha1 = "23258f849603ad4fed3ce7dbcb8c0658920fa5ef"
-uuid = "4d1e1d77-625e-5b40-9113-a560ec7a8ecd"
-version = "0.0.5"
 
 [[Pkg]]
 uuid = "44cfe95a-1eb2-52ea-b672-e2afdf69b78f"
