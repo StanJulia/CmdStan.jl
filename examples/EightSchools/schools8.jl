@@ -7,12 +7,12 @@ cd(ProjDir) do
 
   eightschools ="
   data {
-    int<lower=0> J; // number of schools 
+    int<lower=0> J; // number of schools
     real y[J]; // estimated treatment effects
-    real<lower=0> sigma[J]; // s.e. of effect estimates 
+    real<lower=0> sigma[J]; // s.e. of effect estimates
   }
   parameters {
-    real mu; 
+    real mu;
     real<lower=0> tau;
     real eta[J];
   }
@@ -41,7 +41,7 @@ cd(ProjDir) do
 
   if rc == 0
     println()
-    println("Test round.(mean(mu), digits=0) ≈ 8.0")
-    @test round.(mean(sim[:,8,:]), digits=0) ≈ 8.0
+    println("Test round.(mean(theta[1]), digits=0) ≈ 11.0")
+    @test round.(mean(sim[:,18,:]), digits=0) ≈ 11.0
   end
 end # cd
