@@ -48,6 +48,7 @@ mutable struct Stanmodel
   init_file::String
   output::Output
   tmpdir::String
+  output_format::Symbol
 end
 
 """
@@ -70,7 +71,8 @@ Stanmodel(
   random=Random(),
   init=DataDict[],
   output=Output(),
-  pdir::String=pwd()
+  pdir::String=pwd(),
+  output_format=:array
 )
 
 ```
@@ -93,6 +95,7 @@ Stanmodel(
 * `output::Output`             : File output options
 * `pdir::String`               : Working directory
 * `monitors::String[] `        : Filter for variables used in Mamba post-processing
+* `output_format::Symbol ` : Specifies the required output format (:array for CmdStan.jl)
 ```
 
 ### Example
@@ -136,7 +139,8 @@ function Stanmodel(
   random=Random(),
   init=DataDict[],
   output=Output(),
-  pdir::String=pwd())
+  pdir::String=pwd(),
+  output_format::Symbol=:array)
   
   println("=====> $pdir\n")
   cd(pdir)
@@ -172,14 +176,14 @@ function Stanmodel(
     num_warmup, num_samples, thin,
     id, model, model_file, monitors,
     data, data_file, cmdarray, method, random,
-    init, init_file, output, tmpdir);
+    init, init_file, output, tmpdir, output_format);
 end
 
 function model_show(io::IO, m::Stanmodel, compact::Bool)
   println("  name =                    \"$(m.name)\"")
   println("  nchains =                 $(m.nchains)")
   println("  num_samples =             $(m.num_samples)")
-  println("  num_warmup =                   $(m.num_warmup)")
+  println("  num_warmup =                $(m.num_warmup)")
   println("  thin =                    $(m.thin)")
   println("  monitors =                $(m.monitors)")
   println("  model_file =              \"$(m.model_file)\"")
@@ -188,6 +192,7 @@ function model_show(io::IO, m::Stanmodel, compact::Bool)
   println("    file =                    \"$(m.output.file)\"")
   println("    diagnostics_file =        \"$(m.output.diagnostic_file)\"")
   println("    refresh =                 $(m.output.refresh)")
+  println("  output_format =           :$(m.output_format)")
   if isa(m.method, Sample)
     sample_show(io, m.method, compact)
   elseif isa(m.method, Optimize)

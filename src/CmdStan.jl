@@ -45,6 +45,7 @@ include("utilities/read_samples.jl")
 #include("utilities/read_variational.jl")
 include("utilities/read_diagnose.jl")
 include("utilities/read_optimize.jl")
+include("utilities/convert_a3d.jl")
 
 # type definitions
 

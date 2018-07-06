@@ -216,6 +216,10 @@ function stan(
     error("Return code = -10")
   end
   
+  if model.output_format != :array
+    res = convert_a3d(res, cnames, Val(model.output_format))
+  end
+  
   cd(old)
 
   (rc, res, cnames)
