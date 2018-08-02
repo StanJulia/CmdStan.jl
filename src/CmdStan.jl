@@ -10,13 +10,13 @@ when available. Use `set_cmdstan_home!` to modify.
 CMDSTAN_HOME=""
 
 function __init__()
-  if !isdefined(Main, :JULIA_CMDSTAN_HOME)
-    if haskey(ENV, "JULIA_CMDSTAN_HOME")
-        global CMDSTAN_HOME = ENV["JULIA_CMDSTAN_HOME"]
-    else
-        @warn("Environment variable CMDSTAN_HOME not set. Use set_cmdstan_home!.")
-        ""
-    end
+  global CMDSTAN_HOME = if isdefined(Main, :JULIA_CMDSTAN_HOME)
+    Main.JULIA_CMDSTAN_HOME
+  elseif haskey(ENV, "JULIA_CMDSTAN_HOME")
+    ENV["JULIA_CMDSTAN_HOME"]
+  else
+    @warn("Environment variable CMDSTAN_HOME not set. Use set_cmdstan_home!.")
+    ""
   end
 end
 
