@@ -22,9 +22,8 @@ script:
   - if [[ -a .git/shallow ]]; then git fetch --unshallow; fi
   - cd $HOME; if [[ ! -d cmdstan ]]; then git clone https://github.com/stan-dev/cmdstan.git; fi
   - cd $HOME/cmdstan; git checkout v2.17.1; make stan-update; make build
-  - export CMDSTAN_HOME=$HOME/cmdstan
+  - export JULIA_CMDSTAN_HOME=$HOME/cmdstan
   - cd $TRAVIS_BUILD_DIR
-  #- julia -e 'using Pkg; Pkg.add("https://github.com/StanJulia/CmdStan.jl")'
   - julia -e 'using Pkg; Pkg.test("CmdStan"; coverage=true)'
 after_success:
 
