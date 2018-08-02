@@ -6,11 +6,13 @@ os:
   - osx
   
 julia:
+  - 0.7
   - nightly
   
 matrix:
   allow_failures:
     - os: osx
+    - julia: nightly
 
 notifications:
   email: false
