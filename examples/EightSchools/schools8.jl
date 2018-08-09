@@ -41,7 +41,7 @@ cd(ProjDir) do
 
   if rc == 0
     println()
-    println("Test round.(mean(theta[1]), digits=0) ≈ 11.0")
-    @test round.(mean(sim[:,18,:]), digits=0) ≈ 11.0
+    println("Test 10.0 < round.(mean(theta[1]), digits=0) < 13.0")
+    @test 10.0 < round.(mean(sim[:,18,:]), digits=0) < 13.0
   end
 end # cd
