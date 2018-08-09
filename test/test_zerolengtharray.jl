@@ -1,8 +1,7 @@
 using CmdStan, Test, Statistics
 
 ProjDir = dirname(@__FILE__)
-println(ProjDir)
-cd(ProjDir)
+cd(ProjDir) do
 
   bernoullimodel = "
   data { 
@@ -32,7 +31,7 @@ cd(ProjDir)
 
   if rc == 0
     println()
-    println("Test round(mean(theta), digits=1) ≈ 0.3")
-    @test round(mean(sim[:,8,:]), digits=1) ≈ 0.3
+    println("Test 0.2 < round(mean(theta), digits=1) < 0.4")
+    @test 0.2 < round(mean(sim[:,8,:]), digits=1) < 0.4
   end
 end # cd
