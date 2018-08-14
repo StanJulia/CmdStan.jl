@@ -1,5 +1,5 @@
 name = "CmdStan"
-uuid = "b06cc8f0-5f5d-11e8-13db-4b9f44fd0782"
+uuid = "593b3428-ca2f-500c-ae53-031589ec8ddd"
 authors = ["Rob J Goedman <goedman@mac.com>"]
 version = "4.1.0"
 

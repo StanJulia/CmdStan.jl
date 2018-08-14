@@ -102,7 +102,8 @@ function stan(
   catch
     println("\nAn error occurred while compiling the Stan program.\n")
     print("Please check your Stan program in variable '$(model.name)' ")
-    println("and the contents of $(tmpmodelname)_build.log.\n")
+    print("and the contents of $(tmpmodelname)_build.log.\n")
+    println("Note that Stan does not handle blanks in path names.")
     error("Return code = -3");
   end
         
