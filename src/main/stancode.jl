@@ -15,7 +15,8 @@ rc, sim, cnames = stan(
   init=Nothing,
   summary=true, 
   diagnostics=false, 
-  CmdStanDir=CMDSTAN_HOME
+  CmdStanDir=CMDSTAN_HOME,
+  file_run_log=true
 )
 ```
 ### Required arguments
@@ -71,7 +72,8 @@ function stan(
   init=Nothing,
   summary=true, 
   diagnostics=false, 
-  CmdStanDir=CMDSTAN_HOME)
+  CmdStanDir=CMDSTAN_HOME,
+  file_run_log=true)
   
   old = pwd()
   local rc = 0
@@ -175,7 +177,11 @@ function stan(
   end
   
   try
-    run(pipeline(par(model.command), stdout="$(model.name)_run.log"))
+    if file_run_log
+      run(pipeline(par(model.command), stdout="$(model.name)_run.log"))
+    else
+      run(par(model.command))
+    end
   catch e
     println("\nAn error occurred while running the previously compiled Stan program.\n")
     print("Please check the contents of file $(tmpmodelname)_run.log and the")
