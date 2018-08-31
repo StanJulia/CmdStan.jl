@@ -15,12 +15,6 @@ matrix:
     - os: osx
     - julia: nightly
 
-notifications:
-  email: false
-  
-git:
-  depth: 99999999
-
 script:
   - if [[ -a .git/shallow ]]; then git fetch --unshallow; fi
   - cd $HOME; if [[ ! -d cmdstan ]]; then git clone https://github.com/stan-dev/cmdstan.git; fi
@@ -30,20 +24,29 @@ script:
   - julia -e 'using Pkg; Pkg.test("CmdStan"; coverage=true)'
 after_success:
 
-  #
-  # Documentation
-  #
-  - julia -e 'Pkg.add("Documenter")'
-  - julia -e 'cd(Pkg.dir("CmdStan")); include(joinpath("docs", "make.jl"))'
+#
+# Documentation
+#
 
-  #
-  # Coverage
-  #
+  #- julia -e 'Pkg.add("Documenter")'
+  #- julia -e 'cd(Pkg.dir("CmdStan")); include(joinpath("docs", "make.jl"))'
+
+after_success:
+  - julia --project=test/coverage -e 'using Pkg; Pkg.instantiate()'
+  - julia --project=test/coverage test/coverage/coverage.jl
+
+jobs:
+  include:
+    - stage: deploy
+      julia: 1.0
+      os: linux
+      script:
+        - julia --project=docs -e 'using Pkg; Pkg.instantiate()'
+        - julia --project=docs --color=yes docs/make.jl
+      after_success: skip
+      
+notifications:
+  email: true
   
-  # push coverage results to Coveralls
-  
-  - julia -e 'cd(Pkg.dir("CmdStan")); Pkg.add("Coverage"); using Coverage; Coveralls.submit(Coveralls.process_folder())'
-  
-  # push coverage results to Codecov
-  
-  - julia -e 'cd(Pkg.dir("CmdStan")); Pkg.add("Coverage"); using Coverage; Codecov.submit(Codecov.process_folder())'
+git:
+  depth: 99999999
