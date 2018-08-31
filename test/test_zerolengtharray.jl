@@ -13,7 +13,7 @@ cd(ProjDir) do
     real empty[0];
   } 
   parameters {
-    real<lower=0,upper=1> theta;
+    real<lower=0,upper=1> theta;1
   } 
   model {
     theta ~ beta(1,1);
