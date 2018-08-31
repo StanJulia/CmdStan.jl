@@ -4,8 +4,12 @@ using Compat, Pkg, Documenter, DelimitedFiles, Unicode, Statistics
 
 """
 The directory which contains the cmdstan executables such as `bin/stanc` and 
-`bin/stansummary`. Inferred from `Main.CMDSTAN_HOME` or `ENV["CMDSTAN_HOME"]`
-when available. Use `set_cmdstan_home!` to modify.
+`bin/stansummary`. Inferred from the environment variable `JULIA_CMDSTAN_HOME` or `ENV["JULIA_CMDSTAN_HOME"]`
+when available.
+
+If these are not available, use `set_cmdstan_home!` to set the value of CMDSTAN_HOME.
+
+Executing `versioninfo()` will display the value of JULIA_CMDSTAN_HOME if defined.
 """
 CMDSTAN_HOME=""
 
@@ -14,6 +18,8 @@ function __init__()
     Main.JULIA_CMDSTAN_HOME
   elseif haskey(ENV, "JULIA_CMDSTAN_HOME")
     ENV["JULIA_CMDSTAN_HOME"]
+  elseif haskey(ENV, "CMDSTAN_HOME")
+    ENV["CMDSTAN_HOME"]
   else
     @warn("Environment variable CMDSTAN_HOME not set. Use set_cmdstan_home!.")
     ""
@@ -42,7 +48,7 @@ include("utilities/parallel.jl")
 # used in postprocessing
 
 include("utilities/read_samples.jl")
-#include("utilities/read_variational.jl")
+include("utilities/read_variational.jl")
 include("utilities/read_diagnose.jl")
 include("utilities/read_optimize.jl")
 include("utilities/convert_a3d.jl")

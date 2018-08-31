@@ -1,21 +1,41 @@
-# Just an example of convert_a3d, never called as the array format is
-# the intermediate format
+# convert_a3d
 
-convert_a3d(res, cnames, ::Val{:array}) = res
+# Method that allows federation by setting the `output_format`  in the Stanmodel().
 
-#=
+"""
 
-# Would be called if output_format=:dataframe, e.g.:
+# convert_a3d
 
-#   stanmodel = Stanmodel(num_samples=1200, thin=2, name="bernoulli", 
-#   model=bernoullimodel, output_format=:dataframe);
+Convert the output file created by cmdstan to the shape of choice. Currently . 
 
-using DataFrames
+### Method
+```julia
+convert_a3d(a3d_array, cnames, ::Val{Symbol})
+```
+### Required arguments
+```julia
+* `a3d_array::Array{Float64}(n_draws, n_variables, n_chains`      : Read in from output files created by cmdstan                                   
+* `cnames::Vector{AbstractString}`                                                 : Monitored variable names
+* `::Val{Symbol}`                                                                             : Output format
 
-function convert_a3d(res, cnames, ::Val{:dataframe})
-  [DataFrame(sim[:,:,i], convert(Array{Symbol}, cnames)) for i in 1:size(res, 3)]
-end
+Method called is based on the output_format defined in the stanmodel, e.g.:
 
-# CmdStan does not depend on DataFrames. 
+   stanmodel = Stanmodel(num_samples=1200, thin=2, name="bernoulli", 
+   model=bernoullimodel, output_format=:array);
 
-=#
+Current formats supported are:
+
+1. :array (a3d_array format, the default for CmdStan)
+2. :dataFrame (DataFrame)
+3. :mambachains (Mamba.Chains object)
+4. :mcmcchain (TuringLang/Chains object)
+
+Options 2 through 4 are respectively provided by the packages StanDataFrames, StanMamba and StanMCMCChain.
+```
+
+### Return values
+```julia
+* `res`                       : Draws converted to the specified format.
+```
+"""
+convert_a3d(a3d_array, cnames, ::Val{:array}) = a3d_array

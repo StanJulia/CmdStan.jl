@@ -14,11 +14,21 @@ Updates for new releases of Julia and cmdstan bump the appropriate level.
 
 ## Testing
 
-Version 1.0 of the package has been tested on Mac OSX 10.13, Julia 0.7- and cmdstan 2.18.
+Version 4.x of the package has been tested on Mac OSX 10.13 &14, Julia 0.7+ and cmdstan 2.17.1.
 
-## Version 1.0.0
+### Version 4.2.0
 
-1. Initial release of CmdStan.jl based on previous 
+1. Added ability to reformat a3d_array to a TuringLang/MCMCChain object.
+2. Added the ability to display the sample drawing progress in stdout (instead of storing these updated in the run_log_file)
+
+### Version 4.1.0
+
+1. Added ability to reformat a3d_array, e.g. to a DataFrame or a Mamba.Chains object using add-on packages such as StanDataFrames and StanMamba.
+2. Allowed passing zero-length arrays as input.
+
+### Version 4.0.0
+
+1. Initial Julia 1.0 release of CmdStan.jl (based on Stan.jl).
 _
 
 

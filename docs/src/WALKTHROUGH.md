@@ -45,19 +45,13 @@ rc, sim1 = stan(stanmodel, [bernoullidata], ProjDir, CmdStanDir=CMDSTAN_HOME)
 ```
 More documentation on stan() can be found in [`stan`](@ref)
 
-If the return code rc indicated success (rc == 0), Mamba.jl provides the describe() function. We can't use all monitored variables by Stan. In this example a good subset is selected as below and stored in 'sim'
-```
-if rc == 0
-  println("Subset Sampler Output")
-  sim = sim1[1:1000, ["lp__", "theta", "accept_stat__"], :]
-  describe(sim)
-end
-```
+If the return code rc indicated success (rc == 0), cmdstan execution completed succesfully.
+
 The first time (or when updates to the model have been made) stan() will compile the model and create the executable.
 
 On Windows, the CmdStanDir argument appears needed (this is still being investigated). On OSX/Unix CmdStanDir is obtained from either ~/.juliarc.jl or an environment variable (see the Requirements section).
 
-By default stan() will run 4 chainsand  optionally display a combined summarySome other CmdStan methods, e.g. optimize, return a dictionary.
+By default stan() will run 4 chains and optionally display a combined summary. Some other CmdStan methods, e.g. optimize, return a dictionary.
 
 ## Running a CmdStan script, some details
 
