@@ -31,7 +31,7 @@ after_success:
   - julia --project=docs --color=yes docs/make.jl
 
   # Coverage
-  - julia --project=test/coverage -e 'using Pkg; Pkg.instantiate()'
+  - julia --project=test/coverage -e 'using Pkg; Pkg.add("Documenter"); Pkg.instantiate()'
   - julia --project=test/coverage test/coverage/coverage.jl
       
 notifications:
