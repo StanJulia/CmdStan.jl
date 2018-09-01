@@ -6,7 +6,7 @@ A version of a Julia package is labeled (tagged) as v"major.minor.patch".
 
 My intention is to update the patch level whenever I make updates which are not visible to any of the existing examples.
 
-New functionality will be introduced in minor level updates. This includes adding new examples, tests and the introduction of new arguments if they default to previous behavior, e.g. in v"1.1.0" the useMamba and init arguments to Stanmodel().
+New functionality will be introduced in minor level updates. This includes adding new examples, tests and the introduction of new arguments if they default to previous behavior, e.g. in v"4.2.0" the `run_log_file` argument to stan().
 
 Changes that require updates to some examples bump the major level.
 
@@ -14,7 +14,7 @@ Updates for new releases of Julia and cmdstan bump the appropriate level.
 
 ## Testing
 
-Version 4.x of the package has been tested on Mac OSX 10.13 &14, Julia 0.7+ and cmdstan 2.17.1.
+Versions 4.x of the package has been tested on Mac OSX 10.13 &14, Julia 1.0 and cmdstan 2.17.1.
 
 ### Version 4.2.0
 

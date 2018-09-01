@@ -5,20 +5,18 @@
 CMDSTAN_HOME
 ```
 
-## set_cmdstan_home!
+## `set_cmdstan_home!`
 ```@docs
-set_cmdstan_home!
+CmdStan.set_cmdstan_home!
 ```
 
 ## stanmodel()
-
 ```@docs
 Stanmodel
 CmdStan.update_model_file
 ```
 
 ## stan()
-
 ```@docs
 stan
 CmdStan.stan_summary(filecmd::Cmd; CmdStanDir=CMDSTAN_HOME)

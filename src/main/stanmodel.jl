@@ -121,10 +121,10 @@ stanmodel = Stanmodel(num_samples=1200, thin=2, name="bernoulli", model=bernoull
 ```julia
 ?stan                          : Run a Stanmodel
 ?Sample                        : Sampling settings
-?Method                       : List of available methods
+?Method                         : List of available methods
 ?Output                        : Output file settings
 ?DataDict                      : Input data dictionaries, will be converted to R syntax
-?convert_a3d                : Optionsfor output formats
+?convert_a3d                   : Options for output formats
 ```
 """
 function Stanmodel(

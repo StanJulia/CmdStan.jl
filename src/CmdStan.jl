@@ -8,8 +8,10 @@ The directory which contains the cmdstan executables such as `bin/stanc` and
 when available.
 
 If these are not available, use `set_cmdstan_home!` to set the value of CMDSTAN_HOME.
+    
+Example: `set_cmdstan_home!(homedir() * "/Projects/Stan/cmdstan/")`
 
-Executing `versioninfo()` will display the value of JULIA_CMDSTAN_HOME if defined.
+Executing `versioninfo()` will display the value of `JULIA_CMDSTAN_HOME` if defined.
 """
 CMDSTAN_HOME=""
 
