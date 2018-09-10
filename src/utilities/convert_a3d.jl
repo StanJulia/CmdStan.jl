@@ -16,7 +16,10 @@ convert_a3d(a3d_array, cnames, ::Val{Symbol})
 ```julia
 * `a3d_array::Array{Float64}(n_draws, n_variables, n_chains`      : Read in from output files created by cmdstan                                   
 * `cnames::Vector{AbstractString}`                                                 : Monitored variable names
-* `::Val{Symbol}`                                                                             : Output format
+
+### Optional arguments
+```julia
+* `::Val{Symbol} = :array`                                                                             : Output format
 
 Method called is based on the output_format defined in the stanmodel, e.g.:
 
@@ -26,11 +29,13 @@ Method called is based on the output_format defined in the stanmodel, e.g.:
 Current formats supported are:
 
 1. :array (a3d_array format, the default for CmdStan)
-2. :dataFrame (DataFrame)
-3. :mambachains (Mamba.Chains object)
-4. :mcmcchain (TuringLang/Chains object)
+2. :namedarray (N)
 
-Options 2 through 4 are respectively provided by the packages StanDataFrames, StanMamba and StanMCMCChain.
+3. :dataFrame (DataFrame)
+4. :mambachains (Mamba.Chains object)
+5. :mcmcchain (TuringLang/Chains object)
+
+Options 3 through 5 are respectively provided by the packages StanDataFrames, StanMamba and StanMCMCChain.
 ```
 
 ### Return values
@@ -39,3 +44,7 @@ Options 2 through 4 are respectively provided by the packages StanDataFrames, St
 ```
 """
 convert_a3d(a3d_array, cnames, ::Val{:array}) = a3d_array
+
+convert_a3d(a3d_array, cnames, ::Val{:namedarray}) = 
+  [NamedArray(a3d_array[:,:,i], (collect(1:size(a3d_array, 1)), Symbol.(cnames))) 
+    for i in 1:size(a3d_array, 3)]

@@ -23,19 +23,27 @@ script:
   - cd $TRAVIS_BUILD_DIR
   - julia -e 'using Pkg; Pkg.clone("https://github.com/StanJulia/CmdStan.jl"); Pkg.test("CmdStan"; coverage=true)'
 
+branches:
+  only:
+    - master
+    - /^v\d+\.\d+(\.\d+)?(-\S*)?$/
+    
 after_success:
-
-  # Documentation
-
-  - julia --project=docs -e 'using Pkg; Pkg.add("CmdStan"); Pkg.instantiate()'
-  - julia --project=docs --color=yes docs/make.jl
-
-  # Coverage
   - julia --project=test/coverage -e 'using Pkg; Pkg.instantiate()'
   - julia --project=test/coverage test/coverage/coverage.jl
+  
+jobs:
+  include:
+    - stage: Documentation
+      julia: 1.0
+      os: linux
+      script:
+        - julia --project=docs -e 'using Pkg; Pkg.instantiate()'
+        - julia --project=docs --color=yes docs/make.jl
+      after_success: skip
       
 notifications:
-  email: true
+  email: false
   
 git:
   depth: 99999999

@@ -28,7 +28,7 @@ Note 1: CmdStan.jl is part of the Github StanJulia organization set of packages.
 
 Note 2: Additional work is needed on documentation. 
 
-Note 3: Works with several other packages in the StanJulia organization, i.e. StanDataFrames.jl, StanMamba.jl and StanMCMCChain. StanMCMCChainExamples is under development.
+Note 3: Works with several other packages in the StanJulia organization, i.e. StanMCMCChainExamples is under development.
 
 Note 4: Tested on Julia v0.7.0 and Julia v1.0.0
 
