@@ -32,8 +32,10 @@ after_success:
   - julia --project=test/coverage -e 'using Pkg; Pkg.instantiate()'
   - julia --project=test/coverage test/coverage/coverage.jl
   
-  - julia --project=docs -e 'using Pkg; Pkg.add("Documenter"); Pkg.add("CmdStan"); Pkg.instantiate()'
-  - julia --project=docs --color=yes docs/make.jl
+  - julia -e 'Pkg.add("Documenter")'
+  - julia -e 'cd(Pkg.dir("CmdStan")); include(joinpath("docs", "make.jl"))'
+  #- julia --project=docs -e 'using Pkg; Pkg.add("Documenter"); Pkg.add("CmdStan"); Pkg.instantiate()'
+  #- julia --project=docs --color=yes docs/make.jl
       
 notifications:
   email: false
