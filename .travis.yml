@@ -40,7 +40,7 @@ jobs:
       script:
         - julia --project=docs -e 'using Pkg; Pkg.add("Documenter"); Pkg.add("CmdStan"); Pkg.instantiate()'
         - julia --project=docs --color=yes docs/make.jl
-      after_success: skip
+      after_success: deploy
       
 notifications:
   email: false
