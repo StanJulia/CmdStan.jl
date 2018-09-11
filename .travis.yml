@@ -47,4 +47,4 @@ notifications:
   email: false
   
 git:
-  depth: 99999999after_success:
+  depth: 99999999
