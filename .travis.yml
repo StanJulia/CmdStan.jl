@@ -3,12 +3,12 @@ language: julia
 
 os:
   - linux
-#  - osx
+  #- osx
   
 julia:
-#  - 0.7
+  #- 0.7
   - 1.0
-#  - nightly
+  #- nightly
   
 matrix:
   allow_failures:
@@ -21,21 +21,27 @@ script:
   - cd $HOME/cmdstan; git checkout v2.17.1; make stan-update; make build
   - export JULIA_CMDSTAN_HOME=$HOME/cmdstan
   - cd $TRAVIS_BUILD_DIR
-  - julia -e 'using Pkg; Pkg.clone("https://github.com/StanJulia/CmdStan.jl"); Pkg.test("CmdStan"; coverage=true)'
+  - julia -e 'using Pkg; Pkg.test("CmdStan"; coverage=true)'
 
 branches:
   only:
     - master
+    - v5.0.0
     - /^v\d+\.\d+(\.\d+)?(-\S*)?$/
     
 after_success:
   - julia --project=test/coverage -e 'using Pkg; Pkg.instantiate()'
   - julia --project=test/coverage test/coverage/coverage.jl
   
-  - julia -e 'Pkg.add("Documenter")'
-  - julia -e 'cd(Pkg.dir("CmdStan")); include(joinpath("docs", "make.jl"))'
-  #- julia --project=docs -e 'using Pkg; Pkg.add("Documenter"); Pkg.add("CmdStan"); Pkg.instantiate()'
-  #- julia --project=docs --color=yes docs/make.jl
+jobs:
+  include:
+    - stage: Documentation
+      julia: 1.0
+      os: linux
+      script:
+        - julia --project=docs -e 'using Pkg; Pkg.add("Documenter"); Pkg.add("CmdStan"); Pkg.instantiate()'
+        - julia --project=docs --color=yes docs/make.jl
+      after_success: skip
       
 notifications:
   email: false

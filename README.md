@@ -22,6 +22,10 @@ The location of the cmdstan executable and related programs is now obtained from
 
 Right now `versioninfo()` will show its setting (if defined).
 
+## Version 5+
+
+Project.toml based versions (not on METADATA).
+
 ## Notes
 
 Note 1: CmdStan.jl is part of the Github StanJulia organization set of packages. It's the primary interface to Stan's cmdstan executable. Most other envisaged packages are for post-sampling steps. The intention is to deprecate Stan.jl (or in fact under the cover use CmdStan.jl and StanMamba.jl as a replacement).
