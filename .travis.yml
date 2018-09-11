@@ -26,6 +26,7 @@ script:
 branches:
   only:
     - master
+    - v5.0.0
     - /^v\d+\.\d+(\.\d+)?(-\S*)?$/
     
 after_success:
