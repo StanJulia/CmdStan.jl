@@ -32,11 +32,18 @@ after_success:
   - julia --project=test/coverage -e 'using Pkg; Pkg.instantiate()'
   - julia --project=test/coverage test/coverage/coverage.jl
   
-  - julia --project=docs -e 'using Pkg; Pkg.add("Documenter"); Pkg.add("CmdStan"); Pkg.instantiate()'
-  - julia --project=docs --color=yes docs/make.jl
+jobs:
+  include:
+    - stage: Documentation
+      julia: 1.0
+      os: linux
+      script:
+        - julia --project=docs -e 'using Pkg; Pkg.instantiate()'
+        - julia --project=docs --color=yes docs/make.jl
+      after_success: skip
       
 notifications:
   email: false
   
 git:
-  depth: 99999999
+  depth: 99999999after_success:
