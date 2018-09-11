@@ -23,11 +23,15 @@ script:
   - cd $TRAVIS_BUILD_DIR
   - julia -e 'using Pkg; Pkg.test("CmdStan"; coverage=true)'
 
+notifications:
+  email: false
+  
+git:
+  depth: 99999999
+
 branches:
   only:
     - master
-    - v5.0.0
-    - /^v\d+\.\d+(\.\d+)?(-\S*)?$/
     
 after_success:
   - julia --project=test/coverage -e 'using Pkg; Pkg.instantiate()'
@@ -35,16 +39,11 @@ after_success:
   
 jobs:
   include:
-    - stage: Documentation
-      julia: 1.0
-      os: linux
-      script:
-        - julia --project=docs -e 'using Pkg; Pkg.add("Documenter"); Pkg.add("CmdStan"); Pkg.instantiate()'
-        - julia --project=docs --color=yes docs/make.jl
+    - stage: deploy
+        julia: 1.0
+        os: linux
+        script:
+          - julia --color=yes --project=docs/ -e 'using Pkg; Pkg.add("Documenter"); Pkg.add("CmdStan"); Pkg.instantiate()'
+          - julia --color=yes --project=docs/ docs/make.jl
       after_success: skip
       
-notifications:
-  email: false
-  
-git:
-  depth: 99999999
