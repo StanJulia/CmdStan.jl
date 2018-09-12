@@ -23,11 +23,10 @@ script:
   - cd $TRAVIS_BUILD_DIR
   - julia -e 'using Pkg; Pkg.test("CmdStan"; coverage=true)'
 
-#branches:
-#  only:
-#    - master
-#    - latest
-#    - /^v\d+\.\d+(\.\d+)?(-\S*)?$/
+branches:
+  only:
+    - master
+    - /^v\d+\.\d+(\.\d+)?(-\S*)?$/
     
 after_success:
   - julia --project=test/coverage -e 'using Pkg; Pkg.instantiate()'
