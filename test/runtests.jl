@@ -1,7 +1,7 @@
 # Top level test script for Stan.jl
 using Compat, CmdStan, Test, Statistics
 
-println("Running tests for CmdStan-j0.7-v4.0.0:\n")
+println("Running tests for CmdStan-j1.0-v4.2.0:\n")
 
 code_tests = ["test_env.jl",              
               "test_utilities.jl",
@@ -13,7 +13,8 @@ execution_tests = [
   "test_bernoulli_diagnostics.jl",
   "test_bernoulli_optimize.jl",
   "test_bernoulli_diagnose.jl",
-  #"test_bernoulli_variational.jl",
+  "test_bernoulli_variational.jl",
+  "test_bernoulli_namedarray.jl",
   "test_bernoulliinittheta.jl",
   "test_bernoulliscalar.jl",
   "test_binomial.jl",

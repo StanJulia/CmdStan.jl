@@ -41,23 +41,17 @@ const bernoullidata = Dict("N" => 10, "y" => [0, 1, 0, 1, 0, 0, 0, 0, 0, 1])
 
 Run the simulation by calling stan(), passing in the data and the intended working directory. 
 ```
-rc, sim1 = stan(stanmodel, [bernoullidata], ProjDir, CmdStanDir=CMDSTAN_HOME)
+rc, sim1, cnames = stan(stanmodel, [bernoullidata], ProjDir, CmdStanDir=CMDSTAN_HOME)
 ```
 More documentation on stan() can be found in [`stan`](@ref)
 
-If the return code rc indicated success (rc == 0), Mamba.jl provides the describe() function. We can't use all monitored variables by Stan. In this example a good subset is selected as below and stored in 'sim'
-```
-if rc == 0
-  println("Subset Sampler Output")
-  sim = sim1[1:1000, ["lp__", "theta", "accept_stat__"], :]
-  describe(sim)
-end
-```
+If the return code rc indicated success (rc == 0), cmdstan execution completed succesfully.
+
 The first time (or when updates to the model have been made) stan() will compile the model and create the executable.
 
 On Windows, the CmdStanDir argument appears needed (this is still being investigated). On OSX/Unix CmdStanDir is obtained from either ~/.juliarc.jl or an environment variable (see the Requirements section).
 
-By default stan() will run 4 chainsand  optionally display a combined summarySome other CmdStan methods, e.g. optimize, return a dictionary.
+By default stan() will run 4 chains and optionally display a combined summary. Some other CmdStan methods, e.g. optimize, return a dictionary.
 
 ## Running a CmdStan script, some details
 
@@ -77,7 +71,7 @@ Compared to the call to Stanmodel() above, the keyword argument monitors has bee
 ```
 stanmodel2 = Stanmodel(Sample(adapt=Adapt(delta=0.9)), name="bernoulli2", nchains=6)
 ```
-An example of updating default model values when creating a model. The format is slightly different from CmdStan, but the parameters are as described in the CmdStan Interface User's Guide. This is also the case for the Stanmodel() optional arguments random, init and output (refresh only).
+An example of updating default model values when creating a model. The format is slightly different from cmdstan, but the parameters are as described in the cmdstan Interface User's Guide. This is also the case for the Stanmodel() optional arguments random, init and output (refresh only).
 
 Now, in the REPL, the stanmodel2 can be shown by:
 ```
@@ -94,4 +88,4 @@ After a Stanmodel has been created, the workhorse function stan() is called to r
 
 After the stan() call, the stanmodel.command contains an array of Cmd fields that contain the actual run commands for each chain. These are executed in parallel if that is possible. The call to stan() might update other info in the StanModel, e.g. the names of diagnostics files.
 
-The stan() call uses 'make' to create (or update when needed) an executable with the given model.name, e.g. bernoulli in the above example. If no model String (or of zero length) is found, a message will be shown.
+The stan() call uses 'make' to create (or update when needed) an executable with the given model.name, e.g. bernoulli in the above example. If no model AbstractString (or of zero length) is found, a message will be shown.

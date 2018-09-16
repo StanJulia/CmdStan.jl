@@ -37,12 +37,14 @@ rc, sim, cnames = stan(
 * `summary=true`                  : Use CmdStan's stansummary to display results
 * `diagnostics=false`             : Generate diagnostics file
 * `CmdStanDir=CMDSTAN_HOME`       : Location of cmdstan directory
+* `file_run_log=true`             : Create run log file (if false, write log to stdout)
 ```
 
 ### Return values
 ```julia
 * `rc::Int`                       : Return code from stan(), rc == 0 if all is well
-* `sim`                           : Chain results
+* `sim`                          : Chain results
+* `cnames`                   : Vector of variable names
 ```
 
 ### Examples

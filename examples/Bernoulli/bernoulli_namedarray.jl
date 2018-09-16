@@ -1,13 +1,13 @@
-######### CmndStan program example  ###########
+######### CmdStan program example  ###########
 
-using CmdStan, Test, Statistics
+using CmdStan, NamedArrays, Test, Statistics
 
 ProjDir = dirname(@__FILE__)
 cd(ProjDir) do
 
-  bernoulli = "
+  bernoullimodel = "
   data { 
-    int<lower=0> N; 
+    int<lower=1> N; 
     int<lower=0,upper=1> y[N];
   } 
   parameters {
@@ -15,11 +15,11 @@ cd(ProjDir) do
   } 
   model {
     theta ~ beta(1,1);
-      y ~ bernoulli(theta);
+    y ~ bernoulli(theta);
   }
   "
 
-  bernoullidata = [
+  observeddata = [
     Dict("N" => 10, "y" => [0, 1, 0, 1, 0, 0, 0, 0, 0, 1]),
     Dict("N" => 10, "y" => [0, 1, 0, 0, 0, 0, 1, 0, 0, 1]),
     Dict("N" => 10, "y" => [0, 0, 0, 0, 0, 0, 1, 0, 1, 1]),
@@ -27,13 +27,14 @@ cd(ProjDir) do
   ]
 
   global stanmodel, rc, sim, cnames
-  stanmodel = Stanmodel(CmdStan.Variational(), name="bernoulli",  model=bernoulli)
+  stanmodel = Stanmodel(num_samples=1200, thin=2, name="bernoulli", 
+    model=bernoullimodel, output_format=:namedarray);
 
-  rc, sim, cnames = stan(stanmodel, bernoullidata, ProjDir, CmdStanDir=CMDSTAN_HOME)
+  rc, sim, cnames = stan(stanmodel, observeddata, ProjDir, diagnostics=false,
+    CmdStanDir=CMDSTAN_HOME);
 
   if rc == 0
-    println()
-    println("Test 0.0 <= round.(mean(theta), 1) <= 2.0")
-    @test 0.0 <= round.(mean(sim[:,2,:]), digits=1) <= 2.0
+    @test round.(mean(sim[1][:, :theta]), digits=1) ≈ 0.3
   end
+
 end # cd

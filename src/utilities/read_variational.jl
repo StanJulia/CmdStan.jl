@@ -1,3 +1,20 @@
+"""
+
+# read_variational
+
+Read variational sample output files created by cmdstan. 
+
+### Method
+```julia
+read_variational(m::Stanmodel)
+```
+
+### Required arguments
+```julia
+* `m::Stanmodel`    : Stanmodel object
+```
+
+"""
 function read_variational(m::Stanmodel)
 
   local a3d, monitors, index, idx, indvec, ftype
