@@ -1,25 +1,25 @@
 """
 
-# Method update_model_file
+# Method `update_model_file`
 
 Update Stan language model file if necessary 
 
 ### Method
 ```julia
-update_model_file(
+CmdStan.update_model_file(
   file::String, 
   str::String
 )
 ```
 ### Required arguments
 ```julia
-* `file::String`                : File holding existing Stan model
-* `str::String`                 : Stan model string
+* `file::AbstractString`                : File holding existing Stan model
+* `str::AbstractString`                 : Stan model string
 ```
 
 ### Related help
 ```julia
-?Stan.Stanmodel                 : Create a StanModel
+?CmdStan.Stanmodel                 : Create a StanModel
 ```
 """
 function update_model_file(file::AbstractString, str::AbstractString)

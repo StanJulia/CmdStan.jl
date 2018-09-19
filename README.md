@@ -12,6 +12,10 @@ Cmdstan needs to be installed separatedly. Please see [cmdstan installation](htt
 
 For more info on Stan, please go to <http://mc-stan.org>.
 
+## Added feature in version 4.2.0
+
+The call to stan() now has an option `file_run_log=true`. By default it will create the runlog file in the tmp directory. Setting it to false will write sampling progess to stdout. This is useful for cases where the sampling process is slow.
+
 ## Breaking change
 
 The location of the cmdstan executable and related programs is now obtained from the environment variable JULIA_CMDSTAN_HOME. This used to be CMDSTAN_HOME.
@@ -22,6 +26,12 @@ Right now `versioninfo()` will show its setting (if defined).
 
 Note 1: CmdStan.jl is part of the Github StanJulia organization set of packages. It's the primary interface to Stan's cmdstan executable. Most other envisaged packages are for post-sampling steps. The intention is to deprecate Stan.jl (or in fact under the cover use CmdStan.jl and StanMamba.jl as a replacement).
 
-Note 2: Additional work is needed on documentation and at least on the next couple of packages in the StanJulia organization, i.e. StanDataFrames.jl and StanMamba.jl.
+Note 2: Additional work is needed on documentation. 
 
-Note 3: Tested on Julia v0.7.0, Julia v1.0.0 and Julia 1.1-dev
+Note 3: Works with several other packages in the StanJulia organization, i.e. StanMCMCChainExamples is under development.
+
+Note 4: Tested on Julia v0.7.0, Julia v1.0.0 and Julia 1.1-dev
+
+Note 5: For now the build.jl is skipped. Please let me know if this is inconvenient.
+
+Note 6: Master branch contains a Project.toml

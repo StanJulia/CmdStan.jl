@@ -1,21 +1,50 @@
-# Just an example of convert_a3d, never called as the array format is
-# the intermediate format
+# convert_a3d
 
-convert_a3d(res, cnames, ::Val{:array}) = res
+# Method that allows federation by setting the `output_format`  in the Stanmodel().
 
-#=
+"""
 
-# Would be called if output_format=:dataframe, e.g.:
+# convert_a3d
 
-#   stanmodel = Stanmodel(num_samples=1200, thin=2, name="bernoulli", 
-#   model=bernoullimodel, output_format=:dataframe);
+Convert the output file created by cmdstan to the shape of choice. Currently . 
 
-using DataFrames
+### Method
+```julia
+convert_a3d(a3d_array, cnames, ::Val{Symbol})
+```
+### Required arguments
+```julia
+* `a3d_array::Array{Float64}(n_draws, n_variables, n_chains`      : Read in from output files created by cmdstan                                   
+* `cnames::Vector{AbstractString}`                                                 : Monitored variable names
 
-function convert_a3d(res, cnames, ::Val{:dataframe})
-  [DataFrame(sim[:,:,i], convert(Array{Symbol}, cnames)) for i in 1:size(res, 3)]
-end
+### Optional arguments
+```julia
+* `::Val{Symbol} = :array`                                                                             : Output format
 
-# CmdStan does not depend on DataFrames. 
+Method called is based on the output_format defined in the stanmodel, e.g.:
 
-=#
+   stanmodel = Stanmodel(num_samples=1200, thin=2, name="bernoulli", 
+   model=bernoullimodel, output_format=:array);
+
+Current formats supported are:
+
+1. :array (a3d_array format, the default for CmdStan)
+2. :namedarray (N)
+
+3. :dataFrame (DataFrame)
+4. :mambachains (Mamba.Chains object)
+5. :mcmcchain (TuringLang/Chains object)
+
+Options 3 through 5 are respectively provided by the packages StanDataFrames, StanMamba and StanMCMCChain.
+```
+
+### Return values
+```julia
+* `res`                       : Draws converted to the specified format.
+```
+"""
+convert_a3d(a3d_array, cnames, ::Val{:array}) = a3d_array
+
+convert_a3d(a3d_array, cnames, ::Val{:namedarray}) = 
+  [NamedArray(a3d_array[:,:,i], (collect(1:size(a3d_array, 1)), Symbol.(cnames))) 
+    for i in 1:size(a3d_array, 3)]

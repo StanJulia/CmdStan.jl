@@ -3,6 +3,9 @@ using CmdStan, Test, Statistics
 ProjDir = dirname(@__FILE__)
 cd(ProjDir) do
 
+  isdir("tmp") &&
+    rm("tmp", recursive=true);
+
   bernoullimodel = "
   data { 
     int<lower=1> N; 
@@ -34,4 +37,8 @@ cd(ProjDir) do
     println("Test 0.2 < round(mean(theta), digits=1) < 0.4")
     @test 0.2 < round(mean(sim[:,8,:]), digits=1) < 0.4
   end
+
+  isdir("tmp") &&
+    rm("tmp", recursive=true);
+
 end # cd

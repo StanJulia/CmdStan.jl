@@ -1,3 +1,20 @@
+"""
+
+# read_samples
+
+Read sample output files created by cmdstan. 
+
+### Method
+```julia
+read_samples(m::Stanmodel)
+```
+
+### Required arguments
+```julia
+* `m::Stanmodel`    : Stanmodel object
+```
+
+"""
 function read_samples(m::Stanmodel, diagnostics=false, warmup_samples=false)
 
   local a3d, monitors, index, idx, indvec, ftype, noofsamples
