@@ -96,6 +96,13 @@ Stanmodel(
 * `pdir::String`               : Working directory
 * `monitors::String[] `        : Filter for variables used in Mamba post-processing
 * `output_format::Symbol ` : Specifies the required output format (:array for CmdStan.jl)
+
+CmdStan.jl supports 2 output_format values:
+      
+1. :array                 # Returns an array of draws (the default value)
+2. nmaedarray       # Returns a NamedArray
+
+both return an Array{Float64, 3} with ndraws, nvars, nchains as indeces
 ```
 
 ### Example

@@ -24,4 +24,4 @@ Note 1: CmdStan.jl is part of the Github StanJulia organization set of packages.
 
 Note 2: Additional work is needed on documentation and at least on the next couple of packages in the StanJulia organization, i.e. StanDataFrames.jl and StanMamba.jl.
 
-Note 3: Tested on Julia v0.7.0 and Julia v1.0.0
+Note 3: Tested on Julia v0.7.0, Julia v1.0.0 and Julia 1.1-dev
