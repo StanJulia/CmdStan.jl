@@ -102,7 +102,9 @@ CmdStan.jl supports 2 output_format values:
 1. :array                 # Returns an array of draws (default value)
 2. namedarray       # Returns a NamedArray
 
-both return an Array{Float64, 3} with ndraws, nvars, nchains as indeces. Other 
+both return an Array{Float64, 3} with ndraws, nvars, nchains as indices. Other options are available
+by `importing` or `using` packages such as StanDataFrames.jl, StanMamba.jl or StanMCMCChain.jl.
+See `?CmdStan.convert_a3d`.
 
 ```
 
