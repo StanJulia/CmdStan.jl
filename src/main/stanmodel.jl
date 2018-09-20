@@ -99,10 +99,11 @@ Stanmodel(
 
 CmdStan.jl supports 2 output_format values:
       
-1. :array                 # Returns an array of draws (the default value)
-2. nmaedarray       # Returns a NamedArray
+1. :array                 # Returns an array of draws (default value)
+2. namedarray       # Returns a NamedArray
 
-both return an Array{Float64, 3} with ndraws, nvars, nchains as indeces.
+both return an Array{Float64, 3} with ndraws, nvars, nchains as indeces. Other 
+
 ```
 
 ### Example
