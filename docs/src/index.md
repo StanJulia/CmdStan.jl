@@ -49,14 +49,14 @@ CmdStan.Variational
 ```@docs
 CmdStan.cmdline
 CmdStan.check_dct_type
-CmdStan.update_R_file
+CmdStan.convert_a3d
+CmdStan.Fixed_param
 CmdStan.par
 CmdStan.read_optimize
 CmdStan.read_samples
 CmdStan.read_variational
-CmdStan.convert_a3d
-CmdStan.Fixed_param
 CmdStan.read_diagnose
+CmdStan.update_R_file
 ```
 
 ## Index
