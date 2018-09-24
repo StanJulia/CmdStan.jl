@@ -30,7 +30,6 @@ Current formats supported are:
 
 1. :array (a3d_array format, the default for CmdStan)
 2. :namedarray (N)
-
 3. :dataFrame (DataFrame)
 4. :mambachains (Mamba.Chains object)
 5. :mcmcchain (TuringLang/Chains object)
