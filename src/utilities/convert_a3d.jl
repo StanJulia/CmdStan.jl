@@ -29,7 +29,7 @@ Method called is based on the output_format defined in the stanmodel, e.g.:
 Current formats supported are:
 
 1. :array (a3d_array format, the default for CmdStan)
-2. :namedarray (N)
+2. :namedarray (NamedArrays)
 3. :dataFrame (DataFrame)
 4. :mambachains (Mamba.Chains object)
 5. :mcmcchain (TuringLang/Chains object)
