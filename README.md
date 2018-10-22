@@ -6,6 +6,8 @@
 
 A package to use cmdstan (as an external program) from Julia v1.x and up. 
 
+For more info on Stan and cmdstan, please go to <http://mc-stan.org>.
+
 Documentation can be found [here](https://stanjulia.github.io/CmdStan.jl/latest/)
 
 Cmdstan needs to be installed separatedly. Please see [cmdstan installation](http://StanJulia.github.io/CmdStan.jl/latest/INSTALLATION.html). 
