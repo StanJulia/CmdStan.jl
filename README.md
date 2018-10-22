@@ -12,9 +12,11 @@ Cmdstan needs to be installed separatedly. Please see [cmdstan installation](htt
 
 For more info on Stan, please go to <http://mc-stan.org>.
 
-## Added feature in version 5.0.0
+## Added feature in version 4.4.0
 
 This version is Pkg3 based, i.e. contains a Project.toml file.
+
+Al;so includes NamedArray as output_format.
 
 ## Added feature in version 4.2.0
 
