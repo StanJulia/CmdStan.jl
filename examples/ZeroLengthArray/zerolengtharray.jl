@@ -6,7 +6,7 @@ using CmdStan, Test, Statistics
 
 ProjDir = dirname(@__FILE__)
 println(ProjDir)
-cd(ProjDir)
+cd(ProjDir) do
 
   bernoullimodel = "
   data { 
