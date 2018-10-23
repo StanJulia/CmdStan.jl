@@ -15,19 +15,4 @@ launchctl setenv JULIA_CMDSTAN_HOME /Users/rob/Projects/Stan/cmdstan
 
 to .bash_profile or config/startup.jl. I typically prefer cmdstan not to include the cmdstan version number so no update is needed when cmdstan is updated.
 
-Currently tested with cmdstan 2.17.1
-
-## Linux options
-
-For those who are using a Linux based operating system. These are the cmdstan installation instructions using Linuxbrew. Please note that you must have Linuxbrew installed on your machine prior to going through these steps.
-
-	Executing in a terminal:
-	'''
-	brew tap brewsci/science
-	brew install cmdstan
-	'''
-	should install the latest available cmdstan in /home/usrname/.linuxbrew/Cellar/cmdstan/x.x.x:
-	
-Then set `JULIA_CMDSTAN_HOME` to point to where your local installation of cmdstan lives.
-
-Note: Is this still valid?
+Currently tested with cmdstan 2.18.0

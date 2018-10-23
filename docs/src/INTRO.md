@@ -40,7 +40,7 @@ This workflow uses [StanMCMCChain.jl](https://github.com/StanJulia/StanMCMCChain
 
 The default value for the `output_format` argument in Stanmodel() is :array which causes stan() to call a (dummy) conversion method convert_a3d() and returns an array of values.
 
-Currently 3 other values for `output_format` are used, i.e. :dataframe, :mambachain and :mcmcchain. The associated methods for `convert_a3d` are provided by StanDataFrames, StanMamba and StanMCMCChain.
+Currently 4 other values for `output_format` are used, i.e. :dataframe, :mambachain and :mcmcchain. The associated methods for `convert_a3d` are provided by StanDataFrames, StanMamba and StanMCMCChain. CmdStan.jl also provides the output_format option :namedarray
 
 ## Other MCMC options in Julia
 

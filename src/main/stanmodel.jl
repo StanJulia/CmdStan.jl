@@ -101,11 +101,16 @@ Stanmodel(
 ### CmdStan.jl supports 2 output_format values:
 ```julia     
 1. :array                 # Returns an array of draws (default value)
-2. :namedarray      # Returns a NamedArray
+2. :namedarray      # Returns a NamedArrays object 
 
-both return an Array{Float64, 3} with ndraws, nvars, nchains as indices. Other options are available
-by `importing` or `using` packages such as StanDataFrames.jl, StanMamba.jl or StanMCMCChain.jl.
-See `?CmdStan.convert_a3d`.
+both return an Array{Float64, 3} with ndraws, nvars, nchains as indices.
+
+Other options are availableby `importing` or `using` packages such as:
+1. StanDataFrames.jl
+2. StanMamba.jl or
+3. StanMCMCChain.jl.
+
+See also `?CmdStan.convert_a3d`.
 ```
 
 ### Example
@@ -130,11 +135,11 @@ stanmodel = Stanmodel(num_samples=1200, thin=2, name="bernoulli", model=bernoull
 ### Related help
 ```julia
 ?stan                          : Run a Stanmodel
-?Sample                        : Sampling settings
-?Method                         : List of available methods
-?Output                        : Output file settings
-?DataDict                      : Input data dictionaries, will be converted to R syntax
-?convert_a3d                   : Options for output formats
+?CmdStan.Sample                        : Sampling settings
+?CmdStan.Method                         : List of available methods
+?CmdStan.Output                        : Output file settings
+?CmdStan.DataDict                      : Input data dictionaries, will be converted to R syntax
+?CmdStan.convert_a3d                   : Options for output formats
 ```
 """
 function Stanmodel(

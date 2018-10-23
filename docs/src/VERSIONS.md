@@ -14,13 +14,14 @@ Updates for new releases of Julia and cmdstan bump the appropriate level.
 
 ## Testing
 
-Versions 5.x of the package has been tested on Mac OSX 10.13 &14, Julia 1.0 and cmdstan 2.18.0.
+Versions 4.4 of the package has been tested on Mac OSX 10.14, Julia 1.0 and cmdstan 2.18.0.
 
-### Version 5.0.0
+### Version 4.4.0
 
 1. Pkg3 based.
+2. Added the output_format option :namedarray which will return a NamesArrays object instead of the a3d array.
 
-### Version 4.2.0
+### Version 4.2.0/4.3.0
 
 1. Added ability to reformat a3d_array to a TuringLang/MCMCChain object.
 2. Added the ability to display the sample drawing progress in stdout (instead of storing these updated in the run_log_file)
