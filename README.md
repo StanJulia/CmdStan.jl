@@ -6,15 +6,19 @@
 
 A package to use cmdstan (as an external program) from Julia v1.x and up. 
 
+For more info on Stan and cmdstan, please go to <http://mc-stan.org>.
+
 Documentation can be found [here](https://stanjulia.github.io/CmdStan.jl/latest/)
 
 Cmdstan needs to be installed separatedly. Please see [cmdstan installation](http://StanJulia.github.io/CmdStan.jl/latest/INSTALLATION.html). 
 
 For more info on Stan, please go to <http://mc-stan.org>.
 
-## Added feature in version 5.0.0
+## Added feature in version 4.4.0
 
 This version is Pkg3 based, i.e. contains a Project.toml file.
+
+Al;so includes NamedArray as output_format.
 
 ## Added feature in version 4.2.0
 
