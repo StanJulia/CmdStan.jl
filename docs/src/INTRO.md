@@ -44,7 +44,9 @@ Currently 4 other values for `output_format` are used, i.e. :dataframe, :mambach
 
 ## Other MCMC options in Julia
 
-[Mamba.jl](http://mambajl.readthedocs.io/en/latest/),  [Klara.jl](http://klarajl.readthedocs.io/en/latest/), [DynamicHMC.jl](https://github.com/tpapp/DynamicHMC.jl) and [Turing.jl](https://github.com/TuringLang/Turing.jl) are other Julia packages to run MCMC models (all in pure Julia!). Several other packages that address aspects of MCMC sampling are available. Of particular interest might be the ongoing work in [DiffEqBayes.jl](https://github.com/JuliaDiffEq/DiffEqBayes.jl) on using MCMC for ODE parameter estimation.
+[Mamba.jl](http://mambajl.readthedocs.io/en/latest/),  [Klara.jl](http://klarajl.readthedocs.io/en/latest/), [DynamicHMC.jl](https://github.com/tpapp/DynamicHMC.jl) and [Turing.jl](https://github.com/TuringLang/Turing.jl) are other Julia packages to run MCMC models (all in pure Julia!). Several other packages that address aspects of MCMC sampling are available. 
+
+Of particular interest might be the ongoing work in [DiffEqBayes.jl](https://github.com/JuliaDiffEq/DiffEqBayes.jl) on using MCMC for ODE parameter estimation.
 
 [Jags.jl](https://github.com/goedman/Jags.jl) is another option, but like StanJulia/CmdStan.jl, Jags runs as an external program.
 
@@ -58,7 +60,9 @@ There is no shortage of good books on Bayesian statistics. A few of my favorites
 
 3. [Gelman, Hill: Data Analysis using regression and multileve,/hierachical models](http://www.stat.columbia.edu/~gelman/arm/)
 
-4. [Gelman, Carlin, and others: Bayesian Data Analysis](http://www.stat.columbia.edu/~gelman/book/)
+4. [McElreath: Statistical Rethinking](http://xcelab.net/rm/statistical-rethinking/)
+
+5. [Gelman, Carlin, and others: Bayesian Data Analysis](http://www.stat.columbia.edu/~gelman/book/)
 
 and a great read (and implementation in DynamicHMC.jl):
 

@@ -34,14 +34,8 @@ Right now `versioninfo()` will show its setting (if defined).
 
 Note 1: CmdStan.jl is part of the Github StanJulia organization set of packages. It's the primary interface to Stan's cmdstan executable. Most other envisaged packages are for post-sampling steps. The intention is to deprecate Stan.jl (or in fact under the cover use CmdStan.jl and StanMamba.jl as a replacement).
 
-Note 2: Additional work is needed on documentation. 
+Note 2: Works with several other packages in the StanJulia organization, i.e. StanMamba,
+StanDataFrames and StanMCMCChain. StanMambaExamples.jl and StanMCMCChainExamples are under development.
+Note 3: Tested on Julia v1.0 and Julia 1.1-dev
 
-Note 3: Works with several other packages in the StanJulia organization, i.e. StanMamba,
-StanDataFrames and StanMCMCChain. StanMCMCChainExamples is under development.
-StanMamba will be completed once Mamba is ported to Julia 1.0.
-
-Note 4: Tested on Julia v0.7.0, Julia v1.0.0 and Julia 1.1-dev
-
-Note 5: For now the build.jl is skipped. Please let me know if this is inconvenient.
-
-Note 6: Master (will be released as v5.0.0) branch contains a Project.toml.
+Note 4: For now the build.jl is skipped. Please let me know if this is inconvenient.

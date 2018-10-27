@@ -1,7 +1,7 @@
 name = "CmdStan"
 uuid = "593b3428-ca2f-500c-ae53-031589ec8ddd"
 authors = ["Rob J Goedman <goedman@mac.com>"]
-version = "4.4.0"
+version = "4.4.1"
 
 [deps]
 BinDeps = "9e28174c-4ba2-5203-b857-d8d62c4213ee"
