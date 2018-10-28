@@ -31,17 +31,9 @@ after_success:
   - julia --project=test/coverage -e 'using Pkg; Pkg.instantiate()'
   - julia --project=test/coverage test/coverage/coverage.jl
   
-jobs:
-  include:
-    - stage: "Documentation"
-      julia: 1.0
-      os: linux
-      script:
-        - julia --project=docs/ -e 'using Pkg; Pkg.instantiate();
-                                    Pkg.develop(PackageSpec(path=pwd()))'
-        - julia --project=docs/ docs/make.jl
-      after_success: skip
-      
+  - julia --project=docs -e 'using Pkg; ps=Pkg.PackageSpec(name="Documenter", version="0.20"); Pkg.add(ps); Pkg.pin(ps); Pkg.add("CmdStan"); Pkg.instantiate();'
+  - julia --project=docs --color=yes docs/make.jl
+
 notifications:
   email: false
   
