@@ -20,7 +20,7 @@ This version is Pkg3 based, i.e. contains a Project.toml file.
 
 Al;so includes NamedArray as output_format.
 
-## Added feature in version 4.2.0
+## Added feature in version 4.2.0/4.3.0
 
 The call to stan() now has an option `file_run_log=true`. By default it will create the runlog file in the tmp directory. Setting it to false will write sampling progess to stdout. This is useful for cases where the sampling process is slow.
 
@@ -36,6 +36,7 @@ Note 1: CmdStan.jl is part of the Github StanJulia organization set of packages.
 
 Note 2: Works with several other packages in the StanJulia organization, i.e. StanMamba,
 StanDataFrames and StanMCMCChain. StanMambaExamples.jl and StanMCMCChainExamples are under development.
+
 Note 3: Tested on Julia v1.0 and Julia 1.1-dev
 
 Note 4: For now the build.jl is skipped. Please let me know if this is inconvenient.
