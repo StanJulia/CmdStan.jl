@@ -1,7 +1,7 @@
 var documenterSearchIndex = {"docs": [
 
 {
-    "location": "INTRO.html#",
+    "location": "INTRO/#",
     "page": "Introduction",
     "title": "Introduction",
     "category": "page",
@@ -9,7 +9,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "INTRO.html#A-Julia-interface-to-cmdstan-1",
+    "location": "INTRO/#A-Julia-interface-to-cmdstan-1",
     "page": "Introduction",
     "title": "A Julia interface to cmdstan",
     "category": "section",
@@ -17,7 +17,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "INTRO.html#CmdStan.jl-1",
+    "location": "INTRO/#CmdStan.jl-1",
     "page": "Introduction",
     "title": "CmdStan.jl",
     "category": "section",
@@ -25,7 +25,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "INTRO.html#StanJulia-1",
+    "location": "INTRO/#StanJulia-1",
     "page": "Introduction",
     "title": "StanJulia",
     "category": "section",
@@ -33,7 +33,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "INTRO.html#Other-MCMC-options-in-Julia-1",
+    "location": "INTRO/#Other-MCMC-options-in-Julia-1",
     "page": "Introduction",
     "title": "Other MCMC options in Julia",
     "category": "section",
@@ -41,7 +41,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "INTRO.html#References-1",
+    "location": "INTRO/#References-1",
     "page": "Introduction",
     "title": "References",
     "category": "section",
@@ -49,7 +49,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "INSTALLATION.html#",
+    "location": "INSTALLATION/#",
     "page": "Installation",
     "title": "Installation",
     "category": "page",
@@ -57,7 +57,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "INSTALLATION.html#cmdstan-installation-1",
+    "location": "INSTALLATION/#cmdstan-installation-1",
     "page": "Installation",
     "title": "cmdstan installation",
     "category": "section",
@@ -65,7 +65,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "INSTALLATION.html#Minimal-requirement-1",
+    "location": "INSTALLATION/#Minimal-requirement-1",
     "page": "Installation",
     "title": "Minimal requirement",
     "category": "section",
@@ -73,7 +73,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "WALKTHROUGH.html#",
+    "location": "WALKTHROUGH/#",
     "page": "Walkthrough",
     "title": "Walkthrough",
     "category": "page",
@@ -81,7 +81,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "WALKTHROUGH.html#A-walk-through-example-1",
+    "location": "WALKTHROUGH/#A-walk-through-example-1",
     "page": "Walkthrough",
     "title": "A walk-through example",
     "category": "section",
@@ -89,7 +89,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "WALKTHROUGH.html#Bernoulli-example-1",
+    "location": "WALKTHROUGH/#Bernoulli-example-1",
     "page": "Walkthrough",
     "title": "Bernoulli example",
     "category": "section",
@@ -97,7 +97,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "WALKTHROUGH.html#Running-a-CmdStan-script,-some-details-1",
+    "location": "WALKTHROUGH/#Running-a-CmdStan-script,-some-details-1",
     "page": "Walkthrough",
     "title": "Running a CmdStan script, some details",
     "category": "section",
@@ -105,7 +105,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "WALKTHROUGH.html#[Stanmodel](@ref)-1",
+    "location": "WALKTHROUGH/#[Stanmodel](@ref)-1",
     "page": "Walkthrough",
     "title": "Stanmodel",
     "category": "section",
@@ -113,7 +113,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "WALKTHROUGH.html#[stan](@ref)-1",
+    "location": "WALKTHROUGH/#[stan](@ref)-1",
     "page": "Walkthrough",
     "title": "stan",
     "category": "section",
@@ -121,7 +121,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "VERSIONS.html#",
+    "location": "VERSIONS/#",
     "page": "Versions",
     "title": "Versions",
     "category": "page",
@@ -129,7 +129,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "VERSIONS.html#Version-approach-and-history-1",
+    "location": "VERSIONS/#Version-approach-and-history-1",
     "page": "Versions",
     "title": "Version approach and history",
     "category": "section",
@@ -137,7 +137,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "VERSIONS.html#Approach-1",
+    "location": "VERSIONS/#Approach-1",
     "page": "Versions",
     "title": "Approach",
     "category": "section",
@@ -145,7 +145,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "VERSIONS.html#Testing-1",
+    "location": "VERSIONS/#Testing-1",
     "page": "Versions",
     "title": "Testing",
     "category": "section",
@@ -153,7 +153,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "VERSIONS.html#Version-4.4.0-1",
+    "location": "VERSIONS/#Version-4.4.0-1",
     "page": "Versions",
     "title": "Version 4.4.0",
     "category": "section",
@@ -161,7 +161,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "VERSIONS.html#Version-4.2.0/4.3.0-1",
+    "location": "VERSIONS/#Version-4.2.0/4.3.0-1",
     "page": "Versions",
     "title": "Version 4.2.0/4.3.0",
     "category": "section",
@@ -169,7 +169,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "VERSIONS.html#Version-4.1.0-1",
+    "location": "VERSIONS/#Version-4.1.0-1",
     "page": "Versions",
     "title": "Version 4.1.0",
     "category": "section",
@@ -177,7 +177,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "VERSIONS.html#Version-4.0.0-1",
+    "location": "VERSIONS/#Version-4.0.0-1",
     "page": "Versions",
     "title": "Version 4.0.0",
     "category": "section",
@@ -185,7 +185,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "index.html#",
+    "location": "#",
     "page": "Home",
     "title": "Home",
     "category": "page",
@@ -193,7 +193,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "index.html#Programs-1",
+    "location": "#Programs-1",
     "page": "Home",
     "title": "Programs",
     "category": "section",
@@ -201,7 +201,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "index.html#CmdStan.CMDSTAN_HOME",
+    "location": "#CmdStan.CMDSTAN_HOME",
     "page": "Home",
     "title": "CmdStan.CMDSTAN_HOME",
     "category": "constant",
@@ -209,7 +209,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "index.html#CMDSTAN_HOME-1",
+    "location": "#CMDSTAN_HOME-1",
     "page": "Home",
     "title": "CMDSTAN_HOME",
     "category": "section",
@@ -217,7 +217,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "index.html#CmdStan.set_cmdstan_home!",
+    "location": "#CmdStan.set_cmdstan_home!",
     "page": "Home",
     "title": "CmdStan.set_cmdstan_home!",
     "category": "function",
@@ -225,7 +225,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "index.html#set_cmdstan_home!-1",
+    "location": "#set_cmdstan_home!-1",
     "page": "Home",
     "title": "set_cmdstan_home!",
     "category": "section",
@@ -233,7 +233,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "index.html#CmdStan.Stanmodel",
+    "location": "#CmdStan.Stanmodel",
     "page": "Home",
     "title": "CmdStan.Stanmodel",
     "category": "type",
@@ -241,7 +241,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "index.html#CmdStan.update_model_file",
+    "location": "#CmdStan.update_model_file",
     "page": "Home",
     "title": "CmdStan.update_model_file",
     "category": "function",
@@ -249,7 +249,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "index.html#stanmodel()-1",
+    "location": "#stanmodel()-1",
     "page": "Home",
     "title": "stanmodel()",
     "category": "section",
@@ -257,7 +257,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "index.html#CmdStan.stan",
+    "location": "#CmdStan.stan",
     "page": "Home",
     "title": "CmdStan.stan",
     "category": "function",
@@ -265,7 +265,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "index.html#CmdStan.stan_summary-Tuple{Cmd}",
+    "location": "#CmdStan.stan_summary-Tuple{Cmd}",
     "page": "Home",
     "title": "CmdStan.stan_summary",
     "category": "method",
@@ -273,7 +273,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "index.html#CmdStan.stan_summary-Tuple{String}",
+    "location": "#CmdStan.stan_summary-Tuple{String}",
     "page": "Home",
     "title": "CmdStan.stan_summary",
     "category": "method",
@@ -281,7 +281,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "index.html#stan()-1",
+    "location": "#stan()-1",
     "page": "Home",
     "title": "stan()",
     "category": "section",
@@ -289,7 +289,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "index.html#CmdStan.Method",
+    "location": "#CmdStan.Method",
     "page": "Home",
     "title": "CmdStan.Method",
     "category": "type",
@@ -297,7 +297,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "index.html#CmdStan.Sample",
+    "location": "#CmdStan.Sample",
     "page": "Home",
     "title": "CmdStan.Sample",
     "category": "type",
@@ -305,7 +305,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "index.html#CmdStan.Adapt",
+    "location": "#CmdStan.Adapt",
     "page": "Home",
     "title": "CmdStan.Adapt",
     "category": "type",
@@ -313,7 +313,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "index.html#CmdStan.SamplingAlgorithm",
+    "location": "#CmdStan.SamplingAlgorithm",
     "page": "Home",
     "title": "CmdStan.SamplingAlgorithm",
     "category": "type",
@@ -321,7 +321,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "index.html#CmdStan.Hmc",
+    "location": "#CmdStan.Hmc",
     "page": "Home",
     "title": "CmdStan.Hmc",
     "category": "type",
@@ -329,7 +329,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "index.html#CmdStan.Metric",
+    "location": "#CmdStan.Metric",
     "page": "Home",
     "title": "CmdStan.Metric",
     "category": "type",
@@ -337,7 +337,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "index.html#CmdStan.Engine",
+    "location": "#CmdStan.Engine",
     "page": "Home",
     "title": "CmdStan.Engine",
     "category": "type",
@@ -345,7 +345,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "index.html#CmdStan.Nuts",
+    "location": "#CmdStan.Nuts",
     "page": "Home",
     "title": "CmdStan.Nuts",
     "category": "type",
@@ -353,7 +353,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "index.html#CmdStan.Static",
+    "location": "#CmdStan.Static",
     "page": "Home",
     "title": "CmdStan.Static",
     "category": "type",
@@ -361,7 +361,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "index.html#CmdStan.Diagnostics",
+    "location": "#CmdStan.Diagnostics",
     "page": "Home",
     "title": "CmdStan.Diagnostics",
     "category": "type",
@@ -369,7 +369,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "index.html#CmdStan.Gradient",
+    "location": "#CmdStan.Gradient",
     "page": "Home",
     "title": "CmdStan.Gradient",
     "category": "type",
@@ -377,7 +377,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "index.html#CmdStan.Diagnose",
+    "location": "#CmdStan.Diagnose",
     "page": "Home",
     "title": "CmdStan.Diagnose",
     "category": "type",
@@ -385,7 +385,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "index.html#CmdStan.OptimizeAlgorithm",
+    "location": "#CmdStan.OptimizeAlgorithm",
     "page": "Home",
     "title": "CmdStan.OptimizeAlgorithm",
     "category": "type",
@@ -393,7 +393,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "index.html#CmdStan.Optimize",
+    "location": "#CmdStan.Optimize",
     "page": "Home",
     "title": "CmdStan.Optimize",
     "category": "type",
@@ -401,7 +401,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "index.html#CmdStan.Lbfgs",
+    "location": "#CmdStan.Lbfgs",
     "page": "Home",
     "title": "CmdStan.Lbfgs",
     "category": "type",
@@ -409,7 +409,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "index.html#CmdStan.Bfgs",
+    "location": "#CmdStan.Bfgs",
     "page": "Home",
     "title": "CmdStan.Bfgs",
     "category": "type",
@@ -417,7 +417,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "index.html#CmdStan.Newton",
+    "location": "#CmdStan.Newton",
     "page": "Home",
     "title": "CmdStan.Newton",
     "category": "type",
@@ -425,7 +425,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "index.html#CmdStan.Variational",
+    "location": "#CmdStan.Variational",
     "page": "Home",
     "title": "CmdStan.Variational",
     "category": "type",
@@ -433,7 +433,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "index.html#Types-1",
+    "location": "#Types-1",
     "page": "Home",
     "title": "Types",
     "category": "section",
@@ -441,7 +441,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "index.html#CmdStan.cmdline",
+    "location": "#CmdStan.cmdline",
     "page": "Home",
     "title": "CmdStan.cmdline",
     "category": "function",
@@ -449,7 +449,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "index.html#CmdStan.check_dct_type",
+    "location": "#CmdStan.check_dct_type",
     "page": "Home",
     "title": "CmdStan.check_dct_type",
     "category": "function",
@@ -457,7 +457,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "index.html#CmdStan.convert_a3d",
+    "location": "#CmdStan.convert_a3d",
     "page": "Home",
     "title": "CmdStan.convert_a3d",
     "category": "function",
@@ -465,7 +465,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "index.html#CmdStan.Fixed_param",
+    "location": "#CmdStan.Fixed_param",
     "page": "Home",
     "title": "CmdStan.Fixed_param",
     "category": "type",
@@ -473,7 +473,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "index.html#CmdStan.par",
+    "location": "#CmdStan.par",
     "page": "Home",
     "title": "CmdStan.par",
     "category": "function",
@@ -481,7 +481,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "index.html#CmdStan.read_optimize",
+    "location": "#CmdStan.read_optimize",
     "page": "Home",
     "title": "CmdStan.read_optimize",
     "category": "function",
@@ -489,7 +489,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "index.html#CmdStan.read_samples",
+    "location": "#CmdStan.read_samples",
     "page": "Home",
     "title": "CmdStan.read_samples",
     "category": "function",
@@ -497,7 +497,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "index.html#CmdStan.read_variational",
+    "location": "#CmdStan.read_variational",
     "page": "Home",
     "title": "CmdStan.read_variational",
     "category": "function",
@@ -505,7 +505,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "index.html#CmdStan.read_diagnose",
+    "location": "#CmdStan.read_diagnose",
     "page": "Home",
     "title": "CmdStan.read_diagnose",
     "category": "function",
@@ -513,7 +513,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "index.html#CmdStan.update_R_file",
+    "location": "#CmdStan.update_R_file",
     "page": "Home",
     "title": "CmdStan.update_R_file",
     "category": "function",
@@ -521,7 +521,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "index.html#Utilities-1",
+    "location": "#Utilities-1",
     "page": "Home",
     "title": "Utilities",
     "category": "section",
@@ -529,7 +529,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "index.html#Index-1",
+    "location": "#Index-1",
     "page": "Home",
     "title": "Index",
     "category": "section",
