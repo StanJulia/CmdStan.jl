@@ -205,7 +205,7 @@ var documenterSearchIndex = {"docs": [
     "page": "Home",
     "title": "CmdStan.CMDSTAN_HOME",
     "category": "constant",
-    "text": "The directory which contains the cmdstan executables such as bin/stanc and  bin/stansummary. Inferred from the environment variable JULIA_CMDSTAN_HOME or ENV[\"JULIA_CMDSTAN_HOME\"] when available.\n\nIf these are not available, use set_cmdstan_home! to set the value of CMDSTAN_HOME.\n\nExample: set_cmdstan_home!(homedir() * \"/Projects/Stan/cmdstan/\")\n\nExecuting versioninfo() will display the value of JULIA_CMDSTAN_HOME if defined.\n\n\n\n\n\n"
+    "text": "The directory which contains the cmdstan executables such as bin/stanc and bin/stansummary. Inferred from the environment variable JULIA_CMDSTAN_HOME or ENV[\"JULIA_CMDSTAN_HOME\"] when available.\n\nIf these are not available, use set_cmdstan_home! to set the value of CMDSTAN_HOME.\n\nExample: set_cmdstan_home!(homedir() * \"/Projects/Stan/cmdstan/\")\n\nExecuting versioninfo() will display the value of JULIA_CMDSTAN_HOME if defined.\n\n\n\n\n\n"
 },
 
 {
