@@ -13,7 +13,7 @@ For more info on Stan, please go to <http://mc-stan.org>.
 
 The Julia package CmdStan.jl is based on Stan's command line interface, 'cmdstan'.
 
-The 'cmdstan' interface needs to be installed separatedly. Please see [cmdstan installation](http://StanJulia.github.io/CmdStan.jl/latest/INSTALLATION.html) for further details. 
+The 'cmdstan' interface needs to be installed separatedly. Please see [cmdstan installation](https://github.com/StanJulia/CmdStan.jl/blob/master/docs/src/INSTALLATION.md) for further details. 
 
 The location of the cmdstan executable and related programs is now obtained from the environment variable JULIA_CMDSTAN_HOME. This used to be CMDSTAN_HOME.
 
