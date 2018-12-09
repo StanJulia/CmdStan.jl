@@ -17,7 +17,7 @@ The 'cmdstan' interface needs to be installed separatedly. Please see [cmdstan i
 
 The location of the cmdstan executable and related programs is now obtained from the environment variable JULIA_CMDSTAN_HOME. This used to be CMDSTAN_HOME.
 
-Right now `versioninfo()` will show its setting (if defined).
+Right now ENV["CMDSTAN_HOME"] will show its setting (if defined).
 
 ## Documentation
 
