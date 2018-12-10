@@ -13,7 +13,7 @@ export JULIA_CMDSTAN_HOME=/Users/rob/Projects/Stan/cmdstan
 launchctl setenv JULIA_CMDSTAN_HOME /Users/rob/Projects/Stan/cmdstan
 ```
 
-to ~/.bash_profile or add `ENV["JULIA_CMDSTAN_HOME"]="./cmdstan"` to `./julia/etc/startup.jl`. 
+to ~/.bash_profile or add `ENV["JULIA_CMDSTAN_HOME"]="./cmdstan"` to `./julia/etc/julia/startup.jl`. 
 
 I typically prefer cmdstan not to include the cmdstan version number so no update is needed when cmdstan is updated.
 
