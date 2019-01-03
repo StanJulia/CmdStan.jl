@@ -13,7 +13,7 @@ julia:
 matrix:
   allow_failures:
     - os: osx
-    - julia: 1.1, nightly
+    - julia: nightly
 
 script:
   - if [[ -a .git/shallow ]]; then git fetch --unshallow; fi

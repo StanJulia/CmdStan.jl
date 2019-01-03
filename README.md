@@ -50,6 +50,7 @@ and a great read (and implemented in DynamicHMC.jl):
 
 8. [Betancourt: A Conceptual Introduction to Hamiltonian Monte Carlo](https://arxiv.org/abs/1701.02434)
 
+CmdStan.jl is used in [StatisticalRethinking.jl](https://github.com/StanJulia/StatisticalRethinking.jl)
 
 [docs-dev-img]: https://img.shields.io/badge/docs-dev-blue.svg
 [docs-dev-url]: https://stanjulia.github.io/CmdStan.jl/latest
