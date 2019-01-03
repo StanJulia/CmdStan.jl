@@ -27,13 +27,13 @@ rc, sim, cnames = stan(
 ### Optional positional arguments
 
 ```julia
-* `data=Nothing`                     : Observed input data dictionary 
+* `data=Nothing`                  : Observed input data dictionary (or Vector{Dict})
 * `ProjDir=pwd()`                 : Project working directory
 ```
 
 ### Keyword arguments
 ```julia
-* `init=Nothing`                     : Initial parameter value dictionary
+* `init=Nothing`                     : Initial parameter value dictionary ( or Vector{Dict})
 * `summary=true`                  : Use CmdStan's stansummary to display results
 * `diagnostics=false`             : Generate diagnostics file
 * `CmdStanDir=CMDSTAN_HOME`       : Location of cmdstan directory
@@ -69,7 +69,7 @@ stan(mymodel, mydata, diagnostics=true, summary=false)
 """
 function stan(
   model::Stanmodel, 
-  data=Nothing, 
+  data=Nothing,
   ProjDir=pwd();
   init=Nothing,
   summary=true, 
@@ -112,41 +112,73 @@ function stan(
   end
         
   cd(model.tmpdir)
-  if data != Nothing && check_dct_type(data)
-    if length(data) == model.nchains
-      for i in 1:model.nchains
-        if length(keys(data[i])) > 0
-          update_R_file("$(model.name)_$(i).data.R", data[i])
+  if data != Nothing
+    if !check_dct_type(data)
+      error("Input data Dict not of type Dict{String, Any} or Array{Dict{String, Any}}")
+    end
+    typeof(data) <: Array && (data = convert(Array{Dict{String, Any}}, data))
+    typeof(data) <: Dict && (data = convert(Dict{String, Any}, data))
+    if typeof(data) == Array{Dict{String, Any},1}
+      if length(data) == model.nchains
+        for i in 1:model.nchains
+          if length(keys(data[i])) > 0
+            update_R_file("$(model.name)_$(i).data.R", data[i])
+          end
+        end
+      else
+        for i in 1:model.nchains
+          if length(keys(data[1])) > 0
+            if i == 1
+              println("\nLength of data array is not equal to nchains,")
+              println("all chains will use the first data dictionary.")
+            end
+            update_R_file("$(model.name)_$(i).data.R", data[1])
+          end
         end
       end
-    else
+    elseif typeof(data) == Dict{String, Any}
       for i in 1:model.nchains
-        if length(keys(data[1])) > 0
+        if length(keys(data)) > 0
           if i == 1
             println("\nLength of data array is not equal to nchains,")
             println("all chains will use the first data dictionary.")
           end
-          update_R_file("$(model.name)_$(i).data.R", data[1])
+          update_R_file("$(model.name)_$(i).data.R", data)
         end
       end
     end
   end
   
-  if init != Nothing && check_dct_type(init)
-    if length(init) == model.nchains
-      for i in 1:model.nchains
-        if length(keys(init[i])) > 0
-          update_R_file("$(model.name)_$(i).init.R", init[i])
+  if init != Nothing
+    if !check_dct_type(init)
+      error("Input init Dict not of type Dict{String, Any} or Array{Dict{String, Any}}")
+    end
+    if typeof(init) == Array{Dict{String, Any},1}
+      if length(init) == model.nchains
+        for i in 1:model.nchains
+          if length(keys(init[i])) > 0
+            update_R_file("$(model.name)_$(i).init.R", init[i])
+          end
+        end
+      else
+        for i in 1:model.nchains
+          if length(keys(init[1])) > 0
+            if i == 1
+              println("\nLength of init array is not equal to nchains,")
+              println("all chains will use the first init dictionary.")
+            end
+            update_R_file("$(model.name)_$(i).init.R", init[1])
+          end
         end
       end
-    else
+    elseif typeof(init) == Dict{String, Any}
       for i in 1:model.nchains
-        if length(keys(init[1])) > 0
+        if length(keys(init)) > 0
           if i == 1
             println("\nLength of init array is not equal to nchains,")
             println("all chains will use the first init dictionary.")
           end
-          update_R_file("$(model.name)_$(i).init.R", init[1])
+          update_R_file("$(model.name)_$(i).init.R", init)
         end
       end
     end

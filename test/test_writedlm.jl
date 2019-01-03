@@ -11,7 +11,7 @@ end
 res = readdlm(joinpath(ProjDir, "test_delim_file.txt"), ',')
 println(res)
 
-dct1 = Dict{String, Any}[
+dct1 = [
   Dict("theta" => 0.1),
   Dict("theta" => [0.4]),
   Dict("theta" => [0.1, 0.2, 0.4]),

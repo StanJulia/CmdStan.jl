@@ -46,8 +46,7 @@ cd(ProjDir) do
   }
   "
 
-  dyesdata = [
-    Dict("BATCHES" => 6,
+  dyesdata = Dict("BATCHES" => 6,
       "SAMPLES" => 5,
       "y" => reshape([
         [1545, 1540, 1595, 1445, 1595]; 
@@ -58,7 +57,6 @@ cd(ProjDir) do
         [1495, 1560, 1545, 1625, 1445]
       ], 6, 5)
     )
-  ]
 
   global stanmodel, rc, sim
   stanmodel = Stanmodel(name="dyes", model=dyes);

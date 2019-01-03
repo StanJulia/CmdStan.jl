@@ -1,12 +1,12 @@
 """
 
-# check_dct_type 
+# check_dct_type( 
 
-Check if dct == Dict{String, Any}[] and has length > 0. 
+Check if dct == Dict[] and has length > 0. 
 
 ### Method
 ```julia
-check_dct_type(dct)
+check_dct_type((dct)
 ```
 
 ### Required arguments
@@ -17,10 +17,15 @@ check_dct_type(dct)
 """
 function check_dct_type(dct)
   if typeof(dct) <: Array && length(dct) > 0
-    if keytype(dct[1]) == String && valtype(dct[1]) <: Any
+    if typeof(dct) <: Array{Dict{S, T}} where {S <: AbstractString, T <: Any}
+      return true
+    end
+  else
+    if typeof(dct) <: Dict{S, T} where {S <: AbstractString, T <: Any}
       return true
     end
   end
+  @error "Input $(dct) not of type Dict{String, Any}, but $(typeof(dct))"
   return false
 end
 

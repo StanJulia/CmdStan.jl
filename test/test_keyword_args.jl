@@ -47,7 +47,7 @@ dct2 = Dict{Symbol, Any}[
 ]
 f(5, dct2)
 
-dct3 = Dict{String, Any}[
+dct3 = Dict[
   Dict("theta" => 0.1),
   Dict("theta" => [0.4]),
   Dict("theta" => [0.1, 0.2, 0.4]),

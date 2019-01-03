@@ -39,7 +39,7 @@ if !isdefined(Main, :update_R_file)
   end
 end
 
-dct = Dict{String, Any}[
+dct = Dict[
   Dict("theta" => 0.1),
   Dict("theta" => [0.4]),
   Dict("theta" => [0.1, 0.2, 0.4]),
