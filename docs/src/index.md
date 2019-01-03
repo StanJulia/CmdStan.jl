@@ -48,7 +48,7 @@ CmdStan.Variational
 ## Utilities
 ```@docs
 CmdStan.cmdline
-CmdStan.check_dct_type(
+CmdStan.check_dct_type
 CmdStan.convert_a3d
 CmdStan.Fixed_param
 CmdStan.par
