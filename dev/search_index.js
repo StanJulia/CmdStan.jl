@@ -93,7 +93,7 @@ var documenterSearchIndex = {"docs": [
     "page": "Walkthrough",
     "title": "Bernoulli example",
     "category": "section",
-    "text": "In this walk-through, it is assumed that \'ProjDir\' holds a path to where transient files will be created (in a subdirectory /tmp of ProjDir).Make CmdStan.jl available:using CmdStanNext define the variable \'bernoullistanmodel\' to hold the Stan model definition:const bernoullistanmodel = \"\ndata { \n  int<lower=0> N; \n  int<lower=0,upper=1> y[N];\n} \nparameters {\n  real<lower=0,upper=1> theta;\n} \nmodel {\n  theta ~ beta(1,1);\n    y ~ bernoulli(theta);\n}\n\"The next step is to create a Stanmodel object. The most common way to create such an object is by giving the model a name while the Stan model is passed in, both through keyword (hence optional) arguments:stanmodel = Stanmodel(name=\"bernoulli\", model=bernoullistanmodel);\nstanmodel Above Stanmodel() call creates a default model for sampling. Other arguments to Stanmodel() can be found in StanmodelThe observed input data is defined below.const bernoullidata = Dict(\"N\" => 10, \"y\" => [0, 1, 0, 1, 0, 0, 0, 0, 0, 1])Run the simulation by calling stan(), passing in the data and the intended working directory. rc, sim1, cnames = stan(stanmodel, [bernoullidata], ProjDir, CmdStanDir=CMDSTAN_HOME)More documentation on stan() can be found in stanIf the return code rc indicated success (rc == 0), cmdstan execution completed succesfully.The first time (or when updates to the model have been made) stan() will compile the model and create the executable.On Windows, the CmdStanDir argument appears needed (this is still being investigated). On OSX/Unix CmdStanDir is obtained from an environment variable (see the Requirements section).By default stan() will run 4 chains and optionally display a combined summary. Some other CmdStan methods, e.g. optimize, return a dictionary."
+    "text": "In this walk-through, it is assumed that \'ProjDir\' holds a path to where transient files will be created (in a subdirectory /tmp of ProjDir).Make CmdStan.jl available:using CmdStanNext define the variable \'bernoullistanmodel\' to hold the Stan model definition:const bernoullistanmodel = \"\ndata { \n  int<lower=0> N; \n  int<lower=0,upper=1> y[N];\n} \nparameters {\n  real<lower=0,upper=1> theta;\n} \nmodel {\n  theta ~ beta(1,1);\n    y ~ bernoulli(theta);\n}\n\"The next step is to create a Stanmodel object. The most common way to create such an object is by giving the model a name while the Stan model is passed in, both through keyword (hence optional) arguments:stanmodel = Stanmodel(name=\"bernoulli\", model=bernoullistanmodel);\nstanmodel Above Stanmodel() call creates a default model for sampling. Other arguments to Stanmodel() can be found in StanmodelThe observed input data is defined below.bernoullidata = Dict{String, Any}(\"N\" => 10, \"y\" => [0, 1, 0, 1, 0, 0, 0, 0, 0, 1])Run the simulation by calling stan(), passing in the data and the intended working directory. rc, sim1, cnames = stan(stanmodel, bernoullidata, ProjDir, CmdStanDir=CMDSTAN_HOME)More documentation on stan() can be found in stanIf the return code rc indicated success (rc == 0), cmdstan execution completed succesfully.The first time (or when updates to the model have been made) stan() will compile the model and create the executable.On Windows, the CmdStanDir argument appears needed (this is still being investigated). On OSX/Unix CmdStanDir is obtained from an environment variable (see the Requirements section).By default stan() will run 4 chains and optionally display a combined summary. Some other CmdStan methods, e.g. optimize, return a dictionary."
 },
 
 {
@@ -449,83 +449,11 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "#CmdStan.check_dct_type",
-    "page": "Home",
-    "title": "CmdStan.check_dct_type",
-    "category": "function",
-    "text": "checkdcttype\n\nCheck if dct == Dict{String, Any}[] and has length > 0. \n\nMethod\n\ncheck_dct_type(dct)\n\nRequired arguments\n\n* `dct::Dict{String, Any}`      : Observed data or parameter init data\n\n\n\n\n\n"
-},
-
-{
-    "location": "#CmdStan.convert_a3d",
-    "page": "Home",
-    "title": "CmdStan.convert_a3d",
-    "category": "function",
-    "text": "convert_a3d\n\nConvert the output file created by cmdstan to the shape of choice.\n\nMethod\n\nconvert_a3d(a3d_array, cnames, ::Val{Symbol})\n\nRequired arguments\n\n* `a3d_array::Array{Float64}(n_draws, n_variables, n_chains`      : Read in from output files created by cmdstan                                   \n* `cnames::Vector{AbstractString}`                                                 : Monitored variable names\n\nOptional arguments\n\n* `::Val{Symbol} = :array`                                                                             : Output format\n\nMethod called is based on the output_format defined in the stanmodel, e.g.:\n\nstanmodel = Stanmodel(num/samples=1200, thin=2, name=\"bernoulli\",     model=bernoullimodel, outputformat=:array);\n\nCurrent formats supported are:\n\n:array (a3d_array format, the default for CmdStan)\n:namedarray (NamedArrays object)\n:dataframe (DataFrames object)\n:mambachains (Mamba.Chains object)\n:mcmcchain (TuringLang/Chains object)\n\nOptions 3 through 5 are respectively provided by the packages StanDataFrames, StanMamba and StanMCMCChain.\n\n\n### Return values\n\njulia\n\nres                       : Draws converted to the specified format.\n\n```\n\n\n\n\n\n"
-},
-
-{
-    "location": "#CmdStan.Fixed_param",
-    "page": "Home",
-    "title": "CmdStan.Fixed_param",
-    "category": "type",
-    "text": "Fixed_param type and constructor\n\nSettings for algorithm=Fixed_param() in Sample(). \n\nMethod\n\nFixed_param()\n\nRelated help\n\n?Sample                        : Sampling settings\n?Engine                        : Engine for Hamiltonian Monte Carlo\n?Nuts                          : Settings for Nuts\n?Static                        : Settings for Static\n?Metric                        : Base manifold geometries\n\n\n\n\n\n"
-},
-
-{
-    "location": "#CmdStan.par",
-    "page": "Home",
-    "title": "CmdStan.par",
-    "category": "function",
-    "text": "par\n\nRewrite dct to R format in file. \n\nMethod\n\npar(cmds)\n\nRequired arguments\n\n* `cmds::Array{Base.AbstractCmd,1}`    : Multiple commands to concatenate\n\nor\n\n* `cmd::Base.AbstractCmd`              : Single command to be\n* `n::Number`                            inserted n times into cmd\n\n\nor\n* `cmd::Array{String, 1}`              : Array of cmds as Strings\n\n\n\n\n\n"
-},
-
-{
-    "location": "#CmdStan.read_optimize",
-    "page": "Home",
-    "title": "CmdStan.read_optimize",
-    "category": "function",
-    "text": "read_optimize\n\nRead optimize output file created by cmdstan. \n\nMethod\n\nread_optimize(m::Stanmodel)\n\nRequired arguments\n\n* `m::Stanmodel`    : Stanmodel object\n\n\n\n\n\n"
-},
-
-{
-    "location": "#CmdStan.read_samples",
-    "page": "Home",
-    "title": "CmdStan.read_samples",
-    "category": "function",
-    "text": "read_samples\n\nRead sample output files created by cmdstan. \n\nMethod\n\nread_samples(m::Stanmodel)\n\nRequired arguments\n\n* `m::Stanmodel`    : Stanmodel object\n\n\n\n\n\n"
-},
-
-{
-    "location": "#CmdStan.read_variational",
-    "page": "Home",
-    "title": "CmdStan.read_variational",
-    "category": "function",
-    "text": "read_variational\n\nRead variational sample output files created by cmdstan. \n\nMethod\n\nread_variational(m::Stanmodel)\n\nRequired arguments\n\n* `m::Stanmodel`    : Stanmodel object\n\n\n\n\n\n"
-},
-
-{
-    "location": "#CmdStan.read_diagnose",
-    "page": "Home",
-    "title": "CmdStan.read_diagnose",
-    "category": "function",
-    "text": "read_diagnose\n\nRead diagnose output file created by cmdstan. \n\nMethod\n\nread_diagnose(m::Stanmodel)\n\nRequired arguments\n\n* `m::Stanmodel`    : Stanmodel object\n\n\n\n\n\n"
-},
-
-{
-    "location": "#CmdStan.update_R_file",
-    "page": "Home",
-    "title": "CmdStan.update_R_file",
-    "category": "function",
-    "text": "updateRfile\n\nRewrite a dictionary of observed data or initial parameter values in R dump file format to a file. \n\nMethod\n\nupdate_R_file{T<:Any}(file, dct)\n\nRequired arguments\n\n* `file::String`                : R file name\n* `dct::Dict{String, T}`        : Dictionary to format in R\n\n\n\n\n\n"
-},
-
-{
     "location": "#Utilities-1",
     "page": "Home",
     "title": "Utilities",
     "category": "section",
-    "text": "CmdStan.cmdline\nCmdStan.check_dct_type\nCmdStan.convert_a3d\nCmdStan.Fixed_param\nCmdStan.par\nCmdStan.read_optimize\nCmdStan.read_samples\nCmdStan.read_variational\nCmdStan.read_diagnose\nCmdStan.update_R_file"
+    "text": "CmdStan.cmdline\nCmdStan.check_dct_type(\nCmdStan.convert_a3d\nCmdStan.Fixed_param\nCmdStan.par\nCmdStan.read_optimize\nCmdStan.read_samples\nCmdStan.read_variational\nCmdStan.read_diagnose\nCmdStan.update_R_file"
 },
 
 {
