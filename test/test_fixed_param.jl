@@ -29,7 +29,7 @@ cd(ProjDir) do
   sigma = 1;
 
   # make the data dictionary
-  dat = Dict{String, Any}("T"=>T,"y0"=>y0,"phi"=>phi,"sigma"=>sigma);
+  dat = Dict("T"=>T,"y0"=>y0,"phi"=>phi,"sigma"=>sigma);
 
   stanmodel= Stanmodel(name = "ar1", model = ar1,  Sample(algorithm=CmdStan.Fixed_param()));
   rc, sim1 = stan(stanmodel, dat, ProjDir, CmdStanDir=CMDSTAN_HOME);

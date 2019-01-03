@@ -19,9 +19,9 @@ cd(ProjDir) do
   }
   "
 
-  bernoullidata = Dict{String, Any}("N" => 10, "y" => [0, 1, 0, 1, 0, 0, 0, 0, 0, 1])
+  bernoullidata = Dict("N" => 10, "y" => [0, 1, 0, 1, 0, 0, 0, 0, 0, 1])
 
-  inittheta = Dict{String, Any}("theta" => 0.31)
+  inittheta = Dict("theta" => 0.31)
 
   global stanmodel
   stanmodel = Stanmodel(name="bernoulli", model=bernoullimodel, num_warmup=1);
