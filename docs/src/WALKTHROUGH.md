@@ -38,10 +38,11 @@ The observed input data is defined below.
 ```
 const bernoullidata = Dict("N" => 10, "y" => [0, 1, 0, 1, 0, 0, 0, 0, 0, 1])
 ```
+Each chain will use this data. If needed, an Array{Dict} can be defined with the same number of entries as the number of chains. This is also true for the optional `init` argument to stan().
 
 Run the simulation by calling stan(), passing in the data and the intended working directory. 
 ```
-rc, sim1, cnames = stan(stanmodel, [bernoullidata], ProjDir, CmdStanDir=CMDSTAN_HOME)
+rc, sim1, cnames = stan(stanmodel, bernoullidata, ProjDir, CmdStanDir=CMDSTAN_HOME)
 ```
 More documentation on stan() can be found in [`stan`](@ref)
 
