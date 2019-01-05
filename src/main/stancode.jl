@@ -138,10 +138,6 @@ function stan(
     else
       for i in 1:model.nchains
         if length(keys(init[1])) > 0
-          if i == 1
-            println("\nLength of init array is not equal to nchains,")
-            println("all chains will use the first init dictionary.")
-          end
           update_R_file("$(model.name)_$(i).init.R", init[1])
         end
       end

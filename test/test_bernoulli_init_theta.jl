@@ -30,7 +30,7 @@ cd(ProjDir) do
     ]
     
     theta_init = [0.1, 0.4, 0.5, 0.9]
-    bernoulliinit = Dict{String, Any}[
+    bernoulliinit = Dict[
       Dict("theta" => theta_init[1]),
       Dict("theta" => theta_init[2]),
       Dict("theta" => theta_init[3]),

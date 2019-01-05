@@ -19,12 +19,7 @@ cd(ProjDir) do
   }
   "
 
-  bernoullidata = [
-    Dict("N" => 1, "y" => [0]),
-    Dict("N" => 1, "y" => [0]),
-    Dict("N" => 1, "y" => [0]),
-    Dict("N" => 1, "y" => [0]),
-  ]
+  bernoullidata = Dict("N" => 1, "y" => [0])
 
   global stanmodel, rc, sim
   stanmodel = Stanmodel(num_samples=1200, thin=2, name="bernoulli", model=bernoullimodel);

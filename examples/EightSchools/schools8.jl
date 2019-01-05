@@ -27,13 +27,11 @@ cd(ProjDir) do
   }
   "
 
-  schools8data = [
-    Dict("J" => 8,
+  schools8data = Dict("J" => 8,
       "y" => [28,  8, -3,  7, -1,  1, 18, 12],
       "sigma" => [15, 10, 16, 11,  9, 11, 10, 18],
       "tau" => 25
     )
-  ]
 
   global stanmodel, rc, sim
   stanmodel = Stanmodel(name="schools8", model=eightschools);

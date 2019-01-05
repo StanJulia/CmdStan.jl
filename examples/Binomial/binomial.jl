@@ -37,9 +37,7 @@ cd(ProjDir) do
   global stanmodel, rc, sim
   stanmodel = Stanmodel(name="binomial", model=binomialstanmodel)
 
-  binomialdata = [
-    Dict("n" => 10, "k" => 5)
-  ]
+  binomialdata = Dict("n" => 10, "k" => 5)
 
   rc, sim, cnames = stan(stanmodel, binomialdata, ProjDir, diagnostics=false,
               CmdStanDir=CMDSTAN_HOME)

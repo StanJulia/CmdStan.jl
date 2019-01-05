@@ -29,14 +29,14 @@ model {
 The next step is to create a Stanmodel object. The most common way to create such an object is by giving the model a name while the Stan model is passed in, both through keyword (hence optional) arguments:
 ```
 stanmodel = Stanmodel(name="bernoulli", model=bernoullistanmodel);
-stanmodel |> display
+stanmodel 
 ```
 
 Above Stanmodel() call creates a default model for sampling. Other arguments to Stanmodel() can be found in [`Stanmodel`](@ref)
 
 The observed input data is defined below.
 ```
-const bernoullidata = Dict("N" => 10, "y" => [0, 1, 0, 1, 0, 0, 0, 0, 0, 1])
+bernoullidata = Dict("N" => 10, "y" => [0, 1, 0, 1, 0, 0, 0, 0, 0, 1])
 ```
 Each chain will use this data. If needed, an Array{Dict} can be defined with the same number of entries as the number of chains. This is also true for the optional `init` argument to stan().
 
