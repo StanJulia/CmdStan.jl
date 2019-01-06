@@ -69,8 +69,8 @@ stanmodel = Stanmodel(num_samples=1200, thin=2, name=&quot;bernoulli&quot;, mode
   diagnostics=false, 
   CmdStanDir=CMDSTAN_HOME,
   file_run_log=true
-)</code></pre><p><strong>Required arguments</strong></p><pre><code class="language-julia">* `model::Stanmodel`              : See ?Method</code></pre><p><strong>Optional positional arguments</strong></p><pre><code class="language-julia">* `data=Nothing`                  : Observed input data dictionary (or Vector{Dict})
-* `ProjDir=pwd()`                 : Project working directory</code></pre><p><strong>Keyword arguments</strong></p><pre><code class="language-julia">* `init=Nothing`                     : Initial parameter value dictionary ( or Vector{Dict})
+)</code></pre><p><strong>Required arguments</strong></p><pre><code class="language-julia">* `model::Stanmodel`              : See ?Method</code></pre><p><strong>Optional positional arguments</strong></p><pre><code class="language-julia">* `data=Nothing`                     : Observed input data dictionary 
+* `ProjDir=pwd()`                 : Project working directory</code></pre><p><strong>Keyword arguments</strong></p><pre><code class="language-julia">* `init=Nothing`                     : Initial parameter value dictionary
 * `summary=true`                  : Use CmdStan&#39;s stansummary to display results
 * `diagnostics=false`             : Generate diagnostics file
 * `CmdStanDir=CMDSTAN_HOME`       : Location of cmdstan directory
