@@ -112,33 +112,50 @@ function stan(
   end
         
   cd(model.tmpdir)
+  
   if data != Nothing && check_dct_type(data)
-    if length(data) == model.nchains
+    if typeof(data) <: Array && length(data) == model.nchains
       for i in 1:model.nchains
         if length(keys(data[i])) > 0
           update_R_file("$(model.name)_$(i).data.R", data[i])
         end
       end
     else
-      for i in 1:model.nchains
-        if length(keys(data[1])) > 0
-          update_R_file("$(model.name)_$(i).data.R", data[1])
+      if typeof(data) <: Array
+        for i in 1:model.nchains
+          if length(keys(data[1])) > 0
+            update_R_file("$(model.name)_$(i).data.R", data[1])
+          end
+        end
+      else
+        for i in 1:model.nchains
+          if length(keys(data)) > 0
+            update_R_file("$(model.name)_$(i).data.R", data)
+          end
         end
       end
     end
   end
   
   if init != Nothing && check_dct_type(init)
-    if length(init) == model.nchains
+    if typeof(data) <: Array && length(init) == model.nchains
       for i in 1:model.nchains
         if length(keys(init[i])) > 0
           update_R_file("$(model.name)_$(i).init.R", init[i])
         end
       end
     else
-      for i in 1:model.nchains
-        if length(keys(init[1])) > 0
-          update_R_file("$(model.name)_$(i).init.R", init[1])
+      if typeof(data) <: Array
+        for i in 1:model.nchains
+          if length(keys(init[1])) > 0
+            update_R_file("$(model.name)_$(i).init.R", init[1])
+          end
+        end
+      else
+        for i in 1:model.nchains
+          if length(keys(init)) > 0
+            update_R_file("$(model.name)_$(i).init.R", init)
+          end
         end
       end
     end
