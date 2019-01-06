@@ -158,7 +158,6 @@ function Stanmodel(
   pdir::String=pwd(),
   output_format::Symbol=:array)
   
-  println("=====> $pdir\n")
   cd(pdir)
   
   tmpdir = joinpath(pdir, "tmp")

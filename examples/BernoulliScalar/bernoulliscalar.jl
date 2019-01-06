@@ -22,9 +22,12 @@ cd(ProjDir) do
   bernoullidata = Dict("N" => 1, "y" => [0])
 
   global stanmodel, rc, sim
-  stanmodel = Stanmodel(num_samples=1200, thin=2, name="bernoulli", model=bernoullimodel);
+  
+  stanmodel = Stanmodel(num_samples=1200, thin=2, name="bernoulli",
+    model=bernoullimodel);
 
-  rc, sim, cnames = stan(stanmodel, bernoullidata, ProjDir, diagnostics=false, CmdStanDir=CMDSTAN_HOME);
+  rc, sim, cnames = stan(stanmodel, bernoullidata, ProjDir,
+    diagnostics=false, CmdStanDir=CMDSTAN_HOME);
 
   if rc == 0
     println()

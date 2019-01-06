@@ -38,6 +38,7 @@ rc, sim, cnames = stan(
 * `diagnostics=false`             : Generate diagnostics file
 * `CmdStanDir=CMDSTAN_HOME`       : Location of cmdstan directory
 * `file_run_log=true`             : Create run log file (if false, write log to stdout)
+* `file_make_log=true`          : Create make log file (if false, write log to stdout)
 ```
 
 ### Return values
@@ -75,13 +76,13 @@ function stan(
   summary=true, 
   diagnostics=false, 
   CmdStanDir=CMDSTAN_HOME,
-  file_run_log=true)
+  file_run_log=true,
+  file_make_log=true)
   
   old = pwd()
   local rc = 0
   local res = Dict[]
   
-  println()
   if length(model.model) == 0
     println("\nNo proper model specified in \"$(model.name).stan\".")
     println("This file is typically created from a String passed to Stanmodel().\n")
@@ -93,6 +94,7 @@ function stan(
   
   cd(model.tmpdir)
   isfile("$(model.name)_build.log") && rm("$(model.name)_build.log")
+  isfile("$(model.name)_make.log") && rm("$(model.name)_make.log")
   isfile("$(model.name)_run.log") && rm("$(model.name)_run.log")
 
   cd(CmdStanDir)
@@ -102,8 +104,13 @@ function stan(
     tmpmodelname = replace(tmpmodelname*".exe", "\\" => "/")
   end
   try
-    run(pipeline(`make $(tmpmodelname)`, stderr="$(tmpmodelname)_build.log"))
-  catch
+    if file_make_log
+      run(pipeline(`make $(tmpmodelname)`, stdout="$(tmpmodelname)_make.log",
+        stderr="$(tmpmodelname)_build.log"))
+    else
+      run(pipeline(`make $(tmpmodelname)`, stderr="$(tmpmodelname)_build.log"))
+    end
+   catch
     println("\nAn error occurred while compiling the Stan program.\n")
     print("Please check your Stan program in variable '$(model.name)' ")
     print("and the contents of $(tmpmodelname)_build.log.\n")
@@ -315,8 +322,6 @@ function stan_summary(filecmd::Cmd; CmdStanDir=CMDSTAN_HOME)
   try
     pstring = joinpath("$(CmdStanDir)", "bin", "stansummary")
     cmd = `$(pstring) $(filecmd)`
-    println()
-    println("Calling $(pstring) to infer across chains.")
     println()
     resfile = open(cmd, "r")
     print(read(resfile, String))

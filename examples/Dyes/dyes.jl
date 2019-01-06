@@ -59,7 +59,9 @@ cd(ProjDir) do
     )
 
   global stanmodel, rc, sim
+  
   stanmodel = Stanmodel(name="dyes", model=dyes);
+  
   @time rc, sim, cnames = stan(stanmodel, dyesdata, ProjDir, CmdStanDir=CMDSTAN_HOME)
 
   if rc == 0
