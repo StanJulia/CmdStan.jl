@@ -6,7 +6,7 @@ Engine for Hamiltonian Monte Carlo
 
 ### Types defined
 ```julia
-* Nuts       : No-U-Tyrn sampler
+* Nuts       : No-U-Turn sampler
 * Static     : Static integration time
 ```
 """ 
@@ -99,13 +99,13 @@ end
 
 # Hmc type and constructor
 
-Settings for algorithm=Hmc() in Sample(). 
+Settings for algorithm=CmdStan.Hmc() in Sample(). 
 
 ### Method
 ```julia
 Hmc(;
-  engine=Nuts(),
-  metric=Stan.diag_e,
+  engine=CmdStan.Nuts(),
+  metric=CmdStan.diag_e,
   stepsize=1.0,
   stepsize_jitter=1.0
 )
@@ -142,7 +142,7 @@ Hmc(engine::Engine) = Hmc(engine, diag_e(), 1.0, 1.0)
 
 # Fixed_param type and constructor
 
-Settings for algorithm=Fixed_param() in Sample(). 
+Settings for algorithm=CmdStan.Fixed_param() in Sample(). 
 
 ### Method
 ```julia
@@ -164,7 +164,7 @@ mutable struct Fixed_param <: SamplingAlgorithm end
 
 # Adapt type and constructor
 
-Settings for adapt=Adapt() in Sample(). 
+Settings for adapt=CmdStan.Adapt() in Sample(). 
 
 ### Method
 ```julia
@@ -225,7 +225,7 @@ Sample(;
   num_warmup=1000,
   save_warmup=false,
   thin=1,
-  adapt=Adapt(),
+  adapt=CmdStan.Adapt(),
   algorithm=SamplingAlgorithm()
 )
 ```
