@@ -70,7 +70,7 @@ Above script, in the Julia REPL, shows all parameters in the model, in this case
 
 Compared to the call to Stanmodel() above, the keyword argument monitors has been added. This means that after the simulation is complete, only the monitored variables will be read in from the .csv file produced by Stan. This can be useful if many, e.g. 100s, nodes are being observed.
 ```
-stanmodel2 = Stanmodel(Sample(adapt=Adapt(delta=0.9)), name="bernoulli2", nchains=6)
+stanmodel2 = Stanmodel(Sample(adapt=CmdStan.Adapt(delta=0.9)), name="bernoulli2", nchains=6)
 ```
 An example of updating default model values when creating a model. The format is slightly different from cmdstan, but the parameters are as described in the cmdstan Interface User's Guide. This is also the case for the Stanmodel() optional arguments random, init and output (refresh only).
 
