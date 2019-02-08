@@ -35,7 +35,7 @@ Variational(;
 * `iter::Int64`                   : Maximum number of iterations
 * `grad_samples::Int`             : No of samples for MC estimate of gradients
 * `elbo_samples::Int`             : No of samples for MC estimate of ELBO
-* `eta::Float64`                  : Stepsize weighing parameter for adaptive sequence
+* `eta::Float64`                  : Step size weighting parameter for adaptive sequence
 * `adapt::Adapt`                  : Warmup adaptations
 * `tol_rel_obj::Float64`          : Tolerance on the relative norm of objective
 * `eval_elbo::Int`                : Tolerance on the relative norm of objective
