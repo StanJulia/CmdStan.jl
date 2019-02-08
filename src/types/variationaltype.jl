@@ -30,22 +30,22 @@ Variational(;
 ### Optional arguments
 ```julia
 * `algorithm::Symbol`             : Variational inference algorithm
-                                    :meanfiedl;
-                                    :fullrank
+                                  : meanfield
+                                  : fullrank
 * `iter::Int64`                   : Maximum number of iterations
 * `grad_samples::Int`             : No of samples for MC estimate of gradients
 * `elbo_samples::Int`             : No of samples for MC estimate of ELBO
 * `eta::Float64`                  : Stepsize weighing parameter for adaptive sequence
-* `adapt::Adapt`                  : Warmupadaptations
+* `adapt::Adapt`                  : Warmup adaptations
 * `tol_rel_obj::Float64`          : Tolerance on the relative norm of objective
 * `eval_elbo::Int`                : Tolerance on the relative norm of objective
-* `output_samples::Int`           : Numberof posterior samples to draw and save
+* `output_samples::Int`           : Number of posterior samples to draw and save
 ```
 
 ### Related help
 ```julia
 ?Stanmodel                      : Create a StanModel
-?Stan.Method                   : Available top level methods
+?Stan.Method                    : Available top level methods
 ?Stan.Adapt                     : Adaptation settings
 ```
 """
