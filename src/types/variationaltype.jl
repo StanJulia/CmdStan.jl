@@ -30,22 +30,22 @@ Variational(;
 ### Optional arguments
 ```julia
 * `algorithm::Symbol`             : Variational inference algorithm
-                                    :meanfiedl;
-                                    :fullrank
+                                  : meanfield
+                                  : fullrank
 * `iter::Int64`                   : Maximum number of iterations
 * `grad_samples::Int`             : No of samples for MC estimate of gradients
 * `elbo_samples::Int`             : No of samples for MC estimate of ELBO
-* `eta::Float64`                  : Stepsize weighing parameter for adaptive sequence
-* `adapt::Adapt`                  : Warmupadaptations
+* `eta::Float64`                  : Step size weighting parameter for adaptive sequence
+* `adapt::Adapt`                  : Warmup adaptations
 * `tol_rel_obj::Float64`          : Tolerance on the relative norm of objective
 * `eval_elbo::Int`                : Tolerance on the relative norm of objective
-* `output_samples::Int`           : Numberof posterior samples to draw and save
+* `output_samples::Int`           : Number of posterior samples to draw and save
 ```
 
 ### Related help
 ```julia
 ?Stanmodel                      : Create a StanModel
-?Stan.Method                   : Available top level methods
+?Stan.Method                    : Available top level methods
 ?Stan.Adapt                     : Adaptation settings
 ```
 """
@@ -61,11 +61,11 @@ function variational_show(io::IO, v::Variational, compact::Bool)
   if compact
     println("Variational($(v.algorithm). $(v.grad_samples), $(v.elbo_samples), $(v.eta_adagrad), $(v.iter), $(v.tol_rel_obj), $(v.eval_elbo), $(v.output_samples))")
   else
-    println("  method =                     Variational()")
+    println("    method =                  Variational()")
     println("    algorithm =               ", v.algorithm)
     println("    grad_samples =            ", v.grad_samples)
     println("    elbo_samples =            ", v.elbo_samples)
-    #println("    eta_adagrad =             ", v.eta_adagrad)
+   #println("    eta_adagrad =             ", v.eta_adagrad)
     println("    iter =                    ", v.iter)
     println("    tol_rel_obj =             ", v.tol_rel_obj)
     println("    eval_elbo =               ", v.eval_elbo)
