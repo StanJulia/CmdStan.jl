@@ -48,7 +48,7 @@ Currently 4 other values for `output_format` are used, i.e. :dataframe, :mambach
 
 Of particular interest might be the ongoing work in [DiffEqBayes.jl](https://github.com/JuliaDiffEq/DiffEqBayes.jl) on using MCMC for ODE parameter estimation.
 
-[Jags.jl](https://github.com/goedman/Jags.jl) is another option, but like StanJulia/CmdStan.jl, Jags runs as an external program.
+[Jags.jl](https://github.com/JagsJulia/Jags.jl) is another option, but like StanJulia/CmdStan.jl, Jags runs as an external program.
 
 ## References
 
