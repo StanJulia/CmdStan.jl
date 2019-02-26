@@ -25,8 +25,8 @@ Versions 4.5 of the package has been tested on Mac OSX 10.14, Julia 1.0+ and cmd
 ### Version 4.5.2
 
 1. Mostly minor (but important) fixes in documentation (thanks to Oliver Dechant).
-2. Supports not-array versions of input data and inits.
-3. Announcement v5.x.x will be based on MCMCChains.jl. StanMCMCChain.jl will also be renamed accordingly (StanMCMCChains.jl) once MCMCChains.jl is regeistered.
+2. Supports non-array versions of input data and inits.
+3. Announcement v5.x.x will be based on MCMCChains.jl. StanMCMCChain.jl will also be renamed accordingly (StanMCMCChains.jl) once MCMCChains.jl is registered.
 
 ### Version 4.4.0
 
