@@ -173,7 +173,7 @@ var documenterSearchIndex = {"docs": [
     "page": "Versions",
     "title": "Version 4.5.2",
     "category": "section",
-    "text": "Mostly minor (but important) fixes in documentation (thanks to Oliver Dechant).\nSupports not-array versions of input data and inits.\nAnnouncement v5.x.x will be based on MCMCChains.jl. StanMCMCChain.jl will also be renamed accordingly (StanMCMCChains.jl) once MCMCChains.jl is regeistered."
+    "text": "Mostly minor (but important) fixes in documentation (thanks to Oliver Dechant).\nSupports non-array versions of input data and inits.\nAnnouncement v5.x.x will be based on MCMCChains.jl. StanMCMCChain.jl will also be renamed accordingly (StanMCMCChains.jl) once MCMCChains.jl is registered."
 },
 
 {
