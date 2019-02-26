@@ -69,7 +69,15 @@ var documenterSearchIndex = {"docs": [
     "page": "Installation",
     "title": "Minimal requirement",
     "category": "section",
-    "text": "Note: CmdStan.jl and CmdStan refer this Julia package. The executable C++ program is \'cmdstan\'.To run this version of the CmdStan.jl package on your local machine, it assumes that the  cmdstan executable is properly installed.In order for CmdStan.jl to find the cmdstan you need to set the environment variable JULIA_CMDSTAN_HOME to point to the cmdstan directory, e.g. addexport JULIA_CMDSTAN_HOME=/Users/rob/Projects/Stan/cmdstan\nlaunchctl setenv JULIA_CMDSTAN_HOME /Users/rob/Projects/Stan/cmdstanto ~/.bashprofile or add `ENV[\"JULIACMDSTAN_HOME\"]=\"./cmdstan\"to./julia/etc/startup.jl`. I typically prefer cmdstan not to include the cmdstan version number so no update is needed when cmdstan is updated.Currently tested with cmdstan 2.18.0"
+    "text": "Note: CmdStan.jl and CmdStan refer this Julia package. The executable C++ program is \'cmdstan\'.To run this version of the CmdStan.jl package on your local machine, it assumes that the  cmdstan executable is properly installed.In order for CmdStan.jl to find the cmdstan you need to set the environment variable JULIA_CMDSTAN_HOME to point to the cmdstan directory, e.g. addexport JULIA_CMDSTAN_HOME=/Users/rob/Projects/Stan/cmdstan\nlaunchctl setenv JULIA_CMDSTAN_HOME /Users/rob/Projects/Stan/cmdstanto ~/.bashprofile or add `ENV[\"JULIACMDSTAN_HOME\"]=\"./cmdstan\"to./julia/etc/startup.jl`. I typically prefer cmdstan not to include the cmdstan version number so no update is needed when cmdstan is updated.Currently tested with cmdstan 2.18.1"
+},
+
+{
+    "location": "INSTALLATION/#Important-note-1",
+    "page": "Installation",
+    "title": "Important note",
+    "category": "section",
+    "text": "Over the next month (February 2019) all master versions of StanJulia and StatisticalRethinkingJulia packages will start using MCMCChains.jl (and, for practical reasons, mostly will be tested on Julia v1.2-DEV). As long as MCMCChains.jl has not been registered in METADATA.jl, I use: ] dev https://github.com/TuringLang/MCMCChains.jl to install MCMCChains.jl. Note that currently Turing.jl expects MCMCChain.jl."
 },
 
 {
@@ -149,7 +157,23 @@ var documenterSearchIndex = {"docs": [
     "page": "Versions",
     "title": "Testing",
     "category": "section",
-    "text": "Versions 4.4 of the package has been tested on Mac OSX 10.14, Julia 1.0 and cmdstan 2.18.0."
+    "text": "Versions 4.5 of the package has been tested on Mac OSX 10.14, Julia 1.0+ and cmdstan 2.18.1."
+},
+
+{
+    "location": "VERSIONS/#Version-5.x.x-(in-preparation)-1",
+    "page": "Versions",
+    "title": "Version 5.x.x (in preparation)",
+    "category": "section",
+    "text": "Based on MCMCChains.jl\nSupport for NamedTuple data and init arguments (being investigated)\nIncorporating MCMCChains.jl directly into CmdStan.jl (being considered)."
+},
+
+{
+    "location": "VERSIONS/#Version-4.5.2-1",
+    "page": "Versions",
+    "title": "Version 4.5.2",
+    "category": "section",
+    "text": "Mostly minor (but important) fixes in documentation (thanks to Oliver Dechant).\nSupports not-array versions of input data and inits.\nAnnouncement v5.x.x will be based on MCMCChains.jl. StanMCMCChain.jl will also be renamed accordingly (StanMCMCChains.jl) once MCMCChains.jl is regeistered."
 },
 
 {
