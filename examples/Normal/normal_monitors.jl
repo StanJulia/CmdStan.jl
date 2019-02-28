@@ -1,4 +1,4 @@
-# example borrowed from th0br0
+# example copied from th0br0 with modifications
 using CmdStan
 using StanMCMCChain
 using MCMCChain
