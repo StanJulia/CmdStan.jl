@@ -6,7 +6,6 @@ using MCMCChain
 y = collect(1:100);
 x = [3:3:300 5:5:500];
 
-
 model = """
 data {
   int<lower = 0> N;
