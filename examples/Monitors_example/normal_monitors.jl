@@ -24,12 +24,13 @@ model {
 
 # beta parameters are accessed using beta.[1-9+] syntax
 data = Dict("N"=>100, "k" => 2, "x" => x, "y" => y);
-stanmodel = Stanmodel(monitors = ["beta.1", "sigma"], model=model,
+stanmodel = Stanmodel(monitors = ["beta.1", "beta.2", "sigma"], model=model,
           output_format=:mcmcchain);
 
 rc, sim, cnames = stan(stanmodel, data; diagnostics = false);
 
-cnames
-# 2-element Array{String,1}: "beta.1" "sigma" 
+cnames |> display
+# 3-element Array{String,1}: "beta.1", "beta.2" ,"sigma" 
+println()
 
 describe(sim)

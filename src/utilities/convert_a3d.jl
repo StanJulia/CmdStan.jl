@@ -33,9 +33,11 @@ Current formats supported are:
 2. :namedarray (NamedArrays object)
 3. :dataframe (DataFrames object)
 4. :mambachains (Mamba.Chains object)
-5. :mcmcchain (TuringLang/Chains object)
+5. :mcmcchain (TuringLang/MCMCChain.Chains object, will be deprecated)
+6. :mcmcchain (TuringLang/MCMCChains.Chains object)
 
-Options 3 through 5 are respectively provided by the packages StanDataFrames, StanMamba and StanMCMCChain.
+Options 3 through 6 are respectively provided by the packages StanDataFrames, 
+StanMamba, StanMCMCChain and StanMCMCChains.
 ```
 
 ### Return values
