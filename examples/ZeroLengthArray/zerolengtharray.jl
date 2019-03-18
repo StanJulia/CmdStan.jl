@@ -23,12 +23,12 @@ cd(ProjDir) do
   }
   "
 
-  observeddata = Dict("N" => 10, "y" => [0, 1, 0, 1, 0, 0, 0, 0, 0, 1],"empty"=>Float64[]),
+  observeddata = Dict("N" => 10, "y" => [0, 1, 0, 1, 0, 0, 0, 0, 0, 1],"empty"=>Float64[])
 
   global stanmodel, rc, sim
   
   stanmodel = Stanmodel(num_samples=1200, thin=2, name="bernoulli", 
-    model=bernoullimodel);
+    output_format=:array, model=bernoullimodel);
 
   rc, sim = stan(stanmodel, [observeddata], ProjDir, diagnostics=false,
     CmdStanDir=CMDSTAN_HOME);

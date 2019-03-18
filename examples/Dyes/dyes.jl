@@ -58,15 +58,33 @@ cd(ProjDir) do
       ], 6, 5)
     )
 
-  global stanmodel, rc, sim
+  global stanmodel, rc, sim, cnames
   
   stanmodel = Stanmodel(name="dyes", model=dyes);
   
-  @time rc, sim, cnames = stan(stanmodel, dyesdata, ProjDir, CmdStanDir=CMDSTAN_HOME)
+  @time rc, sim, cnames = stan(stanmodel, dyesdata, ProjDir,
+    CmdStanDir=CMDSTAN_HOME)
 
   if rc == 0
+    pi = filter(p -> length(p) > 2 && p[end-1:end] == "__", cnames)
+    p = filter(p -> !(p in  pi), cnames)
+    
+    chns = set_section(sim, 
+      Dict(
+        :parameters => ["theta", 
+          "tau_between", "tau_within", 
+          "sigma_between", "sigma_within",
+          "sigmasq_between", "sigmasq_within"],
+        :mu => ["mu.$i" for i in 1:6],
+        :internals => pi
+      )
+    )
+    describe(chns)
+    describe(chns, section=:mu)
+    #=
     println()
     println("Test round.(mean(theta)/100.0, digits=0) ≈ 15.0")
     @test round.(mean(sim[:,10,:])/100.0, digits=0) ≈ 15.0
+    =#
   end
 end # cd

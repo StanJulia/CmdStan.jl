@@ -24,7 +24,8 @@ cd(ProjDir) do
   inittheta = Dict("theta" => 0.31)
 
   global stanmodel
-  stanmodel = Stanmodel(name="bernoulli", model=bernoullimodel, num_warmup=1);
+  stanmodel = Stanmodel(name="bernoulli", model=bernoullimodel, 
+    output_format=:array, num_warmup=1);
 
   global rc, sim
   rc, sim, cnames = stan(stanmodel, bernoullidata, ProjDir, 

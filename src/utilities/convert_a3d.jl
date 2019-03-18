@@ -25,7 +25,7 @@ convert_a3d(a3d_array, cnames, ::Val{Symbol})
 Method called is based on the output_format defined in the stanmodel, e.g.:
 
    stanmodel = Stanmodel(num/_samples=1200, thin=2, name="bernoulli", 
-   model=bernoullimodel, output_format=:array);
+     model=bernoullimodel, output_format=:mcmcchains);
 
 Current formats supported are:
 
@@ -33,11 +33,10 @@ Current formats supported are:
 2. :namedarray (NamedArrays object)
 3. :dataframe (DataFrames object)
 4. :mambachains (Mamba.Chains object)
-5. :mcmcchain (TuringLang/MCMCChain.Chains object, will be deprecated)
-6. :mcmcchain (TuringLang/MCMCChains.Chains object)
+5. :mcmcchains (TuringLang/MCMCChains.Chains object)
 
-Options 3 through 6 are respectively provided by the packages StanDataFrames, 
-StanMamba, StanMCMCChain and StanMCMCChains.
+Options 3 through 5 are respectively provided by the packages StanDataFrames, 
+StanMamba, StanMCMCChains and StanMCMCChains.
 ```
 
 ### Return values
@@ -50,3 +49,16 @@ convert_a3d(a3d_array, cnames, ::Val{:array}) = a3d_array
 convert_a3d(a3d_array, cnames, ::Val{:namedarray}) = 
   [NamedArray(a3d_array[:,:,i], (collect(1:size(a3d_array, 1)), Symbol.(cnames))) 
     for i in 1:size(a3d_array, 3)]
+
+function convert_a3d(a3d_array, cnames, ::Val{:mcmcchains})
+  pi = filter(p -> length(p) > 2 && p[end-1:end] == "__", cnames)
+  p = filter(p -> !(p in  pi), cnames)
+
+  MCMCChains.Chains(a3d_array,
+    cnames,
+    Dict(
+      :parameters => p,
+      :internals => pi
+    )
+  )
+end

@@ -34,7 +34,8 @@ cd(ProjDir) do
   ]
 
   global stanmodel
-  stanmodel = Stanmodel(name="bernoulli", model=bernoullimodel, num_warmup=1);
+  stanmodel = Stanmodel(name="bernoulli", model=bernoullimodel,
+    output_format=:array, num_warmup=1);
 
   global rc, sim
   rc, sim, cnames = stan(stanmodel, bernoullidata, ProjDir, 

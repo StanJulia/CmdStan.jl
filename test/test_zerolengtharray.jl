@@ -27,7 +27,7 @@ cd(ProjDir) do
 
   global stanmodel, rc, sim
   stanmodel = Stanmodel(num_samples=1200, thin=2, name="bernoulli", 
-    model=bernoullimodel);
+    output_format=:array, model=bernoullimodel);
 
   rc, sim = stan(stanmodel, observeddata, ProjDir, diagnostics=false,
     CmdStanDir=CMDSTAN_HOME);

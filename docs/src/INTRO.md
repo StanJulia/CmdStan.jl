@@ -14,10 +14,10 @@ CmdStan.jl is part of the [StanJulia Github organization](https://github.com/Sta
 
 Other packages in StanJulia are either extensions, postprocessing of the draws or plotting of the results. as much as possible an attempt has been made to leverage below mentioned MCMC package options available in Julia to make comparisons easier.
 
-On a very high level, a typical workflow for using StanJulia, e.g. to handle postprocessing by TuringLang's MCMCChain.jl, will look like:
+On a very high level, a typical workflow for using StanJulia, e.g. to handle postprocessing by TuringLang's MCMCChains.jl, will look like:
 
 ```
-using CmdStan, StanMCMCChain, MCMCChain, StatsBase
+using CmdStan, StanMCMCChains, MCMCChains, StatsBase
 
 # Define a Stan language program.
 bernoulli = "..."
@@ -29,18 +29,18 @@ stanmodel = StanModel(..., output_format=:mcmcchain)
 rc, mcmcchain, cnames = stan(...)    
 
 # Example of postprocessing, e.g. Highest Posterior Density Interval.
-MCMCChain.hpd(mcmcchain[:, 8, :])
+MCMCChains.hpd(mcmcchain[:, 8, :])
 
 # Plot the draws for a variable.
 plot(mcmcchain[:, 8, :], [:mixeddensity, :autocor, :mean])
 savefig("bernoulli.pdf")  # save to a pdf file
 ```
 
-This workflow uses [StanMCMCChain.jl](https://github.com/StanJulia/StanMCMCChain.jl) to create an [MCMCChain.jl](https://github.com/TuringLang/MCMCChain.jl) object for further processing by TuringLang/MCMCChain. A similar workflow is available for Mamba [StanMamba.jl[](https://github.com/StanJulia/StanMamba.jl). Another option is to convert the array of draw values to a DataFrame using [StanDataFrames.jl](https://github.com/StanJulia/StanDataFrames.jl).
+This workflow uses [StanMCMCChains.jl](https://github.com/StanJulia/StanMCMCChains.jl) to create an [MCMCChains.jl](https://github.com/TuringLang/MCMCChains.jl) object for further processing by TuringLang/MCMCChains. A similar workflow is available for Mamba [StanMamba.jl[](https://github.com/StanJulia/StanMamba.jl). Another option is to convert the array of draw values to a DataFrame using [StanDataFrames.jl](https://github.com/StanJulia/StanDataFrames.jl).
 
 The default value for the `output_format` argument in Stanmodel() is :array which causes stan() to call a (dummy) conversion method convert_a3d() and returns an array of values.
 
-Currently 4 other values for `output_format` are used, i.e. :dataframe, :mambachain and :mcmcchain. The associated methods for `convert_a3d` are provided by StanDataFrames, StanMamba and StanMCMCChain. CmdStan.jl also provides the output_format option :namedarray
+Currently 4 other values for `output_format` are used, i.e. :dataframe, :mambachain and :mcmcchain. The associated methods for `convert_a3d` are provided by StanDataFrames, StanMamba and StanMCMCChains. CmdStan.jl also provides the output_format option :namedarray
 
 ## Other MCMC options in Julia
 

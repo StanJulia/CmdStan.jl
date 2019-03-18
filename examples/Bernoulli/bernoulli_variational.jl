@@ -27,7 +27,8 @@ cd(ProjDir) do
   ]
 
   global stanmodel, rc, sim, cnames
-  stanmodel = Stanmodel(CmdStan.Variational(), name="bernoulli",  model=bernoulli)
+  stanmodel = Stanmodel(CmdStan.Variational(), name="bernoulli", 
+    output_format=:array, model=bernoulli)
 
   rc, sim, cnames = stan(stanmodel, bernoullidata, ProjDir, CmdStanDir=CMDSTAN_HOME)
 

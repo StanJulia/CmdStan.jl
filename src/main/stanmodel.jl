@@ -72,7 +72,7 @@ Stanmodel(
   init=DataDict[],
   output=Output(),
   pdir::String=pwd(),
-  output_format=:array
+  output_format=:mcmcchains
 )
 
 ```
@@ -100,15 +100,15 @@ Stanmodel(
 
 ### CmdStan.jl supports 2 output_format values:
 ```julia     
-1. :array                 # Returns an array of draws (default value)
+1. :array                 # Returns an array of draws
 2. :namedarray      # Returns a NamedArrays object 
+3. :mcmcchains     # Return an MCMCChains.Chains object (default)
 
-both return an Array{Float64, 3} with ndraws, nvars, nchains as indices.
+The first 2 return an Array{Float64, 3} with ndraws, nvars, nchains as indices.
 
 Other options are availableby `importing` or `using` packages such as:
 1. StanDataFrames.jl
 2. StanMamba.jl or
-3. StanMCMCChain.jl.
 
 See also `?CmdStan.convert_a3d`.
 ```
@@ -156,7 +156,7 @@ function Stanmodel(
   init=DataDict[],
   output=Output(),
   pdir::String=pwd(),
-  output_format::Symbol=:array)
+  output_format::Symbol=:mcmcchains)
   
   cd(pdir)
   

@@ -34,7 +34,8 @@ cd(ProjDir) do
     )
 
   global stanmodel, rc, sim
-  stanmodel = Stanmodel(name="schools8", model=eightschools);
+  stanmodel = Stanmodel(name="schools8", model=eightschools,
+    output_format=:array);
   rc, sim, cnames = stan(stanmodel, schools8data, ProjDir, CmdStanDir=CMDSTAN_HOME)
 
   if rc == 0

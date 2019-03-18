@@ -35,7 +35,8 @@ cd(ProjDir) do
   "
 
   global stanmodel, rc, sim
-  stanmodel = Stanmodel(name="binomial", model=binomialstanmodel)
+  stanmodel = Stanmodel(name="binomial",
+    output_format=:array, model=binomialstanmodel)
 
   binomialdata = Dict("n" => 10, "k" => 5)
 

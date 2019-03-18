@@ -33,7 +33,7 @@ cd(ProjDir) do
     CmdStanDir=CMDSTAN_HOME);
 
   if rc == 0
-    @test round.(mean(sim[:, 8, :]), digits=1) ≈ 0.3
+    describe(sim)
   end
 
 end # cd
