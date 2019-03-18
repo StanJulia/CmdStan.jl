@@ -29,7 +29,7 @@ var documenterSearchIndex = {"docs": [
     "page": "Home",
     "title": "StanJulia",
     "category": "section",
-    "text": "CmdStan.jl is part of the StanJulia Github organization set of packages. It captures draws from a Stan language program and returns an array of values for each accepted draw for each monitored varable in all chains.Other packages in StanJulia are either extensions, postprocessing of the draws or plotting of the results. as much as possible an attempt has been made to leverage below mentioned MCMC package options available in Julia to make comparisons easier.On a very high level, a typical workflow for using StanJulia, e.g. to handle postprocessing by TuringLang\'s MCMCChain.jl, will look like:using CmdStan, StanMCMCChain, MCMCChain, StatsBase\n\n# Define a Stan language program.\nbernoulli = \"...\"\n\n# Prepare for calling cmdstan.\nstanmodel = StanModel(..., output_format=:mcmcchain)\n\n# Compile and run Stan program, collect draws.\nrc, mcmcchain, cnames = stan(...)    \n\n# Example of postprocessing, e.g. Highest Posterior Density Interval.\nMCMCChain.hpd(mcmcchain[:, 8, :])\n\n# Plot the draws for a variable.\nplot(mcmcchain[:, 8, :], [:mixeddensity, :autocor, :mean])\nsavefig(\"bernoulli.pdf\")  # save to a pdf fileThis workflow uses StanMCMCChain.jl to create an MCMCChain.jl object for further processing by TuringLang/MCMCChain. A similar workflow is available for Mamba [StanMamba.jl. Another option is to convert the array of draw values to a DataFrame using StanDataFrames.jl.The default value for the output_format argument in Stanmodel() is :array which causes stan() to call a (dummy) conversion method convert_a3d() and returns an array of values.Currently 4 other values for output_format are used, i.e. :dataframe, :mambachain and :mcmcchain. The associated methods for convert_a3d are provided by StanDataFrames, StanMamba and StanMCMCChain. CmdStan.jl also provides the output_format option :namedarray"
+    "text": "CmdStan.jl is part of the StanJulia Github organization set of packages. It captures draws from a Stan language program and returns an array of values for each accepted draw for each monitored varable in all chains.Other packages in StanJulia are either extensions, postprocessing of the draws or plotting of the results. as much as possible an attempt has been made to leverage below mentioned MCMC package options available in Julia to make comparisons easier.On a very high level, a typical workflow for using StanJulia, e.g. to handle postprocessing by TuringLang\'s MCMCChains.jl, will look like:using CmdStan, StanMCMCChains, MCMCChains, StatsBase\n\n# Define a Stan language program.\nbernoulli = \"...\"\n\n# Prepare for calling cmdstan.\nstanmodel = StanModel(..., output_format=:mcmcchain)\n\n# Compile and run Stan program, collect draws.\nrc, mcmcchain, cnames = stan(...)    \n\n# Example of postprocessing, e.g. Highest Posterior Density Interval.\nMCMCChains.hpd(mcmcchain[:, 8, :])\n\n# Plot the draws for a variable.\nplot(mcmcchain[:, 8, :], [:mixeddensity, :autocor, :mean])\nsavefig(\"bernoulli.pdf\")  # save to a pdf fileThis workflow uses StanMCMCChains.jl to create an MCMCChains.jl object for further processing by TuringLang/MCMCChains. A similar workflow is available for Mamba [StanMamba.jl. Another option is to convert the array of draw values to a DataFrame using StanDataFrames.jl.The default value for the output_format argument in Stanmodel() is :array which causes stan() to call a (dummy) conversion method convert_a3d() and returns an array of values.Currently 4 other values for output_format are used, i.e. :dataframe, :mambachain and :mcmcchain. The associated methods for convert_a3d are provided by StanDataFrames, StanMamba and StanMCMCChains. CmdStan.jl also provides the output_format option :namedarray"
 },
 
 {
@@ -77,7 +77,7 @@ var documenterSearchIndex = {"docs": [
     "page": "Installation",
     "title": "Important note",
     "category": "section",
-    "text": "Over the next month (February 2019) all master versions of StanJulia and StatisticalRethinkingJulia packages will start using MCMCChains.jl (and, for practical reasons, mostly will be tested on Julia v1.2-DEV). As long as MCMCChains.jl has not been registered in METADATA.jl, I use: ] dev https://github.com/TuringLang/MCMCChains.jl to install MCMCChains.jl. Note that currently Turing.jl expects MCMCChain.jl."
+    "text": "Over the next month (February 2019) all master versions of StanJulia and StatisticalRethinkingJulia packages will start using MCMCChains.jl (and, for practical reasons, mostly will be tested on Julia v1.2-DEV). As long as MCMCChains.jl has not been registered in METADATA.jl, I use: ] dev https://github.com/TuringLang/MCMCChains.jl to install MCMCChains.jl. Note that currently Turing.jl expects MCMCChains.jl."
 },
 
 {
@@ -157,15 +157,23 @@ var documenterSearchIndex = {"docs": [
     "page": "Versions",
     "title": "Testing",
     "category": "section",
-    "text": "Versions 4.5 of the package has been tested on Mac OSX 10.14, Julia 1.0+ and cmdstan 2.18.1."
+    "text": "Versions 5.x of the package has been tested on Mac OSX 10.14, Julia 1.1+ and cmdstan 2.18.1."
 },
 
 {
-    "location": "VERSIONS/#Version-5.x.x-(in-preparation)-1",
+    "location": "VERSIONS/#Version-5.1.0-(in-preparation)-1",
     "page": "Versions",
-    "title": "Version 5.x.x (in preparation)",
+    "title": "Version 5.1.0 (in preparation)",
     "category": "section",
-    "text": "Based on MCMCChains.jl\nSupport for NamedTuple data and init arguments (being investigated)\nIncorporating MCMCChains.jl directly into CmdStan.jl (being considered)."
+    "text": "Support for NamedTuple data and init arguments (being investigated)"
+},
+
+{
+    "location": "VERSIONS/#Version-5.0.0-1",
+    "page": "Versions",
+    "title": "Version 5.0.0",
+    "category": "section",
+    "text": "Incorporating MCMCChains.jl directly into CmdStan.jl. The old behavior is available by defining the output_format=:array in the call to StanModel.\nTypo correction by @szcf-weiya"
 },
 
 {
@@ -173,7 +181,7 @@ var documenterSearchIndex = {"docs": [
     "page": "Versions",
     "title": "Version 4.5.2",
     "category": "section",
-    "text": "Mostly minor (but important) fixes in documentation (thanks to Oliver Dechant).\nSupports non-array versions of input data and inits.\nAnnouncement v5.x.x will be based on MCMCChains.jl. StanMCMCChain.jl will also be renamed accordingly (StanMCMCChains.jl) once MCMCChains.jl is registered."
+    "text": "Mostly minor (but important) fixes in documentation (thanks to Oliver Dechant).\nSupports non-array versions of input data and inits.\nAnnouncement v5.x.x will be based on MCMCChains.jl. StanMCMCChains.jl will also be renamed accordingly (StanMCMCChains.jl) once MCMCChains.jl is registered."
 },
 
 {
