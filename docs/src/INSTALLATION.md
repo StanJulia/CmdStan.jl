@@ -18,8 +18,3 @@ to `~/.bash_profile` or add `ENV["JULIA_CMDSTAN_HOME"]="./cmdstan"` to `./julia/
 I typically prefer cmdstan not to include the cmdstan version number so no update is needed when cmdstan is updated.
 
 Currently tested with cmdstan 2.18.1
-
-## Important note
-
-Over the next month (February 2019) all _master_ versions of StanJulia and StatisticalRethinkingJulia packages will start using MCMCChains.jl (and, for practical reasons, mostly will be tested on Julia v1.2-DEV). As long as MCMCChains.jl has not been registered in METADATA.jl, I use:
-`] dev https://github.com/TuringLang/MCMCChains.jl` to install MCMCChains.jl. Note that currently Turing.jl expects MCMCChains.jl.
