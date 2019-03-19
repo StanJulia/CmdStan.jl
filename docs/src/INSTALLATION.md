@@ -2,7 +2,7 @@
 
 ## Minimal requirement
 
-Note: CmdStan.jl and CmdStan refer this Julia package. The executable C++ program is 'cmdstan'.
+Note: CmdStan.jl and CmdStan refer to this Julia package. The executable C++ program is 'cmdstan'.
 
 To run this version of the CmdStan.jl package on your local machine, it assumes that the  [cmdstan](http://mc-stan.org/interfaces/cmdstan) executable is properly installed.
 

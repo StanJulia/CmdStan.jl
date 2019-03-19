@@ -26,14 +26,14 @@ cd(ProjDir) do
     Dict("N" => 10, "y" => [0, 0, 0, 1, 0, 0, 0, 1, 0, 1])
   ]
 
-  global stanmodel, rc, sim, cnames
+  global stanmodel, rc, chns, cnames
   stanmodel = Stanmodel(num_samples=1200, thin=2, name="bernoulli",  model=bernoullimodel);
 
-  rc, sim, cnames = stan(stanmodel, observeddata, ProjDir, diagnostics=false,
+  rc, chns, cnames = stan(stanmodel, observeddata, ProjDir, diagnostics=false,
     CmdStanDir=CMDSTAN_HOME);
 
   if rc == 0
-    describe(sim)
+    describe(chns)
   end
 
 end # cd

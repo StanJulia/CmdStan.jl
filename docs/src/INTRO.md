@@ -12,35 +12,37 @@
 
 CmdStan.jl is part of the [StanJulia Github organization](https://github.com/StanJulia) set of packages. It captures draws from a Stan language program and returns an array of values for each accepted draw for each monitored varable in all chains.
 
-Other packages in StanJulia are either extensions, postprocessing of the draws or plotting of the results. as much as possible an attempt has been made to leverage below mentioned MCMC package options available in Julia to make comparisons easier.
+Other packages in StanJulia are either extensions, postprocessing of the draws or plotting of the results. As much as possible an attempt has been made to leverage the MCMCChains.jl package to make comparisons with other mcmc packages easier.
 
-On a very high level, a typical workflow for using StanJulia, e.g. to handle postprocessing by TuringLang's MCMCChains.jl, will look like:
+On a very high level, a typical workflow for using StanJulia and handle postprocessing by TuringLang's MCMCChains.jl, will look like:
 
 ```
-using CmdStan, StanMCMCChains, MCMCChains, StatsBase
+using CmdStan, StatsBase
 
 # Define a Stan language program.
 bernoulli = "..."
 
 # Prepare for calling cmdstan.
-stanmodel = StanModel(..., output_format=:mcmcchain)
+stanmodel = StanModel(...)
 
 # Compile and run Stan program, collect draws.
-rc, mcmcchain, cnames = stan(...)    
+rc, chns, cnames = stan(...)
+
+# Summary of result
+describe(chns) 
 
 # Example of postprocessing, e.g. Highest Posterior Density Interval.
-MCMCChains.hpd(mcmcchain[:, 8, :])
+MCMCChains.hpd(chns)
 
-# Plot the draws for a variable.
-plot(mcmcchain[:, 8, :], [:mixeddensity, :autocor, :mean])
-savefig("bernoulli.pdf")  # save to a pdf file
+# Plot the draws.
+plot(chns)
 ```
 
-This workflow uses [StanMCMCChains.jl](https://github.com/StanJulia/StanMCMCChains.jl) to create an [MCMCChains.jl](https://github.com/TuringLang/MCMCChains.jl) object for further processing by TuringLang/MCMCChains. A similar workflow is available for Mamba [StanMamba.jl[](https://github.com/StanJulia/StanMamba.jl). Another option is to convert the array of draw values to a DataFrame using [StanDataFrames.jl](https://github.com/StanJulia/StanDataFrames.jl).
+This workflow uses an [MCMCChains.jl](https://github.com/TuringLang/MCMCChains.jl) object for further processing by TuringLang/MCMCChains. A similar workflow is available for Mamba [StanMamba.jl[](https://github.com/StanJulia/StanMamba.jl). Another option is to convert the array of draws to a DataFrame using [StanDataFrames.jl](https://github.com/StanJulia/StanDataFrames.jl).
 
-The default value for the `output_format` argument in Stanmodel() is :array which causes stan() to call a (dummy) conversion method convert_a3d() and returns an array of values.
+The default value for the `output_format` argument in Stanmodel() is :mcmcchains which causes stan() to call a conversion method ```convert_a3d()``` That returns an MCMCChains.Chains object.
 
-Currently 4 other values for `output_format` are used, i.e. :dataframe, :mambachain and :mcmcchain. The associated methods for `convert_a3d` are provided by StanDataFrames, StanMamba and StanMCMCChains. CmdStan.jl also provides the output_format option :namedarray
+Other values for `output_format` are used, i.e. :array, :dataframe and :mambachain. The associated methods for `convert_a3d` are provided by StanDataFrames and StanMamba. CmdStan.jl also provides the output_format options :mcmcchains, :array and :namedarray.
 
 ## Other MCMC options in Julia
 

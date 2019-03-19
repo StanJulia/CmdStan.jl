@@ -23,7 +23,7 @@ Versions 5.x of the package has been tested on Mac OSX 10.14, Julia 1.1+ and cmd
 ### Version 5.0.0
 
 1. Incorporating MCMCChains.jl directly into CmdStan.jl. The old behavior is available by defining the ```output_format=:array``` in the call to StanModel.
-2. Typo correction by @szcf-weiya
+2. Typo corrections by @szcf-weiya
 
 ### Version 4.5.2
 

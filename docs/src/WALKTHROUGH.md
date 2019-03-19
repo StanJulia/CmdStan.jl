@@ -57,6 +57,8 @@ describe(chns)
 plot(chhs)
 ```
 
+Stan() returns the results by default in 2 sections, :parameters and :internals. 
+
 The first time (or when updates to the model have been made) stan() will compile the model and create the executable.
 
 On Windows, the CmdStanDir argument appears needed (this is still being investigated). On OSX/Unix CmdStanDir is obtained from an environment variable (see the Requirements section).
@@ -75,15 +77,20 @@ monitor = ["theta", "lp__", "accept_stat__"]
 stanmodel = Stanmodel(name="bernoulli", model=bernoulli, monitors=monitor);
 stanmodel
 ```
+
 Above script, in the Julia REPL, shows all parameters in the model, in this case (by default) a sample model.
 
 Compared to the call to Stanmodel() above, the keyword argument monitors has been added. This means that after the simulation is complete, only the monitored variables will be read in from the .csv file produced by Stan. This can be useful if many, e.g. 100s, nodes are being observed.
+
+If the result is an MCMCChains.Chains object, another option is available by using ```set_section(chain, section_map_dict)```, e.g. see the example in ```examples/Dyes/dyes.jl```.
+
 ```
 stanmodel2 = Stanmodel(Sample(adapt=CmdStan.Adapt(delta=0.9)), name="bernoulli2", nchains=6)
 ```
+
 An example of updating default model values when creating a model. The format is slightly different from cmdstan, but the parameters are as described in the cmdstan Interface User's Guide. This is also the case for the Stanmodel() optional arguments random, init and output (refresh only).
 
-Now, in the REPL, the stanmodel2 can be shown by:
+In the REPL, the stanmodel2 can be shown by:
 ```
 stanmodel2
 ```
