@@ -35,6 +35,23 @@ Example: `set_cmdstan_home!(homedir() * "/Projects/Stan/cmdstan/")`
 """
 set_cmdstan_home!(path) = global CMDSTAN_HOME=path
 
+const src_path = @__DIR__
+
+"""
+
+# rel_path
+
+Relative path using the StatisticalRethinking src/ directory. Copied from
+[DynamicHMCExamples.jl](https://github.com/tpapp/DynamicHMCExamples.jl)
+
+### Example to get access to the data subdirectory
+```julia
+rel_path("..", "data")
+```
+"""
+rel_path(parts...) = normpath(joinpath(src_path, parts...))
+
+
 include("main/stanmodel.jl")
 include("main/stancode.jl")
 
@@ -68,6 +85,7 @@ export
 # from this file
 set_cmdstan_home!,
 CMDSTAN_HOME,
+rel_path,
 
 # From stanmodel.jl
 Stanmodel,

@@ -1,5 +1,7 @@
 using Documenter, CmdStan
 
+DOC_ROOT = rel_path("..", "docs")
+
 makedocs( root = DOC_ROOT,
   modules = [],
   sitename = "StanJulia/CmdStan.jl",
