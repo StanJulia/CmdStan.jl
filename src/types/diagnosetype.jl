@@ -51,6 +51,7 @@ Diagnose(;d=Gradient())
 ```julia
 ?Diagnostics                  : Diagnostic methods
 ?Gradient                     : Currently sole diagnostic method
+```
 """
 mutable struct Diagnose <: Method
   diagnostic::Diagnostics
