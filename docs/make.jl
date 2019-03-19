@@ -3,7 +3,7 @@ using Documenter, CmdStan
 DOC_ROOT = rel_path("..", "docs")
 
 makedocs( root = DOC_ROOT,
-  modules = [],
+  modules = [CmdStan],
   sitename = "StanJulia/CmdStan.jl",
   authors = "Rob J Goedman",
   pages = Any[
