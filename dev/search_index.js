@@ -405,7 +405,7 @@ var documenterSearchIndex = {"docs": [
     "page": "Index",
     "title": "CmdStan.Diagnose",
     "category": "type",
-    "text": "Diagnose type and constructor\n\nMethod\n\nDiagnose(;d=Gradient())\n\nOptional arguments\n\n* `d::Diagnostics`            : Finite difference step size\n\nRelated help\n\n```julia ?Diagnostics                  : Diagnostic methods ?Gradient                     : Currently sole diagnostic method\n\n\n\n\n\n"
+    "text": "Diagnose type and constructor\n\nMethod\n\nDiagnose(;d=Gradient())\n\nOptional arguments\n\n* `d::Diagnostics`            : Finite difference step size\n\nRelated help\n\n?Diagnostics                  : Diagnostic methods\n?Gradient                     : Currently sole diagnostic method\n\n\n\n\n\n"
 },
 
 {
