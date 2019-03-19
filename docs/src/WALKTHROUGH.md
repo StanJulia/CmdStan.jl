@@ -29,10 +29,13 @@ model {
 The next step is to create a Stanmodel object. The most common way to create such an object is by giving the model a name while the Stan model is passed in, both through keyword (hence optional) arguments:
 ```
 stanmodel = Stanmodel(name="bernoulli", model=bernoullistanmodel);
-stanmodel 
 ```
 
-Above Stanmodel() call creates a default model for sampling. Other arguments to Stanmodel() can be found in [`Stanmodel`](@ref)
+Above Stanmodel() call creates a default model for sampling. By default the subsequent call to stan() will return an MCMCChains.Chains object. 
+
+The pre-v5.0.0 behavior is available by specifying ```output_format=:array``` in the StanModel call. This is still used is many of the examples.
+
+Other arguments to Stanmodel() can be found in [`Stanmodel`](@ref)
 
 The observed input data is defined below.
 ```
@@ -42,11 +45,17 @@ Each chain will use this data. If needed, an Array{Dict} can be defined with the
 
 Run the simulation by calling stan(), passing in the data and the intended working directory. 
 ```
-rc, sim1, cnames = stan(stanmodel, bernoullidata, ProjDir, CmdStanDir=CMDSTAN_HOME)
+rc, chns, cnames = stan(stanmodel, bernoullidata, ProjDir, CmdStanDir=CMDSTAN_HOME)
 ```
 More documentation on stan() can be found in [`stan`](@ref)
 
 If the return code rc indicated success (rc == 0), cmdstan execution completed succesfully.
+
+Next possible steps can be:
+```
+describe(chns)
+plot(chhs)
+```
 
 The first time (or when updates to the model have been made) stan() will compile the model and create the executable.
 
