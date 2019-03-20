@@ -149,7 +149,7 @@ var documenterSearchIndex = {"docs": [
     "page": "Versions",
     "title": "Testing",
     "category": "section",
-    "text": "Versions 5.x of the package has been tested on Mac OSX 10.14, Julia 1.1+ and cmdstan 2.19.0."
+    "text": "Versions 5.x of the package has been tested on Mac OSX 10.14.4, Julia 1.1+ and cmdstan 2.19.0."
 },
 
 {
@@ -161,19 +161,11 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "VERSIONS/#Version-5.0.1-(in-preparation)-1",
-    "page": "Versions",
-    "title": "Version 5.0.1 (in preparation)",
-    "category": "section",
-    "text": "Will support Stan 2.19 (expected Mar 2019) and only released if necessary."
-},
-
-{
     "location": "VERSIONS/#Version-5.0.0-(major-level-bump)-1",
     "page": "Versions",
     "title": "Version 5.0.0 (major level bump)",
     "category": "section",
-    "text": "Incorporating MCMCChains.jl directly into CmdStan.jl. The old behavior is available by defining the output_format=:array in the call to StanModel.\nDocumentation typo corrections by @szcf-weiya.\nStanMCMCChain.jl has been renamed to StanMCMCChains.jl."
+    "text": "Incorporating MCMCChains.jl directly into CmdStan.jl. The old behavior is available by defining the output_format=:array in the call to StanModel.\nDocumentation typo corrections by @szcf-weiya.\nStanMCMCChain.jl has been renamed to StanMCMCChains.jl.\nMore documentation fixes thanks to Oliver Dechant."
 },
 
 {
