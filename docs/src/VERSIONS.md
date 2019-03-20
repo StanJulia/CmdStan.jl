@@ -14,21 +14,18 @@ Updates for new releases of Julia and cmdstan bump the appropriate level.
 
 ## Testing
 
-Versions 5.x of the package has been tested on Mac OSX 10.14, Julia 1.1+ and cmdstan 2.19.0.
+Versions 5.x of the package has been tested on Mac OSX 10.14.4, Julia 1.1+ and cmdstan 2.19.0.
 
 ### Version 5.1.0 (in preparation)
 
 1. Support for NamedTuple data and init arguments (being investigated)
-
-### Version 5.0.1 (in preparation)
-
-1. Will support Stan 2.19 (expected Mar 2019) and only released if necessary.
 
 ### Version 5.0.0 (major level bump)
 
 1. Incorporating MCMCChains.jl directly into CmdStan.jl. The old behavior is available by defining the ```output_format=:array``` in the call to StanModel.
 2. Documentation typo corrections by @szcf-weiya.
 3. StanMCMCChain.jl has been renamed to StanMCMCChains.jl.
+4. More documentation fixes thanks to Oliver Dechant.
 
 ### Version 4.5.2
 
