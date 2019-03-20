@@ -75,7 +75,7 @@ Bfgs(;init_alpha=0.001, tol_obj=1e-8, tol_rel_obj=1e4,
 
 ### Related help
 ```julia
-?OptimizeMethod               : List of available optimize methods
+?OptimizeMethod                : List of available optimize methods
 ?Optimize                      : Optimize arguments
 ```
 """
@@ -104,7 +104,7 @@ Newton()
 ```
 ### Related help
 ```julia
-?OptimizeMethod               : List of available optimize methods
+?OptimizeMethod                : List of available optimize methods
 ?Optimize                      : Optimize arguments
 ```
 """

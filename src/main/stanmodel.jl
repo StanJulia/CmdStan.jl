@@ -78,7 +78,7 @@ Stanmodel(
 ```
 ### Required arguments
 ```julia
-* `method::Method`            : See ?Method
+* `method::Method`             : See ?Method
 ```
 
 ### Optional arguments
@@ -95,7 +95,7 @@ Stanmodel(
 * `output::Output`             : File output options
 * `pdir::String`               : Working directory
 * `monitors::String[] `        : Filter for variables used in Mamba post-processing
-* `output_format::Symbol ` : Specifies the required output format (:array for CmdStan.jl)
+* `output_format::Symbol `     : Specifies the required output format (:array for CmdStan.jl)
 ```
 
 ### CmdStan.jl supports 3 output_format values:
@@ -135,9 +135,9 @@ stanmodel = Stanmodel(num_samples=1200, thin=2, name="bernoulli", model=bernoull
 
 ### Related help
 ```julia
-?stan                          : Run a Stanmodel
+?stan                                  : Run a Stanmodel
 ?CmdStan.Sample                        : Sampling settings
-?CmdStan.Method                         : List of available methods
+?CmdStan.Method                        : List of available methods
 ?CmdStan.Output                        : Output file settings
 ?CmdStan.DataDict                      : Input data dictionaries, will be converted to R syntax
 ?CmdStan.convert_a3d                   : Options for output formats
