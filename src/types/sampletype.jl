@@ -38,8 +38,8 @@ Nuts(;max_depth=10)
 
 ### Related help
 ```julia
-?Sample                        : Sampling settings
-?Engine                        : Engine for Hamiltonian Monte Carlo
+?Sample                         : Sampling settings
+?Engine                         : Engine for Hamiltonian Monte Carlo
 ```
 """
 mutable struct Nuts <: Engine

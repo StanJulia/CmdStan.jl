@@ -27,25 +27,25 @@ rc, sim, cnames = stan(
 ### Optional positional arguments
 
 ```julia
-* `data=Nothing`                     : Observed input data dictionary 
+* `data=Nothing`                  : Observed input data dictionary 
 * `ProjDir=pwd()`                 : Project working directory
 ```
 
 ### Keyword arguments
 ```julia
-* `init=Nothing`                     : Initial parameter value dictionary
+* `init=Nothing`                  : Initial parameter value dictionary
 * `summary=true`                  : Use CmdStan's stansummary to display results
 * `diagnostics=false`             : Generate diagnostics file
 * `CmdStanDir=CMDSTAN_HOME`       : Location of cmdstan directory
 * `file_run_log=true`             : Create run log file (if false, write log to stdout)
-* `file_make_log=true`          : Create make log file (if false, write log to stdout)
+* `file_make_log=true`            : Create make log file (if false, write log to stdout)
 ```
 
 ### Return values
 ```julia
 * `rc::Int`                       : Return code from stan(), rc == 0 if all is well
-* `sim`                          : Chain results
-* `cnames`                   : Vector of variable names
+* `sim`                           : Chain results
+* `cnames`                        : Vector of variable names
 ```
 
 ### Examples
@@ -65,7 +65,7 @@ stan(mymodel, mydata, diagnostics=true, summary=false)
 
 ### Related help
 ```julia
-?Stanmodel                      : Create a StanModel
+?Stanmodel                         : Create a StanModel
 ```
 """
 function stan(
