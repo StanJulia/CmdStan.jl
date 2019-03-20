@@ -38,11 +38,13 @@ MCMCChains.hpd(chns)
 plot(chns)
 ```
 
-This workflow uses an [MCMCChains.jl](https://github.com/TuringLang/MCMCChains.jl) object for further processing by TuringLang/MCMCChains. A similar workflow is available for Mamba [StanMamba.jl[](https://github.com/StanJulia/StanMamba.jl). Another option is to convert the array of draws to a DataFrame using [StanDataFrames.jl](https://github.com/StanJulia/StanDataFrames.jl).
+This workflow creates an [MCMCChains.Chains](https://github.com/TuringLang/MCMCChains.jl) object for summarizing, diagnostics, plotting and further processing.
 
-The default value for the `output_format` argument in Stanmodel() is :mcmcchains which causes stan() to call a conversion method ```convert_a3d()``` That returns an MCMCChains.Chains object.
+A similar workflow is available for Mamba [StanMamba.jl](https://github.com/StanJulia/StanMamba.jl). Another option is to convert the array of draws to a DataFrame using [StanDataFrames.jl](https://github.com/StanJulia/StanDataFrames.jl).
 
-Other values for `output_format` are used, i.e. :array, :dataframe and :mambachain. The associated methods for `convert_a3d` are provided by StanDataFrames and StanMamba. CmdStan.jl also provides the output_format options :mcmcchains, :array and :namedarray.
+The default value for the `output_format` argument in Stanmodel() is :mcmcchains which causes stan() to call a conversion method ```convert_a3d()``` that returns the MCMCChains.Chains object.
+
+Other values for `output_format` are available, i.e. :array, :namedarray, :dataframe and :mambachain. CmdStan.jl provides the output_format options :mcmcchains, :array and :namedarray. The associated methods for the latter two options are provided by StanDataFrames and StanMamba. 
 
 ## Other MCMC options in Julia
 

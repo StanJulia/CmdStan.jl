@@ -19,6 +19,12 @@ The location of the cmdstan executable and related programs is now obtained from
 
 Right now `versioninfo()` will show its setting (if defined).
 
+## Note
+
+Release 5.0.0 of CmdStan.jl is a major level update as it breaks several examples. The simplest way to revert back to the pre-5.0.0 behavior is to use the ```output_format=:array``` option in the call to StanModel().
+
+By default a call to stan() will now return an MCMCChains.Chains object (which has been derived from the Mamba.Chains object). The Chains object has facilities for summarizing, diagnostics, plotting and further processing.
+
 ## Documentation
 
 - [**STABLE**][docs-stable-url] &mdash; **documentation of the most recently tagged version.**
