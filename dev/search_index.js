@@ -69,7 +69,7 @@ var documenterSearchIndex = {"docs": [
     "page": "Installation",
     "title": "Minimal requirement",
     "category": "section",
-    "text": "Note: CmdStan.jl and CmdStan refer to this Julia package. The executable C++ program is \'cmdstan\'.To run this version of the CmdStan.jl package on your local machine, it assumes that the  cmdstan executable is properly installed.In order for CmdStan.jl to find the cmdstan you need to set the environment variable JULIA_CMDSTAN_HOME to point to the cmdstan directory, e.g. addexport JULIA_CMDSTAN_HOME=/Users/rob/Projects/Stan/cmdstan\nlaunchctl setenv JULIA_CMDSTAN_HOME /Users/rob/Projects/Stan/cmdstanto ~/.bash_profile or add ENV[\"JULIA_CMDSTAN_HOME\"]=\"./cmdstan\" to ./julia/etc/startup.jl. I typically prefer cmdstan not to include the cmdstan version number so no update is needed when cmdstan is updated.Currently tested with cmdstan 2.18.1"
+    "text": "Note: CmdStan.jl and CmdStan refer to this Julia package. The executable C++ program is \'cmdstan\'.To run this version of the CmdStan.jl package on your local machine, it assumes that the  cmdstan executable is properly installed.In order for CmdStan.jl to find the cmdstan you need to set the environment variable JULIA_CMDSTAN_HOME to point to the cmdstan directory, e.g. addexport JULIA_CMDSTAN_HOME=/Users/rob/Projects/Stan/cmdstan\nlaunchctl setenv JULIA_CMDSTAN_HOME /Users/rob/Projects/Stan/cmdstanto ~/.bash_profile or add ENV[\"JULIA_CMDSTAN_HOME\"]=\"./cmdstan\" to ./julia/etc/startup.jl. I typically prefer cmdstan not to include the cmdstan version number so no update is needed when cmdstan is updated.Currently tested with cmdstan 2.19.0"
 },
 
 {
@@ -149,7 +149,7 @@ var documenterSearchIndex = {"docs": [
     "page": "Versions",
     "title": "Testing",
     "category": "section",
-    "text": "Versions 5.x of the package has been tested on Mac OSX 10.14, Julia 1.1+ and cmdstan 2.18.1."
+    "text": "Versions 5.x of the package has been tested on Mac OSX 10.14, Julia 1.1+ and cmdstan 2.19.0."
 },
 
 {
