@@ -98,17 +98,18 @@ Stanmodel(
 * `output_format::Symbol ` : Specifies the required output format (:array for CmdStan.jl)
 ```
 
-### CmdStan.jl supports 2 output_format values:
+### CmdStan.jl supports 3 output_format values:
 ```julia     
 1. :array                 # Returns an array of draws
 2. :namedarray      # Returns a NamedArrays object 
 3. :mcmcchains     # Return an MCMCChains.Chains object (default)
 
 The first 2 return an Array{Float64, 3} with ndraws, nvars, nchains as indices.
+The 3rd option (the default) returns an MCMCChains.Chains object.
 
 Other options are availableby `importing` or `using` packages such as:
 1. StanDataFrames.jl
-2. StanMamba.jl or
+2. StanMamba.jl
 
 See also `?CmdStan.convert_a3d`.
 ```
