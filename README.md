@@ -25,6 +25,8 @@ Release 5.0.0 of CmdStan.jl is a major level update as it breaks several example
 
 By default a call to stan() will now return an MCMCChains.Chains object (which has been derived from the Mamba.Chains object). The Chains object has facilities for summarizing, diagnostics, plotting and further processing.
 
+CmdStan.jl has been tested on cmdstan v2.19.0 (released 3/20/2019). I have not played around with the brand new GPU possibilities!
+
 ## Documentation
 
 - [**STABLE**][docs-stable-url] &mdash; **documentation of the most recently tagged version.**
