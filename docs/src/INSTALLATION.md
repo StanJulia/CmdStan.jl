@@ -17,4 +17,4 @@ to `~/.bash_profile` or add `ENV["JULIA_CMDSTAN_HOME"]="./cmdstan"` to `./julia/
 
 I typically prefer cmdstan not to include the cmdstan version number so no update is needed when cmdstan is updated.
 
-Currently tested with cmdstan 2.18.1
+Currently tested with cmdstan 2.19.0

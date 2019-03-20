@@ -14,7 +14,7 @@ Updates for new releases of Julia and cmdstan bump the appropriate level.
 
 ## Testing
 
-Versions 5.x of the package has been tested on Mac OSX 10.14, Julia 1.1+ and cmdstan 2.18.1.
+Versions 5.x of the package has been tested on Mac OSX 10.14, Julia 1.1+ and cmdstan 2.19.0.
 
 ### Version 5.1.0 (in preparation)
 
