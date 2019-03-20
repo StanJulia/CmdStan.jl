@@ -29,7 +29,7 @@ var documenterSearchIndex = {"docs": [
     "page": "Home",
     "title": "StanJulia",
     "category": "section",
-    "text": "CmdStan.jl is part of the StanJulia Github organization set of packages. It captures draws from a Stan language program and returns an array of values for each accepted draw for each monitored varable in all chains.Other packages in StanJulia are either extensions, postprocessing of the draws or plotting of the results. As much as possible an attempt has been made to leverage the MCMCChains.jl package to make comparisons with other mcmc packages easier.On a very high level, a typical workflow for using StanJulia and handle postprocessing by TuringLang\'s MCMCChains.jl, will look like:using CmdStan, StatsBase\n\n# Define a Stan language program.\nbernoulli = \"...\"\n\n# Prepare for calling cmdstan.\nstanmodel = StanModel(...)\n\n# Compile and run Stan program, collect draws.\nrc, chns, cnames = stan(...)\n\n# Summary of result\ndescribe(chns) \n\n# Example of postprocessing, e.g. Highest Posterior Density Interval.\nMCMCChains.hpd(chns)\n\n# Plot the draws.\nplot(chns)This workflow uses an MCMCChains.jl object for further processing by TuringLang/MCMCChains. A similar workflow is available for Mamba [StanMamba.jl. Another option is to convert the array of draws to a DataFrame using StanDataFrames.jl.The default value for the output_format argument in Stanmodel() is :mcmcchains which causes stan() to call a conversion method convert_a3d() That returns an MCMCChains.Chains object.Other values for output_format are used, i.e. :array, :dataframe and :mambachain. The associated methods for convert_a3d are provided by StanDataFrames and StanMamba. CmdStan.jl also provides the output_format options :mcmcchains, :array and :namedarray."
+    "text": "CmdStan.jl is part of the StanJulia Github organization set of packages. It captures draws from a Stan language program and returns an array of values for each accepted draw for each monitored varable in all chains.Other packages in StanJulia are either extensions, postprocessing of the draws or plotting of the results. As much as possible an attempt has been made to leverage the MCMCChains.jl package to make comparisons with other mcmc packages easier.On a very high level, a typical workflow for using StanJulia and handle postprocessing by TuringLang\'s MCMCChains.jl, will look like:using CmdStan, StatsBase\n\n# Define a Stan language program.\nbernoulli = \"...\"\n\n# Prepare for calling cmdstan.\nstanmodel = StanModel(...)\n\n# Compile and run Stan program, collect draws.\nrc, chns, cnames = stan(...)\n\n# Summary of result\ndescribe(chns) \n\n# Example of postprocessing, e.g. Highest Posterior Density Interval.\nMCMCChains.hpd(chns)\n\n# Plot the draws.\nplot(chns)This workflow creates an MCMCChains.Chains object for summarizing, diagnostics, plotting and further processing.A similar workflow is available for Mamba StanMamba.jl. Another option is to convert the array of draws to a DataFrame using StanDataFrames.jl.The default value for the output_format argument in Stanmodel() is :mcmcchains which causes stan() to call a conversion method convert_a3d() that returns the MCMCChains.Chains object.Other values for output_format are available, i.e. :array, :namedarray, :dataframe and :mambachain. CmdStan.jl provides the output_format options :mcmcchains, :array and :namedarray. The associated methods for the latter two options are provided by StanDataFrames and StanMamba. "
 },
 
 {
@@ -161,11 +161,19 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "VERSIONS/#Version-5.0.0-1",
+    "location": "VERSIONS/#Version-5.0.1-(in-preparation)-1",
     "page": "Versions",
-    "title": "Version 5.0.0",
+    "title": "Version 5.0.1 (in preparation)",
     "category": "section",
-    "text": "Incorporating MCMCChains.jl directly into CmdStan.jl. The old behavior is available by defining the output_format=:array in the call to StanModel.\nTypo corrections by @szcf-weiya"
+    "text": "Will support Stan 2.19 (expected Mar 2019) and only released if necessary."
+},
+
+{
+    "location": "VERSIONS/#Version-5.0.0-(major-level-bump)-1",
+    "page": "Versions",
+    "title": "Version 5.0.0 (major level bump)",
+    "category": "section",
+    "text": "Incorporating MCMCChains.jl directly into CmdStan.jl. The old behavior is available by defining the output_format=:array in the call to StanModel.\nDocumentation typo corrections by @szcf-weiya.\nStanMCMCChain.jl has been renamed to StanMCMCChains.jl."
 },
 
 {
