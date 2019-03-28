@@ -1,6 +1,6 @@
 using Documenter, CmdStan
 
-DOC_ROOT = rel_path("..", "docs")
+DOC_ROOT = rel_path_cmdstan("..", "docs")
 
 makedocs( root = DOC_ROOT,
   modules = [CmdStan],

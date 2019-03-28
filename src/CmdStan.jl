@@ -39,17 +39,17 @@ const src_path = @__DIR__
 
 """
 
-# rel_path
+# rel_path_c
 
 Relative path using the StatisticalRethinking src/ directory. Copied from
 [DynamicHMCExamples.jl](https://github.com/tpapp/DynamicHMCExamples.jl)
 
 ### Example to get access to the data subdirectory
 ```julia
-rel_path("..", "data")
+rel_path_cmdstan("..", "data")
 ```
 """
-rel_path(parts...) = normpath(joinpath(src_path, parts...))
+rel_path_cmdstan(parts...) = normpath(joinpath(src_path, parts...))
 
 
 include("main/stanmodel.jl")
@@ -85,7 +85,7 @@ export
 # from this file
 set_cmdstan_home!,
 CMDSTAN_HOME,
-rel_path,
+rel_path_c,
 
 # From stanmodel.jl
 Stanmodel,
