@@ -85,7 +85,7 @@ export
 # from this file
 set_cmdstan_home!,
 CMDSTAN_HOME,
-rel_path_c,
+rel_path_cmdstan,
 
 # From stanmodel.jl
 Stanmodel,
