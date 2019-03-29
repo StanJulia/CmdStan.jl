@@ -28,13 +28,13 @@ cd(ProjDir) do
 
   global stanmodel, rc, sim, cnames
   stanmodel = Stanmodel(CmdStan.Variational(), name="bernoulli", 
-    output_format=:array, model=bernoulli)
+    output_format=:mcmcchains, model=bernoulli)
 
-  rc, sim, cnames = stan(stanmodel, bernoullidata, ProjDir, CmdStanDir=CMDSTAN_HOME)
+  rc, chns, cnames = stan(stanmodel, bernoullidata, ProjDir, CmdStanDir=CMDSTAN_HOME)
 
   if rc == 0
     println()
-    println("Test 0.0 <= round.(mean(theta), 1) <= 2.0")
-    @test 0.0 <= round.(mean(sim[:,4,:]), digits=1) <= 2.0
+    println("Test 0.0 <= round.(mean(Array(chns[:theta])), digits=1) <= 2.0")
+    @test 0.0 <= round.(mean(Array(chns[:theta])), digits=1) <= 2.0
   end
 end # cd
