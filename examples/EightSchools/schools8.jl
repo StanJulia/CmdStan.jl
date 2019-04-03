@@ -35,12 +35,22 @@ cd(ProjDir) do
 
   global stanmodel, rc, sim
   stanmodel = Stanmodel(name="schools8", model=eightschools,
-    output_format=:array);
-  rc, sim, cnames = stan(stanmodel, schools8data, ProjDir, CmdStanDir=CMDSTAN_HOME)
+    output_format=:mcmcchains);
+  rc, chn, cnames = stan(stanmodel, schools8data, ProjDir, CmdStanDir=CMDSTAN_HOME)
 
   if rc == 0
-    println()
-    println("Test 10.0 < round.(mean(theta[1]), digits=0) < 13.0")
-    @test 10.0 < round.(mean(sim[:,18,:]), digits=0) < 13.0
+    
+    chns = set_section(chn, Dict(
+      :parameters => ["mu", "tau"],
+      :pooled => vcat(["theta.$i" for i in 1:8], ["eta.$i" for i in 1:8]),
+      :internals => ["lp__", "accept_stat__", "stepsize__", "treedepth__", "n_leapfrog__",
+        "divergent__", "energy__"]
+      )
+    )
+    
+    @test 7.0 < round.(mean(Array(chns[:mu])), digits=0) < 9.0
+    
+    describe(chns)
+    describe(chns, section=:pooled)
   end
 end # cd
