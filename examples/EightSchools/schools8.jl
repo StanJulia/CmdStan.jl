@@ -51,6 +51,6 @@ cd(ProjDir) do
     @test 7.0 < round.(mean(Array(chns[:mu])), digits=0) < 9.0
     
     describe(chns)
-    describe(chns, section=:pooled)
+    describe(chns, sections=[:pooled])
   end
 end # cd

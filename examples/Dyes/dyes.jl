@@ -80,7 +80,7 @@ cd(ProjDir) do
       )
     )
     describe(chns)
-    describe(chns, section=:mu)
+    describe(chns, sections=[:mu])
     #=
     println()
     println("Test round.(mean(theta)/100.0, digits=0) ≈ 15.0")
