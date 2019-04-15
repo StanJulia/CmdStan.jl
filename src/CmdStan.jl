@@ -1,7 +1,7 @@
 module CmdStan
 
-using Reexport, NamedArrays, Pkg, DelimitedFiles, Unicode, Statistics
-@reexport using MCMCChains
+using Reexport, NamedArrays, Pkg, DelimitedFiles, Unicode
+@reexport using MCMCChains, Statistics
 
 """
 The directory which contains the cmdstan executables such as `bin/stanc` and
