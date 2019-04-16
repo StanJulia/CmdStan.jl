@@ -1,6 +1,6 @@
 ######### CmdStan batch program example  ###########
 
-using CmdStan, Test, Statistics
+using CmdStan, StatsPlots
 
 ProjDir = dirname(@__FILE__)
 cd(ProjDir) do
@@ -33,7 +33,7 @@ cd(ProjDir) do
       "tau" => 25
     )
 
-  global stanmodel, rc, sim
+  global stanmodel, rc, chns, cnames
   stanmodel = Stanmodel(name="schools8", model=eightschools,
     output_format=:mcmcchains);
   rc, chn, cnames = stan(stanmodel, schools8data, ProjDir, CmdStanDir=CMDSTAN_HOME)
@@ -42,15 +42,23 @@ cd(ProjDir) do
     
     chns = set_section(chn, Dict(
       :parameters => ["mu", "tau"],
-      :pooled => vcat(["theta.$i" for i in 1:8], ["eta.$i" for i in 1:8]),
+      :thetas => ["theta.$i" for i in 1:8],
+      :etas => ["eta.$i" for i in 1:8],
       :internals => ["lp__", "accept_stat__", "stepsize__", "treedepth__", "n_leapfrog__",
         "divergent__", "energy__"]
       )
     )
     
-    @test 7.0 < round.(mean(Array(chns[:mu])), digits=0) < 9.0
+    if isdefined(Main, :StatsPlots)
+      p1 = plot(chns)
+      savefig(p1, "traceplot.pdf")
+      #p2 = plot(chns, [:thetas])
+      #savefig(p2, "thetas.pdf")
+    end
     
-    describe(chns)
-    describe(chns, sections=[:pooled])
+    show(chns)
+    println("\n")
+    summarize(chns, sections=[:thetas])
+    
   end
 end # cd
