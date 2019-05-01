@@ -224,7 +224,7 @@ function stan(
     end
     
     if summary
-      stan_summary(par(samplefiles), CmdStanDir=CmdStanDir)
+      stan_summary(model, par(samplefiles), CmdStanDir=CmdStanDir)
     end
     
     (res, cnames) = read_samples(model, diagnostics)
@@ -279,10 +279,13 @@ stan_summary(
 ?Stan.stan                      : Execute a StanModel
 ```
 """
-function stan_summary(file::String; CmdStanDir=CMDSTAN_HOME)
+function stan_summary(m::Stanmodel, file::String; 
+  CmdStanDir=CMDSTAN_HOME)
   try
     pstring = joinpath("$(CmdStanDir)", "bin", "stansummary")
-    cmd = `$(pstring) $(file)`
+    csvfile = "$(m.name)_summary.csv"
+    isfile(csvfile) && rm(csvfile)
+    cmd = `$(pstring) --csv_file=$(csvfile) $(file)`
     resfile = open(cmd, "r")
     print(read(resfile, String))
   catch e
@@ -318,15 +321,18 @@ stan_summary(
 ?Stan.stan                      : Create a StanModel
 ```
 """
-function stan_summary(filecmd::Cmd; CmdStanDir=CMDSTAN_HOME)
+function stan_summary(m::Stanmodel, filecmd::Cmd;
+    CmdStanDir=CMDSTAN_HOME)
   try
     pstring = joinpath("$(CmdStanDir)", "bin", "stansummary")
-    cmd = `$(pstring) $(filecmd)`
+    csvfile = "$(m.name)_summary.csv"
+    isfile(csvfile) && rm(csvfile)
+    cmd = `$(pstring) --csv_file=$(csvfile) $(filecmd)`
     println()
     resfile = open(cmd, "r")
     print(read(resfile, String))
   catch e
-    println()
+    println(e)
     println("Stan.jl caught above exception in Stan's 'stansummary' program.")
     println("This is a usually caused by the setting:")
     println("  Sample(save_warmup=true, thin=n)")
