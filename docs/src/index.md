@@ -57,6 +57,7 @@ CmdStan.read_samples
 CmdStan.read_variational
 CmdStan.read_diagnose
 CmdStan.update_R_file
+CmdStan.read_summary
 ```
 
 ## Index
