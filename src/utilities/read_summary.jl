@@ -3,16 +3,17 @@ using DataFrames, Unicode, DelimitedFiles, MCMCChains
 
 # read_samples
 
-Read sample output files created by cmdstan. 
+Read summary output file created by stansummary. 
 
 ### Method
 ```julia
-read_samples(m::Stanmodel)
+read_summary(m::Stanmodel, pdir)
 ```
 
 ### Required arguments
 ```julia
 * `m::Stanmodel`    : Stanmodel object
+* `pdir` : Location where tmp directory can be found
 ```
 
 """

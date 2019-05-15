@@ -27,7 +27,7 @@ cd(ProjDir) do
     Dict("N" => 10, "y" => [0, 0, 0, 1, 0, 0, 0, 1, 0, 1])
   ]
 
-  global stanmodel, rc, chns, cnames
+  global stanmodel, rc, chns, cnames, summary_df
   stanmodel = Stanmodel(num_samples=1200, thin=2, name="bernoulli", 
     model=bernoullimodel);
 
@@ -44,7 +44,13 @@ cd(ProjDir) do
     end
     
     # Describe the results
-    describe(chns)
+    show(chns)
+    println()
+    
+    # Ceate a ChainDataFrame
+    summary_df = read_summary(stanmodel, ProjDir)
+    
+    # E,g, summary_df [:theta, :ess]
   end
 
 end # cd
