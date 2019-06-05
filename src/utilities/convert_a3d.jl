@@ -10,7 +10,7 @@ Convert the output file created by cmdstan to the shape of choice.
 
 ### Method
 ```julia
-convert_a3d(a3d_array, cnames, ::Val{Symbol})
+convert_a3d(a3d_array, cnames, ::Val{Symbol}; start=)
 ```
 ### Required arguments
 ```julia
@@ -20,7 +20,8 @@ convert_a3d(a3d_array, cnames, ::Val{Symbol})
 
 ### Optional arguments
 ```julia
-* `::Val{Symbol} = :array`                                                                             : Output format
+* `::Val{Symbol} = :array`  : Output format
+* `::Start=1` : First draw for MCMCChains.Chains (typically warmup_samples+1)
 ```
 Method called is based on the output_format defined in the stanmodel, e.g.:
 
@@ -44,13 +45,13 @@ StanMamba, StanMCMCChains and StanMCMCChains.
 * `res`                       : Draws converted to the specified format.
 ```
 """
-convert_a3d(a3d_array, cnames, ::Val{:array}) = a3d_array
+convert_a3d(a3d_array, cnames, ::Val{:array}; start=1) = a3d_array
 
-convert_a3d(a3d_array, cnames, ::Val{:namedarray}) = 
+convert_a3d(a3d_array, cnames, ::Val{:namedarray}; start=1) = 
   [NamedArray(a3d_array[:,:,i], (collect(1:size(a3d_array, 1)), Symbol.(cnames))) 
     for i in 1:size(a3d_array, 3)]
 
-function convert_a3d(a3d_array, cnames, ::Val{:mcmcchains})
+function convert_a3d(a3d_array, cnames, ::Val{:mcmcchains}; start=1)
   pi = filter(p -> length(p) > 2 && p[end-1:end] == "__", cnames)
   p = filter(p -> !(p in  pi), cnames)
 
@@ -59,6 +60,7 @@ function convert_a3d(a3d_array, cnames, ::Val{:mcmcchains})
     Dict(
       :parameters => p,
       :internals => pi
-    )
+    );
+    start=start
   )
 end

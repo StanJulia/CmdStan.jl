@@ -242,7 +242,8 @@ function stan(
   end
   
   if model.output_format != :array
-    res = convert_a3d(res, cnames, Val(model.output_format))
+    res = convert_a3d(res, cnames, Val(model.output_format);
+      start=model.method.num_warmup+1)
   end
   
   cd(old)
