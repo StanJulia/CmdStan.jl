@@ -11,6 +11,13 @@ julia:
   - 1.2
   #- nightly
   
+script:
+- if [[ -a .git/shallow ]]; then git fetch --unshallow; fi
+- cd $HOME; if [[ ! -d cmdstan ]]; then git clone https://github.com/stan-dev/cmdstan.git; fi
+- cd $HOME/cmdstan; git checkout v2.19.2; make stan-update; make build
+- export JULIA_CMDSTAN_HOME=$HOME/cmdstan
+- cd $TRAVIS_BUILD_DIR
+        - julia -e 'using Pkg; Pkg.test("CmdStan"; coverage=true)'
 matrix:
   allow_failures:
     - os: osx
@@ -33,6 +40,7 @@ jobs:
         - export JULIA_CMDSTAN_HOME=$HOME/cmdstan
         - cd $TRAVIS_BUILD_DIR
         - julia -e 'using Pkg; Pkg.test("CmdStan"; coverage=true)'
+        - cd $TRAVIS_BUILD_DIR
         - julia --project=docs -e 'using Pkg; Pkg.instantiate(); Pkg.develop(PackageSpec(path=pwd()))'
         - julia --project=docs --color=yes docs/make.jl
       after_success: skip
