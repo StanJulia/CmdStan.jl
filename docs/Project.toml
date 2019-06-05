@@ -1,5 +1,6 @@
 [deps]
 BinDeps = "9e28174c-4ba2-5203-b857-d8d62c4213ee"
+DataFrames = "a93c6f00-e57d-5684-b7b6-d8193f3e46c0"
 DelimitedFiles = "8bb1440f-4735-579b-a4ab-409b98df4dab"
 Documenter = "e30172f5-a6a5-5a46-863b-614d45cd2de4"
 Homebrew = "d9be37ee-ecc9-5288-90f1-b9ca67657a75"
