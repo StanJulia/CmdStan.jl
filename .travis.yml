@@ -6,9 +6,6 @@ os:
   
 julia:
   - 1.1
-  - 1.2
-  - 1.0
-  - nightly
   
 matrix:
   allow_failures:
@@ -22,25 +19,16 @@ branches:
     
 jobs:
   include:
-    - stage: "test"
-      julia: 1.1
-      os: linux
-      script:
-        - if [[ -a .git/shallow ]]; then git fetch --unshallow; fi
-        - cd $HOME; if [[ ! -d cmdstan ]]; then git clone https://github.com/stan-dev/cmdstan.git; fi
-        - cd $HOME/cmdstan; git checkout v2.19.0; make stan-update; make build
-        - export JULIA_CMDSTAN_HOME=$HOME/cmdstan
-        - cd $TRAVIS_BUILD_DIR
-        - julia -e 'using Pkg; Pkg.test("CmdStan"; coverage=true)'
     - stage: "documentation"
       julia: 1.1
       os: linux
       script:
-        - if [[ -a .git/shallow ]]; then git fetch --unshallow; fi
-        - cd $HOME; if [[ ! -d cmdstan ]]; then git clone https://github.com/stan-dev/cmdstan.git; fi
-        - cd $HOME/cmdstan; git checkout v2.19.0; make stan-update; make build
-        - export JULIA_CMDSTAN_HOME=$HOME/cmdstan
-        - cd $TRAVIS_BUILD_DIR
+        #- if [[ -a .git/shallow ]]; then git fetch --unshallow; fi
+        #- cd $HOME; if [[ ! -d cmdstan ]]; then git clone https://github.com/stan-dev/cmdstan.git; fi
+        #- cd $HOME/cmdstan; git checkout v2.19.0; make stan-update; make build
+        #- export JULIA_CMDSTAN_HOME=$HOME/cmdstan
+        #- export CMDSTAN_HOME=$HOME/cmdstan
+        #- cd $TRAVIS_BUILD_DIR
         - julia --project=docs -e 'using Pkg; Pkg.instantiate(); Pkg.develop(PackageSpec(path=pwd()))'
         - julia --project=docs --color=yes docs/make.jl
       after_success: skip
