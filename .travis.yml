@@ -3,21 +3,12 @@ language: julia
 
 os:
   - linux
-  #- osx
   
 julia:
-  #- 1.0
   - 1.1
-  #- 1.2
-  #- nightly
-  
-script:
-  - if [[ -a .git/shallow ]]; then git fetch --unshallow; fi
-  - cd $HOME; if [[ ! -d cmdstan ]]; then git clone https://github.com/stan-dev/cmdstan.git; fi
-  - cd $HOME/cmdstan; git checkout v2.19.0; make stan-update; make build
-  - export JULIA_CMDSTAN_HOME=$HOME/cmdstan
-  - cd $TRAVIS_BUILD_DIR
-  - julia -e 'using Pkg; Pkg.test("CmdStan"; coverage=true)'
+  - 1.2
+  - 1.0
+  - nightly
   
 matrix:
   allow_failures:
@@ -31,7 +22,17 @@ branches:
     
 jobs:
   include:
-    - stage: Documentation
+    - stage: "test"
+      julia: 1.1
+      os: linux
+      script:
+        - if [[ -a .git/shallow ]]; then git fetch --unshallow; fi
+        - cd $HOME; if [[ ! -d cmdstan ]]; then git clone https://github.com/stan-dev/cmdstan.git; fi
+        - cd $HOME/cmdstan; git checkout v2.19.0; make stan-update; make build
+        - export JULIA_CMDSTAN_HOME=$HOME/cmdstan
+        - cd $TRAVIS_BUILD_DIR
+        - julia -e 'using Pkg; Pkg.test("CmdStan"; coverage=true)'
+    - stage: "documentation"
       julia: 1.1
       os: linux
       script:
