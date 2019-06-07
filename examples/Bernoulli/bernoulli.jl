@@ -27,13 +27,15 @@ cd(ProjDir) do
     Dict("N" => 10, "y" => [0, 0, 0, 1, 0, 0, 0, 1, 0, 1])
   ]
 
-  global stanmodel, rc, chns, cnames, summary_df
-  stanmodel = Stanmodel(num_samples=1200, thin=2, name="bernoulli", 
-    model=bernoullimodel);
+  global stanmodel, rc, chn, chns, cnames, summary_df
+  stanmodel = Stanmodel(Sample(save_warmup=true, num_warmup=1000, num_samples=2000, thin=1),
+    name="bernoulli",  model=bernoullimodel);
 
-  rc, chns, cnames = stan(stanmodel, observeddata, ProjDir, diagnostics=false,
+  rc, chn, cnames = stan(stanmodel, observeddata, ProjDir, diagnostics=false,
     CmdStanDir=CMDSTAN_HOME);
 
+  chns = chn[1001:end, :, :]
+  
   if rc == 0
     # Check if StatsPlots is available
     if isdefined(Main, :StatsPlots)
