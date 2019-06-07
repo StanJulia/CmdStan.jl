@@ -6,7 +6,6 @@
 |:-------------------------------------------------------------------------------:|:-----------------------------------------------------------------------------------------------:|
 | [![][docs-stable-img]][docs-stable-url] [![][docs-dev-img]][docs-dev-url] | [![][travis-img]][travis-url] [![][codecov-img]][codecov-url] |
 
-
 ## Prerequisites
 
 For more info on Stan, please go to <http://mc-stan.org>.

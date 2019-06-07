@@ -1,11 +1,15 @@
 ## Documentation: http://docs.travis-ci.com/user/languages/julia/
 language: julia
+
 dist: xenial
+
 os:
   - linux
-  - osx
+  #- osx
+
 env:
   - JULIA_CMDSTAN_HOME="$HOME/cmdstan-2.19.1/"
+
 before_install:
   - OLDWD=`pwd`
   - cd ~
@@ -13,12 +17,15 @@ before_install:
   - tar -xzpf cmdstan-2.19.1.tar.gz
   - make -C $JULIA_CMDSTAN_HOME build
   - cd $OLDWD
+
 julia:
   - 1.1
-  - 1.2
+  #- 1.2
   - nightly
+
 notifications:
   email: false
+
 git:
   depth: 99999999
 
@@ -31,13 +38,14 @@ matrix:
 ## uncomment following lines to deploy documentation
  jobs:
    include:
-     - stage: Documentation
+     - stage: "Documentation"
        julia: 1.1
        os: linux
        script:
          - julia --project=docs -e 'using Pkg; Pkg.instantiate(); Pkg.develop(PackageSpec(path=pwd()))'
          - julia --project=docs --color=yes docs/make.jl
        after_success: skip
+       
 after_success:
   - julia --project=test/coverage -e 'using Pkg; Pkg.instantiate()'
   - julia --project=test/coverage test/coverage/coverage.jl
