@@ -161,11 +161,14 @@ function Stanmodel(
   
   cd(pdir)
   
+#=
   tmpdir = joinpath(pdir, "tmp")
   if !isdir(tmpdir)
     mkdir(tmpdir)
   end
+=#
   
+  tmpdir = mktempdir()
   model_file = "$(name).stan"
   if length(model) > 0
     update_model_file(joinpath(tmpdir, "$(name).stan"), strip(model))

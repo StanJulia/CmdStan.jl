@@ -1,7 +1,7 @@
 using DataFrames, Unicode, DelimitedFiles, MCMCChains
 """
 
-# read_samples
+# read_summary
 
 Read summary output file created by stansummary. 
 
@@ -17,11 +17,9 @@ read_summary(m::Stanmodel, pdir)
 ```
 
 """
-function read_summary(m::Stanmodel, pdir=ProjDir)
+function read_summary(m::Stanmodel)
 
-#    if isfile("$(m.name)_$(ftype)_$(i).csv")
-
-  instream = open(pdir*"/tmp/$(m.name)_summary.csv")
+  instream = open(joinpath(m.tmpdir, "$(m.name)_summary.csv"))
   skipchars(isspace, instream, linecomment='#')
   #
   # First non-comment line contains names of variables

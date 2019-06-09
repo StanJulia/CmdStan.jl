@@ -50,7 +50,7 @@ cd(ProjDir) do
     println()
     
     # Ceate a ChainDataFrame
-    summary_df = read_summary(stanmodel, ProjDir)
+    summary_df = read_summary(stanmodel)
     
     # E,g, summary_df [:theta, :ess]
   end
