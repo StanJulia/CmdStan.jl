@@ -97,7 +97,7 @@ function stan(
   isfile("$(model.name)_make.log") && rm("$(model.name)_make.log")
   isfile("$(model.name)_run.log") && rm("$(model.name)_run.log")
 
-  #cd(CmdStanDir)
+  cd(CmdStanDir)
   println(CmdStanDir)
   local tmpmodelname::String
   tmpmodelname = joinpath(model.tmpdir, model.name)
@@ -109,20 +109,22 @@ function stan(
   println()
   run(pipeline(`ls $(model.tmpdir)`))
   println()
-  make_prog = joinpath(CmdStanDir, "/make")
+  make_path = joinpath(CmdStanDir, "make")
+  println(make_path)
+  println()
   try
     if file_make_log
-      run(pipeline(`$(make_prog) $(tmpmodelname)`,
+      run(pipeline(`make $(tmpmodelname)`,
         stdout="$(tmpmodelname)_make.log",
         stderr="$(tmpmodelname)_build.log"))
     else
-      run(pipeline(`$(make_prog) $(tmpmodelname)`,
+      run(pipeline(`$(make_path) $(tmpmodelname)`,
         stderr="$(tmpmodelname)_build.log"))
     end
-    run(pipeline(`ls`))
+    #run(pipeline(`ls`))
     run(pipeline(`ls $(model.tmpdir)`))
   catch
-    run(pipeline(`ls`))
+    #run(pipeline(`ls`))
     run(pipeline(`ls $(model.tmpdir)`))
     println("\nAn error occurred while compiling the Stan program.\n")
     print("Please check your Stan program in variable '$(model.name)' ")
