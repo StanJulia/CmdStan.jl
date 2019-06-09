@@ -3,7 +3,7 @@ language: julia
 
 os:
   - linux
-  - osx
+  #- osx
   
 env:
   - JULIA_CMDSTAN_HOME="$HOME/cmdstan-2.19.1/"
@@ -17,7 +17,7 @@ before_install:
   - cd $OLDWD
   
 julia:
-  - 1.1
+  #- 1.1
   - nightly
   
 notifications:
