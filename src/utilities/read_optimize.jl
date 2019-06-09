@@ -16,7 +16,6 @@ read_optimize(m::Stanmodel)
 
 """
 function read_optimize(model::Stanmodel)
-  
   ## Collect the results in a Dict
   
   cnames = String[]
@@ -53,26 +52,27 @@ function read_optimize(model::Stanmodel)
         index = [idx[k] for k in 1:length(idx)]
         cnames = convert.(String, idx)
 
-        # The next line should contain the optimized values
-        
-        line = Unicode.normalize(readline(instream), newline2lf=true)
-        flds = Float64[]
-        if eof(instream) && length(line) < 2
-          close(instream)
-          break
-        else
-          flds = parse.(Float64, split(strip(line), ","))
-          for k in 1:length(index)
-            if index[k] in keys(tdict)
-              
-              # For all subsequent chains the entry should already be in tdict
-              
-              append!(tdict[index[k]], flds[k])
-            else
-              
-              # First chain
-              
-              tdict[index[k]] = [flds[k]]
+        # Read optimized values
+        for i in 1:model.method.iter
+          line = Unicode.normalize(readline(instream), newline2lf=true)
+          flds = Float64[]
+          if eof(instream) && length(line) < 2
+            close(instream)
+            break
+          else
+            flds = parse.(Float64, split(strip(line), ","))
+            for k in 1:length(index)
+              if index[k] in keys(tdict)
+                
+                # For all subsequent chains the entry should already be in tdict
+                
+                append!(tdict[index[k]], flds[k])
+              else
+                
+                # First chain
+                
+                tdict[index[k]] = [flds[k]]
+              end
             end
           end
         end
