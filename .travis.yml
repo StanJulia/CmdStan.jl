@@ -25,7 +25,6 @@ notifications:
   
 git:
   depth: 99999999
-    - /^v\d+\.\d+(\.\d+)?(-\S*)?$/
     
 jobs:
   include:
