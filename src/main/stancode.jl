@@ -109,16 +109,16 @@ function stan(
   println()
   run(pipeline(`ls $(model.tmpdir)`))
   println()
-  make_path = joinpath(CmdStanDir, "make")
-  println(make_path)
-  println()
+  #make_path = joinpath(CmdStanDir, "make")
+  #println(make_path)
+  #println()
   try
     if file_make_log
       run(pipeline(`make $(tmpmodelname)`,
         stdout="$(tmpmodelname)_make.log",
         stderr="$(tmpmodelname)_build.log"))
     else
-      run(pipeline(`$(make_path) $(tmpmodelname)`,
+      run(pipeline(`make $(tmpmodelname)`,
         stderr="$(tmpmodelname)_build.log"))
     end
     #run(pipeline(`ls`))
@@ -211,6 +211,11 @@ function stan(
   
   try
     if file_run_log
+      println()
+      run(pipeline(`ls`))
+      println()
+      run(pipeline(`ls $(model.tmpdir)`))
+      println()
       run(pipeline(par(model.command), stdout="$(model.name)_run.log"))
     else
       run(par(model.command))
