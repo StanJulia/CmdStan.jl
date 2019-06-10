@@ -98,20 +98,11 @@ function stan(
   isfile("$(model.name)_run.log") && rm("$(model.name)_run.log")
 
   cd(CmdStanDir)
-  println(CmdStanDir)
   local tmpmodelname::String
   tmpmodelname = joinpath(model.tmpdir, model.name)
-  println(tmpmodelname)
   if @static Sys.iswindows() ? true : false
     tmpmodelname = replace(tmpmodelname*".exe", "\\" => "/")
   end
-  run(pipeline(`ls`))
-  println()
-  run(pipeline(`ls $(model.tmpdir)`))
-  println()
-  #make_path = joinpath(CmdStanDir, "make")
-  #println(make_path)
-  #println()
   try
     if file_make_log
       run(pipeline(`make $(tmpmodelname)`,
@@ -121,11 +112,7 @@ function stan(
       run(pipeline(`make $(tmpmodelname)`,
         stderr="$(tmpmodelname)_build.log"))
     end
-    #run(pipeline(`ls`))
-    run(pipeline(`ls $(model.tmpdir)`))
   catch
-    #run(pipeline(`ls`))
-    run(pipeline(`ls $(model.tmpdir)`))
     println("\nAn error occurred while compiling the Stan program.\n")
     print("Please check your Stan program in variable '$(model.name)' ")
     print("and the contents of $(tmpmodelname)_build.log.\n")
@@ -211,11 +198,6 @@ function stan(
   
   try
     if file_run_log
-      println()
-      run(pipeline(`ls`))
-      println()
-      run(pipeline(`ls $(model.tmpdir)`))
-      println()
       run(pipeline(par(model.command), stdout="$(model.name)_run.log"))
     else
       run(par(model.command))
