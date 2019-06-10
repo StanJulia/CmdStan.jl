@@ -212,14 +212,14 @@ function stan(
   try
     if file_run_log
       println()
-      run(pipeline(`ls`))
-      println()
       run(pipeline(`ls $(model.tmpdir)`))
       println()
       run(pipeline(par(model.command), stdout="$(model.name)_run.log"))
     else
       run(par(model.command))
     end
+    println()
+    run(pipeline(`ls $(model.tmpdir)`))
   catch e
     println("\nAn error occurred while running the previously compiled Stan program.\n")
     print("Please check the contents of file $(tmpmodelname)_run.log and the")
