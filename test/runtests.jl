@@ -1,7 +1,7 @@
 # Top level test script for Stan.jl
 using CmdStan, Test, Statistics
 
-println("\nRunning tests for CmdStan-j1-v5:\n")
+println("\nRunning tests for CmdStan-j1-v6:\n")
 
 code_tests = ["test_env.jl",              
               "test_utilities.jl",

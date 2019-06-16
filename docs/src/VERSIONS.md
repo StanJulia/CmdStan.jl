@@ -14,11 +14,17 @@ Updates for new releases of Julia and cmdstan bump the appropriate level.
 
 ## Testing
 
-Versions 5.x of the package has been tested on Mac OSX 10.14.4, Julia 1.1+ and cmdstan 2.19.0.
+Versions 5.x of the package has been tested on Mac OSX 10.14.4, Julia 1.1+ and cmdstan 2.19.1.
 
-### Version 5.1.0 (in preparation)
+### Version 5.1.0
 
-1. Support for NamedTuple data and init arguments (being investigated)
+1. Added support for retrieving stansummary data (read_summary()).
+2. Added support for using mktempdir() (might improve issue #47).
+3. Fixed handling of save_warmup.
+4. Read all optimization iterations (thanks to sdewaele).
+5. Several other minor documentation and type definitions.
+6. Added an example using Tamas Pap's StanDump and StanRun.
+7. Added a test to compare Stan's ESS values with MCMCChains ESS values.
 
 ### Version 5.0.0 (major level bump)
 

@@ -22,11 +22,19 @@ Right now `versioninfo()` will show its setting (if defined).
 
 Release 5.0.0 of CmdStan.jl is a major level update as it breaks several examples. The simplest way to revert back to the pre-5.0.0 behavior is to use the ```output_format=:array``` option in the call to StanModel().
 
-Latest registered version is v5.0.2.
-
 By default a call to stan() will now return an MCMCChains.Chains object (which has been derived from the Mamba.Chains object). The Chains object has facilities for summarizing, diagnostics, plotting and further processing.
 
-CmdStan.jl has been tested on cmdstan v2.19.0 (released 3/20/2019). I have not played around with the brand new GPU possibilities!
+Release 5.1.0 contains:
+
+1. Support for retrieving stansummary data (read_summary()).
+2. Support for using mktempdir() (might improve issue #47).
+3. Fixed handling of save_warmup.
+4. Read all optimization iterations (thanks to sdewaele).
+5. Several other minor documentation and type definition updates.
+6. Added an example using Tamas Pap's StanDump and StanRun.
+7. Added a test to compare Stan's ESS values with MCMCChains ESS values.
+
+CmdStan.jl has been tested on cmdstan v2.19.1.
 
 ## Documentation
 
