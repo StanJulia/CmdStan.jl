@@ -28,8 +28,10 @@ cd(ProjDir) do
   ]
 
   global stanmodel, rc, chn, chns, cnames, summary_df
-  stanmodel = Stanmodel(Sample(save_warmup=true, num_warmup=1000, num_samples=2000, thin=1),
-    name="bernoulli",  model=bernoullimodel);
+  
+  stanmodel = Stanmodel(Sample(save_warmup=true, num_warmup=1000, 
+    num_samples=2000, thin=1), name="bernoulli", model=bernoullimodel,
+    printsummary=false, tmpdir=mktempdir());
 
   rc, chn, cnames = stan(stanmodel, observeddata, ProjDir, diagnostics=false,
     CmdStanDir=CMDSTAN_HOME);

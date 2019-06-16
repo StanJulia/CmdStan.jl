@@ -98,20 +98,11 @@ function stan(
   isfile("$(model.name)_run.log") && rm("$(model.name)_run.log")
 
   cd(CmdStanDir)
-  println(CmdStanDir)
   local tmpmodelname::String
   tmpmodelname = joinpath(model.tmpdir, model.name)
-  println(tmpmodelname)
   if @static Sys.iswindows() ? true : false
     tmpmodelname = replace(tmpmodelname*".exe", "\\" => "/")
   end
-  run(pipeline(`ls`))
-  println()
-  run(pipeline(`ls $(model.tmpdir)`))
-  println()
-  #make_path = joinpath(CmdStanDir, "make")
-  #println(make_path)
-  #println()
   try
     if file_make_log
       run(pipeline(`make $(tmpmodelname)`,
@@ -121,10 +112,7 @@ function stan(
       run(pipeline(`make $(tmpmodelname)`,
         stderr="$(tmpmodelname)_build.log"))
     end
-    #run(pipeline(`ls`))
-    run(pipeline(`ls $(model.tmpdir)`))
   catch
-    #run(pipeline(`ls`))
     run(pipeline(`ls $(model.tmpdir)`))
     println("\nAn error occurred while compiling the Stan program.\n")
     print("Please check your Stan program in variable '$(model.name)' ")
@@ -211,15 +199,10 @@ function stan(
   
   try
     if file_run_log
-      println()
-      run(pipeline(`ls $(model.tmpdir)`))
-      println()
       run(pipeline(par(model.command), stdout="$(model.name)_run.log"))
     else
       run(par(model.command))
     end
-    println()
-    run(pipeline(`ls $(model.tmpdir)`))
   catch e
     println("\nAn error occurred while running the previously compiled Stan program.\n")
     print("Please check the contents of file $(tmpmodelname)_run.log and the")
@@ -311,8 +294,9 @@ function stan_summary(m::Stanmodel, file::String;
     csvfile = "$(m.name)_summary.csv"
     isfile(csvfile) && rm(csvfile)
     cmd = `$(pstring) --csv_file=$(csvfile) $(file)`
-    resfile = open(cmd, "r")
-    print(read(resfile, String))
+    resfile = open(cmd; read=true)
+    println("Setting $(m.printsummary)")
+    m.printsummary && print(read(resfile, String))
   catch e
     println(e)
   end
@@ -353,9 +337,12 @@ function stan_summary(m::Stanmodel, filecmd::Cmd;
     csvfile = "$(m.name)_summary.csv"
     isfile(csvfile) && rm(csvfile)
     cmd = `$(pstring) --csv_file=$(csvfile) $(filecmd)`
-    println()
-    resfile = open(cmd, "r")
-    print(read(resfile, String))
+    if m.printsummary
+      resfile = open(cmd; read=true)
+      print(read(resfile, String))
+    else
+      run(pipeline(cmd, stdout="out.txt"))
+    end
   catch e
     println(e)
     println("Stan.jl caught above exception in Stan's 'stansummary' program.")
