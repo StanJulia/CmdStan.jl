@@ -47,6 +47,8 @@ mutable struct Stanmodel
   init::Vector{DataDict}
   init_file::String
   output::Output
+  printsummary::Bool
+  pdir::String
   tmpdir::String
   output_format::Symbol
 end
@@ -71,7 +73,9 @@ Stanmodel(
   random=Random(),
   init=DataDict[],
   output=Output(),
+  printsummary=true,
   pdir::String=pwd(),
+  tmpdir::String=joinpath(pwd(), "tmp"),
   output_format=:mcmcchains
 )
 
@@ -84,30 +88,33 @@ Stanmodel(
 ### Optional arguments
 ```julia
 * `name::String`               : Name for the model
-* `nchains::Int`               : Number of chains, if possible execute in parallel
-* `num_warmup::Int`            : Number of samples used for num_warmupation 
+* `nchains::Int`               : Number of chains
+* `num_warmup::Int`            : Number of samples used for num_warmup
 * `num_samples::Int`           : Sample iterations
 * `thin::Int`                  : Stan thinning factor
 * `model::String`              : Stan program source
-* `data::DataDict[]`           : Observed input data as an array of Dicts
+* `monitors::String[] `        : Variables saved for post-processing
+* `data::DataDict[]`           : Observed input data
 * `random::Random`             : Random seed settings
-* `init::DataDict[]`           : Initial values for parameters in parameter block
+* `init::DataDict[]`           : Initial values for parameters
 * `output::Output`             : File output options
+* `printsummary=true`          : Show computed stan summary
 * `pdir::String`               : Working directory
-* `monitors::String[] `        : Filter for variables used in Mamba post-processing
-* `output_format::Symbol `     : Specifies the required output format (:array for CmdStan.jl)
+* `tmpdir::String`             : Directory where output files are stored
+* `output_format::Symbol `     : Output format
 ```
 
 ### CmdStan.jl supports 3 output_format values:
 ```julia     
-1. :array                 # Returns an array of draws
+1. :array           # Returns an array of draws
 2. :namedarray      # Returns a NamedArrays object 
-3. :mcmcchains     # Return an MCMCChains.Chains object (default)
+3. :mcmcchains      # Return an MCMCChains.Chains object (default)
 
-The first 2 return an Array{Float64, 3} with ndraws, nvars, nchains as indices.
-The 3rd option (the default) returns an MCMCChains.Chains object.
+The first 2 return an Array{Float64, 3} with ndraws, nvars, nchains
+as indices. The 3rd option (the default) returns an
+MCMCChains.Chains object.
 
-Other options are availableby `importing` or `using` packages such as:
+Other options are availableby in:
 1. StanDataFrames.jl
 2. StanMamba.jl
 
@@ -116,21 +123,8 @@ See also `?CmdStan.convert_a3d`.
 
 ### Example
 ```julia
-bernoullimodel = "
-data { 
-  int<lower=1> N; 
-  int<lower=0,upper=1> y[N];
-} 
-parameters {
-  real<lower=0,upper=1> theta;
-} 
-model {
-  theta ~ beta(1,1);
-  y ~ bernoulli(theta);
-}
-"
-
-stanmodel = Stanmodel(num_samples=1200, thin=2, name="bernoulli", model=bernoullimodel);
+stanmodel = Stanmodel(num_samples=1200, thin=2, name="bernoulli", 
+  model=bernoullimodel);
 ```
 
 ### Related help
@@ -139,7 +133,7 @@ stanmodel = Stanmodel(num_samples=1200, thin=2, name="bernoulli", model=bernoull
 ?CmdStan.Sample                        : Sampling settings
 ?CmdStan.Method                        : List of available methods
 ?CmdStan.Output                        : Output file settings
-?CmdStan.DataDict                      : Input data dictionaries, will be converted to R syntax
+?CmdStan.DataDict                      : Input data
 ?CmdStan.convert_a3d                   : Options for output formats
 ```
 """
@@ -156,19 +150,15 @@ function Stanmodel(
   random=Random(),
   init=DataDict[],
   output=Output(),
+  printsummary=true,
   pdir::String=pwd(),
+  tmpdir::String=joinpath(pwd(), "tmp"),
   output_format::Symbol=:mcmcchains)
   
-  cd(pdir)
-  
-#=
-  tmpdir = joinpath(pdir, "tmp")
   if !isdir(tmpdir)
     mkdir(tmpdir)
   end
-=#
-  
-  tmpdir = mktempdir()
+
   model_file = "$(name).stan"
   if length(model) > 0
     update_model_file(joinpath(tmpdir, "$(name).stan"), strip(model))
@@ -195,7 +185,7 @@ function Stanmodel(
     num_warmup, num_samples, thin,
     id, model, model_file, monitors,
     data, data_file, cmdarray, method, random,
-    init, init_file, output, tmpdir, output_format);
+    init, init_file, output, printsummary, pdir, tmpdir, output_format);
 end
 
 function model_show(io::IO, m::Stanmodel, compact::Bool)
@@ -211,6 +201,8 @@ function model_show(io::IO, m::Stanmodel, compact::Bool)
   println("    file =                    \"$(m.output.file)\"")
   println("    diagnostics_file =        \"$(m.output.diagnostic_file)\"")
   println("    refresh =                 $(m.output.refresh)")
+  println("  pdir =                   \"$(m.pdir)\"")
+  println("  tmpdir =                 \"$(m.tmpdir)\"")
   println("  output_format =           :$(m.output_format)")
   if isa(m.method, Sample)
     sample_show(io, m.method, compact)
