@@ -19,19 +19,8 @@ cd(ProjDir) do
   }
   "
 
-  bernoullidata = [
-    Dict("N" => 10, "y" => [0, 1, 0, 1, 0, 0, 0, 0, 0, 1]),
-    Dict("N" => 10, "y" => [0, 1, 0, 0, 0, 0, 1, 0, 0, 1]),
-    Dict("N" => 10, "y" => [0, 0, 0, 0, 0, 0, 1, 0, 1, 1]),
-    Dict("N" => 10, "y" => [0, 0, 0, 1, 0, 0, 0, 1, 0, 1])
-  ]
-
-  inittheta = [
-    Dict("theta" => 0.60),
-    Dict("theta" => 0.90),
-    Dict("theta" => 0.50),
-    Dict("theta" => 0.09),
-  ]
+  bernoullidata = Dict("N" => 10, "y" => [0, 1, 0, 1, 0, 0, 0, 0, 0, 1])
+  inittheta = Dict("theta" => 0.60)
 
   global stanmodel, csd, chns
   stanmodel = Stanmodel(name="bernoulli", model=bernoullimodel,
