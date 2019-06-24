@@ -86,6 +86,7 @@ function cmdline(m)
       end
     end
   end
+  #println(cmd)
   cmd
 end
 
