@@ -19,8 +19,6 @@ CmdStan.update_model_file
 ## stan()
 ```@docs
 stan
-CmdStan.stan_summary(filecmd::Cmd; CmdStanDir=CMDSTAN_HOME)
-CmdStan.stan_summary(file::String; CmdStanDir=CMDSTAN_HOME)
 ```
 
 ## Types
@@ -56,6 +54,8 @@ CmdStan.read_optimize
 CmdStan.read_samples
 CmdStan.read_variational
 CmdStan.read_diagnose
+CmdStan.stan_summary
+CmdStan.read_summary
 CmdStan.update_R_file
 CmdStan.read_summary
 ```

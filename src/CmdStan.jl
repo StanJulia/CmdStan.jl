@@ -72,6 +72,7 @@ include("utilities/read_variational.jl")
 include("utilities/read_diagnose.jl")
 include("utilities/read_optimize.jl")
 include("utilities/convert_a3d.jl")
+include("utilities/stan_summary.jl")
 include("utilities/read_summary.jl")
 
 # type definitions
