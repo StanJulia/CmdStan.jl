@@ -8,6 +8,7 @@ CMDSTAN_HOME
 ## `set_cmdstan_home!`
 ```@docs
 CmdStan.set_cmdstan_home!
+CmdStan.rel_path_cmdstan
 ```
 
 ## stanmodel()
@@ -57,7 +58,6 @@ CmdStan.read_diagnose
 CmdStan.stan_summary
 CmdStan.read_summary
 CmdStan.update_R_file
-CmdStan.read_summary
 ```
 
 ## Index
