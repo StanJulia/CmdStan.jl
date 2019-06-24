@@ -23,9 +23,8 @@ Versions 5.x of the package has been tested on Mac OSX 10.14.4, Julia 1.1+ and c
 3. Fixed handling of save_warmup.
 4. Read all optimization iterations (thanks to sdewaele).
 5. Several other minor documentation and type definitions.
-6. Added an example using Tamas Pap's StanDump and StanRun.
-7. Added a test to compare Stan's ESS values with MCMCChains ESS values.
-8. THE init Array{Dict} LENGTH not equal to the data Array{Dict} length is fixed (thanks to sdewaele).
+6. Added a test to compare Stan's ESS values with MCMCChains ESS values.
+7. THE init Array{Dict} LENGTH not equal to the data Array{Dict} length is fixed (thanks to sdewaele).
 
 ### Version 5.0.0 (major level bump)
 
