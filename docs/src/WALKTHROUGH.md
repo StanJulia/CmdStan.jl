@@ -57,7 +57,11 @@ describe(chns)
 plot(chns)
 ```
 
-Stan() returns the results by default in 2 sections, :parameters and :internals. 
+Stan() returns the results by default in 2 sections of the MCMCChains.Chains object, i.e. :parameters and :internals:
+```
+describe(chns)
+describe(chns, sections=[:internals])
+```
 
 The first time (or when updates to the model have been made) stan() will compile the model and create the executable.
 
@@ -65,13 +69,13 @@ On Windows, the CmdStanDir argument appears needed (this is still being investig
 
 By default stan() will run 4 chains and optionally display a combined summary. Some other CmdStan methods, e.g. optimize, return a dictionary.
 
-If `summary = true`, the default settings, the stan summary is also written to a .csv file and can be read in using:
+If `summary = true`, the default, the stan summary is also written to a .csv file and can be read in using:
 ```
 csd = read_summary(Stanmodel)
 csd[:theta, :mean] # Select mean as computed by the stansummary binary.
 ```
 
-Stanmodel has an optional `printsummary=false` to have cmdstan create the summary .csv file but not shown the printout of stansummary.
+Stanmodel has an optional argument `printsummary=false` to have cmdstan create the summary .csv file but not display the stansummary.
 
 ## Running a CmdStan script, some details
 
