@@ -147,14 +147,14 @@ function stan(
   end
   
   if init != Nothing && check_dct_type(init)
-    if typeof(data) <: Array && length(init) == model.nchains
+    if typeof(init) <: Array && length(init) == model.nchains
       for i in 1:model.nchains
         if length(keys(init[i])) > 0
           update_R_file("$(model.name)_$(i).init.R", init[i])
         end
       end
     else
-      if typeof(data) <: Array
+      if typeof(init) <: Array
         for i in 1:model.nchains
           if length(keys(init[1])) > 0
             update_R_file("$(model.name)_$(i).init.R", init[1])

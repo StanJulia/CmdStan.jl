@@ -20,12 +20,7 @@ cd(ProjDir) do
   }
   ";
 
-  observeddata = [
-    Dict("N" => 10, "y" => [0, 1, 0, 1, 0, 0, 0, 0, 0, 1]),
-    Dict("N" => 10, "y" => [0, 1, 0, 0, 0, 0, 1, 0, 0, 1]),
-    Dict("N" => 10, "y" => [0, 0, 0, 0, 0, 0, 1, 0, 1, 1]),
-    Dict("N" => 10, "y" => [0, 0, 0, 1, 0, 0, 0, 1, 0, 1])
-  ]
+  observeddata = Dict("N" => 10, "y" => [0, 1, 0, 1, 0, 0, 0, 0, 0, 1])
 
   global stanmodel, rc, chn, chns, cnames, summary_df
   
@@ -53,8 +48,7 @@ cd(ProjDir) do
     
     # Ceate a ChainDataFrame
     summary_df = read_summary(stanmodel)
-    
-    # E,g, summary_df [:theta, :ess]
+    summary_df[:theta, [:mean, :ess]]
   end
 
 end # cd

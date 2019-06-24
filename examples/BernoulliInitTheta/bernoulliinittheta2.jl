@@ -21,7 +21,7 @@ cd(ProjDir) do
 
   bernoullidata = Dict("N" => 10, "y" => [0, 1, 0, 1, 0, 0, 0, 0, 0, 1])
 
-  inittheta = Dict("theta" => 0.6)
+  inittheta = [Dict("theta" => 0.6), Dict("theta" => 0.6), Dict("theta" => 0.6), Dict("theta" => 0.6)]
 
   global stanmodel
   stanmodel = Stanmodel(name="bernoulli2", model=bernoullimodel, 
