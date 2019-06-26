@@ -19,13 +19,7 @@ cd(ProjDir) do
   }
   "
 
-  bernoullidata = [
-    Dict("N" => 10, "y" => [0, 1, 0, 1, 0, 0, 0, 0, 0, 1]),
-    Dict("N" => 10, "y" => [0, 1, 0, 0, 0, 0, 1, 0, 0, 1]),
-    Dict("N" => 10, "y" => [0, 0, 0, 0, 0, 0, 1, 0, 1, 1]),
-    Dict("N" => 10, "y" => [0, 0, 0, 1, 0, 0, 0, 1, 0, 1])
-  ]
-
+  bernoullidata = Dict("N" => 10, "y" => [0, 1, 0, 1, 0, 0, 0, 0, 0, 1])
   global stanmodel, rc, chns, cnames
   stanmodel = Stanmodel(CmdStan.Variational(), name="bernoulli", 
     output_format=:array, model=bernoulli)

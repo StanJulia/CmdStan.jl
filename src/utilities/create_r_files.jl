@@ -1,6 +1,6 @@
 """
 
-# check_dct_type( 
+# `check_dct_type(`
 
 Check if dct == Dict[] and has length > 0. 
 

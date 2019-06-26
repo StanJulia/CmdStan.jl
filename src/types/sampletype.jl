@@ -112,19 +112,19 @@ Hmc(;
 ```
 ### Optional arguments
 ```julia
-* `engine::Engine`            : Engine for Hamiltonian Monte Carlo
-* `metric::Metric`            : Geometry for base manifold
-* `stepsize::Float64`         : Stepsize for discrete evolutions
-* `stepsize_jitter::Float64`  : Uniform random jitter of the stepsize [%]
+* `engine::Engine`              : Engine for Hamiltonian Monte Carlo
+* `metric::Metric`              : Geometry for base manifold
+* `stepsize::Float64`           : Stepsize for discrete evolutions
+* `stepsize_jitter::Float64`    : Uniform random jitter of the stepsize [%]
 ```
 
 ### Related help
 ```julia
-?Sample                        : Sampling settings
-?Engine                        : Engine for Hamiltonian Monte Carlo
-?Nuts                          : Settings for Nuts
-?Static                        : Settings for Static
-?Metric                        : Base manifold geometries
+?Sample                         : Sampling settings
+?Engine                         : Engine for Hamiltonian Monte Carlo
+?Nuts                           : Settings for Nuts
+?Static                         : Settings for Static
+?Metric                         : Base manifold geometries
 ```
 """
 mutable struct Hmc <: SamplingAlgorithm
