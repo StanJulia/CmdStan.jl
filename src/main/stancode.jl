@@ -245,12 +245,18 @@ function stan(
   
   if model.output_format != :array
     start_sample = 1
-    if !model.method.save_warmup
-      start_sample = model.method.num_warmup+1
+    if isa(model.method, Sample)
+          if !model.method.save_warmup
+            start_sample = model.method.num_warmup+1
+          end
     end
     res = convert_a3d(res, cnames, Val(model.output_format);
       start=start_sample)
   end
+
+
+
+
   
   cd(old)
 
