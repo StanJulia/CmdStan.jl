@@ -33,6 +33,7 @@ Release 5.1.0 contains:
 5. Several other minor documentation and type definition updates.
 6. Fixeda bug related to Array{Dict} inputs to init and data (thanks to sdewaele).
 7. Added a test to compare Stan's ESS values with MCMCChains ESS values.
+8. Updated all examples to have a single Dict as data input (suggested by sdewaele).
 
 CmdStan.jl has been tested on cmdstan v2.19.1.
 
