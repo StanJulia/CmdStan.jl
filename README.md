@@ -24,6 +24,12 @@ Release 5.0.0 of CmdStan.jl is a major level update as it breaks several example
 
 By default a call to stan() will now return an MCMCChains.Chains object (which has been derived from the Mamba.Chains object). The Chains object has facilities for summarizing, diagnostics, plotting and further processing.
 
+Release  5.1.1 contains:
+
+1. Fixed an issue with ```save_warmup``` in Variational (thanks to fargolo).
+2. Fixed a documentation issue in ```rel_path_cmdstan```.
+3. Enabled specifying ```data``` and ```init``` using an existing file.
+
 Release 5.1.0 contains:
 
 1. Support for retrieving stansummary data (read_summary()).

@@ -19,15 +19,15 @@ cd(ProjDir) #do
   }
   "
 
-  bernoullidata = Dict("N" => 10, "y" => [0, 1, 0, 1, 0, 0, 0, 0, 0, 1])
+  datatheta = rel_path_cmdstan("..", "examples", "BernoulliInitTheta", "bernoulli.data.R")
   inittheta = rel_path_cmdstan("..", "examples", "BernoulliInitTheta", "bernoulli.init.R")
 
   global stanmodel
-  stanmodel = Stanmodel(name="bernoulli2", model=bernoullimodel, 
-    output_format=:array, num_warmup=1000, random=CmdStan.Random(seed=-1));
+  stanmodel = Stanmodel(name="bernoulli3", model=bernoullimodel, 
+    output_format=:array, random=CmdStan.Random(seed=-1));
 
   global rc, sim
-  rc, sim, cnames = stan(stanmodel, bernoullidata, ProjDir, 
+  rc, sim, cnames = stan(stanmodel, datatheta, ProjDir, 
     init=inittheta, CmdStanDir=CMDSTAN_HOME, summary=false)
   
   if rc == 0

@@ -41,6 +41,10 @@ rc, sim, cnames = stan(
 * `file_make_log=true`            : Create make log file (if false, write log to stdout)
 ```
 
+If the type the `data` or `init` arguments are an AbstartcString this is interpreted as
+a path name to an existing .R file. This file is copied to the coresponding .R data
+and/or init files for for each chain.
+
 ### Return values
 ```julia
 * `rc::Int`                       : Return code from stan(), rc == 0 if all is well
@@ -122,24 +126,30 @@ function stan(
         
   cd(model.tmpdir)
   
-  if data != Nothing && check_dct_type(data)
-    if typeof(data) <: Array && length(data) == model.nchains
+  if data != Nothing && (typeof(data) <: AbstractString || check_dct_type(data))
+    if typeof(data) <: AbstractString
       for i in 1:model.nchains
-        if length(keys(data[i])) > 0
-          update_R_file("$(model.name)_$(i).data.R", data[i])
-        end
-      end
+        cp(data, "$(model.name)_$(i).data.R", force=true)
+      end   
     else
-      if typeof(data) <: Array
+      if typeof(data) <: Array && length(data) == model.nchains
         for i in 1:model.nchains
-          if length(keys(data[1])) > 0
-            update_R_file("$(model.name)_$(i).data.R", data[1])
+          if length(keys(data[i])) > 0
+            update_R_file("$(model.name)_$(i).data.R", data[i])
           end
         end
       else
-        for i in 1:model.nchains
-          if length(keys(data)) > 0
-            update_R_file("$(model.name)_$(i).data.R", data)
+        if typeof(data) <: Array
+          for i in 1:model.nchains
+            if length(keys(data[1])) > 0
+              update_R_file("$(model.name)_$(i).data.R", data[1])
+            end
+          end
+        else
+          for i in 1:model.nchains
+            if length(keys(data)) > 0
+              update_R_file("$(model.name)_$(i).data.R", data)
+            end
           end
         end
       end

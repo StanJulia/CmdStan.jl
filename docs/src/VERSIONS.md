@@ -20,7 +20,7 @@ Versions 5.x of the package has been tested on Mac OSX 10.14.4, Julia 1.1+ and c
 
 1. Fixed an issue with ```save_warmup``` in Variational (thanks to fargolo).
 2. Fixed a documentation issue in ```rel_path_cmdstan```.
-3. Enabled specifying ```init``` using an existing file. Will add this to ```data``` as well.
+3. Enabled specifying ```data``` and ```init``` using an existing file.
 
 ### Version 5.1.0
 
