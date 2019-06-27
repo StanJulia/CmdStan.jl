@@ -19,21 +19,16 @@ cd(ProjDir) do
   }
   "
 
-  bernoullidata = [
-    Dict("N" => 10, "y" => [0, 1, 0, 1, 0, 0, 0, 0, 0, 1]),
-    Dict("N" => 10, "y" => [0, 1, 0, 0, 0, 0, 1, 0, 0, 1]),
-    Dict("N" => 10, "y" => [0, 0, 0, 0, 0, 0, 1, 0, 1, 1]),
-    Dict("N" => 10, "y" => [0, 0, 0, 1, 0, 0, 0, 1, 0, 1])
-  ]
-
+  bernoullidata = Dict("N" => 10, "y" => [0, 1, 0, 1, 0, 0, 0, 0, 0, 1])
   global stanmodel, rc, chns, cnames
   stanmodel = Stanmodel(CmdStan.Variational(), name="bernoulli", 
-    output_format=:array, model=bernoulli)
+    model=bernoulli)
 
   rc, chns, cnames = stan(stanmodel, bernoullidata, ProjDir, CmdStanDir=CMDSTAN_HOME)
 
   if rc == 0
     println()
-    @test 0.0 <= round.(mean(chns[:, 4, 1]), digits=1) <= 2.0
+    sdf = read_summary(stanmodel)
+    @test 0.0 <= sdf[:theta, :mean][1] <= 2.0
   end
 end # cd

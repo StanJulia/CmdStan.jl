@@ -10,23 +10,23 @@ Convert the output file created by cmdstan to the shape of choice.
 
 ### Method
 ```julia
-convert_a3d(a3d_array, cnames, ::Val{Symbol}; start=)
+convert_a3d(a3d_array, cnames, ::Val{Symbol}; start=1)
 ```
 ### Required arguments
 ```julia
-* `a3d_array::Array{Float64}(n_draws, n_variables, n_chains`      : Read in from output files created by cmdstan                                   
-* `cnames::Vector{AbstractString}`                                                 : Monitored variable names
+* `a3d_array::Array{Float64, 3},`      : Read in from output files created by cmdstan                                   
+* `cnames::Vector{AbstractString}`     : Monitored variable names
 ```
 
 ### Optional arguments
 ```julia
-* `::Val{Symbol} = :array`  : Output format
-* `::Start=1` : First draw for MCMCChains.Chains (typically warmup_samples+1)
+* `::Val{Symbol}`                      : Output format
+* `::start=1`                          : First draw for MCMCChains.Chains
 ```
 Method called is based on the output_format defined in the stanmodel, e.g.:
 
-   stanmodel = Stanmodel(num/_samples=1200, thin=2, name="bernoulli", 
-     model=bernoullimodel, output_format=:mcmcchains);
+   stanmodel = Stanmodel(`num_samples`=1200, thin=2, name="bernoulli", 
+     model=bernoullimodel, `output_format`=:mcmcchains);
 
 Current formats supported are:
 

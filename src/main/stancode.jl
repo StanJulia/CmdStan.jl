@@ -41,6 +41,10 @@ rc, sim, cnames = stan(
 * `file_make_log=true`            : Create make log file (if false, write log to stdout)
 ```
 
+If the type the `data` or `init` arguments are an AbstartcString this is interpreted as
+a path name to an existing .R file. This file is copied to the coresponding .R data
+and/or init files for for each chain.
+
 ### Return values
 ```julia
 * `rc::Int`                       : Return code from stan(), rc == 0 if all is well
@@ -122,48 +126,60 @@ function stan(
         
   cd(model.tmpdir)
   
-  if data != Nothing && check_dct_type(data)
-    if typeof(data) <: Array && length(data) == model.nchains
+  if data != Nothing && (typeof(data) <: AbstractString || check_dct_type(data))
+    if typeof(data) <: AbstractString
       for i in 1:model.nchains
-        if length(keys(data[i])) > 0
-          update_R_file("$(model.name)_$(i).data.R", data[i])
-        end
-      end
+        cp(data, "$(model.name)_$(i).data.R", force=true)
+      end   
     else
-      if typeof(data) <: Array
+      if typeof(data) <: Array && length(data) == model.nchains
         for i in 1:model.nchains
-          if length(keys(data[1])) > 0
-            update_R_file("$(model.name)_$(i).data.R", data[1])
+          if length(keys(data[i])) > 0
+            update_R_file("$(model.name)_$(i).data.R", data[i])
           end
         end
       else
-        for i in 1:model.nchains
-          if length(keys(data)) > 0
-            update_R_file("$(model.name)_$(i).data.R", data)
+        if typeof(data) <: Array
+          for i in 1:model.nchains
+            if length(keys(data[1])) > 0
+              update_R_file("$(model.name)_$(i).data.R", data[1])
+            end
+          end
+        else
+          for i in 1:model.nchains
+            if length(keys(data)) > 0
+              update_R_file("$(model.name)_$(i).data.R", data)
+            end
           end
         end
       end
     end
   end
   
-  if init != Nothing && check_dct_type(init)
-    if typeof(data) <: Array && length(init) == model.nchains
+  if init != Nothing && (typeof(init) <: AbstractString || check_dct_type(init))
+    if typeof(init) <: AbstractString
       for i in 1:model.nchains
-        if length(keys(init[i])) > 0
-          update_R_file("$(model.name)_$(i).init.R", init[i])
-        end
-      end
+        cp(init, "$(model.name)_$(i).init.R", force=true)
+      end   
     else
-      if typeof(data) <: Array
+      if typeof(init) <: Array && length(init) == model.nchains
         for i in 1:model.nchains
-          if length(keys(init[1])) > 0
-            update_R_file("$(model.name)_$(i).init.R", init[1])
+          if length(keys(init[i])) > 0
+            update_R_file("$(model.name)_$(i).init.R", init[i])
           end
         end
       else
-        for i in 1:model.nchains
-          if length(keys(init)) > 0
-            update_R_file("$(model.name)_$(i).init.R", init)
+        if typeof(init) <: Array
+          for i in 1:model.nchains
+            if length(keys(init[1])) > 0
+              update_R_file("$(model.name)_$(i).init.R", init[1])
+            end
+          end
+        else
+          for i in 1:model.nchains
+            if length(keys(init)) > 0
+              update_R_file("$(model.name)_$(i).init.R", init)
+            end
           end
         end
       end
@@ -245,10 +261,8 @@ function stan(
   
   if model.output_format != :array
     start_sample = 1
-    if isa(model.method, Sample)
-          if !model.method.save_warmup
-            start_sample = model.method.num_warmup+1
-          end
+    if isa(model.method, Sample) && !model.method.save_warmup
+      start_sample = model.method.num_warmup+1
     end
     res = convert_a3d(res, cnames, Val(model.output_format);
       start=start_sample)
@@ -263,102 +277,3 @@ function stan(
   (rc, res, cnames)
   
 end
-
-"""
-
-# Method stan_summary
-
-Display cmdstan summary 
-
-### Method
-```julia
-stan_summary(
-  model::StanModel,
-  file::String; 
-  CmdStanDir=CMDSTAN_HOME
-)
-```
-### Required arguments
-```julia
-* `model::Stanmodel             : Stanmodel
-* `file::String`                : Name of file with samples
-```
-
-### Optional arguments
-```julia
-* CmdStanDir=CMDSTAN_HOME       : cmdstan directory for stansummary program
-```
-
-### Related help
-```julia
-?Stan.stan                      : Execute a StanModel
-```
-"""
-function stan_summary(model::Stanmodel, file::String; 
-  CmdStanDir=CMDSTAN_HOME)
-  try
-    pstring = joinpath("$(CmdStanDir)", "bin", "stansummary")
-    csvfile = "$(model.name)_summary.csv"
-    isfile(csvfile) && rm(csvfile)
-    cmd = `$(pstring) --csv_file=$(csvfile) $(file)`
-    resfile = open(cmd; read=true)
-    println("Setting $(model.printsummary)")
-    model.printsummary && print(read(resfile, String))
-  catch e
-    println(e)
-  end
-end
-
-"""
-
-# Method stan_summary
-
-Display cmdstan summary 
-
-### Method
-```julia
-stan_summary(
-  model::Stanmodel
-  filecmd::Cmd; 
-  CmdStanDir=CMDSTAN_HOME
-)
-```
-### Required arguments
-```julia
-* `model::Stanmodel`            : Stanmodel
-* `filecmd::Cmd`                : Run command containing names of sample files
-```
-
-### Optional arguments
-```julia
-* CmdStanDir=CMDSTAN_HOME       : cmdstan directory for stansummary program
-```
-
-### Related help
-```julia
-?Stan.stan                      : Create a StanModel
-```
-"""
-function stan_summary(model::Stanmodel, filecmd::Cmd;
-    CmdStanDir=CMDSTAN_HOME)
-  try
-    pstring = joinpath("$(CmdStanDir)", "bin", "stansummary")
-    csvfile = "$(model.name)_summary.csv"
-    isfile(csvfile) && rm(csvfile)
-    cmd = `$(pstring) --csv_file=$(csvfile) $(filecmd)`
-    if model.printsummary
-      resfile = open(cmd; read=true)
-      print(read(resfile, String))
-    else
-      run(pipeline(cmd, stdout="out.txt"))
-    end
-  catch e
-    println(e)
-    println("Stan.jl caught above exception in Stan's 'stansummary' program.")
-    println("This is a usually caused by the setting:")
-    println("  Sample(save_warmup=true, thin=n)")
-    println("in the call to stanmodel() with n > 1.")
-    println()
-  end
-end
-

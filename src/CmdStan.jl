@@ -39,9 +39,9 @@ const src_path = @__DIR__
 
 """
 
-# rel_path_c
+# `rel_path_cmdstan`
 
-Relative path using the StatisticalRethinking src/ directory. Copied from
+Relative path using the CmdStan.jl src directory. This approach has been copied from
 [DynamicHMCExamples.jl](https://github.com/tpapp/DynamicHMCExamples.jl)
 
 ### Example to get access to the data subdirectory
@@ -72,6 +72,7 @@ include("utilities/read_variational.jl")
 include("utilities/read_diagnose.jl")
 include("utilities/read_optimize.jl")
 include("utilities/convert_a3d.jl")
+include("utilities/stan_summary.jl")
 include("utilities/read_summary.jl")
 
 # type definitions

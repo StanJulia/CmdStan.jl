@@ -44,9 +44,9 @@ Variational(;
 
 ### Related help
 ```julia
-?Stanmodel                      : Create a StanModel
-?Stan.Method                    : Available top level methods
-?Stan.Adapt                     : Adaptation settings
+?Stanmodel                        : Create a StanModel
+?Stan.Method                      : Available top level methods
+?Stan.Adapt                       : Adaptation settings
 ```
 """
 Variational(;grad_samples=1, elbo_samples=100,

@@ -10,9 +10,7 @@
 
 ## StanJulia
 
-CmdStan.jl is part of the [StanJulia Github organization](https://github.com/StanJulia) set of packages. It captures draws from a Stan language program and returns an array of values for each accepted draw for each monitored varable in all chains.
-
-Other packages in StanJulia are either extensions, postprocessing of the draws or plotting of the results. As much as possible an attempt has been made to leverage the MCMCChains.jl package to make comparisons with other mcmc packages easier.
+CmdStan.jl is part of the [StanJulia Github organization](https://github.com/StanJulia) set of packages. It captures draws from a Stan language program and returns by default an MCMCChains.Chains object. As much as possible an attempt has been made to leverage the MCMCChains.jl package for diagnostics, postprocessing and to make comparisons with other mcmc packages easier.
 
 On a very high level, a typical workflow for using StanJulia and handle postprocessing by TuringLang's MCMCChains.jl, will look like:
 
@@ -40,7 +38,7 @@ plot(chns)
 
 This workflow creates an [MCMCChains.Chains](https://github.com/TuringLang/MCMCChains.jl) object for summarizing, diagnostics, plotting and further processing.
 
-A similar workflow is available for Mamba [StanMamba.jl](https://github.com/StanJulia/StanMamba.jl). Another option is to convert the array of draws to a DataFrame using [StanDataFrames.jl](https://github.com/StanJulia/StanDataFrames.jl).
+Another option is to convert the array of draws to a DataFrame using [StanDataFrames.jl](https://github.com/StanJulia/StanDataFrames.jl). This latter option is also available in the MCMCChains package through methods like `DataFrame(...)` and `Array(...)`. A similar workflow is available for Mamba [StanMamba.jl](https://github.com/StanJulia/StanMamba.jl). 
 
 The default value for the `output_format` argument in Stanmodel() is :mcmcchains which causes stan() to call a conversion method ```convert_a3d()``` that returns the MCMCChains.Chains object.
 

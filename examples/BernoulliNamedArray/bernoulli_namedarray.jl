@@ -19,13 +19,7 @@ cd(ProjDir) do
   }
   "
 
-  observeddata = [
-    Dict("N" => 10, "y" => [0, 1, 0, 1, 0, 0, 0, 0, 0, 1]),
-    Dict("N" => 10, "y" => [0, 1, 0, 0, 0, 0, 1, 0, 0, 1]),
-    Dict("N" => 10, "y" => [0, 0, 0, 0, 0, 0, 1, 0, 1, 1]),
-    Dict("N" => 10, "y" => [0, 0, 0, 1, 0, 0, 0, 1, 0, 1])
-  ]
-
+  observeddata = Dict("N" => 10, "y" => [0, 1, 0, 1, 0, 0, 0, 0, 0, 1])
   global stanmodel, rc, sim, cnames
   stanmodel = Stanmodel(num_samples=1200, thin=2, name="bernoulli", 
     model=bernoullimodel, output_format=:namedarray);

@@ -19,32 +19,29 @@ cd(ProjDir) do
   }
   "
 
-  bernoullidata = [
-    Dict("N" => 10, "y" => [0, 1, 0, 1, 0, 0, 0, 0, 0, 1]),
-    Dict("N" => 10, "y" => [0, 1, 0, 0, 0, 0, 1, 0, 0, 1]),
-    Dict("N" => 10, "y" => [0, 0, 0, 0, 0, 0, 1, 0, 1, 1]),
-    Dict("N" => 10, "y" => [0, 0, 0, 1, 0, 0, 0, 1, 0, 1])
-  ]
+  bernoullidata = Dict("N" => 10, "y" => [0, 1, 0, 1, 0, 0, 0, 0, 0, 1])
+  inittheta = Dict("theta" => 0.60)
 
-  inittheta = [
-    Dict("theta" => 0.31),
-    Dict("theta" => 0.32),
-    Dict("theta" => 0.33),
-    Dict("theta" => 0.34),
-  ]
-
-  global stanmodel
+  global stanmodel, csd, chns
   stanmodel = Stanmodel(name="bernoulli", model=bernoullimodel,
-    output_format=:array, num_warmup=1);
+    output_format=:mcmcchains, random=CmdStan.Random(seed=-1),
+    num_warmup=1000, printsummary=false);
 
   global rc, sim
-  rc, sim, cnames = stan(stanmodel, bernoullidata, ProjDir, 
-    init=inittheta, CmdStanDir=CMDSTAN_HOME, summary=false)
+  rc, chns, cnames = stan(stanmodel, bernoullidata, ProjDir, 
+    init=inittheta, CmdStanDir=CMDSTAN_HOME)
   
   if rc == 0
     println()
     println("Test 0.2 <= mean(theta[1]) <= 0.5)")
-    @test 0.2 <= round.(mean(sim[:,8,:]), digits=1) <= 0.5
+    csd = read_summary(stanmodel)
+    @test 0.2 <= csd[:theta, :mean][1] <= 0.5
   end
+  
+  #=
+  using StatsPlots
+  pyplot()                      # PyPlot.jl needs to be in environment
+  plot(chns)
+  =#
 
 end # cd

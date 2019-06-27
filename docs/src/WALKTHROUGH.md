@@ -41,7 +41,7 @@ The observed input data is defined below.
 ```
 bernoullidata = Dict("N" => 10, "y" => [0, 1, 0, 1, 0, 0, 0, 0, 0, 1])
 ```
-Each chain will use this data. If needed, an Array{Dict} can be defined with the same number of entries as the number of chains. This is also true for the optional `init` argument to stan().
+Each chain will use this data. If needed, an Array{Dict} can be defined with the same number of entries as the number of chains. This is also true for the optional `init` argument to stan(). Use these features with care, particularly providing different data as the chains are supposed to be from identical observed data.
 
 Run the simulation by calling stan(), passing in the data and the intended working directory. 
 ```
@@ -54,16 +54,28 @@ If the return code rc indicated success (rc == 0), cmdstan execution completed s
 Next possible steps can be:
 ```
 describe(chns)
-plot(chhs)
+plot(chns)
 ```
 
-Stan() returns the results by default in 2 sections, :parameters and :internals. 
+Stan() returns the results by default in 2 sections of the MCMCChains.Chains object, i.e. :parameters and :internals:
+```
+describe(chns)
+describe(chns, sections=[:internals])
+```
 
 The first time (or when updates to the model have been made) stan() will compile the model and create the executable.
 
 On Windows, the CmdStanDir argument appears needed (this is still being investigated). On OSX/Unix CmdStanDir is obtained from an environment variable (see the Requirements section).
 
 By default stan() will run 4 chains and optionally display a combined summary. Some other CmdStan methods, e.g. optimize, return a dictionary.
+
+If `summary = true`, the default, the stan summary is also written to a .csv file and can be read in using:
+```
+csd = read_summary(Stanmodel)
+csd[:theta, :mean] # Select mean as computed by the stansummary binary.
+```
+
+Stanmodel has an optional argument `printsummary=false` to have cmdstan create the summary .csv file but not display the stansummary.
 
 ## Running a CmdStan script, some details
 

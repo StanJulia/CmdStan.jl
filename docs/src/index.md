@@ -8,6 +8,7 @@ CMDSTAN_HOME
 ## `set_cmdstan_home!`
 ```@docs
 CmdStan.set_cmdstan_home!
+CmdStan.rel_path_cmdstan
 ```
 
 ## stanmodel()
@@ -19,8 +20,6 @@ CmdStan.update_model_file
 ## stan()
 ```@docs
 stan
-CmdStan.stan_summary(filecmd::Cmd; CmdStanDir=CMDSTAN_HOME)
-CmdStan.stan_summary(file::String; CmdStanDir=CMDSTAN_HOME)
 ```
 
 ## Types
@@ -56,8 +55,9 @@ CmdStan.read_optimize
 CmdStan.read_samples
 CmdStan.read_variational
 CmdStan.read_diagnose
-CmdStan.update_R_file
+CmdStan.stan_summary
 CmdStan.read_summary
+CmdStan.update_R_file
 ```
 
 ## Index
