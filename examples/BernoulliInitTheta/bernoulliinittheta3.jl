@@ -3,7 +3,7 @@
 using CmdStan, Test, Statistics
 
 ProjDir = dirname(@__FILE__)
-cd(ProjDir) do
+cd(ProjDir) #do
 
   bernoullimodel = "
   data { 
@@ -20,7 +20,7 @@ cd(ProjDir) do
   "
 
   bernoullidata = Dict("N" => 10, "y" => [0, 1, 0, 1, 0, 0, 0, 0, 0, 1])
-  inittheta = [Dict("theta" => 0.6), Dict("theta" => 0.4), Dict("theta" => 0.2), Dict("theta" => 0.1)]
+  inittheta = rel_path_cmdstan("..", "examples", "BernoulliInitTheta", "bernoulli.init.R")
 
   global stanmodel
   stanmodel = Stanmodel(name="bernoulli2", model=bernoullimodel, 
@@ -36,4 +36,4 @@ cd(ProjDir) do
     @test 0.2 <= round.(mean(sim[:,8,:]), digits=1) <= 0.5
   end
 
-end # cd
+  #end # cd

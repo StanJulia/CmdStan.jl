@@ -146,24 +146,30 @@ function stan(
     end
   end
   
-  if init != Nothing && check_dct_type(init)
-    if typeof(init) <: Array && length(init) == model.nchains
+  if init != Nothing && (typeof(init) <: AbstractString || check_dct_type(init))
+    if typeof(init) <: AbstractString
       for i in 1:model.nchains
-        if length(keys(init[i])) > 0
-          update_R_file("$(model.name)_$(i).init.R", init[i])
-        end
-      end
+        cp(init, "$(model.name)_$(i).init.R", force=true)
+      end   
     else
-      if typeof(init) <: Array
+      if typeof(init) <: Array && length(init) == model.nchains
         for i in 1:model.nchains
-          if length(keys(init[1])) > 0
-            update_R_file("$(model.name)_$(i).init.R", init[1])
+          if length(keys(init[i])) > 0
+            update_R_file("$(model.name)_$(i).init.R", init[i])
           end
         end
       else
-        for i in 1:model.nchains
-          if length(keys(init)) > 0
-            update_R_file("$(model.name)_$(i).init.R", init)
+        if typeof(init) <: Array
+          for i in 1:model.nchains
+            if length(keys(init[1])) > 0
+              update_R_file("$(model.name)_$(i).init.R", init[1])
+            end
+          end
+        else
+          for i in 1:model.nchains
+            if length(keys(init)) > 0
+              update_R_file("$(model.name)_$(i).init.R", init)
+            end
           end
         end
       end
@@ -245,7 +251,7 @@ function stan(
   
   if model.output_format != :array
     start_sample = 1
-    if !model.method.save_warmup
+    if isa(model.method, Sample) && !model.method.save_warmup
       start_sample = model.method.num_warmup+1
     end
     res = convert_a3d(res, cnames, Val(model.output_format);

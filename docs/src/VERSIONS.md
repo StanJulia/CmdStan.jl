@@ -16,6 +16,12 @@ Updates for new releases of Julia and cmdstan bump the appropriate level.
 
 Versions 5.x of the package has been tested on Mac OSX 10.14.4, Julia 1.1+ and cmdstan 2.19.1.
 
+### Version 5.1.1
+
+1. Fixed an issue with ```save_warmup``` in Variational (thanks to fargolo).
+2. Fixed a documentation issue in ```rel_path_cmdstan```.
+3. Enabled specifying ```init``` using an existing file. Will add this to ```data``` as well.
+
 ### Version 5.1.0
 
 1. Added support for retrieving stansummary data (read_summary()).
