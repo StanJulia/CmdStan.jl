@@ -39,20 +39,11 @@ stanmodel = Stanmodel(Sample(save_warmup=true, num_warmup=1000,
   num_samples=2000, thin=1), name="bernoulli", model=bernoulli_model,
   printsummary=false, tmpdir=mktempdir());
 
-rc, chn, cnames = stan(stanmodel, observeddata, ProjDir, diagnostics=false,
-  CmdStanDir=CMDSTAN_HOME);
+rc, chn, cnames = stan(stanmodel, observeddata, ProjDir);
 
 chns = chn[1001:end, :, :]
 
 if rc == 0
-  # Check if StatsPlots is available
-  if isdefined(Main, :StatsPlots)
-    p1 = plot(chns)
-    savefig(p1, "traceplot.pdf")
-    p2 = pooleddensity(chns)
-    savefig(p2, "pooleddensity.pdf")
-  end
-  
   # Describe the results
   show(chns)
   println()
