@@ -45,7 +45,6 @@ function parse_and_interpolate(model)
   lines = split(model, "\n")
   for l in lines
     ls = String(strip(l))
-    println(typeof(ls))
     replace_strings = findall("#include", ls)
     if length(replace_strings) == 1 && 
         # handle the case the include line is commented out

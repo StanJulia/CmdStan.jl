@@ -64,7 +64,7 @@ function read_summary(m::Stanmodel)
   df = DataFrame()
   
   for (i, var) in enumerate(cnames)
-    df[!, Symbol(var)] = mat[i]
+    df[Symbol(var)] = mat
   end
   
   ChainDataFrame("CmdStan Summary", df)
