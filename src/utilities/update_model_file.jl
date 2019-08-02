@@ -40,11 +40,11 @@ function update_model_file(file::AbstractString, model::AbstractString)
   
 end
 
-function parse_and_interpolate(model::AbstractString)
+function parse_and_interpolate(model)
   newmodel = ""
   lines = split(model, "\n")
   for l in lines
-    ls = strip(l)
+    ls = String(strip(l))
     replace_strings = findall("#include", ls)
     if length(replace_strings) == 1 && 
         # handle the case the include line is commented out

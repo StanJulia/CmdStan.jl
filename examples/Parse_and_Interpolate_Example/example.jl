@@ -34,7 +34,6 @@ bernoulli_model = "
 ";
 
 observeddata = Dict("N" => 10, "y" => [0, 1, 0, 1, 0, 0, 0, 0, 0, 1])
-tmpdir = joinpath(@__DIR__, "tmp")
 
 stanmodel = Stanmodel(Sample(save_warmup=true, num_warmup=1000, 
   num_samples=2000, thin=1), name="bernoulli", model=bernoulli_model,
