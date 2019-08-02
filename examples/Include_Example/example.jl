@@ -1,3 +1,6 @@
+# Another way to include functions.
+# See Parse_and_Iterate_Example for the Stan way.
+
 using CmdStan, Distributions, Random
 
 ProjDir = @__DIR__
