@@ -35,17 +35,16 @@ bernoulli_model = "
 
 observeddata = Dict("N" => 10, "y" => [0, 1, 0, 1, 0, 0, 0, 0, 0, 1])
 
-stanmodel = Stanmodel(Sample(save_warmup=true, num_warmup=1000, 
-  num_samples=2000, thin=1), name="bernoulli", model=bernoulli_model,
-  printsummary=false, tmpdir=mktempdir());
+tmpdir = ProjDir*"/tmp"
+
+stanmodel = Stanmodel(name="bernoulli", model=bernoulli_model,
+  printsummary=true, tmpdir=tmpdir);
 
 rc, chn, cnames = stan(stanmodel, observeddata, ProjDir);
 
-chns = chn[1001:end, :, :]
-
 if rc == 0
   # Describe the results
-  show(chns)
+  show(chn)
   println()
   
   # Ceate a ChainDataFrame
