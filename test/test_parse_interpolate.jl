@@ -1,4 +1,4 @@
-using StanSample
+using CmdStan
 
 ProjDir = @__DIR__
 cd(ProjDir)
@@ -23,31 +23,22 @@ bernoulli_model = "
   }
 ";
 
-try
-  stanmodel = SampleModel("bernoulli", bernoulli_model, tmpdir=tmpdir)
-catch e
-  println(e)
-  model = open(f -> read(f, String), tmpdir*"/bernoulli.stan")
-  println(model)
-  println()
-end  
 observeddata = Dict("N" => 10, "y" => [0, 1, 0, 1, 0, 0, 0, 0, 0, 1])
 
-(sample_file, log_file) = stan_sample(stanmodel, data=observeddata)
+stanmodel = Stanmodel(Sample(save_warmup=true, num_warmup=1000, 
+  num_samples=2000, thin=1), name="bernoulli", model=bernoulli_model,
+  printsummary=false, tmpdir=mktempdir());
 
-if sample_file !== Nothing
-  # Convert to an MCMCChains.Chains object
-  chns = read_samples(stanmodel)
+rc, chn, cnames = stan(stanmodel, observeddata, ProjDir);
 
-  # Describe the MCMCChains using MCMCChains statistics
-  cdf = describe(chns)
-  display(cdf)
+chns = chn[1001:end, :, :]
 
-  # Show cmdstan summary in DataFrame format
-  sdf = read_summary(stanmodel)
-  display(sdf)
+if rc == 0
+  # Describe the results
+  show(chns)
   println()
-
-  # Retrieve mean value of theta from the summary
-  sdf[:theta, :mean]
+  
+  # Ceate a ChainDataFrame
+  summary_df = read_summary(stanmodel)
+  summary_df[:theta, [:mean, :ess]]
 end
