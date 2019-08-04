@@ -74,6 +74,7 @@ include("utilities/read_optimize.jl")
 include("utilities/convert_a3d.jl")
 include("utilities/stan_summary.jl")
 include("utilities/read_summary.jl")
+include("utilities/findall.jl")
 
 # type definitions
 
