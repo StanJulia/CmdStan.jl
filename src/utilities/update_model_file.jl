@@ -45,7 +45,11 @@ function parse_and_interpolate(model)
   lines = split(model, "\n")
   for l in lines
     ls = String(strip(l))
-    replace_strings = findall("#include", ls)
+    if VERSION.minor >= 3
+      replace_strings = findall("#include", ls)
+    else
+      replace_strings = CmdStan._findall("#include", ls)
+    end
     if length(replace_strings) == 1 && 
         # handle the case the include line is commented out
         length(ls) > 2 && !(ls[1:2] == "//")
