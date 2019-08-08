@@ -25,4 +25,4 @@ stanmodel = Stanmodel(Sample(save_warmup=true, num_warmup=1000,
   num_samples=2000, thin=1), name="bernoulli", model=bernoullimodel,
   printsummary=false, tmpdir=tmpdir);
 
-println("\mTest for Atom completed, stanmodel should not have been displayed\n")
+println("\nTest for Atom completed, stanmodel should not have been displayed\n")

@@ -59,17 +59,17 @@ Variational(;grad_samples=1, elbo_samples=100,
 
 function variational_show(io::IO, v::Variational, compact::Bool)
   if compact
-    println("Variational($(v.algorithm). $(v.grad_samples), $(v.elbo_samples), $(v.eta_adagrad), $(v.iter), $(v.tol_rel_obj), $(v.eval_elbo), $(v.output_samples))")
+    println(io, "Variational($(v.algorithm). $(v.grad_samples), $(v.elbo_samples), $(v.eta_adagrad), $(v.iter), $(v.tol_rel_obj), $(v.eval_elbo), $(v.output_samples))")
   else
-    println("    method =                  Variational()")
-    println("    algorithm =               ", v.algorithm)
-    println("    grad_samples =            ", v.grad_samples)
-    println("    elbo_samples =            ", v.elbo_samples)
-   #println("    eta_adagrad =             ", v.eta_adagrad)
-    println("    iter =                    ", v.iter)
-    println("    tol_rel_obj =             ", v.tol_rel_obj)
-    println("    eval_elbo =               ", v.eval_elbo)
-    println("    output_samples =          ", v.output_samples)
+    println(io, "    method =                  Variational()")
+    println(io, "    algorithm =               ", v.algorithm)
+    println(io, "    grad_samples =            ", v.grad_samples)
+    println(io, "    elbo_samples =            ", v.elbo_samples)
+   #println(io, "    eta_adagrad =             ", v.eta_adagrad)
+    println(io, "    iter =                    ", v.iter)
+    println(io, "    tol_rel_obj =             ", v.tol_rel_obj)
+    println(io, "    eval_elbo =               ", v.eval_elbo)
+    println(io, "    output_samples =          ", v.output_samples)
   end
 end
 
