@@ -260,43 +260,39 @@ Sample(;num_samples::Number=1000, num_warmup::Number=1000,
   adapt::Adapt=Adapt(), algorithm::SamplingAlgorithm=Hmc()) = 
     Sample(num_samples, num_warmup, save_warmup, thin, adapt, algorithm)
 
-function sample_show(io::IO, s::Sample, compact::Bool)
-  if compact
-    println("Sample($(s.num_samples), $(s.num_warmup), $(s.save_warmup), $(s.thin), $(s.adapt), $(s.algorithm))")
-  else
-    println("  method =                  Sample()")
-    println("    num_samples =             ", s.num_samples)
-    println("    num_warmup =              ", s.num_warmup)
-    println("    save_warmup =             ", s.save_warmup)
-    println("    thin =                    ", s.thin)
-    if isa(s.algorithm, Hmc)
-      println("    algorithm =               HMC()")
-      if isa(s.algorithm.engine, Nuts)
-        println("      engine =                  NUTS()")
-        println("        max_depth =               ", s.algorithm.engine.max_depth)
-      elseif isa(s.algorithm.engine, Static)
-        println("      engine =                  Static()")
-        println("        int_time =                ", s.algorithm.engine.int_time)
-      end
-      println("      metric =                  ", typeof(s.algorithm.metric))
-      println("      stepsize =                ", s.algorithm.stepsize)
-      println("      stepsize_jitter =         ", s.algorithm.stepsize_jitter)
-    else
-      if isa(s.algorithm, Fixed_param)
-        println("    algorithm =               Fixed_param()")
-      else
-        println("    algorithm =               Unknown")
-      end
+function sample_show(io::IO, s::Sample, compact)
+  println("  method =                  Sample()")
+  println("    num_samples =             ", s.num_samples)
+  println("    num_warmup =              ", s.num_warmup)
+  println("    save_warmup =             ", s.save_warmup)
+  println("    thin =                    ", s.thin)
+  if isa(s.algorithm, Hmc)
+    println("    algorithm =               HMC()")
+    if isa(s.algorithm.engine, Nuts)
+      println("      engine =                  NUTS()")
+      println("        max_depth =               ", s.algorithm.engine.max_depth)
+    elseif isa(s.algorithm.engine, Static)
+      println("      engine =                  Static()")
+      println("        int_time =                ", s.algorithm.engine.int_time)
     end
-    println("    adapt =                   Adapt()")
-    println("      gamma =                   ", s.adapt.gamma)
-    println("      delta =                   ", s.adapt.delta)
-    println("      kappa =                   ", s.adapt.kappa)
-    println("      t0 =                      ", s.adapt.t0)
-    println("      init_buffer =             ", s.adapt.init_buffer)
-    println("      term_buffer =             ", s.adapt.term_buffer)
-    println("      window =                  ", s.adapt.window)
+    println("      metric =                  ", typeof(s.algorithm.metric))
+    println("      stepsize =                ", s.algorithm.stepsize)
+    println("      stepsize_jitter =         ", s.algorithm.stepsize_jitter)
+  else
+    if isa(s.algorithm, Fixed_param)
+      println("    algorithm =               Fixed_param()")
+    else
+      println("    algorithm =               Unknown")
+    end
   end
+  println("    adapt =                   Adapt()")
+  println("      gamma =                   ", s.adapt.gamma)
+  println("      delta =                   ", s.adapt.delta)
+  println("      kappa =                   ", s.adapt.kappa)
+  println("      t0 =                      ", s.adapt.t0)
+  println("      init_buffer =             ", s.adapt.init_buffer)
+  println("      term_buffer =             ", s.adapt.term_buffer)
+  println("      window =                  ", s.adapt.window)
 end
 
 show(io::IO, s::Sample) = sample_show(io, s, false)

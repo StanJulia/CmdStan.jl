@@ -188,11 +188,11 @@ function Stanmodel(
     init, init_file, output, printsummary, pdir, tmpdir, output_format);
 end
 
-function model_show(io::IO, m::Stanmodel, compact::Bool)
+function model_show(io::IO, m::Stanmodel, compact)
   println("  name =                    \"$(m.name)\"")
   println("  nchains =                 $(m.nchains)")
   println("  num_samples =             $(m.num_samples)")
-  println("  num_warmup =                $(m.num_warmup)")
+  println("  num_warmup =                $(m.num_warmup)") 
   println("  thin =                    $(m.thin)")
   println("  monitors =                $(m.monitors)")
   println("  model_file =              \"$(m.model_file)\"")
