@@ -29,12 +29,11 @@ function read_diagnose(model::Stanmodel)
       
       ## A result type file for chain i is present ##
       
-      instream = open("$(model.name)_$(res_type)_$(i).csv")
       if i == 1
         
         # Extract cmdstan version
         
-        str = read(instream, String)
+        str = read("$(model.name)_$(res_type)_$(i).csv", String)
         sstr = split(str)
         tdict[:stan_major_version] = [parse(Int, sstr[4])]
         tdict[:stan_minor_version] = [parse(Int, sstr[8])]

@@ -18,7 +18,6 @@ dct1 = [
   Dict("theta" => [0.4 0.5; 0.6 0.7]),
 ]
 
-strmout = open(joinpath(ProjDir, "test_delim_file_2.txt"), "a")
 for entry in dct1
   str = '"' * "$entry" * '"' * " <- "
   writedlm(joinpath(ProjDir, "test_delim_file_2.txt"), str, "")

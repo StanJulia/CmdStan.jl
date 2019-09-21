@@ -29,7 +29,7 @@ function read_summary(m::Stanmodel)
   cnames[4] = "std"
   cnames[8] = "ess"
   names!(df, Symbol.(cnames))
-  df[!, :parameters] = Symbol.(df[!, :parameters])
+  df.parameters = Symbol.(df.parameters)
   
   ChainDataFrame("CmdStan Summary", df)
   
