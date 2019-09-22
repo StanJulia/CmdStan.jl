@@ -32,16 +32,7 @@ cd(ProjDir) do
     init=inittheta, CmdStanDir=CMDSTAN_HOME)
   
   if rc == 0
-    println()
-    println("Test 0.2 <= mean(theta[1]) <= 0.5)")
-    csd = read_summary(stanmodel)
-    @test 0.2 <= csd[:theta, :mean][1] <= 0.5
+    describe(chns)
   end
   
-  #=
-  using StatsPlots
-  pyplot()                      # PyPlot.jl needs to be in environment
-  plot(chns)
-  =#
-
 end # cd

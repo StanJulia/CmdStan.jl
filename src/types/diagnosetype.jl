@@ -61,13 +61,13 @@ Diagnose(;d=Gradient()) = Diagnose(d)
 
 function diagnose_show(io::IO, d::Diagnose, compact::Bool)
   if compact
-    println("Diagnose($(d.diagnostic))")
+    println(io, "Diagnose($(d.diagnostic))")
   else
-    println("  method =                  Diagnose()")
+    println(io, "  method =                  Diagnose()")
     if isa(d.diagnostic, Gradient)
-      println("    diagnostic =              Gradient()")
-      println("      epsilon =                 ", d.diagnostic.epsilon)
-      println("      error =                   ", d.diagnostic.error)
+      println(io, "    diagnostic =              Gradient()")
+      println(io, "      epsilon =                 ", d.diagnostic.epsilon)
+      println(io, "      error =                   ", d.diagnostic.error)
     end
   end
 end

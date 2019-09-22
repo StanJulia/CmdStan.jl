@@ -27,8 +27,6 @@ cd(ProjDir) do
   rc, chns, cnames = stan(stanmodel, bernoullidata, ProjDir, CmdStanDir=CMDSTAN_HOME)
 
   if rc == 0
-    println()
-    sdf = read_summary(stanmodel)
-    @test 0.0 <= sdf[:theta, :mean][1] <= 2.0
+    describe(chns)
   end
 end # cd

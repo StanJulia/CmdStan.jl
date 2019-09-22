@@ -43,26 +43,26 @@ function read_diagnose(model::Stanmodel)
       
       # Position sstr at the beginning of last comment line
       
-      sstr_lp = sstr[79]
+      sstr_lp = sstr[80]
       sstr_lp = parse(Float64, split(sstr_lp, '=')[2])
       
       if :lp in keys(tdict)
         append!(tdict[:lp], sstr_lp)
-        append!(tdict[:var_id], parse(Int, sstr[90]))
-        append!(tdict[:value], parse(Float64, sstr[91]))
-        append!(tdict[:model], parse(Float64, sstr[92]))
-        append!(tdict[:finite_dif], parse(Float64, sstr[93]))
-        append!(tdict[:error], parse(Float64, sstr[94]))
+        append!(tdict[:var_id], parse(Int, sstr[91]))
+        append!(tdict[:value], parse(Float64, sstr[92]))
+        append!(tdict[:model], parse(Float64, sstr[93]))
+        append!(tdict[:finite_dif], parse(Float64, sstr[94]))
+        append!(tdict[:error], parse(Float64, sstr[95]))
       else
         
         # First time around, create value array
         
         tdict[:lp] = [sstr_lp]
-        tdict[:var_id] = [parse(Int, sstr[90])]
-        tdict[:value] = [parse(Float64, sstr[91])]
-        tdict[:model] = [parse(Float64, sstr[92])]
-        tdict[:finite_dif] = [parse(Float64, sstr[93])]
-        tdict[:error] = [parse(Float64, sstr[94])]
+        tdict[:var_id] = [parse(Int, sstr[91])]
+        tdict[:value] = [parse(Float64, sstr[92])]
+        tdict[:model] = [parse(Float64, sstr[93])]
+        tdict[:finite_dif] = [parse(Float64, sstr[94])]
+        tdict[:error] = [parse(Float64, sstr[95])]
       end
     end
   end

@@ -151,27 +151,27 @@ Optimize(method::OptimizeAlgorithm) = Optimize(method, 2000, false)
 
 function optimize_show(io::IO, o::Optimize, compact::Bool)
   if compact
-    println("Optimize($(o.method), $(o.iter), $(o.save_iterations))")
+    println(io, "Optimize($(o.method), $(o.iter), $(o.save_iterations))")
   else
-    println("  method =                  Optimize()")
+    println(io, "  method =                  Optimize()")
     if isa(o.method, Lbfgs)
-      println("    algorithm =               Lbfgs()")
-      println("      init_alpha =              ", o.method.init_alpha)
-      println("      tol_obj =                 ", o.method.tol_obj)
-      println("      tol_grad =                ", o.method.tol_grad)
-      println("      tol_param =               ", o.method.tol_param)
-      println("      history_size =            ", o.method.history_size)
+      println(io, "    algorithm =               Lbfgs()")
+      println(io, "      init_alpha =              ", o.method.init_alpha)
+      println(io, "      tol_obj =                 ", o.method.tol_obj)
+      println(io, "      tol_grad =                ", o.method.tol_grad)
+      println(io, "      tol_param =               ", o.method.tol_param)
+      println(io, "      history_size =            ", o.method.history_size)
     elseif isa(o.method, Bfgs)
-      println("    algorithm =               Bfgs()")
-      println("      init_alpha =              ", o.method.init_alpha)
-      println("      tol_obj =                 ", o.method.tol_obj)
-      println("      tol_grad =                ", o.method.tol_grad)
-      println("      tol_param =               ", o.method.tol_param)
+      println(io, "    algorithm =               Bfgs()")
+      println(io, "      init_alpha =              ", o.method.init_alpha)
+      println(io, "      tol_obj =                 ", o.method.tol_obj)
+      println(io, "      tol_grad =                ", o.method.tol_grad)
+      println(io, "      tol_param =               ", o.method.tol_param)
     else
-      println("    algorithm =               Newton()")
+      println(io, "    algorithm =               Newton()")
     end
-    println("    iterations =              ", o.iter)
-    println("    save_iterations =         ", o.save_iterations)
+    println(io, "    iterations =              ", o.iter)
+    println(io, "    save_iterations =         ", o.save_iterations)
   end
 end
 

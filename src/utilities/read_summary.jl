@@ -1,4 +1,4 @@
-using DataFrames, Unicode, DelimitedFiles, MCMCChains
+using DataFrames, MCMCChains, CSV
 
 """
 
@@ -19,53 +19,17 @@ read_summary(m::Stanmodel)
 """
 function read_summary(m::Stanmodel)
 
-  instream = open(joinpath(m.tmpdir, "$(m.name)_summary.csv"))
-  skipchars(isspace, instream, linecomment='#')
-  #
-  # First non-comment line contains names of variables
-  #
-  line = Unicode.normalize(readline(instream), newline2lf=true)
-  idx = split(strip(line), ",")
-  index = [idx[k] for k in 1:length(idx)]
-
-  if length(m.monitors) == 0
-    indvec = 1:length(index)
-  else
-    indvec = findall((in)(m.monitors), index)
-  end
-
-  cnames = lowercase.(convert.(String, idx[indvec]))
+  fname = "$(m.tmpdir)/$(m.name)_summary.csv"
+  !isfile(fname) && stan_summary(m)
+  
+  df = CSV.read(fname, delim=",", comment="#")
+  
+  cnames = lowercase.(convert.(String, String.(names(df))))
   cnames[1] = "parameters"
   cnames[4] = "std"
   cnames[8] = "ess"
-  
-  rowno = 1; no_of_cols = 10
-  mat = [[]]  
-  for i in 1:no_of_cols-1
-    append!(mat, [[]])
-  end
-  row = Vector{Any}(undef, no_of_cols)
-  while !eof(instream)
-    skipchars(isspace, instream, linecomment='#')
-    line = Unicode.normalize(readline(instream), newline2lf=true)
-    if eof(instream) && length(line) < 2
-      close(instream)
-      break
-    else
-      skipchars(isspace, instream, linecomment='#')
-      line = split(line, ",")
-      append!(mat[1], [Symbol(line[1][2:end-1])])
-      for i in 2:no_of_cols
-        append!(mat[i], [parse.(Float64, line[i])])
-      end
-    end
-  end
-  
-  df = DataFrame()
-  
-  for (i, var) in enumerate(cnames)
-    df[Symbol(var)] = mat[i]
-  end
+  names!(df, Symbol.(cnames))
+  df[!, :parameters] = Symbol.(df[!, :parameters])
   
   ChainDataFrame("CmdStan Summary", df)
   

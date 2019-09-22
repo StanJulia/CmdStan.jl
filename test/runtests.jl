@@ -25,7 +25,8 @@ execution_tests = [
   "test_dyes.jl",
   "test_kidscore.jl",
   "test_fixed_param.jl",
-  "test_zerolengtharray.jl"
+  "test_zerolengtharray.jl",
+  "test_parse_interpolate.jl"
 ]
 
 if CMDSTAN_HOME != ""
