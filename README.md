@@ -24,9 +24,11 @@ Release 5.0.0 of CmdStan.jl is a major level update as it breaks several example
 
 By default a call to stan() will now return an MCMCChains.Chains object (which has been derived from the Mamba.Chains object). The Chains object has facilities for summarizing, diagnostics, plotting and further processing.
 
-Release 5.1.2 will comtain
+Release 5.2.0 contains:
 
-1. Thanks to Daniel Coutinho an issue was fixed which made running CmdStan using Atom bothersome.
+1. Specified Julia 1 dependency in Project
+2. Updates from sdewaele to fix resource busy or locked error messages
+3. Thanks to Daniel Coutinho an issue was fixed which made running CmdStan using Atom bothersome.
 
 Release  5.1.1 contains:
 
@@ -35,7 +37,7 @@ Release  5.1.1 contains:
 3. Enabled specifying ```data``` and ```init``` using an existing file.
 4. Support for Stan's include facility (thanks to Chris Fisher).
 
-CmdStan.jl has been tested on cmdstan v2.20.0.
+CmdStan.jl tested on cmdstan v2.20.0.
 
 Release 5.1.0 contains:
 
@@ -48,7 +50,7 @@ Release 5.1.0 contains:
 7. Added a test to compare Stan's ESS values with MCMCChains ESS values.
 8. Updated all examples to have a single Dict as data input (suggested by sdewaele).
 
-CmdStan.jl has been tested on cmdstan v2.19.1.
+CmdStan.jl tested on cmdstan v2.19.1.
 
 ## Documentation
 
