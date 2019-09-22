@@ -27,15 +27,12 @@ function update_model_file(file::AbstractString, model::AbstractString)
   model1 = parse_and_interpolate(model)
   model2 = ""
   if isfile(file)
-    resfile = open(file, "r")
-    model2 = parse_and_interpolate(read(resfile, String))
+    model2 = parse_and_interpolate(read(file, String))
     model1 != model2 && rm(file)
   end
   if model1 != model2
     println("\nFile $(file) will be updated.\n")
-    strmout = open(file, "w")
-    write(strmout, model1)
-    close(strmout)
+    write(file, model1)
   end
   
 end
