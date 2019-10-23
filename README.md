@@ -26,6 +26,11 @@ By default a call to stan() will now return an MCMCChains.Chains object (which h
 
 The simplest way to revert back to the pre-5.0.0 behavior is to use the ```output_format=:array``` option in the call to StanModel().
 
+
+Release 5.2.1 contains:
+
+1. Fixed an issue with read_diagnose.jl which failed on either linux or osx because of slightly different .csv file layout.
+
 Release 5.2.0 contains:
 
 1. Specified Julia 1 dependency in Project
