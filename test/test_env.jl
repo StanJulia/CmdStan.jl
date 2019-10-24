@@ -1,4 +1,4 @@
-using CmdStan
+using CmdStan, Test
 
 ## testing accessors to CMDSTAN_HOME
 let oldpath = CmdStan.CMDSTAN_HOME
