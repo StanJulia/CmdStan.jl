@@ -18,7 +18,7 @@ before_install:
   - cd $OLDWD
   
 julia:
-  - 1.2
+  - 1.3
   
 notifications:
   email: false
@@ -29,10 +29,10 @@ git:
 jobs:julia
   include:
     - stage: Test
-      julia: 1.2
+      julia: 1.3
       os: linux
     - stage: Documentation
-      julia: 1.2
+      julia: 1.3
       os: linux
       script:
        - julia --project=docs -e 'using Pkg; Pkg.instantiate(); Pkg.develop(PackageSpec(path=pwd()))'
