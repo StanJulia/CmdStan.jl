@@ -39,6 +39,6 @@ if rc == 0
   println()
   
   # Ceate a ChainDataFrame
-  summary_df = read_summary(stanmodel)
+  summary_df = CmdStan.read_summary(stanmodel)
   summary_df[:theta, [:mean, :ess]]
 end
