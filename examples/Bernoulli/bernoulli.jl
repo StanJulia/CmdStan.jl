@@ -39,9 +39,9 @@ cd(ProjDir) do
     # Check if StatsPlots is available
     if isdefined(Main, :StatsPlots)
       p1 = plot(chns)
-      savefig(p1, "traceplot.pdf")
+      savefig(p1, joinpath(tmpdir, "traceplot.pdf"))
       p2 = pooleddensity(chns)
-      savefig(p2, "pooleddensity.pdf")
+      savefig(p2, joinpath(tmpdir, "pooleddensity.pdf"))
     end
     
     # Describe the results

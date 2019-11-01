@@ -51,7 +51,7 @@ cd(ProjDir) do
     
     if isdefined(Main, :StatsPlots)
       p1 = plot(chns)
-      savefig(p1, "traceplot.pdf")
+      savefig(p1, joinpath(tmpdir, "traceplot.pdf"))
       #p2 = plot(chns, [:thetas])
       #savefig(p2, "thetas.pdf")
     end
