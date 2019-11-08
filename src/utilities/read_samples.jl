@@ -17,7 +17,7 @@ read_samples(m::Stanmodel)
 """
 function read_samples(m::Stanmodel, diagnostics=false, warmup_samples=false)
 
-  local a3d, monitors, index, idx, indvec, ftype, noofsamples
+  local monitors, index, idx, indvec, ftype, noofsamples
 
   # a3d will contain the samples such that a3d[s, i, c] where
 
@@ -47,47 +47,51 @@ function read_samples(m::Stanmodel, diagnostics=false, warmup_samples=false)
   
   for i in 1:m.nchains
     if isfile("$(m.name)_$(ftype)_$(i).csv")
-      #noofsamples = 0
-      open("$(m.name)_$(ftype)_$(i).csv") do instream
-        #
-        # Skip initial set of commented lines, e.g. containing cmdstan version info, etc.
-        #
-        skipchars(isspace, instream, linecomment='#')
-        #
-        # First non-comment line contains names of variables
-        #
-        line = Unicode.normalize(readline(instream), newline2lf=true)
-        idx = split(strip(line), ",")
-        index = [idx[k] for k in 1:length(idx)]
+      
+      instream = open("$(m.name)_$(ftype)_$(i).csv")
         
-        if length(m.monitors) == 0
-          indvec = 1:length(index)
-        else
-          indvec = findall((in)(m.monitors), index)
-        end
-        
-        if i == 1
-          a3d = fill(0.0, noofsamples, length(indvec), m.nchains)
-        end
-        
-        #println(size(a3d))
-        skipchars(isspace, instream, linecomment='#')
-        for j in 1:noofsamples
-          skipchars(isspace, instream, linecomment='#')
-          line = Unicode.normalize(readline(instream), newline2lf=true)
-          if eof(instream) && length(line) < 2
-            return
-          else
-            flds = parse.(Float64, split(strip(line), ","))
-            flds = reshape(flds[indvec], 1, length(indvec))
-            a3d[j,:,i] = flds
-          end
-        end   # read in samples
+      # Skip initial set of commented lines, e.g. containing
+      # cmdstan version info, etc.
+      
+      skipchars(isspace, instream, linecomment='#')
+      
+      # First non-comment line contains names of variables
+      
+      line = Unicode.normalize(readline(instream), newline2lf=true)
+      idx = split(strip(line), ",")
+      index = [idx[k] for k in 1:length(idx)]
+      
+      # Only continue with monitored variables
+      
+      if length(m.monitors) == 0
+        indvec = 1:length(index)
+      else
+        indvec = findall((in)(m.monitors), index)
       end
-    end   # read in next file
-  end   # read in file for each chain
-  
-  cnames = convert.(String, idx[indvec])
+      
+      # Preserve cnames and create a3d
+      
+      if i == 1
+        global cnames = convert.(String, idx[indvec])
+        global a3d = fill(0.0, noofsamples, length(indvec), m.nchains)
+      end
+      
+      # Read in the samples for all chains
+      
+      skipchars(isspace, instream, linecomment='#')
+      for j in 1:noofsamples
+        skipchars(isspace, instream, linecomment='#')
+        line = Unicode.normalize(readline(instream), newline2lf=true)
+        if eof(instream) && length(line) < 2
+          return
+        else
+          flds = parse.(Float64, split(strip(line), ","))
+          flds = reshape(flds[indvec], 1, length(indvec))
+          a3d[j,:,i] = flds
+        end
+      end   # read in samples  
+    end   # select next file if it exists
+  end   # loop over all chains
   
   (a3d, cnames)
   

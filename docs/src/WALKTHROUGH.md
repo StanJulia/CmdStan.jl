@@ -71,7 +71,7 @@ By default stan() will run 4 chains and optionally display a combined summary. S
 
 If `summary = true`, the default, the stan summary is also written to a .csv file and can be read in using:
 ```
-csd = read_summary(Stanmodel)
+csd = read_summary(stanmodel)
 csd[:theta, :mean] # Select mean as computed by the stansummary binary.
 ```
 
@@ -86,7 +86,8 @@ CmdStan.jl really only consists of 2 functions, Stanmodel() and stan().
 Stanmodel() is used to define the basic attributes for a model:
 ```
 monitor = ["theta", "lp__", "accept_stat__"]
-stanmodel = Stanmodel(name="bernoulli", model=bernoulli, monitors=monitor);
+stanmodel = Stanmodel(name="bernoulli", model=bernoullistanmodel,
+  monitors=monitor);
 stanmodel
 ```
 
