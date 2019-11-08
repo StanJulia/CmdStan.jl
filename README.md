@@ -30,7 +30,7 @@ Release 5.2.3
 
 1. Fixed an issue in running read_samples from the REPL (thanks to Graydon Marz).
 
-Release 5.2.4
+Release 5.2.2
 
 1. Made sure by default no files are created in Julia's `package` directory.
 2. Removed some DataFrame update warnings.
