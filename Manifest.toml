@@ -2,9 +2,9 @@
 
 [[AbstractFFTs]]
 deps = ["LinearAlgebra"]
-git-tree-sha1 = "380e36c66edfa099cd90116b24c1ce8cafccac40"
+git-tree-sha1 = "051c95d6836228d120f5f4b984dd5aba1624f716"
 uuid = "621f4979-c628-5d54-868e-fcf4e3e8185c"
-version = "0.4.1"
+version = "0.5.0"
 
 [[Arpack]]
 deps = ["BinaryProvider", "Libdl", "LinearAlgebra"]
@@ -183,9 +183,9 @@ uuid = "8ba89e20-285c-5b6f-9357-94700520ee1b"
 
 [[Distributions]]
 deps = ["LinearAlgebra", "PDMats", "Printf", "QuadGK", "Random", "SpecialFunctions", "Statistics", "StatsBase", "StatsFuns"]
-git-tree-sha1 = "56a158bc0abe4af5d4027af2275fde484261ca6d"
+git-tree-sha1 = "838a37797ac24c1b4c3353d46ec87ea6598f2308"
 uuid = "31c24e10-a181-5473-b8eb-7969acd0382f"
-version = "0.19.2"
+version = "0.21.7"
 
 [[DocStringExtensions]]
 deps = ["LibGit2", "Markdown", "Pkg", "Test"]
@@ -206,10 +206,10 @@ uuid = "c87230d0-a227-11e9-1b43-d7ebe4e7570a"
 version = "0.2.3"
 
 [[FFTW]]
-deps = ["AbstractFFTs", "BinaryProvider", "Conda", "Libdl", "LinearAlgebra", "Reexport", "Test"]
-git-tree-sha1 = "6c5b420da0b8c12098048561b8d58f81adea506f"
+deps = ["AbstractFFTs", "BinaryProvider", "Conda", "Libdl", "LinearAlgebra", "Reexport"]
+git-tree-sha1 = "4cfd3d43819228b9e73ab46600d0af0aa5cedceb"
 uuid = "7a1cc6ca-52ef-59f5-83cd-3a7055c09341"
-version = "1.0.1"
+version = "1.1.0"
 
 [[FilePathsBase]]
 deps = ["Dates", "LinearAlgebra", "Printf", "Test", "UUIDs"]
@@ -326,10 +326,10 @@ uuid = "37e2e46d-f89d-539d-b4ee-838fcccc9c8e"
 uuid = "56ddb016-857b-54e1-b83d-db4d58db5568"
 
 [[MCMCChains]]
-deps = ["AxisArrays", "DataFrames", "Distributions", "KernelDensity", "LinearAlgebra", "Plots", "Random", "RecipesBase", "Serialization", "Showoff", "SpecialFunctions", "Statistics", "StatsBase"]
-git-tree-sha1 = "54a33641c1be24a4d254b785f42b545c4b65253b"
+deps = ["AxisArrays", "DataFrames", "Distributions", "KernelDensity", "LinearAlgebra", "Random", "RecipesBase", "Serialization", "Showoff", "SpecialFunctions", "Statistics", "StatsBase"]
+git-tree-sha1 = "e5a6061e2e9ee308e35bde2e763ee147b352b014"
 uuid = "c7f686f2-ff18-58e9-bc7b-31028e88f75d"
-version = "0.3.14"
+version = "0.3.15"
 
 [[MacroTools]]
 deps = ["CSTParser", "Compat", "DataStructures", "Test", "Tokenize"]
@@ -445,9 +445,9 @@ version = "0.27.0"
 
 [[Polynomials]]
 deps = ["LinearAlgebra", "RecipesBase"]
-git-tree-sha1 = "f7c0c07e82798aef542d60a6e6e85e39f4590750"
+git-tree-sha1 = "ae71c2329790af97b7682b11241b3609e4d48626"
 uuid = "f27b6e38-b328-58d1-80ce-0feddd5e7a45"
-version = "0.5.3"
+version = "0.6.0"
 
 [[PooledArrays]]
 git-tree-sha1 = "6e8c38927cb6e9ae144f7277c753714861b27d14"
