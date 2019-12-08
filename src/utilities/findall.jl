@@ -3,7 +3,7 @@ function _findall(t::Union{AbstractString,Regex}, s::AbstractString; overlap::Bo
     i, e = firstindex(s), lastindex(s)
     while true
         r = findnext(t, s, i)
-        isnothing(r) && return found
+        r === nothing && return found
         push!(found, r)
         j = overlap || isempty(r) ? first(r) : last(r)
         j > e && return found
