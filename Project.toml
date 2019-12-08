@@ -1,7 +1,7 @@
 name = "CmdStan"
 uuid = "593b3428-ca2f-500c-ae53-031589ec8ddd"
 authors = ["Rob J Goedman <goedman@mac.com>"]
-version = "5.2.3"
+version = "5.3.0"
 
 [deps]
 BinDeps = "9e28174c-4ba2-5203-b857-d8d62c4213ee"
@@ -21,14 +21,14 @@ Test = "8dfed614-e22c-5e08-85e1-65c5234f0b40"
 Unicode = "4ec0a83e-493e-50e2-b9ac-8f72acf5a8f5"
 
 [compat]
-BinDeps = "^0.8, 1.0"
-CSV = "^0.5"
-DataFrames = "^0.19, 0.20"
-Documenter = "^0.23, 0.24"
-Homebrew = "^0.7"
-MCMCChains = "^0.3, 0.4"
-Missings = "^0.4"
-NamedArrays = "^0.9"
+BinDeps = "0.8, 1.0"
+CSV = "0.5"
+DataFrames = "0.19, 0.20"
+Documenter = "0.23, 0.24"
+Homebrew = "0.7"
+MCMCChains = "0.3, 0.4"
+Missings = "0.4"
+NamedArrays = "0.9"
 Reexport = "0.2"
 StatsPlots = "0.12, 0.13"
-julia = "^1"
+julia = "1"
