@@ -222,7 +222,7 @@ function stan(
       end
     catch e
       println("\nAn error occurred while running the previously compiled Stan program.\n")
-      print("Please check the contents of file $(tmpmodelname)_run.log and the")
+      print("Please check the contents of file $(model.name)_run.log and the")
       println("'command' field in the Stanmodel, e.g. stanmodel.command.\n")
       error("Return code = -5")
     end
