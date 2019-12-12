@@ -104,6 +104,9 @@ Stanmodel(
 * `output_format::Symbol `     : Output format
 ```
 
+Note: If `data` or `init` are specified as part of Stanmodel it
+needs to be an DataDict[]!
+
 ### CmdStan.jl supports 3 output_format values:
 ```julia     
 1. :array           # Returns an array of draws

@@ -6,7 +6,8 @@ println("\nRunning tests for CmdStan-j1-v5:\n")
 code_tests = [
   "test_env.jl",              
   "test_utilities.jl",
-  "test_cmdtype.jl"
+  "test_cmdtype.jl",
+  "test_init_in_stanmodel.jl"
 ]
 
 # Run execution_tests only if cmdstan is installed and CMDSTAN_HOME is set correctly.

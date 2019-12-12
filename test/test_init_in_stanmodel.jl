@@ -56,7 +56,8 @@ stan_model = Stanmodel(
     num_warmup = nwarmup,
     num_samples = nsamples);
 
-_, stan_chns, _ = stan(stan_model, stan_data, summary = false);
+_, stan_chns, _ = stan(stan_model, stan_data, 
+    init = stan_init, summary = false);
 
 chns = set_section(stan_chns, Dict(
   :parameters => ["mu", "sigma", "incubation_mean", "incubation_sd"],
