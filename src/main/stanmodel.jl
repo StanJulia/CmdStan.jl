@@ -39,12 +39,10 @@ mutable struct Stanmodel
   model::String
   model_file::String
   monitors::Vector{String}
-  data::Vector{DataDict}
   data_file::String
   command::Vector{Base.AbstractCmd}
   method::Method
   random::Random
-  init::Vector{DataDict}
   init_file::String
   output::Output
   printsummary::Bool
@@ -69,9 +67,7 @@ Stanmodel(
   thin=1,
   model="",
   monitors=String[],
-  data=DataDict[],
   random=Random(),
-  init=DataDict[],
   output=Output(),
   printsummary=true,
   pdir::String=pwd(),
@@ -94,9 +90,7 @@ Stanmodel(
 * `thin::Int`                  : Stan thinning factor
 * `model::String`              : Stan program source
 * `monitors::String[] `        : Variables saved for post-processing
-* `data::DataDict[]`           : Observed input data
 * `random::Random`             : Random seed settings
-* `init::DataDict[]`           : Initial values for parameters
 * `output::Output`             : File output options
 * `printsummary=true`          : Show computed stan summary
 * `pdir::String`               : Working directory
@@ -104,8 +98,8 @@ Stanmodel(
 * `output_format::Symbol `     : Output format
 ```
 
-Note: If `data` or `init` are specified as part of Stanmodel it
-needs to be an DataDict[]!
+Note: `data` or `init` can no longer be specified in Stanmodel. 
+Please use stan() for this purpose.
 
 ### CmdStan.jl supports 3 output_format values:
 ```julia     
@@ -149,9 +143,9 @@ function Stanmodel(
   thin=1,
   model="",
   monitors=String[],
-  data=DataDict[],
+  #data=DataDict[],
   random=Random(),
-  init=DataDict[],
+  #init=DataDict[],
   output=Output(),
   printsummary=true,
   pdir::String=pwd(),
@@ -187,8 +181,8 @@ function Stanmodel(
   Stanmodel(name, nchains, 
     num_warmup, num_samples, thin,
     id, model, model_file, monitors,
-    data, data_file, cmdarray, method, random,
-    init, init_file, output, printsummary, pdir, tmpdir, output_format);
+    data_file, cmdarray, method, random,
+    init_file, output, printsummary, pdir, tmpdir, output_format);
 end
 
 function model_show(io::IO, m::Stanmodel, compact)

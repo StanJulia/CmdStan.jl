@@ -26,6 +26,10 @@ By default a call to stan() will now return an MCMCChains.Chains object (which h
 
 The simplest way to revert back to the pre-5.0.0 behavior is to use the ```output_format=:array``` option in the call to StanModel().
 
+Release 5.4.0
+
+1. Removed init and data from Stanmodel. Data and init needs to be specified (if needed) in stan(). This is a breaking change although it wasn't handled properly. Thanks to Andrei R. Akhmetzhanov and Chris Fisher.
+
 Release 5.2.3
 
 1. Fixed an issue in running read_samples from the REPL (thanks to Graydon Marz).
