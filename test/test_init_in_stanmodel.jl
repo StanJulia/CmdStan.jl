@@ -4,8 +4,6 @@ tempdir = pwd()
 
 nwarmup, nsamples, nchains = 1000, 1000, 4
 
-
-
 stan_code = "
 data {
     int<lower = 1> J; // number of cases
@@ -50,14 +48,14 @@ temp_init = Dict("mu" => 2.5, "sigma" => 1.0)
 merge!(stan_init, temp_init)
 
 stan_model = Stanmodel(
+    name = "init_array",
     model = stan_code,
     nchains = nchains,
-    init = [stan_init],
+    init = stan_init,
     num_warmup = nwarmup,
     num_samples = nsamples);
 
-_, stan_chns, _ = stan(stan_model, stan_data, 
-    init = stan_init, summary = false);
+_, stan_chns, _ = stan(stan_model, stan_data, summary = false);
 
 chns = set_section(stan_chns, Dict(
   :parameters => ["mu", "sigma", "incubation_mean", "incubation_sd"],
