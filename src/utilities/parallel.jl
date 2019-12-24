@@ -74,7 +74,7 @@ end
 function par(cmd::Array{String, 1})
   res = `$(cmd[1])`
   for i in 2:length(cmd)
-    res = res*` $(cmd[i])`
+    res = `$res $(cmd[i])`
   end
   res
 end
