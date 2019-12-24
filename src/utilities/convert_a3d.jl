@@ -51,7 +51,9 @@ convert_a3d(a3d_array, cnames, ::Val{:namedarray}; start=1) =
   [NamedArray(a3d_array[:,:,i], (collect(1:size(a3d_array, 1)), Symbol.(cnames))) 
     for i in 1:size(a3d_array, 3)]
 
-function convert_a3d(a3d_array, cnames, ::Val{:mcmcchains}; start=1)
+function convert_a3d(a3d_array, cnames, ::Val{:mcmcchains};
+    sorted=true, start=1)
+
   pi = filter(p -> length(p) > 2 && p[end-1:end] == "__", cnames)
   p = filter(p -> !(p in  pi), cnames)
 
@@ -61,6 +63,7 @@ function convert_a3d(a3d_array, cnames, ::Val{:mcmcchains}; start=1)
       :parameters => p,
       :internals => pi
     );
+    sorted=sorted,
     start=start
   )
 end

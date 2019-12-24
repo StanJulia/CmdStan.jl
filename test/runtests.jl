@@ -5,7 +5,7 @@ println("\nRunning tests for CmdStan-j1-v5:\n")
 
 code_tests = [
   "test_env.jl",              
-  "test_utilities.jl",
+  #"test_utilities.jl",
   "test_cmdtype.jl"
 ]
 
