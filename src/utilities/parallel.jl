@@ -1,3 +1,4 @@
+#=
 if !isdefined(Main, :Jags)
   function *(c1::Cmd, c2::Cmd)
     res = deepcopy(c1)
@@ -21,6 +22,7 @@ if !isdefined(Main, :Jags)
     res
   end
 end
+=#
 
 """
 

@@ -1,13 +1,14 @@
 using CmdStan
+#import Base: *
 
 cmd1 = `echo`
 cmd2 = `2`
 sa = ["3", "4"]
 s = "5"
 
-r1 = cmd1 * cmd2; println(r1)
-r2 = cmd1 * sa; println(r2)
-r3 = cmd1 * s; println(r3)
+#r1 = cmd1 * cmd2; println(r1)
+#r2 = cmd1 * sa; println(r2)
+#r3 = cmd1 * s; println(r3)
 
 cs = Base.AbstractCmd[] 
 
