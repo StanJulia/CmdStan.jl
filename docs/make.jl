@@ -1,6 +1,7 @@
 using CmdStan, Documenter
 
 DOC_ROOT = rel_path_cmdstan("..", "docs")
+DocDir =  joinpath(DOC_ROOT, "src")
 
 page_list = Array{Pair{String, Any}, 1}();
 append!(page_list, [Pair("Home", "INTRO.md")]);
