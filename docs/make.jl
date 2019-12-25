@@ -1,7 +1,6 @@
 using CmdStan, Documenter
 
 DOC_ROOT = rel_path_cmdstan("..", "docs")
-DocDir =  rel_path("..", "docs", "src")
 
 page_list = Array{Pair{String, Any}, 1}();
 append!(page_list, [Pair("Home", "INTRO.md")]);
