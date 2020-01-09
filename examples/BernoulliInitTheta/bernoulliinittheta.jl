@@ -32,7 +32,7 @@ cd(ProjDir) do
     init=inittheta, CmdStanDir=CMDSTAN_HOME)
   
   if rc == 0
-    describe(chns)
+    show(chns)
   end
   
 end # cd

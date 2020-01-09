@@ -1,29 +1,3 @@
-#=
-if !isdefined(Main, :Jags)
-  function *(c1::Cmd, c2::Cmd)
-    res = deepcopy(c1)
-    for i in 1:length(c2.exec)
-      push!(res.exec, c2.exec[i])
-    end
-    res
-  end
-
-  function *(c1::Cmd, sa::Array{String, 1})
-    res = deepcopy(c1)
-    for i in 1:length(sa)
-      push!(res.exec, sa[i])
-    end
-    res
-  end
-
-  function *(c1::Cmd, s::String)
-    res = deepcopy(c1)
-    push!(res.exec, s)
-    res
-  end
-end
-=#
-
 """
 
 # par 
