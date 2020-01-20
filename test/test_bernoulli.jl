@@ -1,4 +1,4 @@
-using CmdStan, Test
+using CmdStan, MCMCChains, Test
 
 ProjDir = dirname(@__FILE__)
 cd(ProjDir)

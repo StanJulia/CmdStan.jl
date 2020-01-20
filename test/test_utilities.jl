@@ -1,5 +1,4 @@
 using CmdStan
-#import Base: *
 
 cmd1 = `echo`
 cmd2 = `2`

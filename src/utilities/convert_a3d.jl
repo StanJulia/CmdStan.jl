@@ -20,7 +20,7 @@ convert_a3d(a3d_array, cnames, ::Val{Symbol}; start=1)
 
 ### Optional arguments
 ```julia
-* `::Val{Symbol}`                      : Output format
+* `::Val{Symbol}`                      : Output format, default is :mcmcchains
 * `::start=1`                          : First draw for MCMCChains.Chains
 ```
 Method called is based on the output_format defined in the stanmodel, e.g.:
@@ -31,13 +31,9 @@ Method called is based on the output_format defined in the stanmodel, e.g.:
 Current formats supported are:
 
 1. :array (a3d_array format, the default for CmdStan)
-2. :namedarray (NamedArrays object)
-3. :dataframe (DataFrames object)
-4. :mambachains (Mamba.Chains object)
-5. :mcmcchains (TuringLang/MCMCChains.Chains object)
+2. :mambachains (Mamba.Chains object)
 
-Options 3 through 5 are respectively provided by the packages StanDataFrames, 
-StanMamba, StanMCMCChains and StanMCMCChains.
+Option 2 is provided by the package StanMamba.
 ```
 
 ### Return values
@@ -46,10 +42,6 @@ StanMamba, StanMCMCChains and StanMCMCChains.
 ```
 """
 convert_a3d(a3d_array, cnames, ::Val{:array}; start=1) = a3d_array
-
-convert_a3d(a3d_array, cnames, ::Val{:namedarray}; start=1) = 
-  [NamedArray(a3d_array[:,:,i], (collect(1:size(a3d_array, 1)), Symbol.(cnames))) 
-    for i in 1:size(a3d_array, 3)]
 
 function convert_a3d(a3d_array, cnames, ::Val{:mcmcchains};
     sorted=true, start=1)
