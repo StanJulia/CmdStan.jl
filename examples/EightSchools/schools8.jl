@@ -70,6 +70,7 @@ cd(ProjDir) do
     println("\n")
     summarize(chns, sections=[:thetas])
     
+    #=
     if isdefined(Main, :StatsPlots)
       p1 = plot(chns)
       savefig(p1, joinpath(tmpdir, "traceplot.pdf"))
@@ -77,6 +78,6 @@ cd(ProjDir) do
       p2 = plot(df[!, Symbol("theta[1]")])
       savefig(p2, joinpath(tmpdir, "theta_1.pdf"))
     end
-    
+    =#
   end
 end # cd
