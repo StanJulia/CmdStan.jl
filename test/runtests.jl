@@ -15,9 +15,10 @@ execution_tests = [
   "test_bernoulli_diagnostics.jl",
   "test_bernoulli_optimize.jl",
   "test_bernoulli_diagnose.jl",
-  # Variational often fails on Travis, so disabled right now.
-  #"test_bernoulli_variational.jl",
-  #"test_bernoulli_namedarray.jl",
+
+  # Variational often fails on Travis.
+
+  "test_bernoulli_variational.jl",
   "test_bernoulliinittheta.jl",
   "test_bernoulliinittheta2.jl",
   "test_bernoulliinittheta3.jl",

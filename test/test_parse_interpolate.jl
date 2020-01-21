@@ -25,20 +25,14 @@ bernoulli_model = "
 
 observeddata = Dict("N" => 10, "y" => [0, 1, 0, 1, 0, 0, 0, 0, 0, 1])
 
-stanmodel = Stanmodel(Sample(save_warmup=true, num_warmup=1000, 
+stanmodel = Stanmodel(Sample(save_warmup=false, num_warmup=1000, 
   num_samples=2000, thin=1), name="bernoulli", model=bernoulli_model,
   printsummary=false, tmpdir=mktempdir());
 
-rc, chn, cnames = stan(stanmodel, observeddata, ProjDir);
-
-chns = chn[1001:end, :, :]
+rc, a3d, cnames = stan(stanmodel, observeddata, ProjDir);
 
 if rc == 0
-  # Describe the results
-  show(chns)
-  println()
-  
-  # Ceate a ChainDataFrame
-  summary_df = CmdStan.read_summary(stanmodel)
-  summary_df[:theta, [:mean, :ess]]
+  sdf  = read_summary(stanmodel)
+  @test sdf[sdf.parameters .== :theta, :mean][1] ≈ 0.34 rtol=0.1
 end
+

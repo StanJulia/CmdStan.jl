@@ -1,4 +1,4 @@
-using DataFrames, MCMCChains, CSV
+using DataFrames, CSV
 
 """
 
@@ -32,6 +32,6 @@ function read_summary(m::Stanmodel)
   rename!(df, Symbol.(cnames), makeunique = true)
   df.parameters = Symbol.(df.parameters)
   
-  ChainDataFrame("CmdStan Summary", df)
+  df
   
 end   # end of read_samples

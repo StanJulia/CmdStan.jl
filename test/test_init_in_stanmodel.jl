@@ -1,4 +1,4 @@
-using CmdStan, Test, Statistics
+using CmdStan, DataFrames, Test, Statistics
 
 tempdir = pwd()
 
@@ -47,7 +47,7 @@ stan_init = Dict("incubation[$i]"=>v+.5 for (i,v) in enumerate(days_inc))
 temp_init = Dict("mu" => 2.5, "sigma" => 1.0)
 merge!(stan_init, temp_init)
 
-stan_model = Stanmodel(
+stanmodel = Stanmodel(
     name = "init_array",
     model = stan_code,
     nchains = nchains,
@@ -55,15 +55,11 @@ stan_model = Stanmodel(
     num_warmup = nwarmup,
     num_samples = nsamples);
 
-_, stan_chns, _ = stan(stan_model, stan_data,
-        init = stan_init, summary = false);
+rc, a3d, cnames = stan(stanmodel, stan_data,
+        init = stan_init, summary = true);
 
-chns = set_section(stan_chns, Dict(
-  :parameters => ["mu", "sigma", "incubation_mean", "incubation_sd"],
-  :incubations => ["incubation.$i" for i in 1:116],
-  :internals => ["lp__", "accept_stat__", "stepsize__", "treedepth__", "n_leapfrog__",
-    "divergent__", "energy__"]
-  )
-)
+if rc == 0
+    sdf  = read_summary(stanmodel)
+    @test sdf[sdf.parameters .== :mu, :mean][1] ≈ 2.5 rtol=0.1
+end
 
-show(chns)

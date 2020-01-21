@@ -28,11 +28,13 @@ cd(ProjDir) do
     num_warmup=1000, printsummary=false);
 
   global rc, sim
-  rc, chns, cnames = stan(stanmodel, bernoullidata, ProjDir, 
+  rc, a3d, cnames = stan(stanmodel, bernoullidata, ProjDir, 
     init=inittheta, CmdStanDir=CMDSTAN_HOME)
   
   if rc == 0
-    show(chns)
+    sdf  = read_summary(stanmodel)
+    @test sdf[sdf.parameters .== :theta, :mean][1] ≈ 0.34 rtol=0.1
   end
+
   
 end # cd

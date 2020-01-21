@@ -1,4 +1,4 @@
-using CmdStan, MCMCChains, Test
+using CmdStan, Test
 
 ProjDir = dirname(@__FILE__)
 cd(ProjDir)
@@ -26,20 +26,20 @@ cd(ProjDir)
 
   global stanmodel, rc, chn, chns, cnames, summary_df
 
-  tmpdir = ProjDir*"/tmp"
+  #tmpdir = ProjDir*"/tmp"
 
-  stanmodel = Stanmodel(Sample(save_warmup=true, num_warmup=1000, 
+  stanmodel = Stanmodel(Sample(save_warmup=false, num_warmup=1000, 
     num_samples=2000, thin=1), name="bernoulli", model=bernoullimodel,
-    printsummary=false, tmpdir=tmpdir);
+    printsummary=false, 
+    #tmpdir=tmpdir
+  );
 
-  rc, chn, cnames = stan(stanmodel, observeddata, ProjDir, diagnostics=false,
+  rc, a3d, cnames = stan(stanmodel, observeddata, ProjDir, diagnostics=false,
     CmdStanDir=CMDSTAN_HOME);
 
-  chns = chn[1001:end, :, :]
-
   if rc == 0
-    s = summarize(chns)
-    @test s[:theta, :mean][1] ≈ 0.34 atol=0.1
+    sdf  = read_summary(stanmodel)
+    @test sdf[sdf.parameters .== :theta, :mean][1] ≈ 0.34 rtol=0.1
   end
 
   isdir("tmp") &&

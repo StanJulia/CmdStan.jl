@@ -176,13 +176,13 @@ cd(ProjDir) do
     "mom_iq_new" => 100)
 
   global stanmodel, rc, sim
-  #stanmodel = Stanmodel(name="kid", output_format=:array, model=kid);
+
   stanmodel = Stanmodel(name="kid", model=kid);
   rc, sim, cnames = stan(stanmodel, kiddata, ProjDir, CmdStanDir=CMDSTAN_HOME)
 
   if rc == 0
-    describe(sim)
-    #println("Test: 24.0 < round.(mean(sim[:,8,:]), digits=0) < 27.0")
-    #@test 24.0 < round.(mean(sim[:,8,:]), digits=0) < 27.0
+    sdf  = read_summary(stanmodel)
+    @test sdf[sdf.parameters .== Symbol("beta[1]"), :mean][1] ≈ 26.0 rtol=0.1
   end
+
 end # cd

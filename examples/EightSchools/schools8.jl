@@ -1,6 +1,8 @@
 ######### CmdStan batch program example  ###########
 
-using CmdStan, StatsPlots
+# Note that this example needs StanMCMCChains.
+
+using CmdStan, Test
 
 ProjDir = dirname(@__FILE__)
 cd(ProjDir) do
@@ -43,41 +45,18 @@ cd(ProjDir) do
 
   if rc == 0
     
-    chn1 = Chains(chn.value,
-      [ "accept_stat__", "divergent__", "energy__",
-        "eta[1]", "eta[2]", "eta[3]", "eta[4]",      
-        "eta[5]", "eta[6]", "eta[7]", "eta[8]",       
-        "lp__",        
-        "mu",           
-        "n_leapfrog__", "stepsize__",  
-        "tau",         
-        "theta[1]", "theta[2]", "theta[3]", "theta[4]",      
-        "theta[5]", "theta[6]", "theta[7]", "theta[8]",      
-        "treedepth__"  
-      ]  
-    )
-    
-    chns = set_section(chn1, Dict(
-      :parameters => ["mu", "tau"],
-      :thetas => ["theta[$i]" for i in 1:8],
-      :etas => ["eta[$i]" for i in 1:8],
-      :internals => ["lp__", "accept_stat__", "stepsize__", "treedepth__", "n_leapfrog__",
-        "divergent__", "energy__"]
-      )
-    )
-    
-    show(chns)
-    println("\n")
-    summarize(chns, sections=[:thetas])
-    
-    #=
-    if isdefined(Main, :StatsPlots)
-      p1 = plot(chns)
-      savefig(p1, joinpath(tmpdir, "traceplot.pdf"))
-      df = DataFrame(chns, [:thetas])
-      p2 = plot(df[!, Symbol("theta[1]")])
-      savefig(p2, joinpath(tmpdir, "theta_1.pdf"))
+    if rc == 0
+      sdf  = read_summary(stanmodel)
+      @test sdf[sdf.parameters .== Symbol("theta[1]"), :mean][1] ≈ 11.6 rtol=0.1
+
+      # using StatsPlots
+      if isdefined(Main, :StatsPlots)
+        p1 = plot(chns)
+        savefig(p1, joinpath(tmpdir, "traceplot.pdf"))
+        df = DataFrame(chns, [:thetas])
+        p2 = plot(df[!, Symbol("theta[1]")])
+        savefig(p2, joinpath(tmpdir, "theta_1.pdf"))
+      end
     end
-    =#
   end
 end # cd

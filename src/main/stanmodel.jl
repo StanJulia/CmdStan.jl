@@ -150,7 +150,7 @@ function Stanmodel(
   printsummary=true,
   pdir::String=pwd(),
   tmpdir::String=joinpath(pwd(), "tmp"),
-  output_format::Symbol=:mcmcchains)
+  output_format::Symbol=:array)
   
   if !isdir(tmpdir)
     mkdir(tmpdir)
@@ -176,6 +176,15 @@ function Stanmodel(
   
   if thin != 1
     method.thin=thin
+  end
+
+  if output_format == :mcmcchains
+    if !isdefined(Main, :StanMCMCChains)
+      @warn "You are requesting te create MCMCChains.Chains as output,"
+      @warn "but have not specified `using StanMCMCChains`."
+      @warn "Array output will be produced."
+      output_format = :array
+    end
   end
   
   Stanmodel(name, nchains, 

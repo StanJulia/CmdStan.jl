@@ -45,8 +45,8 @@ cd(ProjDir) #do
     println()
     display(optim)
     println()
-    println("""Test optim["theta"][end] ≈ 0.3 atol=0.1""")
-    @test optim["theta"][end] ≈ 0.3 atol=0.1
+    println("""Test optim["theta"][end] ≈ 0.3 rtol=0.1""")
+    @test optim["theta"][end] ≈ 0.3 rtol=0.1
   end
 
   #end # cd

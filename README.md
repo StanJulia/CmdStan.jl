@@ -20,7 +20,13 @@ Right now `versioninfo()` will show its setting (if defined).
 
 ## Note
 
-Release 5.0.0 of CmdStan.jl is a major level update as it breaks several examples.
+###  Release 6.0.0 is another breaking upgrade.
+
+Unfortunately using MCMCChains as the default object to return has proven to be too expensive in terms of compile time at startup. In Julia 1.3 and up this might be due to a combination of including StatsPlots and resolving dependencies of MCMCChains.
+
+As a consequence I am reverting back to what I termed the `federated approach`. If MCMCChains is the selected output, the script must include `using StanMCMCChains`
+
+###Release 5.0.0 of CmdStan.jl is a major level update as it breaks several examples.
 
 By default a call to stan() will now return an MCMCChains.Chains object (which has been derived from the Mamba.Chains object). The Chains object has facilities for summarizing, diagnostics, plotting and further processing.
 
@@ -70,7 +76,7 @@ Release 5.1.0 contains:
 7. Added a test to compare Stan's ESS values with MCMCChains ESS values.
 8. Updated all examples to have a single Dict as data input (suggested by sdewaele).
 
-CmdStan.jl tested on cmdstan v2.19.1.
+CmdStan.jl tested on cmdstan v2.21.0.
 
 ## Documentation
 

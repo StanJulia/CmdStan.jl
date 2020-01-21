@@ -1,11 +1,5 @@
 module CmdStan
 
-#using Reexport
-#using NamedArrays 
-#using Pkg
-using DelimitedFiles, Unicode
-#@reexport using MCMCChains, Statistics
-
 """
 The directory which contains the cmdstan executables such as `bin/stanc` and
 `bin/stansummary`. Inferred from the environment variable `JULIA_CMDSTAN_HOME` or `ENV["JULIA_CMDSTAN_HOME"]`
