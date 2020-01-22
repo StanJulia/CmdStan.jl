@@ -44,11 +44,14 @@ Option 2 is provided by the package StanMamba, option 3 is provided by StanMCMCC
 """
 convert_a3d(a3d_array, cnames, ::Val{:array}; start=1) = a3d_array
 
+"""
+
 # convert_a3d
 
-Convert the output file created by cmdstan to a DataFrame.
+# Convert the output file created by cmdstan to a DataFrame.
 
-```
+$(SIGNATURES)
+
 """
 function convert_a3d(a3d_array, cnames, ::Val{:dataframes}; start=1)
   snames = [Symbol(cnames[i]) for i in 1: length(cnames)]
