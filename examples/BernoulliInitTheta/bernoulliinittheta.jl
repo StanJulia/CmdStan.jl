@@ -24,7 +24,7 @@ cd(ProjDir) do
 
   global stanmodel, csd, chns
   stanmodel = Stanmodel(name="bernoulli", model=bernoullimodel,
-    output_format=:mcmcchains, random=CmdStan.Random(seed=-1),
+    random=CmdStan.Random(seed=-1),
     num_warmup=1000, printsummary=false);
 
   global rc, sim

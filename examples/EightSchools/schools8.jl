@@ -39,7 +39,7 @@ cd(ProjDir) do
   tmpdir = mktempdir()
   
   stanmodel = Stanmodel(name="schools8", model=eightschools,
-    output_format=:mcmcchains, tmpdir=tmpdir);
+    tmpdir=tmpdir);
   
   rc, chn, cnames = stan(stanmodel, schools8data, ProjDir, CmdStanDir=CMDSTAN_HOME)
 

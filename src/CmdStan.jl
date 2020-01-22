@@ -1,6 +1,7 @@
 module CmdStan
 
 using Requires
+using DocStringExtensions: FIELDS, SIGNATURES, TYPEDEF
 
 """
 The directory which contains the cmdstan executables such as `bin/stanc` and
