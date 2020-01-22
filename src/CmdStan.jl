@@ -1,5 +1,7 @@
 module CmdStan
 
+using Requires
+
 """
 The directory which contains the cmdstan executables such as `bin/stanc` and
 `bin/stansummary`. Inferred from the environment variable `JULIA_CMDSTAN_HOME` or `ENV["JULIA_CMDSTAN_HOME"]`
@@ -24,6 +26,9 @@ function __init__()
     @warn("Environment variable CMDSTAN_HOME not set. Use set_cmdstan_home!.")
     ""
   end
+
+  @require MCMCChains="c7f686f2-ff18-58e9-bc7b-31028e88f75d" include("utilities/require_mcmcchains.jl")
+
 end
 
 """Set the path for the `CMDSTAN_HOME` environment variable.

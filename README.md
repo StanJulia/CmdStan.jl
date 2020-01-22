@@ -18,19 +18,22 @@ The location of the cmdstan executable and related programs is now obtained from
 
 Right now `versioninfo()` will show its setting (if defined).
 
-## Note
+## Versions
 
-###  Release 6.0.0 is another breaking upgrade.
+Release 5.7.0
 
-Unfortunately using MCMCChains as the default object to return has proven to be too expensive in terms of compile time at startup. In Julia 1.3 and up this might be due to a combination of including StatsPlots and resolving dependencies of MCMCChains.
+1. Switch to Requires.jl to delay/prevent loading of MCMCChains if not needed (thanks to suggestions by @Byrth and Stijn de Waele).
+2. Revert back to output an array by default.
+3. Added a sub-directory examples_mcmcchains which demonstrate how to include MCMCChains.jl.
 
-As a consequence I am reverting back to what I termed the `federated approach`. If MCMCChains is the selected output, the script must include `using StanMCMCChains`
+Release 5.6.0
 
-###Release 5.0.0 of CmdStan.jl is a major level update as it breaks several examples.
+1. Simplification were possible, removal of some older constructs.
+2. Removal of NamedArrays. This is mildly breaking. If needed it can be brought back using Requires.
 
-By default a call to stan() will now return an MCMCChains.Chains object (which has been derived from the Mamba.Chains object). The Chains object has facilities for summarizing, diagnostics, plotting and further processing.
+Release 5.5.0
 
-The simplest way to revert back to the pre-5.0.0 behavior is to use the ```output_format=:array``` option in the call to StanModel().
+1. Upper bound fixes.
 
 Release 5.4.0
 

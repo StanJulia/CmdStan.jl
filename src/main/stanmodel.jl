@@ -103,19 +103,13 @@ Please use stan() for this purpose.
 
 ### CmdStan.jl supports 3 output_format values:
 ```julia     
-1. :array           # Returns an array of draws
-2. :namedarray      # Returns a NamedArrays object 
-3. :mcmcchains      # Return an MCMCChains.Chains object (default)
+1. :array           # Returns an array of draws (default)
+2. :mcmcchains      # Return an MCMCChains.Chains object
+3. :dataframes      # Return an DataFrames.DataFrame object
 
 The first 2 return an Array{Float64, 3} with ndraws, nvars, nchains
-as indices. The 3rd option (the default) returns an
-MCMCChains.Chains object.
-
-Other options are availableby in:
-1. StanDataFrames.jl
-2. StanMamba.jl
-
-See also `?CmdStan.convert_a3d`.
+as indices. The 2nd option (the default) returns an
+MCMCChains.Chains object, the 3rd a DataFrame object.
 ```
 
 ### Example
@@ -143,9 +137,7 @@ function Stanmodel(
   thin=1,
   model="",
   monitors=String[],
-  #data=DataDict[],
   random=Random(),
-  #init=DataDict[],
   output=Output(),
   printsummary=true,
   pdir::String=pwd(),
@@ -178,15 +170,6 @@ function Stanmodel(
     method.thin=thin
   end
 
-  if output_format == :mcmcchains
-    if !isdefined(Main, :StanMCMCChains)
-      @warn "You are requesting te create MCMCChains.Chains as output,"
-      @warn "but have not specified `using StanMCMCChains`."
-      @warn "Array output will be produced."
-      output_format = :array
-    end
-  end
-  
   Stanmodel(name, nchains, 
     num_warmup, num_samples, thin,
     id, model, model_file, monitors,

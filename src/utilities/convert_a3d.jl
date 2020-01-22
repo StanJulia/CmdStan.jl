@@ -31,9 +31,10 @@ Method called is based on the output_format defined in the stanmodel, e.g.:
 Current formats supported are:
 
 1. :array (a3d_array format, the default for CmdStan)
-2. :mambachains (Mamba.Chains object)
+2. :mcmcchains (MCMCChains.Chains object)
+3. :dataframes (DataFrames.DataFrame object)
 
-Option 2 is provided by the package StanMamba.
+Option 2 is provided by the package StanMamba, option 3 is provided by StanMCMCChains.
 ```
 
 ### Return values
@@ -43,19 +44,14 @@ Option 2 is provided by the package StanMamba.
 """
 convert_a3d(a3d_array, cnames, ::Val{:array}; start=1) = a3d_array
 
-function convert_a3d(a3d_array, cnames, ::Val{:mcmcchains};
-    sorted=true, start=1)
+# convert_a3d
 
-  pi = filter(p -> length(p) > 2 && p[end-1:end] == "__", cnames)
-  p = filter(p -> !(p in  pi), cnames)
+Convert the output file created by cmdstan to a DataFrame.
 
-  MCMCChains.Chains(a3d_array,
-    cnames,
-    Dict(
-      :parameters => p,
-      :internals => pi
-    );
-    sorted=sorted,
-    start=start
-  )
+```
+"""
+function convert_a3d(a3d_array, cnames, ::Val{:dataframes}; start=1)
+  snames = [Symbol(cnames[i]) for i in 1: length(cnames)]
+  [DataFrame(a3d_array[:,:,i], snames) for i in 1:size(a3d_array, 3)]
 end
+
