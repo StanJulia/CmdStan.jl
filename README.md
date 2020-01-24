@@ -22,11 +22,11 @@ Right now `versioninfo()` will show its setting (if defined).
 
 Release 6.0.0
 
-Release 6.0.0 is a breaking release. To revert back to v5.x behavior a script needs to include `using MCMCChains` (which thus must be installed) and specify `output_format=:mcmcchains` in the call to `stanmodel()`. This option is not tested on Travis, a sub-directory examples_mcmcchains has been added which demonstrate this usage pattern.
-
 1. Revert back to output an array by default.
 2. Switch to Requires.jl to delay/prevent loading of MCMCChains if not needed (thanks to suggestions by @Byrth and Stijn de Waele).
 3. WIP: Redoing documentation. 
+
+Release 6.0.0 is a breaking release. To revert back to v5.x behavior a script needs to include `using MCMCChains` (which thus must be installed) and specify `output_format=:mcmcchains` in the call to `stanmodel()`. This option is not tested on Travis. A sub-directory examples_mcmcchains has been added which demonstrate this usage pattern.
 
 Release 5.6.0
 

@@ -54,7 +54,7 @@ Next possible steps can be:
 sdf = read_summary(stanmodel)
 ```
 
-The first time (or when updates to the model have been made) stan() will compile the model and create the executable.
+The first time (or when updates to the model have been made) stan() will compile the model and create the executable. 
 
 On Windows, the CmdStanDir argument appears needed (this is still being investigated). On OSX/Unix CmdStanDir is obtained from an environment variable (see the Requirements section).
 
@@ -94,7 +94,7 @@ stanmodel = Stanmodel(..., output_format=:dataframes, ...)
 
 when creating the Stanmodel.
 
-It is very important that in order to use option 2 the package MCMCChains.jl needs to be installed and loaded in your script, e.g. see the `bernoulli.jl` example in ```examples_mcmcchains```.
+It is very important that in order to use option 2 the package MCMCChains.jl needs to be installed and loaded in your script, e.g. see the `bernoulli.jl` example in the ```examples_mcmcchains``` directory.
 
 
 ## Running a CmdStan script, some details

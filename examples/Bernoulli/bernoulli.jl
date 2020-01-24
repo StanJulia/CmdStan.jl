@@ -22,7 +22,7 @@ cd(ProjDir) do
   observeddata = Dict("N" => 10, "y" => [0, 1, 0, 1, 0, 0, 0, 0, 0, 1])
 
   # Preserve these variables outside cd/do block.
-  global stanmodel, rc, samples, df
+  global stanmodel, rc, samples, cnames, df
     
   stanmodel = Stanmodel(name="bernoulli", model=bernoullimodel,
     printsummary=false);

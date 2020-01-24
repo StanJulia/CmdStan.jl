@@ -10,9 +10,9 @@
 
 ## StanJulia
 
-CmdStan.jl is part of the [StanJulia Github organization](https://github.com/StanJulia) set of packages. It captures draws from a Stan language program.
+CmdStan.jl is part of the [StanJulia Github organization](https://github.com/StanJulia) set of packages. It is one of two options to capture draws from a Stan language program. The other option is *under development* and is illustrated in Stan.jl and [StatisticalRethinking.jl](https://github.com/StatisticalRethinkingJulia/StatisticalRethinking.jl).
 
-On a very high level, a typical workflow for using StanJulia and handle postprocessing by TuringLang's MCMCChains.jl, will look like:
+On a very high level, a typical workflow for using CmdStan.jl looks like:
 
 ```
 using CmdStan
@@ -35,8 +35,17 @@ sdf |> display
 # Show the draws
 samples |> display
 ```
-
 This workflow creates an array of draws, the default value for the `output_format` argument in Stanmodel(). Other options are `:dataframes` and `:mcmcchains`.
+
+If at this point a vector of DataFrames (a DataFrame for each chain) is preferred:
+```
+CmdStan.convert_a3d(samples, cnames, Val(:dataframes))
+```
+Or, if you know upfront a vector of DataFrames is what you want, you can specify that when creating the Stanmodel:
+```
+stanmodel = StanModel(..., output_format=:dataframes,...)
+```
+Version 5 of CmdStan.jl used `:mcmcchains` by default but the dependencies of MCMCChains.jl, including access to plotting features, can lead to long compile times.
 
 ## References
 
