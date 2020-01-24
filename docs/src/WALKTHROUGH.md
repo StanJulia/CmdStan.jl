@@ -83,10 +83,10 @@ The default output format is :array.
 
 To specify options 2 and 3 use:
 ```
- stammodel= Stanmodel(..., output_format=:mcmcchains, ...)
- ```
+stammodel= Stanmodel(..., output_format=:mcmcchains, ...)
+```
 
- or
+or
 
 ```
 stanmodel = Stanmodel(..., output_format=:dataframes, ...)
