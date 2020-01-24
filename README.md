@@ -20,32 +20,32 @@ Right now `versioninfo()` will show its setting (if defined).
 
 ## Versions
 
-Release 6.0.0
+Release 6.0.0 contains:
 
 1. Revert back to output an array by default.
 2. Switch to Requires.jl to delay/prevent loading of MCMCChains if not needed (thanks to suggestions by @Byrth and Stijn de Waele).
-3. WIP: Redoing documentation. 
+3. Updates to documentation. 
 
 Release 6.0.0 is a breaking release. To revert back to v5.x behavior a script needs to include `using MCMCChains` (which thus must be installed) and specify `output_format=:mcmcchains` in the call to `stanmodel()`. This option is not tested on Travis. A sub-directory examples_mcmcchains has been added which demonstrate this usage pattern.
 
-Release 5.6.0
+Release 5.6.0 contains:
 
 1. Simplification were possible, removal of some older constructs.
 2. Removal of NamedArrays. This is mildly breaking. If needed it can be brought back using Requires.
 
-Release 5.5.0
+Release 5.5.0 contains:
 
 1. Upper bound fixes.
 
-Release 5.4.0
+Release 5.4.0 contains:
 
 1. Removed init and data from Stanmodel. Data and init needs to be specified (if needed) in stan(). This is a breaking change although it wasn't handled properly. Thanks to Andrei R. Akhmetzhanov and Chris Fisher.
 
-Release 5.2.3
+Release 5.2.3 contains:
 
 1. Fixed an issue in running read_samples from the REPL (thanks to Graydon Marz).
 
-Release 5.2.2
+Release 5.2.2 contains:
 
 1. Made sure by default no files are created in Julia's `package` directory.
 2. Removed some DataFrame update warnings.
@@ -61,14 +61,12 @@ Release 5.2.0 contains:
 3. Thanks to Daniel Coutinho an issue was fixed which made running CmdStan using Atom bothersome.
 4. Contains a fix in diagnostics testing
 
-Release  5.1.1 contains:
+Release 5.1.1 contains:
 
 1. Fixed an issue with ```save_warmup``` in Variational (thanks to fargolo).
 2. Fixed a documentation issue in ```rel_path_cmdstan```.
 3. Enabled specifying ```data``` and ```init``` using an existing file.
 4. Support for Stan's include facility (thanks to Chris Fisher).
-
-CmdStan.jl tested on cmdstan v2.20.0.
 
 Release 5.1.0 contains:
 
