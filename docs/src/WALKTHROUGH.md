@@ -77,10 +77,22 @@ CmdStan.jl supports 3 output formats:
 
 3. A DataFrames object. 
 
-The default output_format is :array. To specify options 2 and 3 use `output_format=:mcmcchains` and
-`output_format=:dataframes` when creating the Stanmodel. See also [`Stanmodel`](@ref).
+The default output format is :array. 
 
-It is very important that in order to use option 2 the package MCMCChains.jl needs to be installed and loaded in your script, e.g. see the `bernoulli.jl` example in `examples_mcmcchains`.
+To specify options 2 and 3 use"
+```
+ stammodel= Stanmodel(..., output_format=:mcmcchains, ...)
+ ```
+
+ or
+
+```
+stanmodel = Stanmodel(..., output_format=:dataframes, ...)
+```
+
+when creating the Stanmodel.
+
+It is very important that in order to use option 2 the package MCMCChains.jl needs to be installed and loaded in your script, e.g. see the `bernoulli.jl` example in ```examples_mcmcchains```.
 
 
 ## Running a CmdStan script, some details
