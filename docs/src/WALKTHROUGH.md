@@ -42,6 +42,7 @@ Each chain will use this data. If needed, an Array{Dict} can be defined with the
 
 Run the simulation by calling stan(), passing in the data and the intended working directory. 
 ```
+ProjDir = @__DIR__
 rc, chns, cnames = stan(stanmodel, bernoullidata, ProjDir, CmdStanDir=CMDSTAN_HOME)
 ```
 
