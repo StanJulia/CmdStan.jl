@@ -46,7 +46,7 @@ and/or init files for for each chain.
 ### Return values
 ```julia
 * `rc::Int`                       : Return code from stan(), rc == 0 if all is well
-* `sim`                           : Chain results
+* `sim`                           : Samples
 * `cnames`                        : Vector of variable names
 ```
 
