@@ -175,7 +175,7 @@ cd(ProjDir) do
     "mom_hs_new" => 1,
     "mom_iq_new" => 100)
 
-  global stanmodel, rc, sim
+  global stanmodel, rc, sim, sdf
 
   stanmodel = Stanmodel(name="kid", model=kid);
   rc, sim, cnames = stan(stanmodel, kiddata, ProjDir, CmdStanDir=CMDSTAN_HOME)

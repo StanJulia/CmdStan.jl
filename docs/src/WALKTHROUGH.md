@@ -2,16 +2,14 @@
 
 ## Bernoulli example
 
-In this walk-through, it is assumed that 'ProjDir' holds a path to where transient files will be created (in a subdirectory /tmp of ProjDir).
-
 Make CmdStan.jl available:
 ```
 using CmdStan
 ```
 
-Next define the variable 'bernoullistanmodel' to hold the Stan model definition:
+Define a variable, e.g. 'bernoullistanmodel', to hold the Stan model definition:
 ```
-const bernoullistanmodel = "
+bernoullistanmodel = "
 data { 
   int<lower=0> N; 
   int<lower=0,upper=1> y[N];
@@ -25,15 +23,12 @@ model {
 }
 "
 ```
-
-The next step is to create a Stanmodel object. The most common way to create such an object is by giving the model a name while the Stan model is passed in, both through keyword (hence optional) arguments:
+Create a Stanmodel object by giving the model a name and pass in the Stan model:
 ```
 stanmodel = Stanmodel(name="bernoulli", model=bernoullistanmodel);
 ```
 
-Above Stanmodel() call creates a default model for sampling. By default the subsequent call to stan() will return an MCMCChains.Chains object. 
-
-The pre-v5.0.0 behavior is available by specifying ```output_format=:array``` in the StanModel call. This is still used is many of the examples.
+This creates a default model for sampling. A subsequent call to stan() will return an array of samples.
 
 Other arguments to Stanmodel() can be found in [`Stanmodel`](@ref)
 
@@ -41,26 +36,21 @@ The observed input data is defined below.
 ```
 bernoullidata = Dict("N" => 10, "y" => [0, 1, 0, 1, 0, 0, 0, 0, 0, 1])
 ```
+
 Each chain will use this data. If needed, an Array{Dict} can be defined with the same number of entries as the number of chains. This is also true for the optional `init` argument to stan(). Use these features with care, particularly providing different data as the chains are supposed to be from identical observed data.
 
 Run the simulation by calling stan(), passing in the data and the intended working directory. 
 ```
 rc, chns, cnames = stan(stanmodel, bernoullidata, ProjDir, CmdStanDir=CMDSTAN_HOME)
 ```
+
 More documentation on stan() can be found in [`stan`](@ref)
 
 If the return code rc indicated success (rc == 0), cmdstan execution completed succesfully.
 
 Next possible steps can be:
 ```
-describe(chns)
-plot(chns)
-```
-
-Stan() returns the results by default in 2 sections of the MCMCChains.Chains object, i.e. :parameters and :internals:
-```
-describe(chns)
-describe(chns, sections=[:internals])
+sdf = read_summary(stanmodel)
 ```
 
 The first time (or when updates to the model have been made) stan() will compile the model and create the executable.
@@ -76,6 +66,22 @@ csd[:theta, :mean] # Select mean as computed by the stansummary binary.
 ```
 
 Stanmodel has an optional argument `printsummary=false` to have cmdstan create the summary .csv file but not display the stansummary.
+
+## Output format options
+
+CmdStan.jl supports 3 output formats: 
+
+1. A 3 dimensional array ("a3d") where the first index refers to samples, the 2nd index to parameters and the 3rd index to chains.
+
+2. A MCMCChains.Chains object, see the examples in subdirectory examples_mcmcchains.
+
+3. A DataFrames object. 
+
+The default output_format is :array. To specify options 2 and 3 use `output_format=:mcmcchains` and
+`output_format=:dataframes` when creating the Stanmodel. See also [`Stanmodel`](@ref).
+
+It is very important that in order to use option 2 the package MCMCChains.jl needs to be installed and loaded in your script, e.g. see the `bernoulli.jl` example in `examples_mcmcchains`.
+
 
 ## Running a CmdStan script, some details
 

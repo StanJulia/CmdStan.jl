@@ -1,9 +1,8 @@
 ######### CmdStan program example  ###########
 
 using CmdStan
-using StatsPlots
 
-ProjDir = dirname(@__FILE__)
+ProjDir = @__DIR__
 cd(ProjDir) do
 
   bernoullimodel = "
@@ -22,35 +21,22 @@ cd(ProjDir) do
 
   observeddata = Dict("N" => 10, "y" => [0, 1, 0, 1, 0, 0, 0, 0, 0, 1])
 
-  global stanmodel, rc, chn, chns, cnames, summary_df
-  
-  tmpdir = ProjDir*"/tmp"
-  
-  stanmodel = Stanmodel(Sample(save_warmup=true, num_warmup=1000, 
-    num_samples=2000, thin=1), name="bernoulli", model=bernoullimodel,
-    printsummary=false, tmpdir=tmpdir);
+  # Preserve these variables outside cd/do block.
+  global stanmodel, rc, samples, df
+    
+  stanmodel = Stanmodel(name="bernoulli", model=bernoullimodel,
+    printsummary=false);
 
-  rc, chn, cnames = stan(stanmodel, observeddata, ProjDir, diagnostics=false,
-    CmdStanDir=CMDSTAN_HOME);
-
-  chns = chn[1001:end, :, :]
+  rc, samples, cnames = stan(stanmodel, observeddata, ProjDir, CmdStanDir=CMDSTAN_HOME);
   
   if rc == 0
-    # Check if StatsPlots is available
-    if isdefined(Main, :StatsPlots)
-      p1 = plot(chns)
-      savefig(p1, joinpath(tmpdir, "traceplot.pdf"))
-      p2 = pooleddensity(chns)
-      savefig(p2, joinpath(tmpdir, "pooleddensity.pdf"))
-    end
-    
-    # Describe the results
-    show(chns)
+    # Fetch cmdstan summary as a DataFrame
+    df = read_summary(stanmodel)
+
+    df |> display
     println()
-    
-    # Ceate a ChainDataFrame
-    summary_df = read_summary(stanmodel)
-    summary_df[:theta, [:mean, :ess]]
+
+    df[df.parameters .== :theta, [:mean, :ess, :r_hat]] |> display
   end
 
-end # cd
+end # cd block

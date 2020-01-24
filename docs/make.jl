@@ -22,7 +22,7 @@ makedocs(
 deploydocs(
     root = DOC_ROOT,
     repo = "github.com/StanJulia/CmdStan.jl.git",
-    versions = "v#",
+    versions = "v#.#",
     devbranch = "master",
     push_preview = true,
  )

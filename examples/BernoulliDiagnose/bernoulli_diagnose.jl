@@ -21,8 +21,11 @@ cd(ProjDir) do
 
   bernoullidata = Dict("N" => 10, "y" => [0, 1, 0, 1, 0, 0, 0, 0, 0, 1])
   global stanmode, rc, diags, cnames
-  stanmodel = Stanmodel(Diagnose(CmdStan.Gradient(epsilon=1e-6)),
-    output_format=:array, name="bernoulli", model=bernoulli);
+  stanmodel = Stanmodel(
+    Diagnose(CmdStan.Gradient(epsilon=1e-6)),
+    output_format=:array,
+    name="bernoulli", 
+    model=bernoulli);
 
   rc, diags, cnames = stan(stanmodel, bernoullidata, ProjDir, CmdStanDir=CMDSTAN_HOME);
 

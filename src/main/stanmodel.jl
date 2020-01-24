@@ -69,10 +69,10 @@ Stanmodel(
   monitors=String[],
   random=Random(),
   output=Output(),
-  printsummary=true,
+  printsummary=false,
   pdir::String=pwd(),
   tmpdir::String=joinpath(pwd(), "tmp"),
-  output_format=:mcmcchains
+  output_format=:array
 )
 
 ```
