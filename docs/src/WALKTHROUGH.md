@@ -1,5 +1,6 @@
 # A walk-through example
 
+
 ## Bernoulli example
 
 Make CmdStan.jl available:
@@ -67,6 +68,7 @@ csd[:theta, :mean] # Select mean as computed by the stansummary binary.
 
 Stanmodel has an optional argument `printsummary=false` to have cmdstan create the summary .csv file but not display the stansummary.
 
+
 ## Output format options
 
 CmdStan.jl supports 3 output formats: 
@@ -79,7 +81,7 @@ CmdStan.jl supports 3 output formats:
 
 The default output format is :array. 
 
-To specify options 2 and 3 use"
+To specify options 2 and 3 use:
 ```
  stammodel= Stanmodel(..., output_format=:mcmcchains, ...)
  ```

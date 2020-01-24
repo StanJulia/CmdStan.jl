@@ -15,7 +15,7 @@ CmdStan.jl is part of the [StanJulia Github organization](https://github.com/Sta
 On a very high level, a typical workflow for using StanJulia and handle postprocessing by TuringLang's MCMCChains.jl, will look like:
 
 ```
-using CmdStan, StatsBase
+using CmdStan
 
 # Define a Stan language program.
 bernoulli = "..."
@@ -24,33 +24,18 @@ bernoulli = "..."
 stanmodel = StanModel(...)
 
 # Compile and run Stan program, collect draws.
-rc, chns, cnames = stan(...)
+rc, samples, cnames = stan(...)
 
-# Summary of result
-describe(chns) 
+# Cmdstan summary of result
+sdf = read_summary(stanmodel)
 
-# Example of postprocessing, e.g. Highest Posterior Density Interval.
-MCMCChains.hpd(chns)
-
-# Plot the draws.
-plot(chns)
+# 
+sdf |> display
 ```
 
-This workflow creates an [MCMCChains.Chains](https://github.com/TuringLang/MCMCChains.jl) object for summarizing, diagnostics, plotting and further processing.
+This workflow creates an array of draws. 
 
-Another option is to convert the array of draws to a DataFrame using [StanDataFrames.jl](https://github.com/StanJulia/StanDataFrames.jl). This latter option is also available in the MCMCChains package through methods like `DataFrame(...)` and `Array(...)`. A similar workflow is available for Mamba [StanMamba.jl](https://github.com/StanJulia/StanMamba.jl). 
-
-The default value for the `output_format` argument in Stanmodel() is :mcmcchains which causes stan() to call a conversion method ```convert_a3d()``` that returns the MCMCChains.Chains object.
-
-Other values for `output_format` are available, i.e. :array, :namedarray, :dataframe and :mambachain. CmdStan.jl provides the output_format options :mcmcchains, :array and :namedarray. The associated methods for the latter two options are provided by StanDataFrames and StanMamba. 
-
-## Other MCMC options in Julia
-
-[Mamba.jl](http://mambajl.readthedocs.io/en/latest/),  [Klara.jl](http://klarajl.readthedocs.io/en/latest/), [DynamicHMC.jl](https://github.com/tpapp/DynamicHMC.jl) and [Turing.jl](https://github.com/TuringLang/Turing.jl) are other Julia packages to run MCMC models (all in pure Julia!). Several other packages that address aspects of MCMC sampling are available. 
-
-Of particular interest might be the ongoing work in [DiffEqBayes.jl](https://github.com/JuliaDiffEq/DiffEqBayes.jl) on using MCMC for ODE parameter estimation.
-
-[Jags.jl](https://github.com/JagsJulia/Jags.jl) is another option, but like StanJulia/CmdStan.jl, Jags runs as an external program.
+The default value for the `output_format` argument in Stanmodel() is :array which causes stan() to return an array of sample values for all parameters in all chains.
 
 ## References
 
