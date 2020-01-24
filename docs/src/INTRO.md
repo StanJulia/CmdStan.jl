@@ -10,7 +10,7 @@
 
 ## StanJulia
 
-CmdStan.jl is part of the [StanJulia Github organization](https://github.com/StanJulia) set of packages. It captures draws from a Stan language program and returns by default an MCMCChains.Chains object. As much as possible an attempt has been made to leverage the MCMCChains.jl package for diagnostics, postprocessing and to make comparisons with other mcmc packages easier.
+CmdStan.jl is part of the [StanJulia Github organization](https://github.com/StanJulia) set of packages. It captures draws from a Stan language program.
 
 On a very high level, a typical workflow for using StanJulia and handle postprocessing by TuringLang's MCMCChains.jl, will look like:
 
@@ -29,13 +29,14 @@ rc, samples, cnames = stan(...)
 # Cmdstan summary of result
 sdf = read_summary(stanmodel)
 
-# 
+# Dsplay the summary
 sdf |> display
+
+# Show the draws
+samples |> display
 ```
 
-This workflow creates an array of draws. 
-
-The default value for the `output_format` argument in Stanmodel() is :array which causes stan() to return an array of sample values for all parameters in all chains.
+This workflow creates an array of draws, the default value for the `output_format` argument in Stanmodel(). Other options are `:dataframes` and `:mcmcchains`.
 
 ## References
 
