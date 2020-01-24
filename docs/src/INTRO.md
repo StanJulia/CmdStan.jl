@@ -41,7 +41,7 @@ This workflow creates an array of draws, the default value for the `output_forma
 
 If at this point a vector of DataFrames (a DataFrame for each chain) is preferred:
 ```
-CmdStan.convert_a3d(samples, cnames, Val(:dataframes))
+df = CmdStan.convert_a3d(samples, cnames, Val(:dataframes))
 ```
 Or, if you know upfront a vector of DataFrames is what you want, you can specify that when creating the Stanmodel:
 ```
