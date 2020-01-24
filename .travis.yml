@@ -9,7 +9,7 @@ os:
 env:
   - JULIA_CMDSTAN_HOME="$HOME/cmdstan-2.21.0/"
   
-#before_install:
+before_install:
   - OLDWD=`pwd`
   - cd ~
   - wget https://github.com/stan-dev/cmdstan/releases/download/v2.21.0/cmdstan-2.21.0.tar.gz
