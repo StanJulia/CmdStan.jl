@@ -22,7 +22,7 @@ cd(ProjDir) do
   bernoullidata = Dict("N" => 10, "y" => [0, 1, 0, 1, 0, 0, 0, 0, 0, 1])
   inittheta = Dict("theta" => 0.60)
 
-  global stanmodel, csd, chns
+  global stanmodel, sdf
   stanmodel = Stanmodel(name="bernoulli", model=bernoullimodel,
     random=CmdStan.Random(seed=-1),
     num_warmup=1000, printsummary=false);
