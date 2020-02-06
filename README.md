@@ -20,6 +20,14 @@ Right now `versioninfo()` will show its setting (if defined).
 
 ## Versions
 
+Release 6.0.2
+
+1. Init files were not properly included in cmd. Thanks to ueliwechsler and andrstef.
+
+Release 6.0.1
+
+1. Removed dependency on Documenter.
+
 Release 6.0.0 contains:
 
 1. Revert back to output an array by default.

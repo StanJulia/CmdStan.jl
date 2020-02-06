@@ -18,6 +18,14 @@ Versions 6.x of the package has been developed and tested on Mac OSX 10.15.3, Ju
 
 ## Versions
 
+### Release 6.0.2
+
+1. Init files were not properly included in cmd. Thanks to ueliwechsler and andrstef.
+
+### Release 6.0.1
+
+1. Removed dependency on Documenter.
+
 ### Version 6.0.0
 
 Release 6.0.0 is a breaking release. To revert back to v5.x behavior a script needs to include `using MCMCChains` (which thus must be installed) and specify `output_format=:mcmcchains` in the call to `stanmodel()`. This option is not tested on Travis, a sub-directory examples_mcmcchains has been added which demonstrate this usage pattern.
