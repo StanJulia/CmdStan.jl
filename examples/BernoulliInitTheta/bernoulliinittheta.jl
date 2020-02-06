@@ -36,5 +36,4 @@ cd(ProjDir) do
     @test sdf[sdf.parameters .== :theta, :mean][1] ≈ 0.34 rtol=0.1
   end
 
-  
 end # cd
