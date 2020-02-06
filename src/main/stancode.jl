@@ -189,6 +189,9 @@ function stan(
     for i in 1:model.nchains
       model.id = i
       model.data_file ="$(model.name)_$(i).data.R"
+      if init != Nothing
+        model.init_file = "$(model.name)_$(i).init.R"
+      end
       if isa(model.method, Sample)
         model.output.file = model.name*"_samples_$(i).csv"
         isfile("$(model.name)_samples_$(i).csv") && rm("$(model.name)_samples_$(i).csv")
