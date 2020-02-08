@@ -6,6 +6,14 @@
 |:-------------------------------------------------------------------------------:|:-----------------------------------------------------------------------------------------------:|
 | [![][docs-stable-img]][docs-stable-url] [![][docs-dev-img]][docs-dev-url] | [![][travis-img]][travis-url] [![][codecov-img]][codecov-url] |
 
+## CmdStan.jl stargazers over time
+
+[![Stargazers over time](https://starchart.cc/StanJulia/CmdStan.jl.svg)](https://starchart.cc/StanJulia/CmdStan.jl)
+
+## Stan.jl stargazers over time
+
+[![Stargazers over time](https://starchart.cc/StanJulia/Stan.jl.svg)](https://starchart.cc/StanJulia/Stan.jl)
+
 ## Prerequisites
 
 For more info on Stan, please go to <http://mc-stan.org>.
