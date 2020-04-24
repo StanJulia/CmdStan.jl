@@ -53,7 +53,7 @@ cd(ProjDir) do
       ], 6, 5)
     )
 
-  global stanmodel, rc, sim, cnames
+  global stanmodel, rc, sim, cnames, chns
   
   stanmodel = Stanmodel(name="dyes", model=dyes, output_format=:mcmcchains);
   
@@ -74,7 +74,7 @@ cd(ProjDir) do
         :internals => pi
       )
     )
-    describe(chns)
+    show(chns)
     describe(chns, sections=[:mu])
 
   end
