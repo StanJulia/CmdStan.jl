@@ -1,35 +1,41 @@
 using DiffEqBayes, CmdStan, DynamicHMC, DataFrames
 using Distributions, BenchmarkTools
 using OrdinaryDiffEq, RecursiveArrayTools, ParameterizedFunctions
-using StatsPlots
+
+using StatsPlots, CSV
 gr(size=(600,900))
 
 ProjDir = @__DIR__
 cd(ProjDir)
+
+df = CSV.read("$(ProjDir)/lynx_hare.csv", delim=",")
 
 f = @ode_def LotkaVolterraTest begin
     dx = a*x - b*x*y
     dy = -c*y + d*x*y
 end a b c d
 
-u0 = [1.0,1.0]
-tspan = (0.0,10.0)
-p = [1.5,1.0,3.0,1,0]
+u0 = [30.0, 4.0]
+tspan = (0.0, 21.0)
+p = [0.55, 0.028, 0.84, 0.026]
 
 prob = ODEProblem(f,u0,tspan,p)
 sol = solve(prob,Tsit5())
 
-t = collect(range(1,stop=10,length=30))
-sig = 0.49
+t = collect(range(1,stop=20,length=20))
+
+sig = 0.3
 data = convert(Array, VectorOfArray([(sol(t[i]) + sig*randn(2)) for i in 1:length(t)]))
+
+#data = transpose(hcat(df[2:end, :Hare], df[2:end, :Lynx]))
 
 scatter(t, data[1,:], lab="#prey (data)")
 scatter!(t, data[2,:], lab="#predator (data)")
 plot!(sol)
 savefig("$(ProjDir)/fig_01.png")
 
-priors = [Truncated(Normal(1.5,0.5),0.1,3.0),Truncated(Normal(1.2,0.5),0,2),
-  Truncated(Normal(3.0,0.5),1,4),Truncated(Normal(1.0,0.5),0,2)]
+priors = [Truncated(Normal(1,0.5),0,3),Truncated(Normal(0.05,0.05),0,2),
+  Truncated(Normal(1,0.5),0,3),Truncated(Normal(0.05,0.05),0,2)]
 
 # Stan.jl backend
 
@@ -40,12 +46,13 @@ priors = [Truncated(Normal(1.5,0.5),0.1,3.0),Truncated(Normal(1.2,0.5),0,2),
 nchains = 4
 num_samples = 800
 @time bayesian_result_stan = stan_inference(prob,t,data,priors,
-  num_samples=num_samples, printsummary=false, nchains=4);
+  num_samples=num_samples, printsummary=false, nchains=nchains);
 sdf1  = CmdStan.read_summary(bayesian_result_stan.model)
 println()
 
 @time bayesian_result_stan = stan_inference(prob,t,data,priors,
-  num_samples=num_samples, printsummary=false, nchains=4, stanmodel=bayesian_result_stan.model);
+  num_samples=num_samples, printsummary=false, nchains=nchains,
+  stanmodel=bayesian_result_stan.model);
 sdf2  = CmdStan.read_summary(bayesian_result_stan.model)
 println()
 
@@ -56,6 +63,9 @@ df = CmdStan.convert_a3d(bayesian_result_stan.chains, bayesian_result_stan.cname
 df_stan = append!(append!(df[1], df[2]), append!(df[3], df[4]));
 df_stan = df_stan[:, [10, 11, 12, 13, 8, 9]]
 rename!(df_stan, Symbol.(cnames))
+
+sdf1 |> display
+sdf2 |> display
 
 # DynamicHMC.jl backend
 
@@ -80,9 +90,6 @@ df_dhmc = DataFrame(
   :sigma1 => res_array[:, 5],
   :sigma2 => res_array[:, 6]
 )
-
-sdf1 |> display
-sdf2 |> display
 
 println("\nDhmc results\n")
 mean(res_array, dims=1) |> display
@@ -118,3 +125,4 @@ end
 for i in 1:4
   plot_theta_results(df_stan, df_dhmc, "theta", i, priors)
 end
+

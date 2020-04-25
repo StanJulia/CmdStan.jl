@@ -17,10 +17,16 @@ tspan = (0.0,10.0)
 p = [1.5]
 prob1 = ODEProblem(f1,u0,tspan,p)
 sol = solve(prob1,Tsit5())
-t = collect(range(1,stop=10,length=10))
-randomized = VectorOfArray([(sol(t[i]) + .01randn(2)) for i in 1:length(t)])
+t = collect(range(1,stop=10,length=30))
+randomized = VectorOfArray([(sol(t[i]) + .39randn(2)) for i in 1:length(t)])
 data = convert(Array,randomized)
-priors = [Truncated(Normal(0.5,0.5),0,2)]
+
+scatter(t, data[1,:], lab="#prey (data)")
+scatter!(t, data[2,:], lab="#predator (data)")
+plot!(sol)
+savefig("$(ProjDir)/fig_01.png")
+
+priors = [truncated(Normal(1.0, 0.3), 0, 3)]
 nchains = 4
 num_samples = 1000
 
