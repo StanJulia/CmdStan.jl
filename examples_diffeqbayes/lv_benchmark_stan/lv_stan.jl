@@ -1,10 +1,30 @@
 using StatisticalRethinking
+using DiffEqBayes, DynamicHMC, DataFrames
+using BenchmarkTools
+using OrdinaryDiffEq, RecursiveArrayTools, ParameterizedFunctions
+
+using StatsPlots
+gr(size=(600,900))
 
 ProjDir = @__DIR__
-
+cd(ProjDir)
 isdir(ProjDir*"/tmp") && rm(ProjDir*"/tmp", recursive=true)
 
-df = CSV.read("$(ProjDir)/lynx_hare.csv", delim=",")
+f = @ode_def LotkaVolterraTest begin
+    dx = a*x - b*x*y
+    dy = -c*y + d*x*y
+end a b c d
+
+u0 = [30.0, 4.0]
+tspan = (0.0, 21.0)
+p = [0.55, 0.028, 0.84, 0.026]
+
+prob = ODEProblem(f,u0,tspan,p)
+sol = solve(prob,Tsit5())
+
+t = collect(range(1,stop=20,length=20))
+
+df = CSV.read("$(ProjDir)/../lynx_hare.csv", delim=",")
 
 lv = "
   functions {
@@ -106,5 +126,40 @@ if success(rc)
     z_init[1] 33.960   0.056 2.909 30.363 33.871 37.649  2684    1
     z_init[2]  5.949   0.011 0.533  5.294  5.926  6.644  2235    1
   ";
+
+  p1 = plot()
+  scatter!(vcat(0, t), df[:, :Hare], lab="Obs hare")
+  scatter!(vcat(0, t), vcat(30, [mean(dfa[:, Symbol("y_rep.$i.1")]) for i in 1:20]),
+    lab="Pred hare")
+  hares = transpose(convert(Array, VectorOfArray(vcat(
+    [hpdi(dfa[:, Symbol("z_init.1")])],
+    [hpdi(dfa[:, Symbol("y_rep.$i.1")]) for i in 1:20]
+  ))))
+  mu = vcat(
+    mean(dfa[:, Symbol("z_init.1")]),
+    [mean(dfa[:, Symbol("y_rep.$i.1")]) for i in 1:20]
+  )
+  plot!(vcat(0, t), mu; ribbon=hares, alpha=0.4, lab="89% hpd", color=:lightgrey)
+
+  plot!(sol)
+
+  p2 = plot()
+  scatter!(vcat(0, t), vcat(4, [mean(dfa[:, Symbol("y_rep.$i.2")]) for i in 1:20]), 
+    lab="Pred lynx")
+  scatter!(vcat(0, t), df[:, :Lynx], lab="Obs Lynx")
+  lynxs = transpose(convert(Array, VectorOfArray(vcat(
+    [hpdi(dfa[:, Symbol("z_init.2")])],
+    [hpdi(dfa[:, Symbol("y_rep.$i.2")]) for i in 1:20]
+  ))))
+  mu = vcat(
+    mean(dfa[:, Symbol("z_init.2")]),
+    [mean(dfa[:, Symbol("y_rep.$i.2")]) for i in 1:20]
+  )
+  plot!(vcat(0, t), mu; ribbon=lynxs, alpha=0.4, lab="89% hpd", color=:lightgrey)
+
+  plot!(sol)
+
+  plot(p1, p2, layout=(2,1))
+  savefig("$(ProjDir)/fig_01.png")
 
 end

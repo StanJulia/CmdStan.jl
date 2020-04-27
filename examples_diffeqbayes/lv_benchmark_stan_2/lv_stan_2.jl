@@ -1,4 +1,4 @@
-using StanSample
+using StatisticalRethinking
 using DiffEqBayes, DynamicHMC, DataFrames
 using BenchmarkTools
 using OrdinaryDiffEq, RecursiveArrayTools, ParameterizedFunctions
@@ -145,4 +145,37 @@ if success(rc)
     z_init[2]  5.949   0.011 0.533  5.294  5.926  6.644  2235    1
   ";
   
+  p1 = plot()
+  scatter!(vcat(0, t), df[:, :Hare], lab="Obs hare")
+  scatter!(vcat(0, t), vcat(30, [mean(dfa[:, Symbol("y_rep.$i.1")]) for i in 1:20]),
+    lab="Pred hare")
+  hares = transpose(convert(Array, VectorOfArray(vcat(
+    [hpdi(dfa[:, Symbol("z_init.1")])],
+    [hpdi(dfa[:, Symbol("y_rep.$i.1")]) for i in 1:20]
+  ))))
+  mu = vcat(
+    mean(dfa[:, Symbol("z_init.1")]),
+    [mean(dfa[:, Symbol("y_rep.$i.1")]) for i in 1:20]
+  )
+  plot!(vcat(0, t), mu; ribbon=hares, alpha=0.4, lab="89% hpd", color=:lightgrey)
+  plot!(sol)
+
+  p2 = plot()
+  scatter!(vcat(0, t), df[:, :Lynx], lab="Obs Lynx")
+  scatter!(vcat(0, t), vcat(4, [mean(dfa[:, Symbol("y_rep.$i.2")]) for i in 1:20]), 
+    lab="Pred lynx")
+  lynxs = transpose(convert(Array, VectorOfArray(vcat(
+    [hpdi(dfa[:, Symbol("z_init.2")])],
+    [hpdi(dfa[:, Symbol("y_rep.$i.2")]) for i in 1:20]
+  ))))
+  mu = vcat(
+    mean(dfa[:, Symbol("z_init.2")]),
+    [mean(dfa[:, Symbol("y_rep.$i.2")]) for i in 1:20]
+  )
+  plot!(vcat(0, t), mu; ribbon=lynxs, alpha=0.4, lab="89% hpd", color=:lightgrey)
+  plot!(sol)
+
+  plot(p1, p2, layout=(2,1))
+  savefig("$(ProjDir)/fig_02.png")
+
 end

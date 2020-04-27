@@ -8,7 +8,7 @@ gr(size=(600,900))
 ProjDir = @__DIR__
 cd(ProjDir)
 
-df = CSV.read("$(ProjDir)/lynx_hare.csv", delim=",")
+df = CSV.read("$(ProjDir)/../lynx_hare.csv", delim=",")
 
 f = @ode_def LotkaVolterraTest begin
     dx = a*x - b*x*y
