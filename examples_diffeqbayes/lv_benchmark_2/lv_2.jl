@@ -30,8 +30,8 @@ scatter!(t, data[2,:], lab="#predator (data)")
 plot!(sol)
 savefig("$(ProjDir)/fig_01.png")
 
-priors = [Truncated(Normal(1,0.5),0,3),Truncated(Normal(0.05,0.1),0,2),
-  Truncated(Normal(1,0.5),0,3),Truncated(Normal(0.05,0.1),0,2)]
+priors = [truncated(Normal(1,0.5),0.1,3),truncated(Normal(0.05,0.1),0,2),
+  truncated(Normal(1,0.5),0.1,4),truncated(Normal(0.05,0.1),0,2)]
 
 nchains = 4
 num_samples = 800

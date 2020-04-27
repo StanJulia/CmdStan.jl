@@ -27,15 +27,13 @@ t = collect(range(1,stop=20,length=20))
 sig = 0.49
 data = convert(Array, VectorOfArray([(sol(t[i]) + sig*randn(2)) for i in 1:length(t)]))
 
-#data = transpose(hcat(df[2:end, :Hare], df[2:end, :Lynx]))
-
 scatter(t, data[1,:], lab="#prey (data)")
 scatter!(t, data[2,:], lab="#predator (data)")
 plot!(sol)
 savefig("$(ProjDir)/fig_01.png")
 
-priors = [Truncated(Normal(1,0.5),0,3),Truncated(Normal(0.05,0.05),0,2),
-  Truncated(Normal(1,0.5),0,3),Truncated(Normal(0.05,0.05),0,2)]
+priors = [truncated(Normal(1,0.5),0.1,3),truncated(Normal(0.05,0.05),0,2),
+  truncated(Normal(1,0.5),0.1,4),truncated(Normal(0.05,0.05),0,2)]
 
 # Stan.jl backend
 
