@@ -13,3 +13,5 @@ All simulations usually produce results close to the expected solution.
 All formulations occasionally have chains that do not converge.
 
 All simulations use a slightly updated stan_inference method (imported from DiffEqBayes). It records the u_hat estimates (in a generated_quantities section) and enables pre-compiling by stanc. Note that current benchmarking tools currently don't work well for CmdStan due to the forced compilation of the Stan language program.
+
+Notice that several additional (not normally required for CmdStan.jl) packages are needed in these scripts.
