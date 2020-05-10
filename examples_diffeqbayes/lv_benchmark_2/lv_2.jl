@@ -7,6 +7,7 @@ gr(size=(600,900))
 
 ProjDir = @__DIR__
 cd(ProjDir)
+isdir("tmp") && rm("tmp", recursive=true)
 
 df = CSV.read("$(ProjDir)/../lynx_hare.csv", delim=",")
 
@@ -40,9 +41,9 @@ num_samples = 800
 sdf1  = CmdStan.read_summary(bayesian_result_stan.model)
 println()
 
-@time bayesian_result_stan = stan_inference(prob,t,data,priors,
-  num_samples=num_samples, printsummary=false, nchains=nchains,
-  stanmodel=bayesian_result_stan.model);
+@time bayesian_result_stan = stan_inference(prob,t,data,
+  priors,bayesian_result_stan.model,
+  num_samples=num_samples, printsummary=false, nchains=nchains);
 sdf2  = CmdStan.read_summary(bayesian_result_stan.model)
 println()
 

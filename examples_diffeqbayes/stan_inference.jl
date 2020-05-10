@@ -1,58 +1,15 @@
-struct StanModel{M,R,C,N}
-  model::M
-  return_code::R
-  chains::C
-  cnames::N
-end
+import DiffEqBayes: stan_inference
+import DiffEqBayes: StanModel, StanODEData, generate_priors, generate_theta
 
-struct StanODEData
-end
+function stan_inference(prob::DiffEqBase.DEProblem, t, data, 
+  priors=nothing, 
+  stanmodel=nothing;
+  alg=:rk45, num_samples=1000, num_warmup=1000, reltol=1e-3,
+  abstol=1e-6, maxiter=Int(1e5),likelihood=Normal,
+  vars=(StanODEData(),InverseGamma(3,3)),nchains=1,
+  sample_u0 = false, save_idxs = nothing, diffeq_string = nothing,
+  printsummary = true)
 
-function generate_priors(n,priors)
-  priors_string = ""
-  if priors==nothing
-    for i in 1:n
-      priors_string = string(priors_string,"theta[$i] ~ normal(0, 1)", " ; ")
-    end
-  else
-    for i in 1:n
-      priors_string = string(priors_string,"theta[$i] ~",stan_string(priors[i]),";")
-    end
-  end
-  priors_string
-end
-
-function generate_theta(n,priors)
-  theta = ""
-  for i in 1:n
-    upper_bound = ""
-    lower_bound = ""
-    if !isnothing(priors) && maximum(priors[i]) != Inf
-      upper_bound = string("upper=",maximum(priors[i]))
-    end
-    if !isnothing(priors) && minimum(priors[i]) != -Inf
-      lower_bound = string("lower=",minimum(priors[i]))
-    end
-    if lower_bound != "" && upper_bound != ""
-      theta = string(theta,"real","<$lower_bound",",","$upper_bound>"," theta$i",";")
-    elseif lower_bound != ""
-      theta = string(theta,"real","<$lower_bound",">"," theta$i",";")
-    elseif upper_bound != ""
-      theta = string(theta,"real","<","$upper_bound>"," theta$i",";")
-    else
-      theta = string(theta,"real"," theta$i",";")
-    end
-  end
-  return theta
-end
-
-function stan_inference(prob::DiffEqBase.DEProblem,t,data,priors = nothing;alg=:rk45,
-                            num_samples=1000, num_warmup=1000, reltol=1e-3,
-                            abstol=1e-6, maxiter=Int(1e5),likelihood=Normal,
-                            vars=(StanODEData(),InverseGamma(3,3)),nchains=1,
-                            sample_u0 = false, save_idxs = nothing, 
-                            diffeq_string = nothing, printsummary = true,
-                            stanmodel = nothing)
   save_idxs !== nothing && length(save_idxs) == 1 ? save_idxs = save_idxs[1] : save_idxs = save_idxs
   length_of_y = length(prob.u0)
   save_idxs = something(save_idxs, 1:length_of_y)
@@ -79,7 +36,7 @@ function stan_inference(prob::DiffEqBase.DEProblem,t,data,priors = nothing;alg=:
     thetas = string(thetas,"theta[$i] = theta$i",";")
   end
   for i in 1:length_of_params
-    if isa(vars[i],StanODEData)
+    if isa(vars[i], StanODEData)
       tuple_hyper_params = string(tuple_hyper_params,"u_hat[t,$save_idxs]",",")
     else
       dist = stan_string(vars[i])
@@ -164,6 +121,12 @@ function stan_inference(prob::DiffEqBase.DEProblem,t,data,priors = nothing;alg=:
       internal_var___u[t,:] ~ $stan_likelihood($tuple_hyper_params);
       }
   }
+  generated quantities{
+    real u_hat[T,2];
+    u_hat = integrate_ode_rk45(sho, u0, t0, ts, theta, x_r, x_i, 0.001, 1.0e-6, 100000);
+  }
+
+
   "
   if isnothing(stanmodel)
     stanmodel = CmdStan.Stanmodel(num_samples=num_samples,
@@ -171,7 +134,9 @@ function stan_inference(prob::DiffEqBase.DEProblem,t,data,priors = nothing;alg=:
       model=parameter_estimation_model, nchains=nchains,
       printsummary = printsummary)
   end
+
   parameter_estimation_data = Dict("u0"=>prob.u0, "T" => length(t), "internal_var___u" => view(data, :, 1:length(t))', "t0" => prob.tspan[1], "ts" => t)
   return_code, chains, cnames = CmdStan.stan(stanmodel, [parameter_estimation_data]; CmdStanDir=CMDSTAN_HOME)
   return StanModel(stanmodel, return_code, chains, cnames)
+
 end

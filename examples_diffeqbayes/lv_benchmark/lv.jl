@@ -6,6 +6,7 @@ gr(size=(600,900))
 
 ProjDir = @__DIR__
 cd(ProjDir)
+isdir("tmp") && rm("tmp", recursive=true)
 
 f = @ode_def LotkaVolterraTest begin
     dx = a*x - b*x*y
@@ -28,8 +29,8 @@ scatter!(t, data[2,:], lab="#predator (data)")
 plot!(sol)
 savefig("$(ProjDir)/fig_01.png")
 
-priors = [Truncated(Normal(1.5,0.5),0.1,3.0),Truncated(Normal(1.2,0.5),0,2),
-  Truncated(Normal(3.0,0.5),1,4),Truncated(Normal(1.0,0.5),0,2)]
+priors = [Truncated(Normal(1.5,0.5),0.1,3.0),Truncated(Normal(1.2,0.5),0.1,2),
+  Truncated(Normal(3.0,0.5),1,4),Truncated(Normal(1.0,0.5),0.1,2)]
 
 # Stan.jl backend
 
@@ -44,8 +45,9 @@ num_samples = 800
 sdf1  = CmdStan.read_summary(bayesian_result_stan.model)
 println()
 
-@time bayesian_result_stan = stan_inference(prob,t,data,priors,
-  num_samples=num_samples, printsummary=false, nchains=4, stanmodel=bayesian_result_stan.model);
+@time bayesian_result_stan = stan_inference(prob,t,data,
+  priors,bayesian_result_stan.model,
+  num_samples=num_samples, printsummary=false, nchains=4)
 sdf2  = CmdStan.read_summary(bayesian_result_stan.model)
 println()
 
