@@ -131,6 +131,7 @@ for i in 1:4
   plot_theta_results(df_stan, df_dhmc, "theta", i, priors)
 end
 
+stan_results = "
                 mean se_mean    sd    10%    50%    90% n_eff Rhat
     theta[1]   0.549   0.002 0.065  0.469  0.545  0.636  1163    1
     theta[2]   0.028   0.000 0.004  0.023  0.028  0.034  1281    1
