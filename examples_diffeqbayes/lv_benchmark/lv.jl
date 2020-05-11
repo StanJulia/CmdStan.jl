@@ -1,5 +1,5 @@
 using DiffEqBayes, CmdStan, DynamicHMC, DataFrames
-using Distributions, BenchmarkTools
+using Distributions, BenchmarkTools, Random
 using OrdinaryDiffEq, RecursiveArrayTools, ParameterizedFunctions
 using StatsPlots
 gr(size=(600,900))
@@ -7,6 +7,8 @@ gr(size=(600,900))
 ProjDir = @__DIR__
 cd(ProjDir)
 isdir("tmp") && rm("tmp", recursive=true)
+
+include("../stan_inference.jl")
 
 f = @ode_def LotkaVolterraTest begin
     dx = a*x - b*x*y
@@ -29,8 +31,8 @@ scatter!(t, data[2,:], lab="#predator (data)")
 plot!(sol)
 savefig("$(ProjDir)/fig_01.png")
 
-priors = [Truncated(Normal(1.5,0.5),0.1,3.0),Truncated(Normal(1.2,0.5),0.1,2),
-  Truncated(Normal(3.0,0.5),1,4),Truncated(Normal(1.0,0.5),0.1,2)]
+priors = [truncated(Normal(1.5,0.5),0.1,3.0),truncated(Normal(1.2,0.5),0.1,2),
+  truncated(Normal(3.0,0.5),1,4),truncated(Normal(1.0,0.5),0.1,2)]
 
 # Stan.jl backend
 

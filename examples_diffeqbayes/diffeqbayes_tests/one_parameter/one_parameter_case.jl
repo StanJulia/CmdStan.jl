@@ -1,5 +1,5 @@
 using CmdStan, DiffEqBayes, OrdinaryDiffEq, ParameterizedFunctions,
-      RecursiveArrayTools, Distributions, Random, Test
+      ModelingToolkit, RecursiveArrayTools, Distributions, Random, Test
 
 # Uncomment for local testing only, make sure MCMCChains and StatsPlots are available
 using MCMCChains, StatsPlots
@@ -7,6 +7,8 @@ using MCMCChains, StatsPlots
 #Random.seed!(123)
 cd(@__DIR__)
 isdir("tmp") && rm("tmp", recursive=true)
+
+include("../../stan_inference.jl")
 
 println("\nOne parameter case 1\n")
 f1 = @ode_def begin

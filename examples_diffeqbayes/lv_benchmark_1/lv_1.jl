@@ -9,6 +9,8 @@ ProjDir = @__DIR__
 cd(ProjDir)
 isdir("tmp") && rm("tmp", recursive=true)
 
+include("../stan_inference.jl")
+
 df = CSV.read("$(ProjDir)/../lynx_hare.csv", delim=",")
 
 f = @ode_def LotkaVolterraTest begin

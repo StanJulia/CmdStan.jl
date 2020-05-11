@@ -1,13 +1,17 @@
 using DiffEqBayes, CmdStan, DynamicHMC, DataFrames
 using Distributions, BenchmarkTools
 using OrdinaryDiffEq, RecursiveArrayTools, ParameterizedFunctions
-
+using ModelingToolkit
 using StatsPlots, CSV
 gr(size=(600,900))
 
 ProjDir = @__DIR__
 cd(ProjDir)
 isdir("tmp") && rm("tmp", recursive=true)
+
+include("../stan_inference.jl")
+
+Random.seed!(123)
 
 df = CSV.read("$(ProjDir)/../lynx_hare.csv", delim=",")
 
