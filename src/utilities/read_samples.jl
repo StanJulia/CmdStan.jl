@@ -39,6 +39,10 @@ function read_samples(m::Stanmodel, diagnostics=false, warmup_samples=false)
     end
   else
     ftype = lowercase(string(typeof(m.method)))
+    if (ftype[1:7] == "cmdstan")
+      ftype = ftype[9:end]
+    end
+    
     
     # The noofsamples is obtained from method.output_samples
   
