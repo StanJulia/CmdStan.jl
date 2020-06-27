@@ -28,6 +28,12 @@ Right now `versioninfo()` will show its setting (if defined).
 
 ## Versions
 
+Release 6.0.6
+
+1. Fixed an issue related to naming of created files. Thanks to mkshirazi.
+2. Several bumps to deal with package versions.
+3. Re-enabling Coverage.
+
 Release 6.0.2
 
 1. Init files were not properly included in cmd. Thanks to ueliwechsler and andrstef.
