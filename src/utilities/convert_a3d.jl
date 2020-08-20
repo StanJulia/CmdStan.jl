@@ -1,3 +1,5 @@
+using DataFrames
+
 # convert_a3d
 
 # Method that allows federation by setting the `output_format`  in the Stanmodel().
@@ -32,9 +34,10 @@ Current formats supported are:
 
 1. :array (a3d_array format, the default for CmdStan)
 2. :mcmcchains (MCMCChains.Chains object)
-3. :dataframes (DataFrames.DataFrame object)
+3. :dataframes (Array of DataFrames.DataFrame objects)
+4. :namedtuple (NamedTuple object)
 
-Option 2 is provided by the package StanMamba, option 3 is provided by StanMCMCChains.
+Option 2 is available if MCMCChains is loaded.
 ```
 
 ### Return values
@@ -48,7 +51,7 @@ convert_a3d(a3d_array, cnames, ::Val{:array}; start=1) = a3d_array
 
 # convert_a3d
 
-# Convert the output file created by cmdstan to a DataFrame.
+# Convert the output file created by cmdstan to an Array of DataFrames.
 
 $(SIGNATURES)
 
@@ -56,5 +59,18 @@ $(SIGNATURES)
 function convert_a3d(a3d_array, cnames, ::Val{:dataframes}; start=1)
   snames = [Symbol(cnames[i]) for i in 1: length(cnames)]
   [DataFrame(a3d_array[:,:,i], snames) for i in 1:size(a3d_array, 3)]
+end
+
+"""
+
+# convert_a3d
+
+# Convert the output file created by cmdstan to NamedTuples.
+
+$(SIGNATURES)
+
+"""
+function convert_a3d(a3d_array, cnames, ::Val{:namedtuple}; start=1)
+  extract(a3d_array, cnames)
 end
 

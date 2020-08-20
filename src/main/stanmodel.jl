@@ -103,6 +103,7 @@ Stanmodel(
 1. :array           # Returns an array of draws (default)
 2. :mcmcchains      # Return an MCMCChains.Chains object
 3. :dataframes      # Return an DataFrames.DataFrame object
+4. :namedtuple       # Returns a NamedTuple object
 
 The first options (the default) returns an Array{Float64, 3} with ndraws, nvars, nchains
 as indices. The 2nd option returns an MCMCChains.Chains object, the 3rd a DataFrame object.

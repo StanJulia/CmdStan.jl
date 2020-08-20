@@ -30,7 +30,8 @@ Right now `versioninfo()` will show its setting (if defined).
 
 Release 6.0.8
 
-1. Thanks to @yiyuezhuo, a function `extract` has been added to simplify grouping variables into Arrays.
+1. Thanks to @yiyuezhuo, a function `extract` has been added to simplify grouping variables into a NamedTuple of Arrays.
+2. Updated CSV.read to specify Dataframe argument
 
 Release 6.0.7
 
