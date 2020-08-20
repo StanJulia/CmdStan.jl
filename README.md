@@ -28,7 +28,16 @@ Right now `versioninfo()` will show its setting (if defined).
 
 ## Versions
 
-Release 6.0.6
+Release 6.0.8
+
+1. Thanks to @yiyuezhuo, a function `extract` has been added to simplify grouping variables into Arrays.
+
+Release 6.0.7
+
+1. Compatibility updates
+2. Cmdstan version updates.
+
+Release 6.0.2-6
 
 1. Fixed an issue related to naming of created files. Thanks to mkshirazi.
 2. Several bumps to deal with package versions.

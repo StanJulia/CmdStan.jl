@@ -11,7 +11,7 @@ isdir("tmp") && rm("tmp", recursive=true)
 
 include("../stan_inference.jl")
 
-df = CSV.read("$(ProjDir)/../lynx_hare.csv", delim=",")
+df = CSV.read("$(ProjDir)/../lynx_hare.csv", DataFrame; delim=",")
 
 f = @ode_def LotkaVolterraTest begin
     dx = a*x - b*x*y

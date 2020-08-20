@@ -22,7 +22,7 @@ function read_summary(m::Stanmodel)
   fname = "$(m.tmpdir)/$(m.name)_summary.csv"
   !isfile(fname) && stan_summary(m)
   
-  df = CSV.read(fname, delim=",", comment="#")
+  df = CSV.read(fname, DataFrame; delim=",", comment="#")
   
   cnames = lowercase.(convert.(String, String.(names(df))))
   cnames[1] = "parameters"

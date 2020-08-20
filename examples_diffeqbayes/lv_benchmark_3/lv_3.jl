@@ -13,7 +13,7 @@ include("../stan_inference.jl")
 
 Random.seed!(123)
 
-df = CSV.read("$(ProjDir)/../lynx_hare.csv", delim=",")
+df = CSV.read("$(ProjDir)/../lynx_hare.csv", DataFrame; delim=",")
 
 f = @ode_def LotkaVolterraTest begin
     dx = a*x - b*x*y
