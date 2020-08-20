@@ -30,8 +30,9 @@ Right now `versioninfo()` will show its setting (if defined).
 
 Release 6.0.8
 
-1. Thanks to @yiyuezhuo, a function `extract` has been added to simplify grouping variables into a NamedTuple of Arrays.
-2. Updated CSV.read to specify Dataframe argument
+1. Thanks to @yiyuezhuo, a function `extract` has been added to simplify grouping variables into a NamedTuple.
+2. Stanmodel's output_format argument has been extended with an option to request conversion to a NamedTuple.
+3. Updated CSV.read to specify Dataframe argument
 
 Release 6.0.7
 
