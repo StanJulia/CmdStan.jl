@@ -50,11 +50,13 @@ function read_samples(m::Stanmodel, diagnostics=false, warmup_samples=false)
   end
   
   # Read .csv files created by each chain
-  
+
+  cnames = String[]
+  a3d = Dict{String,Any}("a" => nothing)
   for i in 1:m.nchains
-    if isfile("$(m.name)_$(ftype)_$(i).csv")
+    if isfile("$(m.object_file)_$(ftype)_$(i).csv")
       
-      instream = open("$(m.name)_$(ftype)_$(i).csv")
+      instream = open("$(m.object_file)_$(ftype)_$(i).csv")
         
       # Skip initial set of commented lines, e.g. containing
       # cmdstan version info, etc.
@@ -78,8 +80,8 @@ function read_samples(m::Stanmodel, diagnostics=false, warmup_samples=false)
       # Preserve cnames and create a3d
       
       if i == 1
-        global cnames = convert.(String, idx[indvec])
-        global a3d = fill(0.0, noofsamples, length(indvec), m.nchains)
+        append!(cnames, convert.(String, idx[indvec]))
+        a3d["a"] = fill(0.0, noofsamples, length(indvec), m.nchains)
       end
       
       # Read in the samples for all chains
@@ -93,12 +95,12 @@ function read_samples(m::Stanmodel, diagnostics=false, warmup_samples=false)
         else
           flds = parse.(Float64, split(strip(line), ","))
           flds = reshape(flds[indvec], 1, length(indvec))
-          a3d[j,:,i] = flds
+          a3d["a"][j,:,i] = flds
         end
       end   # read in samples  
     end   # select next file if it exists
   end   # loop over all chains
   
-  (a3d, cnames)
+  (a3d["a"], cnames)
   
 end   # end of read_samples
