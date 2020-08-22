@@ -37,16 +37,15 @@ if rc == 0
   df[df.parameters .== :theta, [:mean, :ess, :r_hat]] |> display
 end
 =#
-println("\n\nThreads loop\n\n")
+
+println("\nThreads loop\n")
 p1 = 1
-old_model = sm
 # p1 is the number of models to fit
 # old_model is an old Stanmodel
 estimates = Vector(undef, p1)
 Threads.@threads for i in 1:p1
-    new_model= deepcopy(old_model)
-    #new_model = Stanmodel(name="bernoulli", model=bernoullimodel)
-    println(new_model)
+    new_model= deepcopy(sm)
+    println(new_model.tmpdir)
 
     pdir = pwd()
     while ispath(pdir)
