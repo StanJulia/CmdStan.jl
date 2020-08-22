@@ -41,6 +41,7 @@ mutable struct Stanmodel
   monitors::Vector{String}
   data_file::String
   command::Vector{Base.AbstractCmd}
+  object_file::String
   method::Method
   random::Random
   init_file::String
@@ -155,6 +156,7 @@ function Stanmodel(
   
   id::Int=0
   data_file::String=""
+  object_file::String=""
   init_file::String=""
   cmdarray = fill(``, nchains)
   
@@ -173,7 +175,7 @@ function Stanmodel(
   Stanmodel(name, nchains, 
     num_warmup, num_samples, thin,
     id, model, model_file, monitors,
-    data_file, cmdarray, method, random,
+    data_file, cmdarray, object_file, method, random,
     init_file, output, printsummary, pdir, tmpdir, output_format);
 end
 

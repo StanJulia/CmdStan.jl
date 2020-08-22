@@ -96,11 +96,12 @@ function stan(
   @assert isdir(ProjDir) "Incorrect ProjDir specified: $(ProjDir)"
   @assert isdir(model.tmpdir) "$(model.tmpdir) not created"
   
-  cd(model.tmpdir) do 
-    isfile("$(model.name)_build.log") && rm("$(model.name)_build.log")
-    isfile("$(model.name)_make.log") && rm("$(model.name)_make.log")
-    isfile("$(model.name)_run.log") && rm("$(model.name)_run.log")
-  end
+  absolute_tempdir_path = cd(pwd,model.tmpdir)
+  path_prefix = joinpath(splitpath(absolute_tempdir_path)..., model.name)
+  model.object_file = path_prefix
+  isfile("$(path_prefix)_build.log") && rm("$(path_prefix)_build.log")
+  isfile("$(path_prefix)_make.log") && rm("$(path_prefix)_make.log")
+  isfile("$(path_prefix)_run.log") && rm("$(path_prefix)_run.log")
 
   cd(CmdStanDir) do
     local tmpmodelname::String
@@ -126,138 +127,136 @@ function stan(
     end
   end
 
-  cd(model.tmpdir) do  
-    if data != Nothing && (typeof(data) <: AbstractString || check_dct_type(data))
-      if typeof(data) <: AbstractString
+  if data != Nothing && (typeof(data) <: AbstractString || check_dct_type(data))
+    if typeof(data) <: AbstractString
+      for i in 1:model.nchains
+        cp(data, "$(path_prefix)_$(i).data.R", force=true)
+      end   
+    else
+      if typeof(data) <: Array && length(data) == model.nchains
         for i in 1:model.nchains
-          cp(data, "$(model.name)_$(i).data.R", force=true)
-        end   
+          if length(keys(data[i])) > 0
+            update_R_file("$(path_prefix)_$(i).data.R", data[i])
+          end
+        end
       else
-        if typeof(data) <: Array && length(data) == model.nchains
+        if typeof(data) <: Array
           for i in 1:model.nchains
-            if length(keys(data[i])) > 0
-              update_R_file("$(model.name)_$(i).data.R", data[i])
+            if length(keys(data[1])) > 0
+              update_R_file("$(path_prefix)_$(i).data.R", data[1])
             end
           end
         else
-          if typeof(data) <: Array
-            for i in 1:model.nchains
-              if length(keys(data[1])) > 0
-                update_R_file("$(model.name)_$(i).data.R", data[1])
-              end
-            end
-          else
-            for i in 1:model.nchains
-              if length(keys(data)) > 0
-                update_R_file("$(model.name)_$(i).data.R", data)
-              end
+          for i in 1:model.nchains
+            if length(keys(data)) > 0
+              update_R_file("$(path_prefix)_$(i).data.R", data)
             end
           end
         end
       end
     end
-    
-    if init != Nothing && (typeof(init) <: AbstractString || check_dct_type(init))
-      if typeof(init) <: AbstractString
+  end
+  
+  if init != Nothing && (typeof(init) <: AbstractString || check_dct_type(init))
+    if typeof(init) <: AbstractString
+      for i in 1:model.nchains
+        cp(init, "$(path_prefix)_$(i).init.R", force=true)
+      end   
+    else
+      if typeof(init) <: Array && length(init) == model.nchains
         for i in 1:model.nchains
-          cp(init, "$(model.name)_$(i).init.R", force=true)
-        end   
+          if length(keys(init[i])) > 0
+            update_R_file("$(path_prefix)_$(i).init.R", init[i])
+          end
+        end
       else
-        if typeof(init) <: Array && length(init) == model.nchains
+        if typeof(init) <: Array
           for i in 1:model.nchains
-            if length(keys(init[i])) > 0
-              update_R_file("$(model.name)_$(i).init.R", init[i])
+            if length(keys(init[1])) > 0
+              update_R_file("$(path_prefix)_$(i).init.R", init[1])
             end
           end
         else
-          if typeof(init) <: Array
-            for i in 1:model.nchains
-              if length(keys(init[1])) > 0
-                update_R_file("$(model.name)_$(i).init.R", init[1])
-              end
-            end
-          else
-            for i in 1:model.nchains
-              if length(keys(init)) > 0
-                update_R_file("$(model.name)_$(i).init.R", init)
-              end
+          for i in 1:model.nchains
+            if length(keys(init)) > 0
+              update_R_file("$(path_prefix)_$(i).init.R", init)
             end
           end
         end
       end
+    end
+  end
+  
+  for i in 1:model.nchains
+    model.id = i
+    model.data_file ="$(path_prefix)_$(i).data.R"
+    if init != Nothing
+        model.init_file = "$(path_prefix)_$(i).init.R"
+    end
+    if isa(model.method, Sample)
+      model.output.file = path_prefix*"_samples_$(i).csv"
+      isfile(model.output.file) && rm(model.output.file)
+      if diagnostics
+        model.output.diagnostic_file = path_prefix*"_diagnostics_$(i).csv"
+        isfile(model.output.diagnostic_file) && rm(model.output.diagnostic_file)
+      end
+    elseif isa(model.method, Optimize)
+      model.output.file = path_prefix*"_optimize_$(i).csv"
+      isfile(model.output.file) && rm(model.output.file)
+    elseif isa(model.method, Variational)
+      model.output.file = path_prefix*"_variational_$(i).csv"
+      isfile(model.output.file) && rm(model.output.file)
+    elseif isa(model.method, Diagnose)
+      model.output.file = path_prefix*"_diagnose_$(i).csv"
+      isfile(model.output.file) && rm(model.output.file)
+    end
+    model.command[i] = cmdline(model)
+  end
+  
+  try
+    if file_run_log
+      run(pipeline(par(model.command), stdout="$(path_prefix)_run.log"))
+    else
+      run(par(model.command))
+    end
+  catch e
+    println("\nAn error occurred while running the previously compiled Stan program.\n")
+    print("Please check the contents of file $(model.name)_run.log and the")
+    println("'command' field in the Stanmodel, e.g. stanmodel.command.\n")
+    error("Return code = -5")
+  end
+  
+  local samplefiles = String[]
+  local ftype
+  # local cnames = String[]
+  
+  if typeof(model.method) in [Sample, Variational]
+    if isa(model.method, Sample)
+      ftype = diagnostics ? "diagnostics" : "samples"
+    else
+      ftype = lowercase(string(typeof(model.method)))
     end
     
     for i in 1:model.nchains
-      model.id = i
-      model.data_file ="$(model.name)_$(i).data.R"
-      if init != Nothing
-         model.init_file = "$(model.name)_$(i).init.R"
-      end
-      if isa(model.method, Sample)
-        model.output.file = model.name*"_samples_$(i).csv"
-        isfile("$(model.name)_samples_$(i).csv") && rm("$(model.name)_samples_$(i).csv")
-        if diagnostics
-          model.output.diagnostic_file = model.name*"_diagnostics_$(i).csv"
-          isfile("$(model.name)_diagnostics_$(i).csv") && rm("$(model.name)_diagnostics_$(i).csv")
-        end
-      elseif isa(model.method, Optimize)
-        isfile("$(model.name)_optimize_$(i).csv") && rm("$(model.name)_optimize_$(i).csv")
-        model.output.file = model.name*"_optimize_$(i).csv"
-      elseif isa(model.method, Variational)
-        isfile("$(model.name)_variational_$(i).csv") && rm("$(model.name)_variational_$(i).csv")
-        model.output.file = model.name*"_variational_$(i).csv"
-      elseif isa(model.method, Diagnose)
-        isfile("$(model.name)_diagnose_$(i).csv") && rm("$(model.name)_diagnose_$(i).csv")
-        model.output.file = model.name*"_diagnose_$(i).csv"
-      end
-      model.command[i] = cmdline(model)
+      push!(samplefiles, "$(path_prefix)_$(ftype)_$(i).csv")
     end
     
-    try
-      if file_run_log
-        run(pipeline(par(model.command), stdout="$(model.name)_run.log"))
-      else
-        run(par(model.command))
-      end
-    catch e
-      println("\nAn error occurred while running the previously compiled Stan program.\n")
-      print("Please check the contents of file $(model.name)_run.log and the")
-      println("'command' field in the Stanmodel, e.g. stanmodel.command.\n")
-      error("Return code = -5")
+    if summary
+      stan_summary(model, par(samplefiles), CmdStanDir=CmdStanDir)
     end
     
-    local samplefiles = String[]
-    local ftype
-    # local cnames = String[]
+    (res, cnames) = read_samples(model, diagnostics)
     
-    if typeof(model.method) in [Sample, Variational]
-      if isa(model.method, Sample)
-        ftype = diagnostics ? "diagnostics" : "samples"
-      else
-        ftype = lowercase(string(typeof(model.method)))
-      end
-      
-      for i in 1:model.nchains
-        push!(samplefiles, "$(model.name)_$(ftype)_$(i).csv")
-      end
-      
-      if summary
-        stan_summary(model, par(samplefiles), CmdStanDir=CmdStanDir)
-      end
-      
-      (res, cnames) = read_samples(model, diagnostics)
-      
-    elseif isa(model.method, Optimize)
-      res, cnames = read_optimize(model)
+  elseif isa(model.method, Optimize)
+    res, cnames = read_optimize(model)
 
-    elseif isa(model.method, Diagnose)
-      res, cnames = read_diagnose(model)
+  elseif isa(model.method, Diagnose)
+    res, cnames = read_diagnose(model)
 
-    else
-      println("\nAn unknown method is specified in the call to stan().")
-      error("Return code = -10")
-    end
-  end # cd()
+  else
+    println("\nAn unknown method is specified in the call to stan().")
+    error("Return code = -10")
+  end
 
   if model.output_format != :array
     start_sample = 1
