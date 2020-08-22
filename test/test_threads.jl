@@ -19,33 +19,14 @@ model {
 
 observeddata = Dict("N" => 10, "y" => [0, 1, 0, 1, 0, 0, 0, 0, 0, 1])
 
-tmpdir = ProjDir * "/tmp"
-sm = Stanmodel(name="bernoulli", model=bernoullimodel;
-  #tmpdir=tmpdir
-);
-
-#=
-rc, samples, cnames = stan(stanmodel, observeddata, ProjDir, CmdStanDir=CMDSTAN_HOME);
-
-if rc == 0
-  # Fetch cmdstan summary as a DataFrame
-  df = read_summary(stanmodel)
-
-  df |> display
-  println()
-
-  df[df.parameters .== :theta, [:mean, :ess, :r_hat]] |> display
-end
-=#
+sm = Stanmodel(name="bernoulli", model=bernoullimodel);
 
 println("\nThreads loop\n")
-p1 = 1
+p1 = 15
 # p1 is the number of models to fit
-# old_model is an old Stanmodel
 estimates = Vector(undef, p1)
 Threads.@threads for i in 1:p1
     new_model= deepcopy(sm)
-    println(new_model.tmpdir)
 
     pdir = pwd()
     while ispath(pdir)
@@ -57,7 +38,11 @@ Threads.@threads for i in 1:p1
 
     mkpath(new_model.tmpdir)
 
-    estimates[i] = stan(new_model)
+    #estimates[i] = stan(new_model)
+    rc, samples, cnames = stan(sm, observeddata, new_model.pdir);
+    if rc == 0
+      estimates[i] = samples
+    end
 
     rm(pdir; force=true, recursive=true)
 end
