@@ -28,12 +28,12 @@ function read_optimize(model::Stanmodel)
   tdict = Dict()
   
   for i in 1:model.nchains
-    if isfile("$(model.name)_$(res_type)_$(i).csv")
+    if isfile("$(model.object_file)_$(res_type)_$(i).csv")
       
       # A result type file for chain i is present ##
-      instream = open("$(model.name)_$(res_type)_$(i).csv")
+      instream = open("$(model.object_file)_$(res_type)_$(i).csv")
       if i == 1
-        open("$(model.name)_$(res_type)_$(i).csv") do instream 
+        open("$(model.object_file)_$(res_type)_$(i).csv") do instream 
           str = read(instream, String)
           sstr = split(str)
           tdict[:stan_major_version] = [parse(Int, sstr[4])]
@@ -43,7 +43,7 @@ function read_optimize(model::Stanmodel)
       end
       
       # After reopening the file, skip all comment lines
-      open("$(model.name)_$(res_type)_$(i).csv") do instream
+      open("$(model.object_file)_$(res_type)_$(i).csv") do instream
         skipchars(isspace, instream, linecomment='#')
         line = Unicode.normalize(readline(instream), newline2lf=true)
         

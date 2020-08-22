@@ -30,7 +30,7 @@ cd(ProjDir) #do
     println()
     display(optim)
     println()
-    println("Test round.(mean(optim[1][\"theta\"]), digits=1) ≈ 0.3")
+    println("Test round.(mean(optim[\"theta\"]), digits=1) ≈ 0.3")
     @test round.(mean(optim["theta"]), digits=1) ≈ 0.3
   end
 
