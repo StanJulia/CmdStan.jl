@@ -1,4 +1,4 @@
-using CmdStan, Distributed
+using CmdStan, Statistics
 
 ProjDir = @__DIR__
 cd(ProjDir)
@@ -19,7 +19,7 @@ model {
 
 observeddata = Dict("N" => 10, "y" => [0, 1, 0, 1, 0, 0, 0, 0, 0, 1])
 
-sm = Stanmodel(name="bernoulli", model=bernoullimodel);
+sm = Stanmodel(name="bernoulli", model=bernoullimodel, output_format=:namedtuple);
 
 println("\nThreads loop\n")
 p1 = 15
@@ -41,7 +41,7 @@ Threads.@threads for i in 1:p1
     #estimates[i] = stan(new_model)
     rc, samples, cnames = stan(sm, observeddata, new_model.pdir);
     if rc == 0
-      estimates[i] = samples
+      estimates[i] = mean(reshape(samples.theta, 4000))
     end
 
     rm(pdir; force=true, recursive=true)
