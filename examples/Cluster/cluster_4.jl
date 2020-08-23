@@ -83,7 +83,7 @@ d[2] = Dict("N" => 10, "y" => [0, 1, 0, 0, 0, 1, 1, 1, 0, 1])
 d[3] = Dict("N" => 10, "y" => [0, 1, 0, 1, 0, 0, 0, 0, 0, 1])
 d[4] = Dict("N" => 10, "y" => [0, 1, 1, 1, 0, 1, 1, 1, 0, 1])
 
-mkdir("$(ProjDir)/tmp")
+!isdir("$(ProjDir)/tmp") && mkdir("$(ProjDir)/tmp")
 tmpdir = "$(ProjDir)/tmp/cmd"
 @everywhere jobs = Vector{Job}(undef, 4)
 jobs[1] = Job("m1.1", m1, d[1]; tmpdir=tmpdir*"1")

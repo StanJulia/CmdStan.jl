@@ -22,7 +22,7 @@ observeddata = Dict("N" => 10, "y" => [0, 1, 0, 1, 0, 0, 0, 0, 0, 1])
 sm = Stanmodel(name="bernoulli", model=bernoullimodel, output_format=:namedtuple);
 
 println("\nThreads loop\n")
-p1 = 15
+p1 = 6
 # p1 is the number of models to fit
 estimates = Vector(undef, p1)
 Threads.@threads for i in 1:p1
