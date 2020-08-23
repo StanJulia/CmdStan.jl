@@ -83,6 +83,7 @@ d[2] = Dict("N" => 10, "y" => [0, 1, 0, 0, 0, 1, 1, 1, 0, 1])
 d[3] = Dict("N" => 10, "y" => [0, 1, 0, 1, 0, 0, 0, 0, 0, 1])
 d[4] = Dict("N" => 10, "y" => [0, 1, 1, 1, 0, 1, 1, 1, 0, 1])
 
+isdir("$(ProjDir)/tmp") && rm("$(ProjDir)/tmp", recursive=true)
 mkdir("$(ProjDir)/tmp")
 tmpdir = "$(ProjDir)/tmp/cmd"
 @everywhere jobs = Vector{Job}(undef, 4)
@@ -100,11 +101,12 @@ jobs[4] = Job("m2.2", m2, d[4]; tmpdir=tmpdir*"4")
   else
     println("Job[i] failed, adjust p indices accordingly.")
   end
+  show(p)
   p
 end
 
 @time res = pmap(i -> runjob(i, jobs), 1:length(jobs));
 for i in 1:length(jobs)
-  display(res[i])
+  res[i]
 end
 
