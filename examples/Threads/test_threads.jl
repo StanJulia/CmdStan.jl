@@ -39,7 +39,7 @@ Threads.@threads for i in 1:p1
     mkpath(new_model.tmpdir)
 
     #estimates[i] = stan(new_model)
-    rc, samples, cnames = stan(sm, observeddata, new_model.pdir);
+    rc, samples, cnames = stan(new_model, observeddata, new_model.pdir);
     if rc == 0
       estimates[i] = mean(reshape(samples.theta, 4000))
     end

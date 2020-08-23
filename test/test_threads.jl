@@ -19,10 +19,11 @@ model {
 
 observeddata = Dict("N" => 10, "y" => [0, 1, 0, 1, 0, 0, 0, 0, 0, 1])
 
-sm = Stanmodel(name="bernoulli", model=bernoullimodel, output_format=:namedtuple);
+sm = Stanmodel(name="bernoulli", model=bernoullimodel,
+  output_format=:namedtuple);
 
 println("\nThreads loop\n")
-p1 = 6
+p1 = 1
 # p1 is the number of models to fit
 estimates = Vector(undef, p1)
 Threads.@threads for i in 1:p1
@@ -35,14 +36,9 @@ Threads.@threads for i in 1:p1
 
     new_model.pdir = pdir
     new_model.tmpdir = joinpath(splitpath(pdir)...,"tmp")
-
     mkpath(new_model.tmpdir)
 
-    #estimates[i] = stan(new_model)
-    rc, samples, cnames = stan(sm, observeddata, new_model.pdir);
-    if rc == 0
-      estimates[i] = mean(reshape(samples.theta, 4000))
-    end
+    estimates[i] = stan(new_model, observeddata, new_model.pdir)
 
     rm(pdir; force=true, recursive=true)
 end
