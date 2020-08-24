@@ -26,7 +26,7 @@ sm = Stanmodel(name="bernoulli", model=bernoullimodel;
   output_format=:namedtuple);
 
 println("\nThreads loop\n")
-p1 = 2 # p1 is the number of models to fit
+p1 = 6 # p1 is the number of models to fit
 estimates = Vector(undef, p1)
 Threads.@threads for i in 1:p1
     pdir = pwd()

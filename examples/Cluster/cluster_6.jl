@@ -1,4 +1,7 @@
-using CmdStan, Distributions, Distributed, MCMCChains
+# Use `julia -p auto` to activate mp.
+using Distributed
+
+@everywhere using CmdStan, Distributions, MCMCChains
 
 ProjDir = @__DIR__
 
