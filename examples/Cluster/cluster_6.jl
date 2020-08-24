@@ -1,3 +1,4 @@
+# Use `julia -p auto` to activate mp.
 using Distributed
 
 @everywhere using CmdStan, Distributions, MCMCChains
