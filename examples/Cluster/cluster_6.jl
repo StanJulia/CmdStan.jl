@@ -1,4 +1,6 @@
-using CmdStan, Distributions, Distributed, MCMCChains
+using Distributed
+
+@everywhere using CmdStan, Distributions, MCMCChains
 
 ProjDir = @__DIR__
 
