@@ -1,3 +1,5 @@
+# Experimental threads example. WIP!
+
 using CmdStan
 #using Distributed
 using Statistics
@@ -26,7 +28,7 @@ sm = Stanmodel(name="bernoulli", model=bernoullimodel;
   output_format=:namedtuple);
 
 println("\nThreads loop\n")
-p1 = 12 # p1 is the number of models to fit
+p1 = 6 # p1 is the number of models to fit
 estimates = Vector(undef, p1)
 Threads.@threads for i in 1:p1
     pdir = pwd()
@@ -48,10 +50,10 @@ Threads.@threads for i in 1:p1
     );
 
     if rc == 0
-      estimates[i] = samples.theta
+      estimates[i] = [mean(reshape(samples.theta, 4000)), std(reshape(samples.theta, 4000))]
     end
 
-    rm(pdir; force=true, recursive=true)
+    #rm(pdir; force=true, recursive=true)
 end
 
 estimates |> display
