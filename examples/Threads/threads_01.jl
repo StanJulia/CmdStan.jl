@@ -6,7 +6,7 @@ using Statistics
 using StatsBase: sample
 
 ProjDir = mktempdir()
-cd(ProjDir)
+cd(ProjDir) #do
 
 bernoullimodel = "
 data { 
@@ -57,4 +57,5 @@ Threads.@threads for i in 1:p1
 end
 
 estimates |> display
-  
+
+#end
