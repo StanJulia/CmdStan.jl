@@ -3,7 +3,7 @@ using CmdStan
 using Statistics
 using StatsBase: sample
 
-ProjDir = @__DIR__
+ProjDir = mktempdir()
 cd(ProjDir)
 
 bernoullimodel = "
@@ -51,7 +51,7 @@ Threads.@threads for i in 1:p1
       estimates[i] = samples.theta
     end
 
-    rm(pdir; force=true, recursive=true)
+    #rm(pdir; force=true, recursive=true)
 end
 
 estimates |> display

@@ -5,7 +5,7 @@ using CmdStan
 using Statistics
 using StatsBase: sample
 
-ProjDir = @__DIR__
+ProjDir = mktempdir()
 cd(ProjDir)
 
 bernoullimodel = "
