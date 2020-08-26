@@ -46,7 +46,7 @@ Threads.@threads for i in 1:p1
     CmdStan.update_model_file(joinpath(new_model.tmpdir, "$(new_model.name).stan"), strip(new_model.model))
 
     rc, samples, cnames = stan(new_model, observeddata, new_model.pdir;
-      summary=false
+    #  summary=false
     );
 
     if rc == 0

@@ -7,16 +7,22 @@ version = "6.1.0"
 CSV = "336ed68f-0bac-5ca0-87d4-7b16caf5d00b"
 DataFrames = "a93c6f00-e57d-5684-b7b6-d8193f3e46c0"
 DelimitedFiles = "8bb1440f-4735-579b-a4ab-409b98df4dab"
+Distributed = "8ba89e20-285c-5b6f-9357-94700520ee1b"
+Distributions = "31c24e10-a181-5473-b8eb-7969acd0382f"
 DocStringExtensions = "ffbed154-4ef7-542d-bbb7-c09d3a79fcae"
+MCMCChains = "c7f686f2-ff18-58e9-bc7b-31028e88f75d"
 Requires = "ae029012-a4dd-5104-9daa-d747884805df"
 Statistics = "10745b16-79ce-11e8-11f9-7d13ad32a3b2"
+StatsBase = "2913bbd2-ae8a-5f71-8c99-4fb6c76f3a91"
 Unicode = "4ec0a83e-493e-50e2-b9ac-8f72acf5a8f5"
 
 [compat]
 CSV = "0.5, 0.6, 0.7"
 DataFrames = "0.19, 0.20, 0.21"
+Distributions = "0"
 DocStringExtensions = "0.8"
 Requires = "1.0"
+StatsBase = "0"
 julia = "1"
 
 [extras]

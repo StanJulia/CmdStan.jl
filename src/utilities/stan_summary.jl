@@ -31,8 +31,11 @@ stan_summary(
 function stan_summary(model::Stanmodel, file::String; 
   CmdStanDir=CMDSTAN_HOME)
   try
+    absolute_tempdir_path = cd(pwd,model.tmpdir)
+    path_prefix = joinpath(splitpath(absolute_tempdir_path)..., model.name)
+
     pstring = joinpath("$(CmdStanDir)", "bin", "stansummary")
-    csvfile = "$(model.object_file)_summary.csv"
+    csvfile = "$(path_prefix)_summary.csv"
     isfile(csvfile) && rm(csvfile)
     cmd = `$(pstring) --csv_file=$(csvfile) $(file)`
     resfile = open(cmd; read=true)
