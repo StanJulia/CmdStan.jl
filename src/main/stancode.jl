@@ -96,7 +96,11 @@ function stan(
   @assert isdir(ProjDir) "Incorrect ProjDir specified: $(ProjDir)"
   @assert isdir(model.tmpdir) "$(model.tmpdir) not created"
   
-  absolute_tempdir_path = cd(pwd,model.tmpdir)
+  absolute_tempdir_path = if model.tmpdir[1] == '/'
+    model.tmpdir
+  else
+    joinpath(splitpath(pwd)...,splitpath(model.tmpdir))
+  end
   path_prefix = joinpath(splitpath(absolute_tempdir_path)..., model.name)
   model.object_file = path_prefix
   isfile("$(path_prefix)_build.log") && rm("$(path_prefix)_build.log")

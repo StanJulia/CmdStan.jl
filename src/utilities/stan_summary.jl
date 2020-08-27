@@ -31,7 +31,11 @@ stan_summary(
 function stan_summary(model::Stanmodel, file::String; 
   CmdStanDir=CMDSTAN_HOME)
   try
-    absolute_tempdir_path = cd(pwd,model.tmpdir)
+    absolute_tempdir_path = if model.tmpdir[1] == '/'
+      model.tmpdir
+    else
+      joinpath(splitpath(pwd)...,splitpath(model.tmpdir))
+    end
     path_prefix = joinpath(splitpath(absolute_tempdir_path)..., model.name)
 
     pstring = joinpath("$(CmdStanDir)", "bin", "stansummary")

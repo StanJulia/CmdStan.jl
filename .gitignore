@@ -9,6 +9,7 @@ Manifest.toml
 *.log
 #*.pdf
 #*.svg
+out.txt
 tmp
 bernoulli.bugs
 win_tests_*.jl

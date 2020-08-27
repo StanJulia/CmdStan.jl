@@ -11,7 +11,7 @@ bernoullimodel = "
 data { 
   int<lower=1> N; 
   int<lower=0,upper=1> y[N];
-} 
+}
 parameters {
   real<lower=0,upper=1> theta;
 } 
@@ -24,7 +24,7 @@ model {
 #isdir(ProjDir * "/tmp") && rm(ProjDir * "/tmp", recursive=true)
 tmpdir = ProjDir * "/tmp"
 
-p1 = 12 # p1 is the number of models to fit
+p1 = 24 # p1 is the number of models to fit
 
 n = 100;
 p = range(0, stop=1, length=p1)
