@@ -22,6 +22,11 @@ notifications:
   
 git:
   depth: 99999999
+
+matrix:
+  allow_failures:
+  - julia: nightly
+  - os: osx
   
 jobs:
   include:
