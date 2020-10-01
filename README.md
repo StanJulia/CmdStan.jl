@@ -104,8 +104,8 @@ CmdStan.jl and several other Julia based mcmc packages are used in  [Statistical
 [docs-stable-img]: https://img.shields.io/badge/docs-stable-blue.svg
 [docs-stable-url]: https://stanjulia.github.io/CmdStan.jl/stable
 
-[travis-img]: https://travis-ci.org/StanJulia/CmdStan.jl.svg?branch=master
-[travis-url]: https://travis-ci.org/StanJulia/CmdStan.jl
+[travis-img]: https://travis-ci.com/StanJulia/CmdStan.jl.svg?branch=master
+[travis-url]: https://travis-ci.com/StanJulia/CmdStan.jl
 
 [appveyor-img]: https://ci.appveyor.com/api/projects/status/xx7nimfpnl1r4gx0?svg=true
 [appveyor-url]: https://ci.appveyor.com/project/StanJulia/CmdStan-jl
