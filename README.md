@@ -103,4 +103,4 @@ There is no shortage of good books on Bayesian statistics. A few of my favorites
 
 [issues-url]: https://github.com/StanJulia/CmdStan.jl/issues
 
-[project-status-img]: https://img.shields.io/badge/lifecycle-stable-green.svg
+[project-status-img]: https://img.shields.io/badge/lifecycle-stable-brightgreen.svg
