@@ -2,17 +2,9 @@
 
 *A package to run Stan's cmdstan executable from Julia.*
 
-| **Documentation**                                                               | **Build Status**                                                                                |
-|:-------------------------------------------------------------------------------:|:-----------------------------------------------------------------------------------------------:|
-| [![][docs-stable-img]][docs-stable-url] [![][docs-dev-img]][docs-dev-url] | [![][travis-img]][travis-url] [![][codecov-img]][codecov-url] |
-
-## CmdStan.jl stargazers over time
-
-[![Stargazers over time](https://starchart.cc/StanJulia/CmdStan.jl.svg)](https://starchart.cc/StanJulia/CmdStan.jl)
-
-## Stan.jl stargazers over time
-
-[![Stargazers over time](https://starchart.cc/StanJulia/Stan.jl.svg)](https://starchart.cc/StanJulia/Stan.jl)
+| **Project Status**                                                               |  **Documentation**                                                               | **Build Status**                                                                                |
+|:-------------------------------------------------------------------------------:|:-------------------------------------------------------------------------------:|:-----------------------------------------------------------------------------------------------:|
+|![][project-status-img] | [![][docs-stable-img]][docs-stable-url] [![][docs-dev-img]][docs-dev-url] | ![][CI-build] |
 
 ## Prerequisites
 
@@ -27,6 +19,10 @@ The location of the cmdstan executable and related programs is now obtained from
 Right now `versioninfo()` will show its setting (if defined).
 
 ## Versions
+
+Release 6.0.9
+
+1. Switch to GitHub actions.
 
 Release 6.0.8
 
@@ -92,11 +88,7 @@ There is no shortage of good books on Bayesian statistics. A few of my favorites
 
 7. [Kruschke:Doing Bayesian Data Analysis](https://sites.google.com/site/doingbayesiandataanalysis/what-s-new-in-2nd-ed)
 
-and a great read (and implemented in DynamicHMC.jl):
-
 8. [Betancourt: A Conceptual Introduction to Hamiltonian Monte Carlo](https://arxiv.org/abs/1701.02434)
-
-CmdStan.jl and several other Julia based mcmc packages are used in  [StatisticalRethinking.jl](https://github.com/StatisticalRethinkingJulia)
 
 [docs-dev-img]: https://img.shields.io/badge/docs-dev-blue.svg
 [docs-dev-url]: https://stanjulia.github.io/CmdStan.jl/latest
@@ -104,11 +96,7 @@ CmdStan.jl and several other Julia based mcmc packages are used in  [Statistical
 [docs-stable-img]: https://img.shields.io/badge/docs-stable-blue.svg
 [docs-stable-url]: https://stanjulia.github.io/CmdStan.jl/stable
 
-[travis-img]: https://travis-ci.com/StanJulia/CmdStan.jl.svg?branch=master
-[travis-url]: https://travis-ci.com/StanJulia/CmdStan.jl
-
-[appveyor-img]: https://ci.appveyor.com/api/projects/status/xx7nimfpnl1r4gx0?svg=true
-[appveyor-url]: https://ci.appveyor.com/project/StanJulia/CmdStan-jl
+[CI-build]: https://github.com/StanJulia/CmdStan.jl/workflows/CI/badge.svg?branch=master
 
 [codecov-img]: https://codecov.io/gh/StanJulia/CmdStan.jl/branch/master/graph/badge.svg
 [codecov-url]: https://codecov.io/gh/StanJulia/CmdStan.jl
