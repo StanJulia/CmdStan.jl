@@ -102,3 +102,5 @@ There is no shortage of good books on Bayesian statistics. A few of my favorites
 [codecov-url]: https://codecov.io/gh/StanJulia/CmdStan.jl
 
 [issues-url]: https://github.com/StanJulia/CmdStan.jl/issues
+
+[project-status-img]: https://img.shields.io/badge/lifecycle-stable-green.svg
