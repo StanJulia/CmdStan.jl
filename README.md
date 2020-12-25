@@ -1,10 +1,12 @@
 # CmdStan
 
-*A package to run Stan's cmdstan executable from Julia.*
-
 | **Project Status**                                                               |  **Documentation**                                                               | **Build Status**                                                                                |
 |:-------------------------------------------------------------------------------:|:-------------------------------------------------------------------------------:|:-----------------------------------------------------------------------------------------------:|
 |![][project-status-img] | [![][docs-stable-img]][docs-stable-url] [![][docs-dev-img]][docs-dev-url] | ![][CI-build] |
+
+## Purpose
+
+*A package to run Stan's cmdstan executable from Julia.*
 
 ## Prerequisites
 
