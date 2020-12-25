@@ -4,6 +4,21 @@
 |:-------------------------------------------------------------------------------:|:-------------------------------------------------------------------------------:|:-----------------------------------------------------------------------------------------------:|
 |![][project-status-img] | [![][docs-stable-img]][docs-stable-url] [![][docs-dev-img]][docs-dev-url] | ![][CI-build] |
 
+[docs-dev-img]: https://img.shields.io/badge/docs-dev-blue.svg
+[docs-dev-url]: https://stanjulia.github.io/CmdStan.jl/latest
+
+[docs-stable-img]: https://img.shields.io/badge/docs-stable-blue.svg
+[docs-stable-url]: https://stanjulia.github.io/CmdStan.jl/stable
+
+[CI-build]: https://github.com/stanjulia/CmdStan.jl/workflows/CI/badge.svg?branch=master
+
+[codecov-img]: https://codecov.io/gh/stanjulia/CmdStan.jl/branch/master/graph/badge.svg
+[codecov-url]: https://codecov.io/gh/stanjulia/CmdStan.jl
+
+[issues-url]: https://github.com/stanJulia/CmdStan.jl/issues
+
+[project-status-img]: https://img.shields.io/badge/lifecycle-stable-brightgreen.svg
+
 ## Purpose
 
 *A package to run Stan's cmdstan executable from Julia.*
@@ -91,18 +106,3 @@ There is no shortage of good books on Bayesian statistics. A few of my favorites
 7. [Kruschke:Doing Bayesian Data Analysis](https://sites.google.com/site/doingbayesiandataanalysis/what-s-new-in-2nd-ed)
 
 8. [Betancourt: A Conceptual Introduction to Hamiltonian Monte Carlo](https://arxiv.org/abs/1701.02434)
-
-[docs-dev-img]: https://img.shields.io/badge/docs-dev-blue.svg
-[docs-dev-url]: https://stanjulia.github.io/CmdStan.jl/latest
-
-[docs-stable-img]: https://img.shields.io/badge/docs-stable-blue.svg
-[docs-stable-url]: https://stanjulia.github.io/CmdStan.jl/stable
-
-[CI-build]: https://github.com/StanJulia/CmdStan.jl/workflows/CI/badge.svg?branch=master
-
-[codecov-img]: https://codecov.io/gh/StanJulia/CmdStan.jl/branch/master/graph/badge.svg
-[codecov-url]: https://codecov.io/gh/StanJulia/CmdStan.jl
-
-[issues-url]: https://github.com/StanJulia/CmdStan.jl/issues
-
-[project-status-img]: https://img.shields.io/badge/lifecycle-stable-brightgreen.svg
