@@ -12,9 +12,6 @@
 
 [CI-build]: https://github.com/stanjulia/CmdStan.jl/workflows/CI/badge.svg?branch=master
 
-[codecov-img]: https://codecov.io/gh/stanjulia/CmdStan.jl/branch/master/graph/badge.svg
-[codecov-url]: https://codecov.io/gh/stanjulia/CmdStan.jl
-
 [issues-url]: https://github.com/stanJulia/CmdStan.jl/issues
 
 [project-status-img]: https://img.shields.io/badge/lifecycle-stable-brightgreen.svg
