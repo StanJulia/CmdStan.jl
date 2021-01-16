@@ -34,7 +34,7 @@ function stan_summary(model::Stanmodel, file::String;
     pstring = joinpath("$(CmdStanDir)", "bin", "stansummary")
     csvfile = "$(model.name)_summary.csv"
     isfile(csvfile) && rm(csvfile)
-    cmd = `$(pstring) --csv_file=$(csvfile) $(file)`
+    cmd = `$(pstring) -c $(csvfile) $(file)`
     resfile = open(cmd; read=true)
     println("Setting $(model.printsummary)")
     model.printsummary && print(read(resfile, String))
@@ -79,7 +79,7 @@ function stan_summary(model::Stanmodel, filecmd::Cmd;
     pstring = joinpath("$(CmdStanDir)", "bin", "stansummary")
     csvfile = "$(model.name)_summary.csv"
     isfile(csvfile) && rm(csvfile)
-    cmd = `$(pstring) --csv_file=$(csvfile) $(filecmd)`
+    cmd = `$(pstring) -c $(csvfile) $(filecmd)`
     if model.printsummary
       resfile = open(cmd; read=true)
       print(read(resfile, String))
