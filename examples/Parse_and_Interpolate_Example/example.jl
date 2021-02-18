@@ -43,11 +43,8 @@ stanmodel = Stanmodel(name="bernoulli", model=bernoulli_model,
 rc, chn, cnames = stan(stanmodel, observeddata, ProjDir);
 
 if rc == 0
-  # Describe the results
-  show(chn)
-  println()
   
-  # Ceate a ChainDataFrame
+  # Ceate a summary df
   summary_df = read_summary(stanmodel)
-  summary_df[:theta, [:mean, :ess]]
+  summary_df[:, [:mean, :ess]]
 end
