@@ -1,7 +1,7 @@
 name = "CmdStan"
 uuid = "593b3428-ca2f-500c-ae53-031589ec8ddd"
 authors = ["Rob J Goedman <goedman@mac.com>"]
-version = "6.1.8"
+version = "6.1.9"
 
 [deps]
 CSV = "336ed68f-0bac-5ca0-87d4-7b16caf5d00b"
