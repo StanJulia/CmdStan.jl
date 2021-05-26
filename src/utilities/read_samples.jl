@@ -52,9 +52,10 @@ function read_samples(m::Stanmodel, diagnostics=false, warmup_samples=false)
   # Read .csv files created by each chain
   
   for i in 1:m.nchains
-    if isfile("$(m.name)_$(ftype)_$(i).csv")
+    file_path = joinpath(m.tmpdir, "$(m.name)_$(ftype)_$(i).csv")
+    if isfile(file_path)
       
-      instream = open("$(m.name)_$(ftype)_$(i).csv")
+      instream = open(file_path)
         
       # Skip initial set of commented lines, e.g. containing
       # cmdstan version info, etc.

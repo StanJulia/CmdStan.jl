@@ -24,8 +24,9 @@ function read_variational(m::Stanmodel)
   ftype = lowercase(string(typeof(m.method)))
   
   for i in 1:m.nchains
-    if isfile("$(m.name)_$(ftype)_$(i).csv")
-      open("$(m.name)_$(ftype)_$(i).csv") do instream
+    file_path = joinpath(m.tmpdir, "$(m.name)_$(ftype)_$(i).csv")
+    if isfile(file_path)
+      open(file_path) do instream
         skipchars(isspace, instream, linecomment='#')
         line = Unicode.normalize(readline(instream), newline2lf=true)
         idx = split(strip(line), ",")
