@@ -19,7 +19,7 @@ read_summary(m::Stanmodel)
 """
 function read_summary(m::Stanmodel)
 
-  fname = "$(m.tmpdir)/$(m.name)_summary.csv"
+  fname = joinpath(m.tmpdir, "$(m.name)_summary.csv")
   !isfile(fname) && stan_summary(m)
   
   df = CSV.read(fname, DataFrame; delim=",", comment="#")

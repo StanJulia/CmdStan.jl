@@ -24,7 +24,7 @@ or
 ```
 
 """
-function par(cmds::Array{Base.AbstractCmd,1})
+function par(cmds::Array{<:Base.AbstractCmd,1})
   if length(cmds) > 2
     return(par([cmds[1:(length(cmds)-2)];
       Base.AndCmds(cmds[length(cmds)-1], cmds[length(cmds)])]))

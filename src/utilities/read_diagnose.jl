@@ -27,7 +27,8 @@ function read_diagnose(model::Stanmodel)
   local sstr
   
   for i in 1:model.nchains
-    if isfile("$(model.name)_$(res_type)_$(i).csv")
+    file_path = joinpath(model.tmpdir, "$(model.name)_$(res_type)_$(i).csv")
+    if isfile(file_path)
       
       ## A result type file for chain i is present ##
       
@@ -35,7 +36,7 @@ function read_diagnose(model::Stanmodel)
         
         # Extract cmdstan version
         
-        str = read("$(model.name)_$(res_type)_$(i).csv", String)
+        str = read(file_path, String)
         sstr = split(str)
         tdict[:stan_version] = "$(parse(Int, sstr[4])).$(parse(Int, sstr[8])).$(parse(Int, sstr[12]))"
       end
