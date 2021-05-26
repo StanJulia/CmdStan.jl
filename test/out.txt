@@ -1,0 +1,22 @@
+Inference for Stan model: bernoulli_model
+4 chains: each with iter=(2000,2000,2000,2000); warmup=(0,0,0,0); thin=(1,1,1,1); 8000 iterations saved.
+
+Warmup took (0.0050, 0.0050, 0.0050, 0.0050) seconds, 0.020 seconds total
+Sampling took (0.055, 0.056, 0.055, 0.057) seconds, 0.22 seconds total
+
+                Mean     MCSE  StdDev    5%   50%   95%    N_Eff  N_Eff/s    R_hat
+
+lp__            -8.1  1.3e-02    0.74  -9.7  -7.9  -7.6     3251    14579      1.0
+accept_stat__   0.92  1.4e-03    0.13  0.64  0.97   1.0  8.7e+03  3.9e+04  1.0e+00
+stepsize__      0.96  2.5e-02   0.035  0.91  0.99  0.99  2.0e+00  9.0e+00  4.9e+12
+treedepth__      1.4  5.5e-03    0.48   1.0   1.0   2.0  7.9e+03  3.5e+04  1.0e+00
+n_leapfrog__     2.4  1.2e-02    0.99   1.0   3.0   3.0  7.4e+03  3.3e+04  1.0e+00
+divergent__     0.00      nan    0.00  0.00  0.00  0.00      nan      nan      nan
+energy__         8.6  1.9e-02     1.0   7.7   8.3    11  3.1e+03  1.4e+04  1.0e+00
+
+theta           0.33  2.4e-03    0.13  0.13  0.32  0.56     2855    12801      1.0
+
+Samples were drawn using hmc with nuts.
+For each parameter, N_Eff is a crude measure of effective sample size,
+and R_hat is the potential scale reduction factor on split chains (at 
+convergence, R_hat=1).
