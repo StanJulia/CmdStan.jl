@@ -35,6 +35,22 @@ Right now `versioninfo()` will show its setting (if defined).
 
 ## Versions
 
+Release 6.2.0 - Thanks to @Byrth.
+
+Switch from using
+```
+cd(dir) do  
+  # stuff
+  run(cmd)
+end
+```
+
+to
+# stuff
+```run(setenv(cmd, ENV; dir=dir))```
+
+in main functions.
+
 Release 6.0.9
 
 1. Switch to GitHub actions.
