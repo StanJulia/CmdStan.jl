@@ -2,19 +2,19 @@ Inference for Stan model: bernoulli_model
 4 chains: each with iter=(1000,1000,1000,1000); warmup=(0,0,0,0); thin=(1,1,1,1); 4000 iterations saved.
 
 Warmup took (0.0040, 0.0040, 0.0040, 0.0040) seconds, 0.016 seconds total
-Sampling took (0.027, 0.027, 0.028, 0.027) seconds, 0.11 seconds total
+Sampling took (0.013, 0.012, 0.013, 0.013) seconds, 0.051 seconds total
 
                 Mean     MCSE  StdDev    5%   50%   95%    N_Eff  N_Eff/s    R_hat
 
-lp__            -8.2  2.0e-02    0.79  -9.7  -7.9  -7.6     1634    14993      1.0
-accept_stat__   0.91  2.1e-03    0.13  0.63  0.97   1.0  4.0e+03  3.7e+04  1.0e+00
-stepsize__       1.0  1.7e-03   0.075  0.92   1.0   1.1  2.0e+03  1.8e+04  1.9e+13
-treedepth__      1.4  8.0e-03    0.48   1.0   1.0   2.0  3.7e+03  3.4e+04  1.0e+00
-n_leapfrog__     2.4  1.9e-02     1.1   1.0   3.0   3.0  3.3e+03  3.0e+04  1.0e+00
+lp__            -8.2  2.3e-02    0.76  -9.7  -7.9  -7.6     1103    21636      1.0
+accept_stat__   0.93  1.7e-03    0.11  0.70  0.97   1.0  4.2e+03  8.3e+04  1.0e+00
+stepsize__      0.98  4.9e-02   0.069  0.86   1.0   1.0  2.0e+00  3.9e+01  2.5e+13
+treedepth__      1.4  9.2e-03    0.52   1.0   1.0   2.0  3.2e+03  6.2e+04  1.0e+00
+n_leapfrog__     2.6  2.0e-01     1.4   1.0   3.0   7.0  5.0e+01  9.8e+02  1.0e+00
 divergent__     0.00      nan    0.00  0.00  0.00  0.00      nan      nan      nan
-energy__         8.7  2.7e-02     1.1   7.7   8.3    11  1.6e+03  1.4e+04  1.0e+00
+energy__         8.7  3.1e-02     1.0   7.7   8.4    11  1.1e+03  2.2e+04  1.0e+00
 
-theta           0.34  3.4e-03    0.13  0.13  0.32  0.56     1515    13899      1.0
+theta           0.33  3.5e-03    0.13  0.14  0.31  0.56     1404    27537      1.0
 
 Samples were drawn using hmc with nuts.
 For each parameter, N_Eff is a crude measure of effective sample size,
