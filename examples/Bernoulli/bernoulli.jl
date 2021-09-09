@@ -27,7 +27,8 @@ cd(ProjDir) do
   stanmodel = Stanmodel(name="bernoulli", model=bernoullimodel,
     printsummary=false);
 
-  rc, samples, cnames = stan(stanmodel, observeddata, ProjDir, CmdStanDir=CMDSTAN_HOME);
+  rc, samples, cnames = stan(stanmodel, observeddata, ProjDir,
+    CmdStanDir=CMDSTAN_HOME);
   
   if rc == 0
     # Fetch cmdstan summary as a DataFrame
