@@ -34,7 +34,8 @@ if haskey(ENV, "JULIA_CMDSTAN_HOME")
     "test_fixed_param.jl",
     "test_zerolengtharray.jl",
     "test_parse_interpolate.jl",
-    "test_init_in_stanmodel.jl"
+    "test_init_in_stanmodel.jl",
+    "test_mcmcchains.jl"
   ]
 
   if CMDSTAN_HOME != ""

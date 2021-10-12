@@ -1,7 +1,7 @@
 name = "CmdStan"
 uuid = "593b3428-ca2f-500c-ae53-031589ec8ddd"
 authors = ["Rob J Goedman <goedman@mac.com>"]
-version = "6.3.1"
+version = "6.4.0"
 
 [deps]
 CSV = "336ed68f-0bac-5ca0-87d4-7b16caf5d00b"
@@ -20,7 +20,8 @@ Requires = "1.0"
 julia = "1"
 
 [extras]
+MCMCChains = "c7f686f2-ff18-58e9-bc7b-31028e88f75d"
 Test = "8dfed614-e22c-5e08-85e1-65c5234f0b40"
 
 [targets]
-test = ["Test"]
+test = ["Test", "MCMCChains"]
