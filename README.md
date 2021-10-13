@@ -14,12 +14,17 @@
 
 [issues-url]: https://github.com/stanJulia/CmdStan.jl/issues
 
-[project-status-img]: https://img.shields.io/badge/lifecycle-stable-brightgreen.svg
+[project-status-img]: https://img.shields.io/badge/lifecycle-deprecated-orange.svg
 
 
 ## Purpose
 
 *A package to run Stan's cmdstan executable from Julia.*
+
+## Status
+
+CmdStan.jl will be deprecated in 2022. Please switch to StanSample.jl.
+Time permitting, Pull Requests will be merged if all tests pass and new fuctionality is tested.
 
 ## Prerequisites
 
